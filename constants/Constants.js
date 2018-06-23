@@ -1,0 +1,6 @@
+export const  MENU_LABELS = {
+  HEROES: 'HEROES',
+  ITEMS: 'ITEMS',
+  STATS: 'STATS',
+  PROFILE: 'PROFILE',
+}
