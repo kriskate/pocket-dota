@@ -1,65 +1,66 @@
 import React from 'react';
-import { StatusBar, Image, Text, TouchableOpacity, View, StyleSheet } from 'react-native';
-import { Grid, Row, Thumbnail } from 'native-base';
+import { Image, Text, TouchableOpacity, View, StyleSheet } from 'react-native';
+import { Thumbnail } from 'native-base';
 
-import { Constants } from 'expo'
-import Layout from '../constants/Layout'
 import Colors from '../constants/Colors';
-import { MENU_LABELS } from '../constants/Constants';
+import { HOME_LABELS, SCREEN_LABELS } from '../constants/Constants';
 
 
-const generateRow = (label=MENU_LABELS.PROFILE, cardImage, profileImg) => (
-  <Row style={styles.menuRow}>
-    <TouchableOpacity style={styles.imageWrapper}>
+const MenuItem = ({onPress, label, cardImage, profileImage}) => (
+  <View style={styles.menuRow}>
+    <TouchableOpacity style={styles.imageWrapper} onPress={onPress}>
       <Image style={styles.image} source={cardImage} />
     </TouchableOpacity>
-    { !profileImg ? null : 
+
+    { !profileImage ? null : 
         <View style={styles.profileImageWrapper} pointerEvents='none'> 
-          <Thumbnail large style={styles.profileImage} source={{uri: profileImg}}  pointerEvents='none'/>
+          <Thumbnail large style={styles.profileImage} source={{uri: profileImage}} pointerEvents='none'/>
         </View> 
-      }
+    }
+
     <View style={styles.textWrapper} pointerEvents='none'>
       <Text style={styles.text}>{label}</Text>
     </View>
-  </Row>
-)
+  </View>
+);
 
-export default class HomeScreen extends React.Component {
-  static navigationOptions = {
-    header: null,
-    footer: null,
+
+class Screen extends React.PureComponent {
+  static defaultProps = {
+    profileName: HOME_LABELS.PROFILE,
   };
 
   render() {
-    let { profileImg, profileName } = this.props
-    if(!profileImg){ profileImg = 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/74/74dea924d1c2a0dbbbe6e7574ecbf385e7b9a355_full.jpg'; profileName = 'PUMP IT UP';} 
+    const { profileImage, profileName } = this.props;
+    const { navigate } = this.props.navigation;
 
     return (
-      <Grid style={styles.container}>
-
-        <StatusBar barStyle="light-content" />
-
-        { generateRow(MENU_LABELS.HEROES, require("../assets/images/menu-heroes.png")) }
-        
-        { generateRow(MENU_LABELS.ITEMS, require("../assets/images/menu-items.png")) }
-
-        { generateRow(MENU_LABELS.STATS, require("../assets/images/menu-stats.png")) }
-
-        { !profileImg ? null : generateRow(profileName, require("../assets/images/menu-profile.png"), profileImg) }
-
-      </Grid>
-    )
+      <View style={styles.container}>
+        <MenuItem onPress={() => navigate(SCREEN_LABELS.HEROES)} label={HOME_LABELS.HEROES}
+          cardImage={require("../assets/images/menu-heroes.png")} />
+        <MenuItem onPress={() => navigate(SCREEN_LABELS.ITEMS)} label={HOME_LABELS.ITEMS}
+          cardImage={require("../assets/images/menu-items.png")} />
+        <MenuItem onPress={() => navigate(SCREEN_LABELS.STATS)} label={HOME_LABELS.STATS}
+          cardImage={require("../assets/images/menu-stats.png")} />
+        { !profileImage ? null :
+          <MenuItem onPress={() => navigate(SCREEN_LABELS.PROFILE)} label={profileName}
+            cardImage={require("../assets/images/menu-profile.png")}
+            profileImage={profileImage} /> 
+        }
+      </View>
+    );
   }
 }
-
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
     backgroundColor: Colors.dota_ui2,
   },
   menuRow: {
-    width: Layout.window.width,
+    flex: 1,
+    flexDirection: 'row',
     borderWidth: 1,
     borderColor: Colors.dota_red_dark,
   },
@@ -78,7 +79,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width:'100%',
     height: '100%',
-
+    
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
@@ -91,3 +92,5 @@ const styles = StyleSheet.create({
     color: 'white',
   },
 });
+
+export default Screen;
