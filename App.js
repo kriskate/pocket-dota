@@ -1,27 +1,33 @@
 import React from 'react';
-import { AppLoading } from 'expo';
-import AppNavigator from './navigation/AppNavigator';
+import { combineReducers, createStore } from 'redux';
+import { Provider } from 'react-redux';
 
-import { Container } from 'native-base';
+import { AppLoading } from 'expo';
 import { loadInitialAssets } from './utils/loaders';
+import AppContent from './AppContent';
+
+import profile from './reducers/profile';
+import wiki from './reducers/wiki';
+
+
+const reducers = combineReducers({ profile, wiki });
+const store = createStore(reducers);
 
 
 export default class App extends React.Component {
-  state = {
-    isLoadingComplete: false,
-  };
+  state = { loadedInitialAssets: false, };
 
   _handleLoadingError = error => {
     console.warn(error);
   };
 
   _handleFinishLoading = () => {
-    this.setState({ isLoadingComplete: true });
+    this.setState({ loadedInitialAssets: true });
   };
 
 
   render() {
-    if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
+    if (!this.state.loadedInitialAssets) {
       return (
         <AppLoading
           startAsync={loadInitialAssets}
@@ -31,9 +37,9 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <Container>
-          <AppNavigator />
-        </Container>
+        <Provider store={store}>
+          <AppContent />
+        </Provider>
       );
     }
   }
