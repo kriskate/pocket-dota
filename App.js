@@ -1,19 +1,24 @@
 import React from 'react';
 import { combineReducers, createStore } from 'redux';
 import { Provider } from 'react-redux';
+import { StatusBar } from 'react-native';
+
+import app from './reducers/app';
+import profile from './reducers/profile';
+import wiki from './reducers/wiki';
 
 import { AppLoading } from 'expo';
 import { loadInitialAssets } from './utils/loaders';
 import AppContent from './AppContent';
+import { Container } from './components/ui';
 
-import profile from './reducers/profile';
-import wiki from './reducers/wiki';
+StatusBar.setBarStyle('light-content');
 
-
-const reducers = combineReducers({ profile, wiki });
+const reducers = combineReducers({ profile, wiki, app });
 const store = createStore(reducers);
 
-
+// handles splash screen, via AppLoading
+// implements redux at top-level
 export default class App extends React.Component {
   state = { loadedInitialAssets: false, };
 
@@ -38,7 +43,9 @@ export default class App extends React.Component {
     } else {
       return (
         <Provider store={store}>
-          <AppContent />
+          <Container>
+            <AppContent />
+          </Container>
         </Provider>
       );
     }
