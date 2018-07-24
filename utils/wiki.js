@@ -2,6 +2,7 @@ import React from 'react';
 import { AsyncStorage } from 'react-native';
 import { url } from '../constants/Constants';
 import { connectionIssue } from './utils';
+import Logger from './Logger';
 
 const ERRORS = {
   SET: (key, e) => `AsyncStorage - problem setting key ${key}: \n${e}`,
@@ -16,7 +17,7 @@ export const setItem = async (key, value) => {
   try {
     await AsyncStorage.setItem(`@wiki_local:${key}`, JSON.stringify(value));
   } catch (e) {
-    console.log(ERRORS.SET(key, e));
+    Logger.log(ERRORS.SET(key, e));
   }
 }
 export const getItem = async (key) => {
@@ -24,7 +25,7 @@ export const getItem = async (key) => {
     const val = await AsyncStorage.getItem(`@wiki_local:${key}`);
     return val ? JSON.parse(val) : null;
   } catch (e) {
-    console.log(ERRORS.GET(key, e));
+    Logger.log(ERRORS.GET(key, e));
     return null;
   }
 }
@@ -57,7 +58,7 @@ export const downloadNewWikiData = async () => {
       data[cData] = await fetchJSON(url.data[cData].replace('$WIKI_FOLDER', cWikiFolder))
     ));
   } catch (e) {
-    console.log(e)
+    Logger.log(e)
     return false;
   }
   
@@ -79,7 +80,7 @@ const getCurrentWiki = async () => {
     wiki_current = await fetchJSON(url.currentWiki);
   } catch (e) {
     connectionIssue();
-    console.log(ERRORS.FETCH(url.currentWiki, e));
+    Logger.log(ERRORS.FETCH(url.currentWiki, e));
   }
   return wiki_current;
 }
