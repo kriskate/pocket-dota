@@ -4,9 +4,9 @@ import Colors from '../../constants/Colors';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 export default ({ style, children, padTop, padInner }) => {
-  const padingTop = padTop ? getStatusBarHeight() : 0;
-  const padding = padingTop ? 5 : 0;
-  return <View style={[styles.container, style, padingTop, padding]}>{children}</View>
+  const paddingTop = padTop ? getStatusBarHeight() : 0;
+  const padding = padInner ? 5 : 0;
+  return <View style={[styles.container, style, {paddingTop}, {padding}]}>{children}</View>
 }
 
 const styles = StyleSheet.create({
