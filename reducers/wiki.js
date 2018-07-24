@@ -25,7 +25,8 @@ export const Actions = {
 const initialState = {
   data: {},
 
-  loading: false,
+  // set to true, so that the app initially shows the LoadLocalData screen
+  loading: true,
   downloading: false,
 
   // fresh/ missing/ update
