@@ -1,5 +1,9 @@
 import { Image } from 'react-native'
 import { Asset, Font, Icon } from 'expo';
+import { getItem } from './wiki';
+import { initialState as profileState } from '../reducers/profile';
+import { initialState as wikiState } from '../reducers/wiki';
+import Logger from './Logger';
 
 export const cacheImages = (images) => {
   return images.map(image => {
@@ -28,4 +32,32 @@ export const loadInitialAssets = async () => {
   })
 
   await Promise.all([...imageAssets, fontAssets])
+}
+
+
+export const loadWikiFromStorage = async () => {
+  const data = {};
+
+  await Promise.all(
+    Object.keys(wikiState.data).map(async cData => 
+      data[cData] = await getItem(cData)
+    )
+  );
+  
+  Logger.silly('_localData', !!data.info);
+
+  return {...wikiState, data};
+}
+
+
+export const loadProfileFromStorage = async () => {
+  const data = {}
+
+  await Promise.all(
+    Object.keys(profileState).map(async cData => 
+      data[cData] = await getItem(cData)
+    )
+  );
+
+  return data;
 }

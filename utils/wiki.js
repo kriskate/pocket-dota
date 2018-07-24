@@ -10,22 +10,6 @@ const ERRORS = {
 };
 
 
-/* INIT */
-export const loadFromStorage = async () => {
-  const data = {}
-
-  await Promise.all(
-    Object.keys(url.data).map(async cData => 
-      data[cData] = await getItem(cData)
-    )
-  );
-
-  return data;
-}
-
-export const flushGetRequests = () => AsyncStorage.flushGetRequests();
-
-
 
 /* GET/SET items */
 export const setItem = async (key, value) => {

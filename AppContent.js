@@ -26,20 +26,12 @@ export default class AppContent extends React.Component {
   constructor(props) {
     super(props);
 
-    this._loadLocalData();
-  }
-  async _loadLocalData() {
-    const local_data = await loadFromStorage();
-    
-    Logger.debug('_loadLocalData', !!this.props.wiki.data.info, !!local_data.info, !!await getItem('info'));
-
-    this.props.actions.newWiki(local_data);
-
     this._checkData();
   }
+  
   _downloadData = async () => {
-    Logger.debug('_downloadData:\r\n   --- wiki', !!await getItem('info'))
-    Logger.debug('   --- state', !!this.props.wiki.data.info)
+    Logger.debug('_downloadData:\r\n--- wiki', !!await getItem('info'))
+    Logger.debug('--- state', !!this.props.wiki.data.info)
 
     Platform.OS === 'ios' && NStatusBar.setNetworkActivityIndicatorVisible(true);
     
@@ -73,7 +65,7 @@ export default class AppContent extends React.Component {
     return (
       <Container>
         { 
-          loading ? <LoadLocalData /> : downloading
+          downloading
           ? <DownloadData />
           : <AppNavigator />
         }

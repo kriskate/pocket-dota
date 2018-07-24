@@ -7,7 +7,7 @@ const Actions = {
   setUser: user => ({ type: ActionTypes.SET_USER_PROFILE, user}),
 }
 
-const initialState = {
+export const initialState = {
   search: null,
   user: null, // { name, image, url_profile }
 }

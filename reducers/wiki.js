@@ -2,8 +2,6 @@ const Types = {
   NEW_WIKI: 'NEW_WIKI_AVAILABLE',
   NEW_WIKI: 'NEW_WIKI',
 
-  LOADING: 'LOADING',
-
   DOWLOADING: 'DOWLOADING',
 }
 export const DOWNLOAD_REASONS = {
@@ -22,13 +20,12 @@ export const Actions = {
   downloadNewData: downloadingReason => ({ type: Types.DOWLOADING, downloadingReason }),
 }
 
-const initialState = {
-  data: {},
+export const initialState = {
+  data: {
+    heroes: null, items: null, tips: null, patch_notes: null, info: null,
+  },
 
-  // set to true, so that the app initially shows the LoadLocalData screen
-  loading: true,
   downloading: false,
-
   // fresh/ missing/ update
   downloadingReason: '',
 }
@@ -37,12 +34,10 @@ export default function reducer(state=initialState, action) {
   switch(action.type) {
     case Types.NEW_WIKI:
       const { data } = action;
-      return { ...state, data, downloading: false, loading: false };
-    case Types.LOADING:
-      return { ...state, loading: true, downloading: false };
+      return { ...state, data, downloading: false, };
     case Types.DOWLOADING:
       const { downloadingReason } = action;
-      return { ...state, loading: false, downloading: true, downloadingReason };
+      return { ...state, downloading: true, downloadingReason };
     default:
       return state;
   }
