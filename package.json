@@ -12,6 +12,7 @@
     "native-base": "2.6.1",
     "react": "16.3.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-28.0.0.tar.gz",
+    "react-native-progress-bar-animated": "^1.0.6",
     "react-native-status-bar-height": "2.0.0",
     "react-native-super-grid": "^2.4.1",
     "react-navigation": "^2.5.5",
