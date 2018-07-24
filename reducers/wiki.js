@@ -1,5 +1,3 @@
-import { model_data } from "../constants/Models";
-
 const Types = {
   NEW_WIKI: 'NEW_WIKI_AVAILABLE',
   NEW_WIKI: 'NEW_WIKI',
