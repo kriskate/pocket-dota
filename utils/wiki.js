@@ -8,22 +8,19 @@ const ERRORS = {
   GET: (key, e) => `AsyncStorage - problem retrieving ${key}: \n${e}`,
   FETCH: url => `Fetch - problem fetching ${url}: \n ${e}`,
 };
-const wiki_local = {};
 
 
 /* INIT */
-export const initStorage = async () => {
-  return await Promise.all(
-    Object.keys(url.data).map(async cData => {
-      try {
-        const val = await AsyncStorage.getItem(cData);
-        wiki_local[cData] = val ? JSON.parse(val) : null;
-      } catch(e) {
-        wiki_local[cData] = null;
-        console.log(ERRORS.GET(cData, e));
-      }
-    })
+export const loadFromStorage = async () => {
+  const data = {}
+
+  await Promise.all(
+    Object.keys(url.data).map(async cData => 
+      data[cData] = await getItem(cData)
+    )
   );
+
+  return data;
 }
 
 export const flushGetRequests = () => AsyncStorage.flushGetRequests();
@@ -34,7 +31,6 @@ export const flushGetRequests = () => AsyncStorage.flushGetRequests();
 export const setItem = async (key, value) => {
   try {
     await AsyncStorage.setItem(`@wiki_local:${key}`, JSON.stringify(value));
-    wiki_local[key] = value;
   } catch (e) {
     console.log(ERRORS.SET(key, e));
   }
@@ -55,8 +51,7 @@ export const checkIfWikiUpdateNeeded = async () => {
   const wiki_current = await getCurrentWiki();
   if(!wiki_current) return false;
 
-  const { info } = wiki_local;
-
+  const info = getItem('info');
   if(!info) return true;
   else return info.currentWikiVersion == wiki_current.currentWikiVersion 
            && info.currentWikiVersionDate == wiki_current.currentWikiVersionDate;
@@ -85,6 +80,12 @@ export const downloadNewWikiData = async () => {
   return data;
 }
 
+export const setCurrentWiki = async newWiki => {
+  await Promise.all(Object.keys(newWiki).map(async cData =>
+    await setItem(cData, newWiki[cData])
+  ));
+}
+
 
 
 /* UTILS */
@@ -98,4 +99,5 @@ const getCurrentWiki = async () => {
   }
   return wiki_current;
 }
+
 const fetchJSON = async url => (await fetch(url)).json();
