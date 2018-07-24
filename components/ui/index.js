@@ -1,9 +1,13 @@
-import Text from "./Text";
 import Container from "./Container";
+import Progress from "./Progress";
 import Separator from "./Separator";
+import StatusBar from "./StatusBar";
+import Text from "./Text";
 
 export {
-  Text,
   Container,
+  Progress,
   Separator,
+  StatusBar,
+  Text,
 }

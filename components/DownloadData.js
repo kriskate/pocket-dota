@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Actions } from '../reducers/wiki';
 
-import { Container, Text, Separator } from './ui';
-import Progress from './ui/Progress';
+import { Container, Text, Progress, Separator } from './ui';
+import { downloadWiki } from '../utils/loaders';
 
 const texts = {
   FRESH: 'Because this is the first time you launch the app, additional files need to be downloaded (eg: images, hero/ item descriptions).',
@@ -26,9 +26,13 @@ export default class DownloadData extends React.PureComponent {
     progressPictures: 0,
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.setState({ progressData:100 });
     this.setState({ progressPictures:100 });
+
+    const data = await downloadWiki();
+
+    this.props.actions.newWiki(data);
   }
   render() {
     const { downloadingReason } = this.props.wiki;
@@ -45,7 +49,7 @@ export default class DownloadData extends React.PureComponent {
 
         <Separator />
 
-        <Progress label={`Downloading images `} 
+        <Progress label={`Downloading images`} 
           progress={this.state.progressPictures} />
         
       </Container>

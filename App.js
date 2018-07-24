@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 
 
 import { AppLoading } from 'expo';
-import { loadInitialAssets, loadWikiFromStorage, loadProfileFromStorage } from './utils/loaders';
+import { loadInitialAssets, loadWikiFromStorage, loadProfileFromStorage, checkDataConsistency } from './utils/loaders';
 import AppContent from './AppContent';
 import Logger from './utils/Logger';
 import { createStore } from 'redux';
@@ -24,7 +24,16 @@ export default class App extends React.Component {
     const wiki = await loadWikiFromStorage();
     const profile = await loadProfileFromStorage();
 
-    store = createStore(reducers, { wiki, profile });
+    const dataConsistency = checkDataConsistency(wiki.data);
+
+    if(dataConsistency === true) {
+      store = createStore(reducers, { wiki, profile });
+    } else {
+      store = createStore(reducers, {
+        wiki: { ...wiki, downloading: true, downloadingReason: dataConsistency },
+        profile,
+      });
+    }
   }
 
   render() {

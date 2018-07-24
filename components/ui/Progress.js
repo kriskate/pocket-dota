@@ -9,7 +9,7 @@ import Colors from '../../constants/Colors';
 
 export default ({ progress, label }) => (
   <View>
-    <Text style={styles.label}>{label}</Text>
+    <Text style={styles.label}>{label} ({progress})</Text>
 
     { !progress && progress !== 0
       

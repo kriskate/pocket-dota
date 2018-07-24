@@ -1,8 +1,8 @@
-import { Image } from 'react-native'
+import { Image, Platform, StatusBar } from 'react-native'
 import { Asset, Font, Icon } from 'expo';
-import { getItem } from './wiki';
+import { getItem, downloadNewWikiData, setCurrentWiki } from './wiki';
 import { initialState as profileState } from '../reducers/profile';
-import { initialState as wikiState } from '../reducers/wiki';
+import { initialState as wikiState, DOWNLOAD_REASONS } from '../reducers/wiki';
 import Logger from './Logger';
 
 export const cacheImages = (images) => {
@@ -34,6 +34,30 @@ export const loadInitialAssets = async () => {
   await Promise.all([...imageAssets, fontAssets])
 }
 
+export const checkDataConsistency = data => {
+  // initiates a download if MISSING or FRESH
+  const { heroes, items, tips, patch_notes, info, } = data;
+
+  Logger.debug('--- checking data')
+
+  if(!(heroes && items && tips && patch_notes && info)) {
+    return heroes || items || tips || patch_notes || info 
+      ? DOWNLOAD_REASONS.MISSING : DOWNLOAD_REASONS.FRESH
+  }
+
+  return true;
+}
+
+export const downloadWiki = async () => {
+  Logger.debug('--- downloading new wiki')
+  
+  Platform.OS === 'ios' && StatusBar.setNetworkActivityIndicatorVisible(true);
+  const newWikiData = await downloadNewWikiData();
+  Platform.OS === 'ios' && StatusBar.setNetworkActivityIndicatorVisible(false);
+  await setCurrentWiki(newWikiData);
+
+  return newWikiData;
+}
 
 export const loadWikiFromStorage = async () => {
   const data = {};
@@ -44,7 +68,7 @@ export const loadWikiFromStorage = async () => {
     )
   );
   
-  Logger.silly('_localData', !!data.info);
+  Logger.silly('loading local data', !!data.info);
 
   return {...wikiState, data};
 }
