@@ -1,6 +1,7 @@
 import React from 'react';
-import { Image, Text, TouchableOpacity, View, StyleSheet } from 'react-native';
+import { Image, Text, TouchableOpacity, View, StyleSheet, } from 'react-native';
 import { Thumbnail } from 'native-base';
+import { connect } from 'react-redux';
 
 import Colors from '../constants/Colors';
 import { HOME_LABELS, SCREEN_LABELS } from '../constants/Constants';
@@ -24,14 +25,16 @@ const MenuItem = ({onPress, label, cardImage, profileImage}) => (
   </View>
 );
 
-
-class Screen extends React.PureComponent {
+@connect(state => ({
+  profile: state.profile,
+}))
+export default class Screen extends React.PureComponent {
   static defaultProps = {
     profileName: HOME_LABELS.PROFILE,
   };
 
   render() {
-    const { profileImage, profileName } = this.props;
+    const { name, image } = this.props.profile;
     const { navigate } = this.props.navigation;
 
     return (
@@ -42,15 +45,16 @@ class Screen extends React.PureComponent {
           cardImage={require("../assets/images/menu-items.png")} />
         <MenuItem onPress={() => navigate(SCREEN_LABELS.STATS)} label={HOME_LABELS.STATS}
           cardImage={require("../assets/images/menu-stats.png")} />
-        { !profileImage ? null :
-          <MenuItem onPress={() => navigate(SCREEN_LABELS.PROFILE)} label={profileName}
+        { !image ? null :
+          <MenuItem onPress={() => navigate(SCREEN_LABELS.PROFILE)} label={name}
             cardImage={require("../assets/images/menu-profile.png")}
-            profileImage={profileImage} /> 
+            profileImage={image} /> 
         }
       </View>
     );
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -92,5 +96,3 @@ const styles = StyleSheet.create({
     color: 'white',
   },
 });
-
-export default Screen;
