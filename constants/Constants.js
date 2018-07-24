@@ -21,11 +21,18 @@ export const SCREEN_LABELS = {
 }
 
 
-
 export const url = {
-  heroes: 'https://raw.githubusercontent.com/kriskate/dota-data/master/v_1_2018-07-16T14%3A53%3A46.631Z/heroes.json',
-  items: 'https://raw.githubusercontent.com/kriskate/dota-data/master/v_1_2018-07-16T14%3A53%3A46.631Z/items.json',
-  patch_notes: 'https://raw.githubusercontent.com/kriskate/dota-data/master/v_1_2018-07-16T14%3A53%3A46.631Z/patch_notes.json',
-  tips: 'https://raw.githubusercontent.com/kriskate/dota-data/master/v_1_2018-07-16T14%3A53%3A46.631Z/tips.json',
-  info: 'https://raw.githubusercontent.com/kriskate/dota-data/master/v_1_2018-07-16T14%3A53%3A46.631Z/info.json',
+  images: {
+
+  },
+
+  currentWiki: 'https://raw.githubusercontent.com/kriskate/dota-data/master/info.json',
+
+  data:{
+    heroes: 'https://raw.githubusercontent.com/kriskate/dota-data/master/$WIKI_FOLDER/heroes.json',
+    items: 'https://raw.githubusercontent.com/kriskate/dota-data/master/$WIKI_FOLDER/items.json',
+    patch_notes: 'https://raw.githubusercontent.com/kriskate/dota-data/master/$WIKI_FOLDER/patch_notes.json',
+    tips: 'https://raw.githubusercontent.com/kriskate/dota-data/master/$WIKI_FOLDER/tips.json',
+    info: 'https://raw.githubusercontent.com/kriskate/dota-data/master/$WIKI_FOLDER/info.json',
+  },
 }
