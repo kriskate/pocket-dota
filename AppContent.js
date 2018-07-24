@@ -17,7 +17,6 @@ const texts = {
   state => ({
     wiki: state.wiki,
     profile: state.profile,
-    app: state.app,
   }), 
   dispatch => ({
     actions: bindActionCreators(Actions, dispatch)
