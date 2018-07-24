@@ -1,15 +1,12 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { StatusBar } from 'react-native';
 
 import store from './reducers/store';
 
 import { AppLoading } from 'expo';
 import { loadInitialAssets } from './utils/loaders';
 import AppContent from './AppContent';
-import { Container } from './components/ui';
 
-StatusBar.setBarStyle('light-content');
 
 // handles splash screen, via AppLoading
 // implements redux at top-level
@@ -37,9 +34,7 @@ export default class App extends React.Component {
     } else {
       return (
         <Provider store={store}>
-          <Container>
-            <AppContent />
-          </Container>
+          <AppContent />
         </Provider>
       );
     }
