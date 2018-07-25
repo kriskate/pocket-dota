@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Image } from 'react-native';
+
 import { Actions } from '../reducers/wiki';
 
 import { Container, Text, Progress, Separator } from './ui';
@@ -27,11 +29,20 @@ export default class DownloadData extends React.PureComponent {
   }
 
   async componentDidMount() {
+    
     this.setState({ progressData:100 });
-    this.setState({ progressPictures:100 });
-
     const data = await downloadWiki();
 
+    const { heroes } = data;
+    const step = 100/heroes.length;
+
+    await Promise.all(heroes.map(async hero => {
+      await Image.prefetch(hero.img_small);
+      this.setState({ progressPictures: Math.round((this.state.progressPictures+step)*100)/100 })
+    }))
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    
+    //this.setState({ progressPictures:100 });
     this.props.actions.newWiki(data);
   }
   render() {

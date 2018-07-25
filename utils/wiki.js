@@ -58,7 +58,7 @@ export const downloadNewWikiData = async () => {
       data[cData] = await fetchJSON(url.data[cData].replace('$WIKI_FOLDER', cWikiFolder))
     ));
   } catch (e) {
-    Logger.log(e)
+    Logger.error(e)
     return false;
   }
   
