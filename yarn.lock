@@ -4579,12 +4579,6 @@ react-native-maps@0.21.0:
     babel-plugin-module-resolver "^2.3.0"
     babel-preset-react-native "1.9.0"
 
-react-native-progress-bar-animated@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/react-native-progress-bar-animated/-/react-native-progress-bar-animated-1.0.6.tgz#18de003ababb8222c84299ef2f20d0eab549dc19"
-  dependencies:
-    prop-types "^15.6.0"
-
 react-native-reanimated@1.0.0-alpha.3:
   version "1.0.0-alpha.3"
   resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-1.0.0-alpha.3.tgz#42983aa41911791cd3186fd3a18a788c3d4c3601"

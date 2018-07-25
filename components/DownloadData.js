@@ -30,15 +30,15 @@ export default class DownloadData extends React.PureComponent {
 
   async componentDidMount() {
     
-    this.setState({ progressData:100 });
+    this.setState({ progressData: 1 });
     const data = await downloadWiki();
 
     const { heroes } = data;
-    const step = 100/heroes.length;
+    const step = 1/heroes.length;
 
     await Promise.all(heroes.map(async hero => {
       await Image.prefetch(hero.img_small);
-      this.setState({ progressPictures: Math.round((this.state.progressPictures+step)*100)/100 })
+      if(this.state.progressPictures < 1) this.setState({ progressPictures: this.state.progressPictures+step })
     }))
     await new Promise(resolve => setTimeout(resolve, 3000));
     
