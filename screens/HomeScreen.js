@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, Text, TouchableOpacity, View, StyleSheet, } from 'react-native';
-import { Thumbnail } from 'native-base';
+import { Thumbnail } from '../components/ui/';
 import { connect } from 'react-redux';
 
 import Colors from '../constants/Colors';
@@ -13,9 +13,9 @@ const MenuItem = ({onPress, label, cardImage, profileImage}) => (
       <Image style={styles.image} source={cardImage} />
     </TouchableOpacity>
 
-    { !profileImage ? null : 
+    { !profileImage ? null :
         <View style={styles.profileImageWrapper} pointerEvents='none'> 
-          <Thumbnail large style={styles.profileImage} source={{uri: profileImage}} pointerEvents='none'/>
+          <Thumbnail round source={{uri: profileImage}} />
         </View> 
     }
 
@@ -26,7 +26,7 @@ const MenuItem = ({onPress, label, cardImage, profileImage}) => (
 );
 
 @connect(state => ({
-  profile: state.profile,
+  user: state.profile.user,
 }))
 export default class Screen extends React.PureComponent {
   static defaultProps = {
@@ -34,7 +34,7 @@ export default class Screen extends React.PureComponent {
   };
 
   render() {
-    const { name, image } = this.props.profile;
+    const { name, image } = this.props.user;
     const { navigate } = this.props.navigation;
 
     return (
@@ -75,9 +75,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     resizeMode: 'cover',
-  },
-  profileImage: {
-    marginTop: 5,
   },
   profileImageWrapper: {
     position: 'absolute',

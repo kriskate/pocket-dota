@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Content, Text, } from 'native-base';
+import { Container, Text } from '../components/ui';
 
 import ButtonHamburger from '../components/ButtonHamburger';
 
@@ -13,11 +13,9 @@ export default class Screen extends React.Component {
 
     return (
       <Container>
-        <Content padder>
           <Text>
             Item description
-          </Text>
-        </Content>
+          </Text>>
       </Container>
     );
   }

@@ -1,8 +1,9 @@
 import React from 'react';
-import { Container, Content, Text, } from 'native-base';
 import { View, Image, StyleSheet } from 'react-native';
 
+
 import ButtonHamburger from '../components/ButtonHamburger';
+import { Text, Container } from '../components/ui';
 
 export default class Screen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -15,22 +16,20 @@ export default class Screen extends React.Component {
 
     return (
       <Container>
-        <Content padder>
-          <View style={styles.hype}>
-            <Text>{hype}</Text>
-          </View>
-          <Image style={styles.imgHero} source={{ uri: img_vert }} />
-          <View style={styles.lore}>
-            <Text>{bio}</Text>
-          </View>
-          <View style={styles.abilities}>
-            { abilities.map(ability => (
-              <View key={ability.tag}>
-                <Image style={styles.imgAbility} source={{ uri: ability.img }} /><Text>{ability.name}</Text>
-              </View>
-            )) }
-          </View>
-        </Content>
+        <View style={styles.hype}>
+          <Text>{hype}</Text>
+        </View>
+        <Image style={styles.imgHero} source={{ uri: img_vert }} />
+        <View style={styles.lore}>
+          <Text>{bio}</Text>
+        </View>
+        <View style={styles.abilities}>
+          { abilities.map(ability => (
+            <View key={ability.tag}>
+              <Image style={styles.imgAbility} source={{ uri: ability.img }} /><Text>{ability.name}</Text>
+            </View>
+          )) }
+        </View>
       </Container>
     );
   }

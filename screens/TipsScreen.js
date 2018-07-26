@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Text } from 'native-base';
+import { Container, Text } from '../components/ui';
 
 import ButtonHamburger from '../components/ButtonHamburger';
 import { SCREEN_LABELS } from '../constants/Constants';

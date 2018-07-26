@@ -3,6 +3,7 @@ import Progress from "./Progress";
 import Separator from "./Separator";
 import StatusBar from "./StatusBar";
 import Text from "./Text";
+import Thumbnail from "./Thumbnail";
 
 export {
   Container,
@@ -10,4 +11,5 @@ export {
   Separator,
   StatusBar,
   Text,
+  Thumbnail,
 }

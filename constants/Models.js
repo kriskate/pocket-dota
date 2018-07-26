@@ -3,12 +3,12 @@ export function model_wiki (data) {
   return { heroes, items, tips, patch_notes, info };
 }
 export function model_user (user) {
-  const { name, image, url_profile=model_profile({}) } = user;
+  const { name, image, url_profile } = user;
   return { name, image, url_profile };
 }
 
 export function model_profile (data) {
-  const { user, lastSearch } = data;
+  const { user=model_user({}), lastSearch } = data;
   return { user, lastSearch };
 }
 
