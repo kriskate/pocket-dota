@@ -17,7 +17,7 @@ export default class AppDownloading extends React.PureComponent {
     Platform.OS === 'ios' && StatusBar.setNetworkActivityIndicatorVisible(true);
 
     // to-do: find a solution to download json with progress (react-native-fetch-blob - not supported by expo)
-    const profile = await loadProfileStateFromStorage;
+    const profile = await loadProfileStateFromStorage();
     const wiki = await downloadNewWikiData();
     this.setState({ progress_wiki: 1 });
 

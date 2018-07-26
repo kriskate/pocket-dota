@@ -5,6 +5,7 @@ import Logger from './Logger';
 import { DOWNLOAD_REASONS } from '../constants/Constants';
 import { initialState as initialState_wiki } from '../reducers/wiki';
 import { initialState as initialState_profile } from '../reducers/profile';
+import { model_profile, model_wiki } from '../constants/Models';
 
 export const cacheImages = (images) => {
   return images.map(image => {
@@ -36,7 +37,7 @@ export const loadInitialAssets = async () => {
 
 
 export const loadWikiStateFromStorage = async () => {
-  const data = await loadState(initialState_wiki);
+  const data = await loadState(initialState_wiki, 'wiki');
 
   // check if all the loaded data exists
   // if a user clears cache and aborts half-way, saved data might be incomplete
@@ -52,10 +53,12 @@ export const loadWikiStateFromStorage = async () => {
     }
   }
 
-  return data;
+  return model_wiki(data);
 }
 export const loadProfileStateFromStorage = async () => {
-  return await loadState(initialState_profile);
+  const data = await loadState(initialState_profile, 'profile');
+  
+  return model_profile(data);
 }
 const loadState = async (initialState, reducer) => {
   Logger.debug(`loading local data (${reducer})`);
