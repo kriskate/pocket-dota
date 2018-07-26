@@ -36,3 +36,9 @@ export const url = {
     info: 'https://raw.githubusercontent.com/kriskate/dota-data/master/$WIKI_FOLDER/info.json',
   },
 }
+
+export const DOWNLOAD_REASONS = {
+  FRESH: 'Because this is the first time you launch the app, additional files need to be downloaded (eg: images, hero/ item descriptions).',
+  MISSING: 'Some wiki data on your device seems to be missing. Please wait while the app re-downloads the data.',
+  UPDATE: 'Downloading new wiki database.'
+}

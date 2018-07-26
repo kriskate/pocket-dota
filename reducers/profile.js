@@ -1,23 +1,22 @@
+import { model_profile } from "../constants/Models";
+
 const ActionTypes = {
   SEARCH: 'SEARCH',
   SET_USER: 'SET_USER',
 }
-const Actions = {
-  searchFor: search => ({ type: ActionTypes.SEARCH_PROFILE, search }),
+export const Actions = {
   setUser: user => ({ type: ActionTypes.SET_USER_PROFILE, user}),
+  searchFor: lastSearch => ({ type: ActionTypes.SEARCH_PROFILE, lastSearch }),
 }
 
-export const initialState = {
-  search: null,
-  user: null, // { name, image, url_profile }
-}
+export const initialState = model_profile({});
 
 export default function reducer(state=initialState, action) {
-  const { user, search } = action;
+  const { user, lastSearch } = action;
 
   switch(action.type) {
     case ActionTypes.SEARCH_PROFILE:
-      return { ...state, search };
+      return { ...state, lastSearch };
     break;
     case ActionTypes.SET_USER_PROFILE:
       return { ...state, user };

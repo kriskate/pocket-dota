@@ -43,46 +43,54 @@ export const checkIfWikiUpdateNeeded = async () => {
 }
 
 export const downloadNewWikiData = async () => {
-  const wiki_current = await getCurrentWiki();
+  Logger.debug('downloading new wiki');
+  const wiki_info = await getCurrentWikiInfo();
   
-  if(!wiki_current ) return null;
+  if(!wiki_info ) return null;
 
-  const { currentWikiVersion, currentWikiVersionDate } = wiki_current;
+  const { currentWikiVersion, currentWikiVersionDate } = wiki_info;
 
   const cWikiFolder = `v_${currentWikiVersion}_${currentWikiVersionDate}`;
   const data = {};
 
-  //Object.keys(url.data).map(cData => data[cData] = url.data[cData].replace('$WIKI_FOLDER', cWikiFolder))
   try {
     await Promise.all(Object.keys(url.data).map(async cData => 
       data[cData] = await fetchJSON(url.data[cData].replace('$WIKI_FOLDER', cWikiFolder))
     ));
   } catch (e) {
     Logger.error(e)
-    return false;
+    throw e;
   }
+
+  await setCurrentWiki(data);
   
   return data;
-}
-
-export const setCurrentWiki = async newWiki => {
-  await Promise.all(Object.keys(newWiki).map(async cData =>
-    await setItem(cData, newWiki[cData])
-  ));
 }
 
 
 
 /* UTILS */
-const getCurrentWiki = async () => {
+const getCurrentWikiInfo = async () => {
   let wiki_current = null;
   try {
     wiki_current = await fetchJSON(url.currentWiki);
   } catch (e) {
-    connectionIssue();
-    Logger.log(ERRORS.FETCH(url.currentWiki, e));
+    Logger.error(ERRORS.FETCH(url.currentWiki, e));
+    throw e;
   }
   return wiki_current;
+}
+const setCurrentWiki = async newWiki => {
+  await Promise.all(Object.keys(newWiki).map(async cData => {
+    try {
+      await setItem(cData, newWiki[cData])
+    } catch(e) {
+      Logger.error(e);
+      throw e;
+    }
+
+  }
+  ));
 }
 
 const fetchJSON = async url => (await fetch(url)).json();

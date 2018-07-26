@@ -1,13 +1,15 @@
-export function model_data (data) {
-  return {
-    heroes, items, tips, patch_notes, info
-  } = data;
+export function model_wiki (data) {
+  const { heroes, items, tips, patch_notes, info } = data;
+  return { heroes, items, tips, patch_notes, info };
+}
+export function model_user (user) {
+  const { name, image, url_profile=model_profile({}) } = user;
+  return { name, image, url_profile };
 }
 
-export function model_user (user) {
-  return {
-    name, image, url_profile,
-  } = user;
+export function model_profile (data) {
+  const { user, lastSearch } = data;
+  return { user, lastSearch };
 }
 
 
@@ -19,7 +21,6 @@ export function model_item (item) {
     attrib, mc, cooldown, created, AbilityCastRange,
   } = item;
 }
-
 
 export function model_ability (ability) {
   return { 

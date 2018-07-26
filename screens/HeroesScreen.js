@@ -7,7 +7,7 @@ import { SCREEN_LABELS, url } from '../constants/Constants';
 import ButtonHamburger from '../components/ButtonHamburger';
 
 @connect(state => ({ 
-  heroes: state.wiki.data.heroes,
+  heroes: state.wiki.heroes,
 }))
 export default class Screen extends React.Component {
   static navigationOptions = ({ navigation }) => ({

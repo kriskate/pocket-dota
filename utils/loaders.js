@@ -1,9 +1,10 @@
-import { Image, Platform, StatusBar } from 'react-native'
+import { Image } from 'react-native';
 import { Asset, Font, Icon } from 'expo';
-import { getItem, downloadNewWikiData, setCurrentWiki } from './wiki';
-import { initialState as profileState } from '../reducers/profile';
-import { initialState as wikiState, DOWNLOAD_REASONS } from '../reducers/wiki';
+import { getItem  } from './wiki';
 import Logger from './Logger';
+import { DOWNLOAD_REASONS } from '../constants/Constants';
+import { initialState as initialState_wiki } from '../reducers/wiki';
+import { initialState as initialState_profile } from '../reducers/profile';
 
 export const cacheImages = (images) => {
   return images.map(image => {
@@ -34,53 +35,39 @@ export const loadInitialAssets = async () => {
   await Promise.all([...imageAssets, fontAssets])
 }
 
-export const checkDataConsistency = data => {
-  // initiates a download if MISSING or FRESH
+
+
+export const loadWikiStateFromStorage = async () => {
+  const data = await loadState(initialState_wiki);
+
+  // check if all the loaded data exists
+  // if a user clears cache and aborts half-way, saved data might be incomplete
+  Logger.debug('checking data consistency');
   const { heroes, items, tips, patch_notes, info, } = data;
-
-  Logger.debug('--- checking data')
-
   if(!(heroes && items && tips && patch_notes && info)) {
-    return heroes || items || tips || patch_notes || info 
-      ? DOWNLOAD_REASONS.MISSING : DOWNLOAD_REASONS.FRESH
+    if (heroes || items || tips || patch_notes || info) {
+      Logger.debug(' - data is partially missing');
+      throw new Error(DOWNLOAD_REASONS.MISSING);
+    } else {
+      Logger.debug(' - data is missing');
+      throw new Error(DOWNLOAD_REASONS.FRESH);
+    }
   }
 
-  return true;
+  return data;
 }
-
-export const downloadWiki = async () => {
-  Logger.debug('--- downloading new wiki')
-  
-  Platform.OS === 'ios' && StatusBar.setNetworkActivityIndicatorVisible(true);
-  const newWikiData = await downloadNewWikiData();
-  Platform.OS === 'ios' && StatusBar.setNetworkActivityIndicatorVisible(false);
-  await setCurrentWiki(newWikiData);
-
-  return newWikiData;
+export const loadProfileStateFromStorage = async () => {
+  return await loadState(initialState_profile);
 }
-
-export const loadWikiFromStorage = async () => {
+const loadState = async (initialState, reducer) => {
+  Logger.debug(`loading local data (${reducer})`);
   const data = {};
 
   await Promise.all(
-    Object.keys(wikiState.data).map(async cData => 
-      data[cData] = await getItem(cData)
-    )
-  );
-  
-  Logger.silly('loading local data', !!data.info);
-
-  return {...wikiState, data};
-}
-
-
-export const loadProfileFromStorage = async () => {
-  const data = {}
-
-  await Promise.all(
-    Object.keys(profileState).map(async cData => 
-      data[cData] = await getItem(cData)
-    )
+    Object.keys(initialState).map(async cData => {
+      data[cData] = await getItem(cData);
+      Logger.silly(`loaded local data: ${reducer} : ${cData} : ${!!data[cData]}`);
+    })
   );
 
   return data;
