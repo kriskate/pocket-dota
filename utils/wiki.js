@@ -23,10 +23,10 @@ export const setItem = async (key, value) => {
 export const getItem = async (key) => {
   try {
     const val = await AsyncStorage.getItem(`@wiki_local:${key}`);
-    return val ? JSON.parse(val) : null;
+    return val ? JSON.parse(val) : undefined;
   } catch (e) {
     Logger.log(ERRORS.GET(key, e));
-    return null;
+    return undefined;
   }
 }
 
@@ -46,7 +46,7 @@ export const downloadNewWikiData = async () => {
   Logger.debug('downloading new wiki');
   const wiki_info = await getCurrentWikiInfo();
   
-  if(!wiki_info ) return null;
+  if(!wiki_info ) return undefined;
 
   const { currentWikiVersion, currentWikiVersionDate } = wiki_info;
 
@@ -71,7 +71,7 @@ export const downloadNewWikiData = async () => {
 
 /* UTILS */
 const getCurrentWikiInfo = async () => {
-  let wiki_current = null;
+  let wiki_current;
   try {
     wiki_current = await fetchJSON(url.currentWiki);
   } catch (e) {
