@@ -2,14 +2,19 @@ export function model_wiki (data) {
   const { heroes, items, tips, patch_notes, info } = data;
   return { heroes, items, tips, patch_notes, info };
 }
+
+
+export function model_profile (data) {
+  const { user=model_user({}), settings=model_settings({}), lastSearch } = data;
+  return { user, settings, lastSearch };
+}
 export function model_user (user) {
   const { name, image, url_profile } = user;
   return { name, image, url_profile };
 }
-
-export function model_profile (data) {
-  const { user=model_user({}), lastSearch } = data;
-  return { user, lastSearch };
+export function model_settings (settings) {
+  const { showProfileOnHome, autoUpdateApp, autoUpdateDB } = settings;
+  return { showProfileOnHome, autoUpdateApp, autoUpdateDB };
 }
 
 
