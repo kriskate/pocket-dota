@@ -4,7 +4,7 @@ import { View, Text } from 'react-native'
 import ButtonHamburger from '../components/ButtonHamburger'
 import { SCREEN_LABELS } from '../constants/Constants';
 
-export default class Screen extends React.Component {
+export default class AboutScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: SCREEN_LABELS.ABOUT,
     headerRight: <ButtonHamburger />,

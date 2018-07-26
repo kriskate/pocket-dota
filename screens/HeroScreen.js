@@ -5,7 +5,7 @@ import { View, Image, StyleSheet } from 'react-native';
 import ButtonHamburger from '../components/ButtonHamburger';
 import { Text, Container } from '../components/ui';
 
-export default class Screen extends React.Component {
+export default class HeroScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: navigation.getParam('hero').name,
     headerRight: <ButtonHamburger />,

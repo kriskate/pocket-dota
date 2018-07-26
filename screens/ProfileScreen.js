@@ -4,7 +4,7 @@ import { Container, Text } from '../components/ui';
 import ButtonHamburger from '../components/ButtonHamburger';
 import { SCREEN_LABELS } from '../constants/Constants';
 
-export default class Screen extends React.Component {
+export default class ProfileScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: SCREEN_LABELS.PROFILE,
     headerRight: <ButtonHamburger />,

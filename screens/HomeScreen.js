@@ -28,7 +28,7 @@ const MenuItem = ({onPress, label, cardImage, profileImage}) => (
 @connect(state => ({
   user: state.profile.user,
 }))
-export default class Screen extends React.PureComponent {
+export default class HomeScreen extends React.PureComponent {
   static defaultProps = {
     profileName: HOME_LABELS.PROFILE,
   };

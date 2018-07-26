@@ -9,7 +9,7 @@ import ButtonHamburger from '../components/ButtonHamburger';
 @connect(state => ({ 
   heroes: state.wiki.heroes,
 }))
-export default class Screen extends React.Component {
+export default class HeroesScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: SCREEN_LABELS.HEROES,
     headerRight: <ButtonHamburger />
