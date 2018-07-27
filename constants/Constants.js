@@ -20,10 +20,15 @@ export const SCREEN_LABELS = {
   ABOUT: 'About',
 }
 
-
+const images_base = 'https://raw.githubusercontent.com/kriskate/dota-data/master/assets/images/';
 export const url = {
   images: {
+    hero: id => `${images_base}/heroes/small/${id}.png`,
+    hero_vert: id => `${images_base}/heroes/vert/${id}_vert.jpg`,
+    hero_icon: id => `${images_base}/heroes/icons/${id}.png`,
 
+    ability: id => `${images_base}/abilities/${id}.png`,
+    item: id => `${images_base}/items/${id}.png`,
   },
 
   currentWiki: 'https://raw.githubusercontent.com/kriskate/dota-data/master/info.json',
