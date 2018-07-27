@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import { SCREEN_LABELS, url } from '../constants/Constants';
 import ButtonHamburger from '../components/ButtonHamburger';
+import { Container } from '../components/ui';
 
 @connect(state => ({ 
   heroes: state.wiki.heroes,
@@ -18,7 +19,7 @@ export default class HeroesScreen extends React.Component {
 
   _renderItem = hero => {
     const { navigate } = this.props.navigation
-    const imgSource = { uri: hero.img_small }
+    const imgSource = { uri: url.images.hero(hero.tag) };
 
     return (
       <TouchableHighlight key={hero.tag} onPress={() => navigate('HeroScreen', { hero }) } 
@@ -36,20 +37,13 @@ export default class HeroesScreen extends React.Component {
     const { heroes } = this.props;
 
     return (
-      <View>
-        { !heroes
-          ? <View>
-              <Text>No heroes found... please reload the application</Text>
-            </View>
-          : <View>
-              <GridView removeClippedSubviews={true}
-                itemDimension={100}
-                items={heroes}
-                renderItem={this._renderItem}
-              />
-            </View>
-        }
-      </View>
+      <Container>
+        <GridView
+          itemDimension={100}
+          items={heroes}
+          renderItem={this._renderItem}
+        />
+      </Container>
     );
   }
 }
@@ -79,7 +73,7 @@ const styles = StyleSheet.create({
     borderColor: '#CCC'
   },
   thumb: {
-    width: 64,
+    width: 90,
     height: 64
   },
   text: {
