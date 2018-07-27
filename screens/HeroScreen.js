@@ -4,6 +4,8 @@ import { View, Image, StyleSheet } from 'react-native';
 
 import ButtonHamburger from '../components/ButtonHamburger';
 import { Text, Container } from '../components/ui';
+import { url } from '../constants/Constants';
+import Abilities from '../components/Abilities';
 
 export default class HeroScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -12,45 +14,38 @@ export default class HeroScreen extends React.Component {
   });
 
   render() {
-    const { name, bio, hype, img_vert, abilities } =  this.props.navigation.getParam('hero');
+    const { name, bio, hype, tag, abilities } =  this.props.navigation.getParam('hero');
 
     return (
-      <Container>
+      <Container scrollable padInner>
         <View style={styles.hype}>
           <Text>{hype}</Text>
         </View>
-        <Image style={styles.imgHero} source={{ uri: img_vert }} />
+        <View style={styles.imgHeroWrapper}>
+          <Image style={styles.imgHero} source={{ uri: url.images.hero_vert(tag) }} />
+        </View>
+
         <View style={styles.lore}>
           <Text>{bio}</Text>
         </View>
-        <View style={styles.abilities}>
-          { abilities.map(ability => (
-            <View key={ability.tag}>
-              <Image style={styles.imgAbility} source={{ uri: ability.img }} /><Text>{ability.name}</Text>
-            </View>
-          )) }
-        </View>
+        <Abilities abilities={abilities} />
       </Container>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  imgHeroWrapper: {
+    alignItems: 'center',
+  },
   imgHero: {
     width: 235,
     height: 272,
-  },
-  imgAbility: {
-    width: 90,
-    height: 90,
   },
   hype: {
 
   },
   lore: {
-
-  },
-  abilities: {
 
   },
 })
