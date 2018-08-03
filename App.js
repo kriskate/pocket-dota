@@ -11,6 +11,7 @@ import { loadInitialAssets, loadCurrentWikiInfo, loadWiki, loadProfileStateFromS
 import AppNavigator from './navigation/AppNavigator';
 import Logger from './utils/Logger';
 import { DOWNLOAD_REASONS } from './constants/Constants';
+import { checkIfWikiUpdateNeeded } from './utils/wiki';
 
 
 let store;
@@ -32,6 +33,13 @@ export default class App extends React.Component {
     this.setState({ loaded: true });
   };
 
+
+  _checkWikiUpdate = () => {
+    checkIfWikiUpdateNeeded();
+  }
+  _wikiUpdate = () => {
+    this.setState({ downloading: true, downloadReason: DOWNLOAD_REASONS.UPDATE });
+  }
 
   _createStore = async () => {
     const wiki = await loadWiki();
