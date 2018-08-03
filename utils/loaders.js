@@ -3,24 +3,15 @@ import { Asset, Font, Icon, FileSystem } from 'expo';
 import Logger from './Logger';
 import { model_profile, model_wiki } from '../constants/Models';
 import { folder_data } from './downloaders';
-import { getItem } from './wiki';
+import { getItem } from './storage';
 
-export const cacheImages = (images) => {
-  return images.map(image => {
-    if (typeof image === 'string') {
-      return Image.prefetch(image)
-    } else {
-      return Asset.fromModule(image).downloadAsync()
-    }
-  })
-}
 
 export const loadInitialAssets = async () => {
-  const imageAssets = cacheImages([
+  const imageAssets = [
     require('../assets/images/menu-heroes.png'),
     require('../assets/images/menu-items.png'),
     require('../assets/images/menu-stats.png'),
-  ])
+  ].map(image => Asset.fromModule(image).downloadAsync())
 
   const fontAssets = Font.loadAsync({
     ...Icon.Ionicons.font,
@@ -57,7 +48,7 @@ export const loadWiki = async () => {
       try {
         data[key] = JSON.parse(await FileSystem.readAsStringAsync(folder_data + `${key}.json`));
       } catch(e) {
-        // if the file for one of the assets does not exist, download all of them
+        // if the file for one of the assets does not exist, re-download all of them
         badData = true;
       }
       Logger.silly(`- loaded local data: wiki : ${key} : ${!!data[key]}`);

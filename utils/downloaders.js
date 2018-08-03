@@ -10,6 +10,7 @@ export const folder_data = `${FileSystem.cacheDirectory}dota-data/`;
 
 export const downloadImages = async (wiki, progress_callback) => {
   Logger.debug('downloading images');
+
   const { heroes, items, } = wiki;
   const images = { icons: [], small: [], vert: [], abilities: [], items: [] };
   // to-do - remove these from here; put rule on backend
@@ -21,7 +22,7 @@ export const downloadImages = async (wiki, progress_callback) => {
     ['small', 'vert', 'icons'].forEach(type => images[type].push(url.images[type](tag)));
 
     abilities.forEach(ability => images.abilities.push(url.images.abilities(ability.tag)));
-  })
+  });
   items.forEach(({tag}) => {
     if(!ignore.items.includes(tag.tag))
       images.items.push(url.images.items(tag.tag));
@@ -35,12 +36,16 @@ export const downloadImages = async (wiki, progress_callback) => {
 
   return Promise.all(
     keys.map(async key => {
+      Logger.debug(`downloading images for -${key}-`)
+
       await Promise.all(
         images[key].map(async image => {
           await Image.prefetch(image);
           progress_callback(cProgress += step);
         })
       )
+
+      Logger.silly(`downloaded -${key}-`)
     })
   )
 
@@ -77,6 +82,8 @@ export const downloadWiki = async (progress_callback) => {
 
   await Promise.all(
     keys.map(async key => {
+      Logger.debug(`downloading data for ${key}`);
+
       await download(
         url.data[key].replace('$WIKI_FOLDER', cWikiFolder),
         folder_data,
