@@ -1,11 +1,9 @@
 import { Image } from 'react-native';
-import { Asset, Font, Icon } from 'expo';
-import { getItem  } from './wiki';
+import { Asset, Font, Icon, FileSystem } from 'expo';
 import Logger from './Logger';
-import { DOWNLOAD_REASONS } from '../constants/Constants';
-import { initialState as initialState_wiki } from '../reducers/wiki';
-import { initialState as initialState_profile } from '../reducers/profile';
 import { model_profile, model_wiki } from '../constants/Models';
+import { folder_data } from './downloaders';
+import { getItem } from './wiki';
 
 export const cacheImages = (images) => {
   return images.map(image => {
@@ -32,42 +30,50 @@ export const loadInitialAssets = async () => {
   await Promise.all([...imageAssets, fontAssets])
 }
 
-
-
-export const loadWikiStateFromStorage = async () => {
-  const data = await loadState(initialState_wiki, 'wiki');
-
-  // check if all the loaded data exists
-  // if a user clears cache and aborts half-way, saved data might be incomplete
-  Logger.debug('checking data consistency');
-  const { heroes, items, tips, patch_notes, info, } = data;
-  if(!(heroes && items && tips && patch_notes && info)) {
-    if (heroes || items || tips || patch_notes || info) {
-      Logger.debug(' - data is partially missing');
-      throw new Error(DOWNLOAD_REASONS.MISSING);
-    } else {
-      Logger.debug(' - data is missing');
-      throw new Error(DOWNLOAD_REASONS.FRESH);
-    }
-  }
-
-  return model_wiki(data);
-}
 export const loadProfileStateFromStorage = async () => {
-  const data = await loadState(initialState_profile, 'profile');
+  const data = model_profile({});
   
-  return model_profile(data);
-}
-const loadState = async (initialState, reducer) => {
-  Logger.debug(`loading local data (${reducer})`);
-  const data = {};
-
   await Promise.all(
-    Object.keys(initialState).map(async cData => {
-      data[cData] = await getItem(cData);
-      Logger.silly(`loaded local data: ${reducer} : ${cData} : ${!!data[cData]}`);
+    Object.keys(data).map(async key => {
+      const local_data = await getItem(key);
+      if(local_data) data[key] = local_data;
+
+      Logger.silly(`loaded local data: profile : ${key} : ${!!data[key]}`);
     })
   );
-
+  
   return data;
+}
+
+   
+
+export const loadWiki = async () => {
+  Logger.debug('loading wiki data');
+  const data = model_wiki({});
+  let badData = false;
+  
+  await Promise.all(
+    Object.keys(data).map(async key => {
+      try {
+        data[key] = JSON.parse(await FileSystem.readAsStringAsync(folder_data + `${key}.json`));
+      } catch(e) {
+        // if the file for one of the assets does not exist, download all of them
+        badData = true;
+      }
+      Logger.silly(`- loaded local data: wiki : ${key} : ${!!data[key]}`);
+    })
+  )
+  
+  return badData ? null : data;
+}
+
+
+export const loadCurrentWikiInfo = async () => {
+  let info;
+  try {
+    info = JSON.parse(await FileSystem.readAsStringAsync(folder_data + 'info.json'));
+  } catch(e) { 
+    info = null;
+   }
+  return info;
 }

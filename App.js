@@ -7,10 +7,10 @@ import { Provider } from 'react-redux';
 import { AppLoading } from 'expo';
 import AppDownloading from './screens/AppDownloading';
 
-import { loadInitialAssets,loadWikiStateFromStorage, loadProfileStateFromStorage } from './utils/loaders';
+import { loadInitialAssets, loadCurrentWikiInfo, loadWiki, loadProfileStateFromStorage, } from './utils/loaders';
 import AppNavigator from './navigation/AppNavigator';
 import Logger from './utils/Logger';
-import { Container } from './components/ui';
+import { DOWNLOAD_REASONS } from './constants/Constants';
 
 
 let store;
@@ -26,24 +26,39 @@ export default class App extends React.Component {
   _loadAssets = async () => {
     await loadInitialAssets();
 
-    try {
-      const wiki = await loadWikiStateFromStorage();
-      const profile = await loadProfileStateFromStorage();
-      store = createStore(reducers, { wiki, profile });
-    } catch(e) {
-      // data is inconsistent
-      // if react-native fail to load data at getItem, we'll re-download the data
-      this.setState({ downloading: true, downloadReason: e.message });
-    }
+    await this._createStore();
   };
   _handleFinishLoading = () => {
-    this.setState({ loaded: true });    
+    this.setState({ loaded: true });
   };
 
-  _handleFinishDownLoading = ({wiki, profile}) => {
-    store = createStore(reducers, { wiki, profile });
-    this.setState({ downloading: false, downloadReason: '' });
+
+  _createStore = async () => {
+    const wiki = await loadWiki();
+    
+    if(!wiki) {
+      const downloadReason = !await loadCurrentWikiInfo() 
+      ? DOWNLOAD_REASONS.FRESH
+      : DOWNLOAD_REASONS.MISSING;
+      
+      this.setState({ downloading: true, downloadReason });
+    } else {
+      const profile = await loadProfileStateFromStorage();
+
+      store = createStore(reducers, { wiki, profile });
+    }
+  }
+
+  _handleFinishDownLoading = async () => {
+    await this._createStore();
+
+    if(store) {
+      this.setState({ downloading: false });
+    } else {
+      // please restart app
+    }
   };
+
 
   render() {
     if (!this.state.loaded) {

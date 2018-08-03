@@ -2,9 +2,8 @@ import React from 'react';
 import { Image, Platform, StatusBar } from 'react-native';
 
 import { Container, Text, Progress, Separator } from '../components/ui';
-import { loadProfileStateFromStorage } from '../utils/loaders';
 import Logger from '../utils/Logger';
-import { downloadNewWikiData } from '../utils/wiki';
+import { downloadImages, downloadWiki } from '../utils/downloaders';
 
 export default class AppDownloading extends React.PureComponent {
   state = {
@@ -12,29 +11,20 @@ export default class AppDownloading extends React.PureComponent {
     progress_images: 0,
   }
 
+  _progress = (key, value) => {
+    this.setState({ [`progress_${key}`]: value });
+  }
   async componentDidMount() {
-    Logger.debug('mounted AppDownloading');
     Platform.OS === 'ios' && StatusBar.setNetworkActivityIndicatorVisible(true);
 
-    // to-do: find a solution to download json with progress (react-native-fetch-blob - not supported by expo)
-    const profile = await loadProfileStateFromStorage();
-    const wiki = await downloadNewWikiData();
-    this.setState({ progress_wiki: 1 });
-
-    const { heroes } = wiki;
-    const step = 1/heroes.length;
-
-    await Promise.all(heroes.map(async hero => {
-      await Image.prefetch(hero.img_small);
-      if(this.state.progress_images < 1) 
-        this.setState({ progress_images: this.state.progress_images + step })
-    }))
-    // await new Promise(resolve => setTimeout(resolve, 3000));
+    const wiki = await downloadWiki(p => this._progress('wiki', p));
+    await downloadImages(wiki, p => this._progress('images', p));
     
     Platform.OS === 'ios' && StatusBar.setNetworkActivityIndicatorVisible(false);
 
-    this.props.onFinish({ wiki, profile });
+    this.props.onFinish();
   }
+  
   render() {
     const { reason } = this.props;
 
@@ -50,7 +40,7 @@ export default class AppDownloading extends React.PureComponent {
 
         <Separator />
 
-        <Progress label={`Downloading images`} 
+        <Progress label={`Caching images`} 
           progress={this.state.progress_images} />
         
       </Container>
