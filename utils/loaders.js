@@ -19,11 +19,9 @@ export const cacheImages = (images) => {
 
 export const loadInitialAssets = async () => {
   const imageAssets = cacheImages([
-    // 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
     require('../assets/images/menu-heroes.png'),
     require('../assets/images/menu-items.png'),
     require('../assets/images/menu-stats.png'),
-    
   ])
 
   const fontAssets = Font.loadAsync({

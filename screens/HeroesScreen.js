@@ -3,9 +3,10 @@ import { Image, View, Text, StyleSheet, TouchableHighlight } from 'react-native'
 import GridView from 'react-native-super-grid';
 import { connect } from 'react-redux';
 
-import { SCREEN_LABELS, url } from '../constants/Constants';
+import { SCREEN_LABELS } from '../constants/Constants';
 import ButtonHamburger from '../components/ButtonHamburger';
 import { Container } from '../components/ui';
+import { url, local_uri } from '../constants/Data';
 
 @connect(state => ({ 
   heroes: state.wiki.heroes,
@@ -19,7 +20,7 @@ export default class HeroesScreen extends React.Component {
 
   _renderItem = hero => {
     const { navigate } = this.props.navigation
-    const imgSource = { uri: url.images.hero(hero.tag) };
+    const imgSource = { uri: url.images.small(hero.tag) };
 
     return (
       <TouchableHighlight key={hero.tag} onPress={() => navigate('HeroScreen', { hero }) } 

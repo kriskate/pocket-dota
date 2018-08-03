@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, Image, StyleSheet } from 'react-native';
-import { url } from '../constants/Constants';
+import { url } from '../constants/Data';
 
 export default class Abilities extends React.Component {
   render() {
@@ -10,7 +10,7 @@ export default class Abilities extends React.Component {
       <View style={styles.abilities}>
         { abilities.map(ability => (
           <View key={ability.tag}>
-            <Image style={styles.imgAbility} source={{ uri: url.images.ability(ability.tag) }} />
+            <Image style={styles.imgAbility} source={{ uri: url.images.abilities(ability.tag) }} />
             <Text>{ability.name}</Text>
           </View>
         )) }

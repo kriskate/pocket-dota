@@ -4,7 +4,7 @@ import { View, Image, StyleSheet } from 'react-native';
 
 import ButtonHamburger from '../components/ButtonHamburger';
 import { Text, Container } from '../components/ui';
-import { url } from '../constants/Constants';
+import { url } from '../constants/Data';
 import Abilities from '../components/Abilities';
 
 export default class HeroScreen extends React.Component {
@@ -22,7 +22,7 @@ export default class HeroScreen extends React.Component {
           <Text>{hype}</Text>
         </View>
         <View style={styles.imgHeroWrapper}>
-          <Image style={styles.imgHero} source={{ uri: url.images.hero_vert(tag) }} />
+          <Image style={styles.imgHero} source={{ uri: url.images.vert(tag) }} />
         </View>
 
         <View style={styles.lore}>
