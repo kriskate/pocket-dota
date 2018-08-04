@@ -22,7 +22,7 @@ export const SCREEN_LABELS = {
 
 
 export const DOWNLOAD_REASONS = {
-  FRESH: 'Because this is the first time you launch the app, additional files need to be downloaded (eg: images, hero/ item descriptions).',
+  FRESH: 'Because this is the first time you open the app, additional files need to be downloaded (eg: hero/ item descriptions, images).',
   MISSING: 'Some wiki data on your device seems to be missing. Please wait while the app re-downloads the data.',
   UPDATE: 'Downloading new wiki database.'
 }

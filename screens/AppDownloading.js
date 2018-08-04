@@ -1,9 +1,10 @@
 import React from 'react';
-import { Image, Platform, StatusBar } from 'react-native';
+import { Image, Platform, StatusBar, StyleSheet } from 'react-native';
 
 import { Container, Text, Progress, Separator } from '../components/ui';
 import Logger from '../utils/Logger';
 import { downloadImages, downloadWiki } from '../utils/downloaders';
+import Colors from '../constants/Colors';
 
 export default class AppDownloading extends React.PureComponent {
   state = {
@@ -29,9 +30,15 @@ export default class AppDownloading extends React.PureComponent {
     const { reason } = this.props;
 
     return (
-      <Container padTop padInner>
+      <Container padTop padInner style={styles.content}>
 
-        <Text>{reason}</Text>
+        <StatusBar translucent barStyle={'light-content'} />
+        
+        <Image resizeMode='contain' style={styles.logo}
+          source={ require('../assets/images/logo-red.png') } 
+        />
+
+        <Text style={styles.reason}>{reason}</Text>
 
         <Separator />
 
@@ -47,3 +54,21 @@ export default class AppDownloading extends React.PureComponent {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  content: {
+    flex: 1,
+    padding: 25,
+    justifyContent: 'center',
+  },
+  reason: {
+    color: Colors.dota_,
+  },
+  logo: {
+    flex: 1,
+    alignSelf: 'stretch',
+    width: undefined,
+    height: undefined
+  },
+
+})
