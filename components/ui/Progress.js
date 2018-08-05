@@ -14,8 +14,8 @@ export default ({ progress, label }) => (
         ? <ActivityIndicator size="small" color={Colors.dota_red_dark} />
 
         : Platform.OS === 'android'
-          ? <ProgressBarAndroid styleAttr="Horizontal" progress={progress} indeterminate={false} />
-          : <ProgressViewIOS progress={progress} />
+          ? <ProgressBarAndroid styleAttr="Horizontal" progress={progress} indeterminate={false} color={Colors.dota_int} />
+          : <ProgressViewIOS progressTintColor={Colors.dota_int} progress={progress} />
       }
   </View>
 )
@@ -24,8 +24,6 @@ export default ({ progress, label }) => (
 const styles = StyleSheet.create({
   label: {
     color: '#999',
-    fontSize: 14,
-    fontWeight: '500',
     marginBottom: 10,
   }
 })

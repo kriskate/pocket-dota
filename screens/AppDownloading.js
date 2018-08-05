@@ -2,7 +2,6 @@ import React from 'react';
 import { Image, Platform, StatusBar, StyleSheet } from 'react-native';
 
 import { Container, Text, Progress, Separator } from '../components/ui';
-import Logger from '../utils/Logger';
 import { downloadImages, downloadWiki } from '../utils/downloaders';
 import Colors from '../constants/Colors';
 
