@@ -16,7 +16,7 @@ export const loadInitialAssets = async () => {
 
   const fontAssets = Font.loadAsync({
     ...Icon.Ionicons.font,
-    'space-mono': require('../assets/fonts/SpaceMono-Regular.ttf'),
+    //'space-mono': require('../assets/fonts/SpaceMono-Regular.ttf'),
   })
 
   await Promise.all([...imageAssets, fontAssets])
