@@ -4,7 +4,18 @@ import { folder_img, folder_data } from "../utils/downloaders";
 const images_base = 'https://raw.githubusercontent.com/kriskate/dota-data/master/assets/images/';
 const base_data = 'https://raw.githubusercontent.com/kriskate/dota-data/master/$WIKI_FOLDER/';
 
+export const assets = {
+  attributes: {
+    agi: require('../assets/images/game/overview/overviewicon_agi.png'),
+    int: require('../assets/images/game/overview/overviewicon_int.png'),
+    str: require('../assets/images/game/overview/overviewicon_str.png'),
+    attack: require('../assets/images/game/overview/overviewicon_attack.png'),
+    defense: require('../assets/images/game/overview/overviewicon_defense.png'),
+    speed: require('../assets/images/game/overview/overviewicon_speed.png'),
 
+  }
+
+}
 export const local_uri = { 
   images: {
     small: id => `${folder_img}small/${id}.png`,

@@ -40,7 +40,7 @@ export function model_talent (talent) {
   } = talent;
 }
 export function model_hero_attributes (attributes) {
-  return {
+  const {
     AttributePrimary, AttributeBaseAgility, AttributeAgilityGain, AttributeBaseStrength, AttributeStrengthGain, AttributeBaseIntelligence, AttributeIntelligenceGain,
     ArmorPhysical, MagicalResistance,
     StatusHealth, StatusHealthRegen, StatusMana, StatusManaRegen,
@@ -50,6 +50,16 @@ export function model_hero_attributes (attributes) {
     Role, Rolelevels, Complexity,
     Team, HeroID,
   } = attributes;
+  return {
+    AttributePrimary, AttributeBaseAgility, AttributeAgilityGain, AttributeBaseStrength, AttributeStrengthGain, AttributeBaseIntelligence, AttributeIntelligenceGain,
+    ArmorPhysical, MagicalResistance,
+    StatusHealth, StatusHealthRegen, StatusMana, StatusManaRegen,
+    MovementSpeed, MovementTurnRate,
+    VisionDaytimeRange, VisionNighttimeRange,
+    AttackCapabilities, AttackDamageMin, AttackDamageMax, AttackRate, AttackAnimationPoint, AttackAcquisitionRange, AttackRange, ProjectileSpeed,
+    Role, Rolelevels, Complexity,
+    Team, HeroID,
+  };
 }
 export function model_hero (hero) {
   return {
