@@ -4,18 +4,14 @@ import { View, Image, StyleSheet } from 'react-native';
 
 import ButtonHamburger from '../components/ButtonHamburger';
 import { Text, Container } from '../components/ui';
-import { url, assets } from '../constants/Data';
 import Abilities from '../components/Hero/Abilities';
 import Layout from '../constants/Layout';
 import Colors from '../constants/Colors';
 import { model_hero, model_hero_attributes } from '../constants/Models';
+import Attributes from '../components/Hero/Attributes';
+import ImageVert from '../components/Hero/ImageVert';
+import Card from '../components/ui/Card';
 
-const Attribute = ({ src, bval, lval }) => (
-  <View style={styles.attribute}>
-    <Image source={assets.attributes[src]} />
-    <Text> {bval}{lval ? ` + ${lval} /lvl` : ''} </Text>
-  </View>
-)
 
 export default class HeroScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -30,67 +26,41 @@ export default class HeroScreen extends React.Component {
 
 
     return (
-      <Container scrollable padInner>
+      <Container scrollable padInner style={styles.container} >
 
-        <View style={styles.hype}>
+        <Card style={styles.row} collapsedTitle='Hype and Stats'>
           <Text>{hype}</Text>
-        </View>
 
-        <View style={styles.imgHeroWrapper}>
-          <Image style={styles.imgHero} source={{ uri: url.images.vert(tag) }} />
-
-          <View style={styles.attributes}>
-            <Text style={styles.attributesText}>Attributes:</Text>
-            <Attribute src='agi' bval={attributes.AttributeBaseAgility} lval={Number(attributes.AttributeAgilityGain)} />
-            <Attribute src='int' bval={attributes.AttributeBaseIntelligence} lval={Number(attributes.AttributeIntelligenceGain)} />
-            <Attribute src='str' bval={attributes.AttributeBaseStrength} lval={attributes.AttributeBaseStrength} />
-            <Attribute src='attack' bval={`${attributes.AttackDamageMin} - ${attributes.AttackDamageMax}`} />
-            <Attribute src='defense' bval={attributes.ArmorPhysical} />
-            <Attribute src='speed' bval={attributes.MovementSpeed} />
+          <View style={styles.imgHeroWrapper}>
+            <ImageVert />
+            <Attributes />
           </View>
-        </View>
-
-        <View style={styles.lore}>
+        </Card>
+        
+        <Card style={styles.row} collapsedTitle='BIOGRAPHY'>
           <Text>{bio}</Text>
-        </View>
-        <Abilities abilities={abilities} />
+        </Card>
+
+        <Card style={styles.row}>
+          <Abilities abilities={abilities} />
+        </Card>
       </Container>
     )
   }
 }
 
 const styles = StyleSheet.create({
+  container: {
+    // flexDirection: 'row',
+  },
+  row: {
+    flexDirection: 'row',
+  },
   imgHeroWrapper: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     paddingVertical: Layout.paddingSmall,
   },
-  imgHero: {
-    width: 235,
-    height: 272,
-
-    borderRadius: 3,
-    borderWidth: 3,
-    borderColor: Colors.dota_ui2,
-  },
-  attribute: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  attributesText: {
-    textAlign: 'center',
-    backgroundColor: Colors.dota_ui2,
-  },
-  attributes: {
-    borderRadius: 3,
-    borderWidth: 3,
-    borderColor: Colors.dota_ui2,
-
-    justifyContent: 'space-around',
-    alignContent: 'flex-end',
-  },
-
 
   hype: {
 

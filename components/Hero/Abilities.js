@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
-import { url } from '../constants/Data';
-import { Text } from './ui';
-import Layout from '../constants/Layout';
+import { url } from '../../constants/Data';
+import { Text } from '../ui';
+import Layout from '../../constants/Layout';
 
 export default class Abilities extends React.Component {
   render() {
