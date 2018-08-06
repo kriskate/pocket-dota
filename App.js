@@ -34,6 +34,8 @@ export default class App extends React.Component {
 
 
   _createStore = async () => {
+    if (store && module.hot) return;
+
     const wiki = await loadWiki();
     
     if(!wiki) {
