@@ -34,8 +34,6 @@ export default class App extends React.Component {
 
 
   _createStore = async () => {
-    if (store && module.hot) return;
-
     const wiki = await loadWiki();
     
     if(!wiki) {
@@ -47,7 +45,14 @@ export default class App extends React.Component {
     } else {
       const profile = await loadProfileStateFromStorage();
 
-      store = createStore(reducers, { wiki, profile });
+      // avoid replacing the whole store for App when hot loading
+      if (module.hot || store) {
+        module.hot.accept(() => {
+          store.replaceReducer(reducers);
+        });
+      } else {
+        store = createStore(reducers, { wiki, profile });
+      } 
     }
   }
 
