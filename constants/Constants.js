@@ -20,6 +20,11 @@ export const SCREEN_LABELS = {
   ABOUT: 'About',
 }
 
+export const ATTRIBUTES = {
+  agility: 'DOTA_ATTRIBUTE_AGILITY',
+  intelligence: 'DOTA_ATTRIBUTE_INTELLIGENCE',
+  strength: 'DOTA_ATTRIBUTE_STRENGTH',
+}
 
 export const DOWNLOAD_REASONS = {
   FRESH: 'Because this is the first time you open the app, additional files need to be downloaded (eg: hero/ item descriptions, images).',
