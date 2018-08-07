@@ -1,8 +1,8 @@
 {
-  "presets": ["babel-preset-expo"],
+  "presets": ["stage-2", "babel-preset-expo"],
   "env": {
     "development": {
-      "plugins": ["transform-react-jsx-source"]
+      "plugins": ["babel-plugin-transform-class-properties", "transform-react-jsx-source"]
     }
   }
 }

@@ -1,4 +1,5 @@
-import { FileSystem } from 'expo';
+//import { FileSystem } from 'expo';
+const FileSystem = {}
 import { Image } from 'react-native';
 import { url, } from '../constants/Data';
 import { loadCurrentWikiInfo, loadWiki, cacheImages } from './loaders';

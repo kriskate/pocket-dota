@@ -17,11 +17,15 @@ let store;
 // handles splash screen, via AppLoading
 // implements redux at top-level
 export default class App extends React.Component {
-  state = { 
-    loaded: false,
-    downloading: false,
-    downloadReason: '',
-  };
+  constructor(props){
+    super(props)
+    
+    this.state = { 
+      loaded: false,
+      downloading: false,
+      downloadReason: '',
+    };
+  }
 
   _loadAssets = async () => {
     await loadInitialAssets();
