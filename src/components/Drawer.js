@@ -2,6 +2,7 @@ import React from 'react';
 import { DrawerItems } from 'react-navigation';
 import { ScrollView, StyleSheet, View, Text } from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
+// todo: replace with Button
 import TouchableItem from '../../node_modules/react-navigation-drawer/dist/views/TouchableItem';
 import { SCREEN_LABELS } from '../constants/Constants';
 

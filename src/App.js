@@ -47,7 +47,7 @@ export default class App extends React.Component {
       this.setState({ downloading: true, downloadReason });
     } else {
       const profile = await loadProfileStateFromStorage();
-
+      // todo - move loading data to redux, in order to refresh store on updates
       // avoid replacing the whole store for App when hot loading
       if (module.hot && store) {
         module.hot.accept(() => {
