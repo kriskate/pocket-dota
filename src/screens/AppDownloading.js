@@ -30,8 +30,6 @@ export default class AppDownloading extends React.PureComponent {
 
     return (
       <Container padTop padInner style={styles.content}>
-
-        <StatusBar translucent barStyle={'light-content'} />
         
         <Image resizeMode='contain' style={styles.logo}
           source={ require('../assets/images/logo-red.png') } 
