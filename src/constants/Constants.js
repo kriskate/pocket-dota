@@ -22,7 +22,7 @@ export const SCREEN_LABELS = {
 
 export const ATTRIBUTES = {
   agility: 'DOTA_ATTRIBUTE_AGILITY',
-  intelligence: 'DOTA_ATTRIBUTE_INTELLIGENCE',
+  intelligence: 'DOTA_ATTRIBUTE_INTELLECT',
   strength: 'DOTA_ATTRIBUTE_STRENGTH',
 }
 
