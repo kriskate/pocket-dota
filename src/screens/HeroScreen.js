@@ -50,7 +50,7 @@ export default class HeroScreen extends React.Component {
         <Card style={styles.row} collapsedTitle='Hype and Stats'>
           <Text style={styles.hype}>{hype}</Text>
 
-          <Attributes style={styles.attributes} attributes={attributes} tag={tag} />
+          <Attributes attributes={attributes} tag={tag} />
         </Card>
 
         <Card style={styles.row}>
@@ -67,19 +67,15 @@ export default class HeroScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    paddingBottom: Layout.paddingSmall
+    paddingBottom: Layout.paddingSmall,
   },
   row: {
     flexDirection: 'row',
   },
   
 
-  hype: {
-    // width: "100%",
-  },
-  attributes: {
-
-  },
+  
+  hype: { marginBottom: Layout.padding_regular, },
 
   lore: {
 
