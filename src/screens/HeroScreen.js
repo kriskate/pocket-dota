@@ -57,7 +57,8 @@ export default class HeroScreen extends React.Component {
           <Abilities abilities={abilities} />
         </Card>
 
-        <Card style={styles.row} collapsedTitle='BIOGRAPHY'>
+        <Card collapsedTitle='BIOGRAPHY'>
+          <Text style={styles.bioTitle}>Biography:</Text>
           <Text>{bio}</Text>
         </Card>
       </Container>
@@ -77,7 +78,10 @@ const styles = StyleSheet.create({
   
   hype: { marginBottom: Layout.padding_regular, },
 
-  lore: {
-
+  bioTitle: {
+    color: Colors.dota_white,
+    fontSize: 17,
+    margin: Layout.padding_regular,
+    textAlign: 'center',
   },
 })
