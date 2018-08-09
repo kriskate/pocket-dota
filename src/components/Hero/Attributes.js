@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Image } from "react-native";
-import Slider from 'react-native-slider';
+// todo - when pull request https://github.com/jeanregisser/react-native-slider/pull/137 , change import to regular 'react-native-slider'
+import Slider from '../../../node_modules/react-native-slider/src/Slider';
 
 import { assets, url } from "../../constants/Data";
 import Colors from '../../constants/Colors';
@@ -95,19 +96,34 @@ const calc = {
   
 }
 
+
 export default class extends React.Component {
-  state = {
-    level: 0,
-  }
   constructor(props) {
     super(props, attributes);
 
     this.state = {
       level: 0,
       attributes: calc.parseAsNumbers(props.attributes),
+      thumbScale: new Animated.Value(1),
     }
   }
-  
+
+  pulse = () => {
+    Animated.sequence([
+      Animated.timing(this.state.thumbScale, {
+        toValue: 1.4,
+        duration: 1000,
+      }),
+      Animated.timing(this.state.thumbScale, {
+        toValue: 1,
+        duration: 1000,
+      }),
+    ]).start(() => { this.pulse(); });
+  }
+  componentDidMount() {
+    this.pulse();
+  }
+
   render() {
     const { level } = this.state;
     const attributes = model_hero_attributes(this.state.attributes);
@@ -139,6 +155,7 @@ export default class extends React.Component {
       magicResistance = bonusesStr.magicResistance,
     } = {}
 
+
     return (
       <View style={[styles.attributes, this.props.style]}>
         {/* <Text style={styles.attributesText}>Attributes:</Text> */}
@@ -165,6 +182,8 @@ export default class extends React.Component {
             value={level}
             onValueChange={level => this.setState({ level })}
             step={1} maximumValue={25} minimumValue={0}
+
+            thumbStyle={{ transform: [{ scale: this.state.thumbScale }], backgroundColor: Colors.goldenrod }}
           />
           <Text>
             { level === 0 ? 'Base stats' : `Level: ${level}` }

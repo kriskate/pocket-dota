@@ -17,6 +17,8 @@ export default {
   dota_ui2: '#2F363D',
   dota_white: '#fff',
   dota_black: '#000',
+  gold: '#FFD700',
+  goldenrod: '#DAA520',
 
 
   tintColor,
