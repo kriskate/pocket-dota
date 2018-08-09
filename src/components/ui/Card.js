@@ -17,11 +17,11 @@ export default class Card extends Component {
     const { collapsed } = this.state;
 
     return (
-      <View>
+      <View style={[styles.card, style]}>
         { !collapsedTitle ? null :
           <Button style={styles.btnCollapse} onPress={this._toggleCollapse}><Text>{ collapsed ? '+' : '-' }</Text></Button>
         }
-        <View style={[styles.container, style]}>
+        <View>
           { !title || collapsed ? null : <Text style={styles.title}>{title}</Text> }
           { collapsed ? <Text>{collapsedTitle}</Text> : children }
 
@@ -41,15 +41,15 @@ const styles = StyleSheet.create({
     position: 'absolute',
     elevation: 1,
     zIndex: 10,
-    top: 0,
-    right: 0,
+    top: -5,
+    right: -5,
     width: 20,
     height: 20,
     backgroundColor: Colors.dota_background_light,
   },
-  container: {
-    overflow: 'visible',
-    backgroundColor: Colors.dota_ui,
+  card: {
+
+    backgroundColor: Colors.dota_ui1,
     borderColor: Colors.dota_ui2,
     borderWidth: 1,
     padding: Layout.paddingSmall,
