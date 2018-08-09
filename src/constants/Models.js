@@ -28,11 +28,17 @@ export function model_item (item) {
 }
 
 export function model_ability (ability) {
-  return { 
+  const {
     tag, name, description, lore,
     img, affects, notes, 
     attrib, cmb, IsGrantedByScepter, HasScepterUpgrade, 
   } = ability;
+
+  return { 
+    tag, name, description, lore,
+    img, affects, notes, 
+    attrib, cmb, IsGrantedByScepter, HasScepterUpgrade, 
+  }
 }
 export function model_talent (talent) {
   return {
