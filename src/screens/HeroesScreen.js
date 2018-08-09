@@ -7,6 +7,7 @@ import { SCREEN_LABELS } from '../constants/Constants';
 import ButtonHamburger from '../components/ButtonHamburger';
 import { Container } from '../components/ui';
 import { url, local_uri } from '../constants/Data';
+import { headerStyle } from '../utils/screen';
 
 @connect(state => ({ 
   heroes: state.wiki.heroes,
@@ -14,7 +15,7 @@ import { url, local_uri } from '../constants/Data';
 export default class HeroesScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: SCREEN_LABELS.HEROES,
-    headerRight: <ButtonHamburger />
+    ...headerStyle,
   });
 
 

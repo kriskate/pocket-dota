@@ -15,7 +15,8 @@ export default {
   dota_dire: '#A83806',
   dota_ui1: '#1B1E21',
   dota_ui2: '#2F363D',
-  dota_: '#598307',
+  dota_white: '#fff',
+  dota_black: '#000',
 
 
   tintColor,

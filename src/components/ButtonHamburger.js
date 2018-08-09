@@ -4,12 +4,13 @@ import { Header, withNavigation } from 'react-navigation';
 
 import { Ionicons } from '@expo/vector-icons';
 import Button from './Button';
+import Colors from '../constants/Colors';
 
 
 export default withNavigation( ({ navigation }) => (
   <Button onPress={() => navigation.openDrawer()} style={styles.hamburger}>
     <Ionicons size={24} name={ Platform == "ios" ? "ios-menu" : "md-menu" }
-      color={Platform.OS === 'ios' ? '#037aff' : '#000'} pointerEvents='none' />
+      color={Colors.dota_white} pointerEvents='none' />
   </Button>
 ))
 

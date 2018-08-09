@@ -1,12 +1,13 @@
 import React from 'react';
 import { Container, Text } from '../components/ui';
 
-import ButtonHamburger from '../components/ButtonHamburger';
+import { headerStyle } from '../utils/screen';
+
 
 export default class ItemScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: navigation.getParam('itemName'),
-    headerRight: <ButtonHamburger />,
+    ...headerStyle,
   });
 
   render() {
