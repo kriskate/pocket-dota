@@ -20,10 +20,7 @@ export default ({ style, children, padTop, padInner, scrollable }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.dota_ui1,
-    flex: 1,
-  },
-  wrapper: {
+    backgroundColor: Colors.dota_ui2,
     flex: 1,
   },
 })
