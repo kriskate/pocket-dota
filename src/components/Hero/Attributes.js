@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, View, Image } from "react-native";
 // todo - when pull request https://github.com/jeanregisser/react-native-slider/pull/137 , change import to regular 'react-native-slider'
-import Slider from '../../../node_modules/react-native-slider/src/Slider';
+// import Slider from 'react-native-slider';
+import Slider from '../../utils/RNSlider_fork';
 
 import { assets, url } from "../../constants/Data";
 import Colors from '../../constants/Colors';
@@ -182,7 +183,8 @@ export default class extends React.Component {
             value={level}
             onValueChange={level => this.setState({ level })}
             step={1} maximumValue={25} minimumValue={0}
-
+            
+            trackPressable={true}
             thumbStyle={{ transform: [{ scale: this.state.thumbScale }], backgroundColor: Colors.goldenrod }}
           />
           <Text>
