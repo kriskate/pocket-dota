@@ -6,9 +6,15 @@ import Button from "../Button";
 import Layout from "../../constants/Layout";
 
 export default class Card extends Component {
-  state = {
-    collapsed: false,
+  constructor(props) {
+    super(props);
+    
+    this.state = {
+      collapsed: props.collapsedByDefault,
+    }
+    if(props.collapsedByDefault && !props.collapsedTitle) console.warn('You should pass a collapsedTitle prop in order to show the collapse button.');
   }
+  
   _toggleCollapse = () => {
     this.setState({ collapsed: !this.state.collapsed });
   }
