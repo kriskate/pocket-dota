@@ -78,7 +78,7 @@ const calc = {
     
     return { 
       mana: Math.round(attributes.StatusMana + intelligence * bonusesPerPoint.int.mana * multiplier),
-      manaRegen: round(attributes.StatusManaRegen * (1 + bonusesPerPoint.int.manaRegen * intelligence * multiplier)),
+      manaRegen: round(attributes.StatusManaRegen * (1 + bonusesPerPoint.int.manaRegen * intelligence * multiplier), 100),
       spellDamage: 10,
     }
   },
