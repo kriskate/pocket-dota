@@ -54,13 +54,13 @@ export default class HeroesScreen extends React.PureComponent {
 const thumbAspectRatio = 127/71;
 const columns = 3;
 const borderWidth = 1;
-const thumbWidth = (Layout.window.width - (columns + 1) * Layout.paddingSmall - borderWidth * 2 * columns) / columns;
+const thumbWidth = (Layout.window.width - (columns + 1) * Layout.padding_regular - borderWidth * 2 * columns) / columns;
 const thumbHeight = thumbWidth/thumbAspectRatio;
 
 const styles = StyleSheet.create({
   thumb: {
-    marginLeft: Layout.paddingSmall,
-    marginTop: Layout.paddingSmall,
+    marginLeft: Layout.padding_regular,
+    marginTop: Layout.padding_regular,
     justifyContent: 'center',
 
     backgroundColor: Colors.dota_ui1,

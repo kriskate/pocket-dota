@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 import { assets } from '../../constants/Data';
 import Text from '../ui/Text';
+import Layout from '../../constants/Layout';
 
 
 export default class Attribute extends React.PureComponent {
@@ -26,5 +27,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    marginTop: Layout.padding_small,
+    marginHorizontal: Layout.padding_small,
   },
 })

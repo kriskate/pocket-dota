@@ -11,6 +11,7 @@ import { model_hero_attributes } from '../../constants/Models';
 
 import Attribute from './Attribute';
 import { calculateAttributes, parseAsNumbers } from '../../utils/CalculateAttributes';
+import Layout from '../../constants/Layout';
 
 
 
@@ -65,8 +66,8 @@ export default class extends React.Component {
             <Attribute val={moveSpeed} src='speed' />
 
             <View style={styles.healthAndMana}>
-              <Text style={{ backgroundColor: Colors.dota_agi }}>{health} +{healthRegen}</Text>
-              <Text style={{ backgroundColor: Colors.dota_int }}>{mana} +{manaRegen}</Text>
+              <Text style={[styles.HM, {backgroundColor: Colors.dota_agi}]}>{health}   (+{healthRegen})</Text>
+              <Text style={[styles.HM, {backgroundColor: Colors.dota_int}]}>{mana}   (+{manaRegen})</Text>
             </View>
           </View>
         </View>
@@ -86,7 +87,7 @@ export default class extends React.Component {
             trackPressable={true}
             thumbStyle={{ transform: [{ scale: this.state.thumbScale }], backgroundColor: Colors.goldenrod }}
           />
-          <Text>
+          <Text style={styles.levelText}>
             { level === 0 ? 'Base stats' : `Level: ${level}` }
           </Text>
         </View>
@@ -121,5 +122,23 @@ const styles = StyleSheet.create({
 
   secondaryAttributes: {},
 
-  healthAndMana: {},
+  healthAndMana: { paddingHorizontal: Layout.padding_small, },
+  HM: {
+    borderRadius: 3,
+    marginTop: Layout.padding_small,
+    paddingHorizontal: Layout.padding_small,
+    alignItems: 'center',
+    // justifyContent: 'center',
+    textAlign: 'center',
+    color: Colors.dota_white,
+    textShadowColor: Colors.dota_black,
+    textShadowOffset: {width: 1, height: 1},
+    textShadowRadius: 5,
+  },
+
+  levelText: {
+    color: Colors.goldenrod,
+    textAlign: 'center',
+    marginBottom: Layout.padding_regular,
+  }
 })

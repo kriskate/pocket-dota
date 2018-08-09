@@ -67,7 +67,7 @@ export default class HeroScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    paddingBottom: Layout.paddingSmall,
+    paddingBottom: Layout.padding_regular,
   },
   row: {
     flexDirection: 'row',

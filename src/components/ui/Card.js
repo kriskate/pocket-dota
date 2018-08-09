@@ -52,9 +52,9 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.dota_ui1,
     borderColor: Colors.dota_ui2,
     borderWidth: 1,
-    padding: Layout.paddingSmall,
-    margin: Layout.paddingSmall,
-    marginBottom: Layout.paddingSmall/2,
+    padding: Layout.padding_regular,
+    margin: Layout.padding_regular,
+    marginBottom: Layout.padding_small,
     ...Platform.select({
       ios: {
         shadowColor: 'rgba(0,0,0, .2)',

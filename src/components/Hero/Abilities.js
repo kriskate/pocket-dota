@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     height: 90,
   },
   container: {
-    marginTop: Layout.paddingSmall,
+    marginTop: Layout.padding_regular,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },

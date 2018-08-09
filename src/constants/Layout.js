@@ -10,7 +10,7 @@ export default {
   },
   isSmallDevice: width() < 375,
 
-  paddingSmall: 10,
+  padding_small: 5,
 
   padding_regular: 10,
 };

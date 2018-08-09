@@ -6,7 +6,7 @@ import Layout from '../../constants/Layout';
 
 export default ({ style, children, padTop, padInner, scrollable }) => {
   const marginTop = padTop ? getStatusBarHeight() : 0;
-  const padding = padInner ? Layout.paddingSmall : 0;
+  const padding = padInner ? Layout.padding_regular : 0;
   const _style = [styles.container, {marginTop, padding}, style];
 
   return scrollable 
