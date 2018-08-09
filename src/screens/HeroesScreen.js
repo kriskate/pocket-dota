@@ -1,36 +1,36 @@
 import React from 'react';
-import { Image, View, Text, StyleSheet, TouchableHighlight } from 'react-native';
-import GridView from 'react-native-super-grid';
+import { Image, View, Text, StyleSheet, TouchableHighlight, Platform, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 
 import { SCREEN_LABELS } from '../constants/Constants';
-import ButtonHamburger from '../components/ButtonHamburger';
 import { Container } from '../components/ui';
 import { url, local_uri } from '../constants/Data';
+import Colors from '../constants/Colors';
+import Layout from '../constants/Layout';
 import { headerStyle } from '../utils/screen';
 
 @connect(state => ({ 
   heroes: state.wiki.heroes,
 }))
-export default class HeroesScreen extends React.Component {
+export default class HeroesScreen extends React.PureComponent {
   static navigationOptions = ({ navigation }) => ({
     title: SCREEN_LABELS.HEROES,
     ...headerStyle,
   });
 
 
-  _renderItem = hero => {
+  _renderItem = ({ item }) => {
+    const hero = item;
     const { navigate } = this.props.navigation
     const imgSource = { uri: url.images.small(hero.tag) };
 
     return (
-      <TouchableHighlight key={hero.tag} onPress={() => navigate('HeroScreen', { hero }) } 
-        underlayColor='rgba(0,0,0,0)'>
-        <View style={styles.item}>
-          <Image style={styles.thumb} source={imgSource} />
-          <Text style={styles.text}>
-            {hero.name}
-          </Text>
+      <TouchableHighlight onPress={() => navigate('HeroScreen', { hero })}>
+        <View style={styles.thumb}>
+          <Image style={styles.thumbImg} source={imgSource} />
+          <View style={styles.thumbTextWrapper}>
+            <Text style={styles.thumbText}>{hero.name}</Text>
+          </View>
         </View>
       </TouchableHighlight>
     )
@@ -40,10 +40,10 @@ export default class HeroesScreen extends React.Component {
 
     return (
       <Container>
-        <GridView
-          itemDimension={100}
-          items={heroes}
+        <FlatList numColumns={columns}
+          data={heroes}
           renderItem={this._renderItem}
+          keyExtractor={(item) => item.tag}
         />
       </Container>
     );
@@ -51,36 +51,42 @@ export default class HeroesScreen extends React.Component {
 }
 
 
+const thumbAspectRatio = 127/71;
+const columns = 3;
+const borderWidth = 1;
+const thumbWidth = (Layout.window.width - (columns + 1) * Layout.paddingSmall - borderWidth * 2 * columns) / columns;
+const thumbHeight = thumbWidth/thumbAspectRatio;
 
 const styles = StyleSheet.create({
-  gridView: {
-    paddingTop: 25,
-    flex: 1,
-  },
-  list: {
-    justifyContent: 'center',
-    flexDirection: 'row',
-    flexWrap: 'wrap'
-  },
-  item: {
-    justifyContent: 'center',
-    padding: 5,
-    margin: 10,
-    width: 100,
-    height: 100,
-    backgroundColor: '#F6F6F6',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderRadius: 5,
-    borderColor: '#CCC'
-  },
   thumb: {
-    width: 90,
-    height: 64
+    marginLeft: Layout.paddingSmall,
+    marginTop: Layout.paddingSmall,
+    justifyContent: 'center',
+
+    backgroundColor: Colors.dota_ui1,
+    alignItems: 'center',
+    borderWidth,
+    borderRadius: 5,
+    borderColor: Colors.dota_ui1,
   },
-  text: {
-    flex: 1,
-    marginTop: 5,
-    fontWeight: 'bold'
+  thumbImg: {
+    width: thumbWidth,
+    height: thumbHeight,
+  },
+  thumbTextWrapper: {
+    width: thumbWidth,
+    padding: 2,
+    
+    position: 'absolute',
+    bottom: 0,
+    
+    backgroundColor: Colors.dota_ui1 + '99',
+  },
+  thumbText: {
+    fontWeight: 'bold',
+    fontSize: Platform.OS === 'ios' ? 9 : 13,
+    textAlign: 'center',
+    
+    color: Colors.dota_white,
   }
 });
