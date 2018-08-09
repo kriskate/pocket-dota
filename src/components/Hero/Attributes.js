@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Image } from "react-native";
 import Slider from 'react-native-slider';
 
-import { assets } from "../../constants/Data";
+import { assets, url } from "../../constants/Data";
 import Colors from '../../constants/Colors';
 import { Text } from '../ui';
 import { model_hero_attributes } from '../../constants/Models';
@@ -144,6 +144,7 @@ export default class extends React.Component {
         {/* <Text style={styles.attributesText}>Attributes:</Text> */}
 
         <View style={styles.content}>
+          <Image style={styles.imgHero} source={{ uri: url.images.vert(this.props.tag) }} />
           <View>
             <Attribute val={agility} lval={attributes.AttributeAgilityGain} src='agi' />
             <Attribute val={intelligence} lval={attributes.AttributeIntelligenceGain} src='int' />
@@ -205,5 +206,13 @@ const styles = StyleSheet.create({
   content: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  imgHero: {
+    flex: 1,
+    alignSelf: 'stretch',
+
+    borderRadius: 3,
+    borderWidth: 3,
+    borderColor: Colors.dota_ui2,
   },
 })

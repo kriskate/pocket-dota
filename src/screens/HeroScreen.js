@@ -50,9 +50,7 @@ export default class HeroScreen extends React.Component {
         <Card style={styles.row} collapsedTitle='Hype and Stats'>
           <Text style={styles.hype}>{hype}</Text>
 
-          <Image style={styles.imgHero} source={{ uri: url.images.vert(tag) }} />
-
-          <Attributes style={styles.attributes} attributes={attributes} />
+          <Attributes style={styles.attributes} attributes={attributes} tag={tag} />
         </Card>
 
         <Card style={styles.row}>
@@ -73,23 +71,11 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
   },
   
-  imgHero: {
-    flex: 1,
-    alignSelf: 'stretch',
-
-    width: undefined,
-    height: undefined,
-
-    borderRadius: 3,
-    borderWidth: 3,
-    borderColor: Colors.dota_ui2,
-  },
 
   hype: {
-    width: "100%",
+    // width: "100%",
   },
   attributes: {
 
