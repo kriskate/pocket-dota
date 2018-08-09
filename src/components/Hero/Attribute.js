@@ -22,11 +22,13 @@ export default class Attribute extends React.PureComponent {
 const styles = StyleSheet.create({
   attribute_img: {
     resizeMode: 'contain',
+    width: Layout.isSmallDevice ? 30 : 40,
   },
   attribute: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+
     marginTop: Layout.padding_small,
     marginHorizontal: Layout.padding_small,
   },
