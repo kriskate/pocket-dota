@@ -47,13 +47,13 @@ export default class HeroScreen extends React.Component {
 
     return (
       <Container scrollable style={styles.container} >
-        <Card style={styles.row} collapsedTitle='Hype and Stats'>
+        <Card collapsedTitle='Hype and Stats' collapsedByDefault>
           <Text style={styles.hype}>{hype}</Text>
 
           <Attributes attributes={attributes} tag={tag} />
         </Card>
 
-        <Card style={styles.row}>
+        <Card>
           <Abilities abilities={abilities} />
         </Card>
 
@@ -68,13 +68,8 @@ export default class HeroScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    paddingBottom: Layout.padding_regular,
+    paddingVertical: Layout.padding_small,
   },
-  row: {
-    flexDirection: 'row',
-  },
-  
-
   
   hype: { marginBottom: Layout.padding_regular, },
 
