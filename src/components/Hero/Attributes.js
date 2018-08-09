@@ -85,7 +85,7 @@ export default class extends React.Component {
             step={1} maximumValue={25} minimumValue={0}
             
             trackPressable={true}
-            thumbStyle={{ transform: [{ scale: this.state.thumbScale }], backgroundColor: Colors.goldenrod }}
+            thumbStyle={{ transform: [{ scaleY: this.state.thumbScale }], backgroundColor: Colors.goldenrod }}
           />
           <Text style={styles.levelText}>
             { level === 0 ? 'Base stats' : `Level: ${level}` }
@@ -97,6 +97,7 @@ export default class extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  // todo: for tablet, modify these % widths, in order to fit well
   container: {
     borderRadius: 3,
     borderWidth: 3,
@@ -104,25 +105,37 @@ const styles = StyleSheet.create({
 
     justifyContent: 'space-around',
     alignContent: 'flex-end',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
-
+  
   mainAttributes: {
+    width: '100%',
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
   },
   imgHero: {
-    flex: 2,
+    width: '60%',
     alignSelf: 'stretch',
     
     borderRadius: 3,
     borderWidth: 3,
     borderColor: Colors.dota_ui2,
   },
-
-  secondaryAttributes: {},
-
+  attributesRight: {
+    width: '40%',
+  },
   healthAndMana: { paddingHorizontal: Layout.padding_small, },
+
+  secondaryAttributes: {
+    width: '100%',
+  },
+
+  slider: {
+    width: '100%',
+  },
+
   HM: {
     borderRadius: 3,
     marginTop: Layout.padding_small,
