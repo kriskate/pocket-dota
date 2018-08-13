@@ -47,7 +47,7 @@ export default class HeroScreen extends React.Component {
 
     return (
       <Container scrollable style={styles.container} >
-        <Card collapsedTitle='Hype and Stats' collapsedByDefault>
+        <Card collapsedTitle='Hype and Stats'>
           <Text style={styles.hype}>{hype}</Text>
 
           <Attributes attributes={attributes} tag={tag} />
