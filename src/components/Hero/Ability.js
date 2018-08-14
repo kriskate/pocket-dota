@@ -12,7 +12,6 @@ export default class Ability extends React.PureComponent {
   render() {
     const { tag, selected, name } = this.props;
     const ss = selected ? { borderColor: Colors.gold } : {};
-    console.log(tag, selected)
 
     return (
       <Button key={tag} style={[styles.ab, ss]} onPress={() => this.props.onPress(tag)}>

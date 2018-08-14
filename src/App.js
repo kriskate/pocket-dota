@@ -11,10 +11,11 @@ import { loadInitialAssets, loadCurrentWikiInfo, loadWiki, loadProfileStateFromS
 import AppNavigator from './navigation/AppNavigator';
 import Logger from './utils/Logger';
 import { DOWNLOAD_REASONS } from './constants/Constants';
-import { StatusBar, Platform } from 'react-native';
+import { StatusBar, Platform, UIManager } from 'react-native';
 
 Platform === 'android' && StatusBar.setTranslucent(true);
 StatusBar.setBarStyle('light-content');
+UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
 
 let store;
 // handles splash screen, via AppLoading

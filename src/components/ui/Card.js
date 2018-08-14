@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Platform } from "react-native";
+import { View, StyleSheet, Platform, LayoutAnimation } from "react-native";
 import Colors from "../../constants/Colors";
 import Text from "./Text";
 import Button from "../Button";
 import Layout from "../../constants/Layout";
+import { animation } from "../../utils/screen";
 
 export default class Card extends Component {
   constructor(props) {
@@ -16,6 +17,8 @@ export default class Card extends Component {
   }
   
   _toggleCollapse = () => {
+    LayoutAnimation.configureNext(animation.standard);
+
     this.setState({ collapsed: !this.state.collapsed });
   }
   render() {

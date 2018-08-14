@@ -2,6 +2,21 @@ import React from 'react';
 
 import Colors from "../constants/Colors";
 import ButtonHamburger from "../components/ButtonHamburger";
+import { LayoutAnimation } from 'react-native';
+
+
+export const animation = {
+  standard: {
+    duration: 250,
+    create: {
+      type: LayoutAnimation.Types.easeOut,
+      property: LayoutAnimation.Properties.scaleXY,
+    },
+    update: {
+      type: LayoutAnimation.Types.easeOut,
+    },
+  },
+}
 
 export const headerStyle = {
   headerRight: <ButtonHamburger />,
