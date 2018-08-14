@@ -8,7 +8,7 @@ import Colors from '../constants/Colors';
 
 
 export default withNavigation( ({ navigation }) => (
-  <Button onPress={() => navigation.openDrawer()} style={styles.hamburger}>
+  <Button onPress={() => navigation.openDrawer()} viewStyle={styles.hamburger}>
     <Ionicons size={24} name={ Platform == "ios" ? "ios-menu" : "md-menu" }
       color={Colors.dota_white} pointerEvents='none' />
   </Button>

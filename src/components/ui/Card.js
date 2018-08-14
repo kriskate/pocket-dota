@@ -28,7 +28,7 @@ export default class Card extends Component {
     return (
       <View style={[styles.card, style]}>
         { !collapsedTitle ? null :
-          <Button style={styles.btnCollapse} onPress={this._toggleCollapse}><Text>{ collapsed ? '+' : '-' }</Text></Button>
+          <Button style={styles.btnCollapse} viewStyle={styles.btnCollapseView} onPress={this._toggleCollapse}><Text>{ collapsed ? '+' : '-' }</Text></Button>
         }
         <View>
           { !title || collapsed ? null : <Text style={styles.title}>{title}</Text> }
@@ -40,6 +40,7 @@ export default class Card extends Component {
   }
 }
 
+const btnPad = 10;
 const styles = StyleSheet.create({
   title: {
     flex: 3,
@@ -50,8 +51,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     elevation: 1,
     zIndex: 10,
-    top: -2,
-    right: -2,
+    top: -btnPad -2,
+    right: -btnPad -2,
+    padding: btnPad,
+  },
+  btnCollapseView: {
     width: 20,
     height: 20,
     backgroundColor: Colors.dota_background_light,

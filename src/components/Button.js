@@ -9,19 +9,23 @@ export default class Button extends React.Component {
   
   render() {
     // android lollipop
-    const { pressColor, borderless, onPress, style, children } = this.props;
+    const { pressColor, borderless, onPress, style, viewStyle, children } = this.props;
 
     if (Platform.OS === 'android' && Platform.Version >= 21) {
       return (
-        <TouchableNativeFeedback onPress={onPress}
-            background={TouchableNativeFeedback.Ripple(pressColor, borderless)}>
-          <View style={[styles.button, style]}>{children}</View>
-        </TouchableNativeFeedback>
+        <View style={[styles.touch, style]}>
+          <TouchableNativeFeedback onPress={onPress}
+              background={TouchableNativeFeedback.Ripple(pressColor, borderless)}>
+            <View style={[styles.button, viewStyle]}>{children}</View>
+          </TouchableNativeFeedback>
+        </View>
       );
     } else {
       return (
-        <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
-          {children}
+        <TouchableOpacity onPress={onPress} style={[styles.touch, style]}>
+          <View style={[styles.button, viewStyle]}>
+            {children}
+          </View>
         </TouchableOpacity>
       );
     }
@@ -33,5 +37,8 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  touch: {
+    // backgroundColor: 'yellow',
   },
 })
