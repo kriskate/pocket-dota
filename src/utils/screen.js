@@ -7,7 +7,7 @@ import { LayoutAnimation } from 'react-native';
 
 export const animation = {
   standard: {
-    duration: 250,
+    duration: 200,
     create: {
       type: LayoutAnimation.Types.easeOut,
       property: LayoutAnimation.Properties.scaleXY,
