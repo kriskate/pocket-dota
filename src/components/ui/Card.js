@@ -43,9 +43,10 @@ export default class Card extends Component {
 const btnPad = 10;
 const styles = StyleSheet.create({
   title: {
-    flex: 3,
-    width: '100%',
-    
+    fontSize: 17,
+    color: Colors.dota_white,
+    marginBottom: Layout.padding_regular,
+    textAlign: 'center',
   },
   btnCollapse: {
     position: 'absolute',
