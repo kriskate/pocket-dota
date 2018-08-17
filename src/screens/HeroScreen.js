@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
 
 
 import ButtonHamburger from '../components/ButtonHamburger';
@@ -14,7 +15,12 @@ import { url } from '../constants/Data';
 import { ATTRIBUTES } from '../constants/Constants';
 
 import { headerStyle } from '../utils/screen';
+import Item from '../components/Item';
 
+
+@connect(state => ({
+  game_items: state.wiki.items
+}))
 export default class HeroScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     let primaryAttColor;
@@ -39,8 +45,9 @@ export default class HeroScreen extends React.Component {
   };
 
   render() {
-    const { name, bio, hype, tag, abilities } =  this.props.navigation.getParam('hero');
     const hero = model_hero(this.props.navigation.getParam('hero'));
+    const { name, bio, hype, tag, abilities, popular_items } = hero;
+    const { game_items } = this.props;
 
 
     return (
@@ -51,12 +58,21 @@ export default class HeroScreen extends React.Component {
           <Attributes attributes={attributes} tag={tag} />
         </Card>
 
-        <Card>
+        <Card collapsedTitle='Abilities'>
           <Abilities abilities={abilities} />
         </Card>
 
         <Card collapsedTitle='BIOGRAPHY' title='Biography'>
           <Text>{bio}</Text>
+        </Card>
+
+        <Card collapsedTitle='Popular items' title='Popular items'>
+          <View style={styles.popular_items}>
+            { popular_items.map(item_tag => {
+              const iTAG = item_tag.replace('item_', '');
+              return <Item key={iTAG} tag={iTAG} items={game_items} showPrice />
+            }) }
+          </View>
         </Card>
       </Container>
     )
@@ -69,4 +85,9 @@ const styles = StyleSheet.create({
   },
   
   hype: { marginBottom: Layout.padding_regular, },
+
+  popular_items: { 
+    flexDirection: 'row', flexWrap: 'wrap',
+    justifyContent: 'space-around',
+  },
 })

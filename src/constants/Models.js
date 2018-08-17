@@ -19,12 +19,18 @@ export function model_settings (settings) {
 
 
 export function model_item (item) {
-  return {
-    tag, id,
-    img, name, desc, notes, lore,
+  const {
+    tag, id, img,
+    dname, desc, notes, lore,
     qual, cost, ItemDisassembleRule, components,
-    attrib, mc, cooldown, created, AbilityCastRange,
+    attrib, mc, cd, created, AbilityCastRange,
   } = item;
+  return {
+    tag, id, img,
+    dname, desc, notes, lore,
+    qual, cost, ItemDisassembleRule, components,
+    attrib, mc, cd, created, AbilityCastRange,
+  };
 }
 
 export function model_ability (ability) {
