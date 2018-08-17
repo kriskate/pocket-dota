@@ -13,7 +13,8 @@ export const assets = {
     defense: require('../assets/images/game/overview/overviewicon_defense.png'),
     speed: require('../assets/images/game/overview/overviewicon_speed.png'),
 
-  }
+  },
+  gold: require('../assets/images/game/gold.png'),
 
 }
 export const local_uri = { 

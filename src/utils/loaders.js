@@ -12,6 +12,7 @@ export const loadInitialAssets = async () => {
     require('../assets/images/menu-items.png'),
     require('../assets/images/menu-stats.png'),
     require('../assets/images/logo-red.png'),
+    require('../assets/images/game/gold.png'),
   ].map(image => Asset.fromModule(image).downloadAsync())
 
   const fontAssets = Font.loadAsync({
