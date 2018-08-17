@@ -4,6 +4,7 @@ import { Image, Platform, StatusBar, StyleSheet } from 'react-native';
 import { Container, Text, Progress, Separator } from '../components/ui';
 import { downloadImages, downloadWiki } from '../utils/downloaders';
 import Colors from '../constants/Colors';
+import { assets } from '../constants/Data';
 
 export default class AppDownloading extends React.PureComponent {
   state = {
@@ -32,7 +33,7 @@ export default class AppDownloading extends React.PureComponent {
       <Container padTop padInner style={styles.content}>
         
         <Image resizeMode='contain' style={styles.logo}
-          source={ require('../assets/images/logo-red.png') } 
+          source={ assets.app.logoRed } 
         />
 
         <Text style={styles.reason}>{reason}</Text>

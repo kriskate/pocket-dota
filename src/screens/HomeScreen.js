@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import Colors from '../constants/Colors';
 import { HOME_LABELS, SCREEN_LABELS } from '../constants/Constants';
+import { assets } from '../constants/Data';
 
 
 const MenuItem = ({onPress, label, cardImage, profileImage}) => (
@@ -40,14 +41,14 @@ export default class HomeScreen extends React.PureComponent {
     return (
       <View style={styles.container}>
         <MenuItem onPress={() => navigate(SCREEN_LABELS.HEROES)} label={HOME_LABELS.HEROES}
-          cardImage={require("../assets/images/menu-heroes.png")} />
+          cardImage={assets.app.menuHeroes} />
         <MenuItem onPress={() => navigate(SCREEN_LABELS.ITEMS)} label={HOME_LABELS.ITEMS}
-          cardImage={require("../assets/images/menu-items.png")} />
+          cardImage={assets.app.menuItems} />
         <MenuItem onPress={() => navigate(SCREEN_LABELS.STATS)} label={HOME_LABELS.STATS}
-          cardImage={require("../assets/images/menu-stats.png")} />
+          cardImage={assets.app.menuStats} />
         { !image ? null :
           <MenuItem onPress={() => navigate(SCREEN_LABELS.PROFILE)} label={name}
-            cardImage={require("../assets/images/menu-profile.png")}
+            cardImage={assets.app.menuProfile}
             profileImage={image} /> 
         }
       </View>

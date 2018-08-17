@@ -4,15 +4,14 @@ import Logger from './Logger';
 import { model_profile, model_wiki } from '../constants/Models';
 import { folder_data } from './downloaders';
 import { getItem } from './storage';
+import { assets } from '../constants/Data';
 
 
 export const loadInitialAssets = async () => {
   const imageAssets = [
-    require('../assets/images/menu-heroes.png'),
-    require('../assets/images/menu-items.png'),
-    require('../assets/images/menu-stats.png'),
-    require('../assets/images/logo-red.png'),
-    require('../assets/images/game/gold.png'),
+    ...assets.attributes,
+    ...assets.game,
+    ...assets.app,
   ].map(image => Asset.fromModule(image).downloadAsync())
 
   const fontAssets = Font.loadAsync({

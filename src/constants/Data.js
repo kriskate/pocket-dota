@@ -12,10 +12,19 @@ export const assets = {
     attack: require('../assets/images/game/overview/overviewicon_attack.png'),
     defense: require('../assets/images/game/overview/overviewicon_defense.png'),
     speed: require('../assets/images/game/overview/overviewicon_speed.png'),
-
   },
-  gold: require('../assets/images/game/gold.png'),
+  game: {
+    gold: require('../assets/images/game/gold.png'),
+  },
 
+  app: {
+    icon: require('../assets/images/app-icon.png'),
+    menuHeroes: require('../assets/images/menu-heroes.png'),
+    menuItems: require('../assets/images/menu-items.png'),
+    menuStats: require('../assets/images/menu-stats.png'),
+    menuProfile: require("../assets/images/menu-profile.png"),
+    logoRed: require('../assets/images/logo-red.png'),
+  }  
 }
 export const local_uri = { 
   images: {
