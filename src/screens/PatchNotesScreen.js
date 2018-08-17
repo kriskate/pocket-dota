@@ -12,7 +12,7 @@ export default class PatchNotesScreen extends React.Component {
 
   render() {
     return (
-      <Container>
+      <Container backToHome>
         <Text>Patch content</Text>
       </Container>
     );

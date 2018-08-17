@@ -12,7 +12,7 @@ export default class Itemscreen extends React.Component {
 
   render() {
     return (
-      <Container>
+      <Container backToHome>
         <Text>Items content</Text>
       </Container>
     );

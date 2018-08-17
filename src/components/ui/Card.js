@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { View, StyleSheet, Platform, LayoutAnimation } from "react-native";
 import Colors from "../../constants/Colors";
 import Text from "./Text";
@@ -6,7 +6,7 @@ import Button from "./Button";
 import Layout from "../../constants/Layout";
 import { animation } from "../../utils/screen";
 
-export default class Card extends Component {
+export default class Card extends React.PureComponent {
   constructor(props) {
     super(props);
     

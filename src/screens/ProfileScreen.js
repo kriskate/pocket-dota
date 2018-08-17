@@ -12,7 +12,7 @@ export default class ProfileScreen extends React.Component {
 
   render() {
     return (
-      <Container>
+      <Container backToHome>
         <Text>Profile content</Text>
       </Container>
     );

@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 
 import { headerStyle } from '../utils/screen';
 import { SCREEN_LABELS } from '../constants/Constants';
+import { Container } from '../components/ui';
 
 export default class AboutScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -12,9 +13,9 @@ export default class AboutScreen extends React.Component {
 
   render() {
     return (
-      <View>
+      <Container backToHome>
         <Text>About and Legal content</Text>
-      </View>
+      </Container>
     );
   }
 }

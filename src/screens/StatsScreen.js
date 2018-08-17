@@ -12,7 +12,7 @@ export default class StatsScreen extends React.Component {
 
   render() {
     return (
-      <Container>
+      <Container backToHome>
         <Text>Stats content</Text>
       </Container>
     );

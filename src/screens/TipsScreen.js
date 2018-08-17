@@ -12,7 +12,7 @@ export default class TipsScreen extends React.Component {
 
   render() {
     return (
-      <Container>
+      <Container backToHome>
         <Text>Tips content</Text>
       </Container>
     );
