@@ -1,5 +1,4 @@
 import React from 'react';
-import { Platform } from 'react-native';
 import { createStackNavigator, createDrawerNavigator } from 'react-navigation'
 
 import HeroesScreen from '../screens/HeroesScreen';
@@ -30,7 +29,7 @@ const drawerNav = createDrawerNavigator({
   [SCREEN_LABELS.ABOUT]: createStackNavigator({ AboutScreen }),
 }, {
   contentComponent: Drawer,
-  drawerPosition: Platform.OS === 'ios' ? 'right' : 'left',
+  drawerPosition: 'right',
 })
 
 
