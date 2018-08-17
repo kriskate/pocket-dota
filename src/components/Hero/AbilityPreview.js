@@ -45,7 +45,7 @@ export default class AbilityPreview extends React.PureComponent {
         <HTML htmlContent={affects} />
         <HTML htmlContent={description} style={styles.description} />
         <HTML htmlContent={attrib} />
-        <HTML htmlContent={cmb.trim()} />
+        <HTML htmlContent={cmb} />
         
         <HTML htmlContent={notes} style={styles.description} />
         
