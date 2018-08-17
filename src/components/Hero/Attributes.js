@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   imgHero: {
-    width: '60%',
+    width: '55%',
     alignSelf: 'stretch',
     
     borderRadius: 3,
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     borderColor: Colors.dota_ui2,
   },
   attributesRight: {
-    width: '40%',
+    width: '45%',
   },
   healthAndMana: { paddingHorizontal: Layout.padding_small, },
 
