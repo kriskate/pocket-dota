@@ -15,6 +15,7 @@ import AboutScreen from '../screens/AboutScreen';
 import { SCREEN_LABELS } from '../constants/Constants';
 
 import Drawer from '../components/Drawer';
+import Colors from '../constants/Colors';
 
 const drawerNav = createDrawerNavigator({
   [SCREEN_LABELS.HEROES]: createStackNavigator({ HeroesScreen, HeroScreen }),
@@ -29,6 +30,10 @@ const drawerNav = createDrawerNavigator({
   [SCREEN_LABELS.ABOUT]: createStackNavigator({ AboutScreen }),
 }, {
   contentComponent: Drawer,
+  contentOptions: { 
+    inactiveTintColor: Colors.dota_white,
+    activeBackgroundColor: Colors.dota_ui1,
+  },
   drawerPosition: 'right',
 })
 

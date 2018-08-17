@@ -2,24 +2,20 @@ import React from 'react';
 import { DrawerItems } from 'react-navigation';
 import { ScrollView, StyleSheet, View, Text } from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
-// todo: replace with Button
-import TouchableItem from '../../node_modules/react-navigation-drawer/dist/views/TouchableItem';
+
 import { SCREEN_LABELS } from '../constants/Constants';
+import { Button, Container } from './ui';
+import Colors from '../constants/Colors';
 
 export default class Drawer extends React.Component {
   render() {
     return (
-      <ScrollView style={{ flex: 1, marginTop: getStatusBarHeight() }}>
-        <TouchableItem onPress={() => this.props.navigation.navigate(SCREEN_LABELS.HOME)} 
-          delayPressIn={0}>
-            <View style={[styles.item]}>
-              <Text style={[styles.label]}>
-                { SCREEN_LABELS.HOME }
-              </Text>
-            </View>
-        </TouchableItem>
+      <Container scrollable padTop>
+        <Button style={styles.item} onPress={() => this.props.navigation.navigate(SCREEN_LABELS.HOME)} >
+          <Text style={[styles.label]}>{ SCREEN_LABELS.HOME }</Text>
+        </Button>
         <DrawerItems {...this.props} />
-      </ScrollView>
+      </Container>
     );
   }
 }
@@ -31,7 +27,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   label: {
+    textAlign: 'left',
     margin: 16,
     fontWeight: 'bold',
+    color: Colors.dota_white,
   }
 });
