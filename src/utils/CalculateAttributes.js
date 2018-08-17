@@ -31,13 +31,21 @@ const round = (nr, to=10) => Math.round(nr*to)/to;
 // as taken from https://liquipedia.net/dota2/Hero_Attributes#Attribute_Bonus
 const calc = {
   bonus: (gain, level) => level === 0 ? 0 : Math.round(gain * (level-1)),
-
+// 22 + 2.8 * 24 = 89.2 + 51
   // For heroes it is their given damage value plus their total primary attribute.
   damageBase: (attributes, agility, intelligence, strength) => {
-    const fromPoints = 
-        attributes.AttributePrimary == ATTRIBUTES.agility ? agility
-      : attributes.AttributePrimary == ATTRIBUTES.intelligence ? intelligence
-      : strength;
+    let fromPoints;
+      switch(attributes.AttributePrimary) {
+        case ATTRIBUTES.agility:
+          fromPoints = agility;
+        break;
+        case ATTRIBUTES.intelligence:
+          fromPoints = intelligence;
+        break;
+        case ATTRIBUTES.strength:
+          fromPoints = strength;
+        break;
+      }
     return {
       min: attributes.AttackDamageMin + fromPoints,
       max: attributes.AttackDamageMax + fromPoints,
@@ -49,17 +57,17 @@ const calc = {
 
     return {
       armor: round(attributes.ArmorPhysical + agility * bonusesPerPoint.agi.armor * multiplier),
-      attackSpeed: Math.round(attributes.AttackRate * (1 + agility * bonusesPerPoint.agi.attackSpeed * multiplier)),
-      moveSpeed: Math.round(attributes.MovementSpeed * (1 + agility * bonusesPerPoint.agi.moveSpeed * multiplier)),
+      attackSpeed: round(attributes.AttackRate * (1 + agility * bonusesPerPoint.agi.attackSpeed * multiplier)),
+      moveSpeed: round(attributes.MovementSpeed * (1 + agility * bonusesPerPoint.agi.moveSpeed * multiplier), 1),
     }
   },
   bonusesInt: (attributes, intelligence) => {
     const multiplier = multipliers.intelligence(attributes.AttributePrimary);
     
     return { 
-      mana: Math.round(attributes.StatusMana + intelligence * bonusesPerPoint.int.mana * multiplier),
+      mana: round(attributes.StatusMana + intelligence * bonusesPerPoint.int.mana * multiplier),
       manaRegen: round(attributes.StatusManaRegen * (1 + bonusesPerPoint.int.manaRegen * intelligence * multiplier), 100),
-      spellDamage: 10,
+      spellDamage: (round(1 - (1 - intelligence * bonusesPerPoint.int.spellDamage * multiplier), 1000)*100).toFixed(1) + '%',
     }
   },
 
@@ -77,7 +85,8 @@ const calc = {
 
 export const parseAsNumbers = (attributes) => {
   const d = {};
-  Object.keys(attributes).forEach(attribute => d[attribute] = Number(attributes[attribute]));
+  const notNumbers = ['AttributePrimary', 'DOTA_UNIT_CAP_MELEE_ATTACK', 'Role', 'Team']
+  Object.keys(attributes).forEach(attribute => d[attribute] = isNaN(Number(attributes[attribute])) ? attributes[attribute] : Number(attributes[attribute]));
   return d;
 }
 

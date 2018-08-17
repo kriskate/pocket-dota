@@ -6,6 +6,7 @@ import Slider from '../../utils/RNSlider_fork';
 
 import { assets, url } from "../../constants/Data";
 import Colors from '../../constants/Colors';
+import { ATTRIBUTES } from '../../constants/Constants';
 import { Text } from '../ui';
 import { model_hero_attributes } from '../../constants/Models';
 
@@ -20,7 +21,7 @@ export default class extends React.Component {
     super(props, attributes);
 
     this.state = {
-      level: 0,
+      level: 1,
       attributes: parseAsNumbers(props.attributes),
     }
   }
@@ -54,18 +55,19 @@ export default class extends React.Component {
             </View>
           </View>
         </View>
-        
+
         <View style={styles.secondaryAttributes}>
           <Attribute val={attackSpeed} title='Attack Speed' />
           <Attribute val={spellDamage} title='Spell Amplification' />
           <Attribute val={magicResistance} title='Magic Resistance' />
+          <Attribute val={ATTRIBUTES[this.state.attributes.AttackCapabilities]} title='Attack type' />
         </View>
 
         <View style={styles.slider}>
           <Slider
             value={level}
             onValueChange={level => this.setState({ level })}
-            step={1} maximumValue={25} minimumValue={0}
+            step={1} maximumValue={25} minimumValue={1}
             
             trackPressable={true}
             thumbStyle={{ backgroundColor: Colors.goldenrod }}
@@ -121,7 +123,7 @@ const styles = StyleSheet.create({
 
   HM: {
     borderRadius: 3,
-    marginTop: Layout.padding_small,
+    marginVertical: Layout.padding_small,
     paddingHorizontal: Layout.padding_small,
     alignItems: 'center',
     // justifyContent: 'center',

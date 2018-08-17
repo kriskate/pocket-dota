@@ -24,6 +24,8 @@ export const ATTRIBUTES = {
   agility: 'DOTA_ATTRIBUTE_AGILITY',
   intelligence: 'DOTA_ATTRIBUTE_INTELLECT',
   strength: 'DOTA_ATTRIBUTE_STRENGTH',
+  DOTA_UNIT_CAP_MELEE_ATTACK: 'Melee',
+  DOTA_UNIT_CAP_RANGED_ATTACK: 'Ranged',
 }
 
 export const DOWNLOAD_REASONS = {
