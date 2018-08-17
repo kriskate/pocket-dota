@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     marginBottom: Layout.padding_small,
   },
   abText: {
+    fontSize: 13,
   },
   abImg: {
     width: thumbSize,

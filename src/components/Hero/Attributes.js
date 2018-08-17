@@ -22,24 +22,7 @@ export default class extends React.Component {
     this.state = {
       level: 0,
       attributes: parseAsNumbers(props.attributes),
-      thumbScale: new Animated.Value(1),
     }
-  }
-
-  pulse = () => {
-    Animated.sequence([
-      Animated.timing(this.state.thumbScale, {
-        toValue: 1.4,
-        duration: 1000,
-      }),
-      Animated.timing(this.state.thumbScale, {
-        toValue: 1,
-        duration: 1000,
-      }),
-    ]).start(() => { this.pulse(); });
-  }
-  componentDidMount() {
-    this.pulse();
   }
 
   render() {
@@ -85,7 +68,7 @@ export default class extends React.Component {
             step={1} maximumValue={25} minimumValue={0}
             
             trackPressable={true}
-            thumbStyle={{ transform: [{ scaleY: this.state.thumbScale }], backgroundColor: Colors.goldenrod }}
+            thumbStyle={{ backgroundColor: Colors.goldenrod }}
           />
           <Text style={styles.levelText}>
             { level === 0 ? 'Base stats' : `Level: ${level}` }
