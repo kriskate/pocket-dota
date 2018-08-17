@@ -2,10 +2,9 @@ import React from 'react';
 
 import { View, Image, StyleSheet, TouchableHighlight, TouchableOpacity } from 'react-native';
 import { url } from '../../constants/Data';
-import { Text } from '../ui';
+import { Text, Button } from '../ui';
 import Colors from '../../constants/Colors';
 import Layout from '../../constants/Layout';
-import Button from '../Button';
 
 
 export default class Ability extends React.PureComponent {

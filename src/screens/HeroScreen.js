@@ -3,12 +3,10 @@ import { View, Image, StyleSheet } from 'react-native';
 
 
 import ButtonHamburger from '../components/ButtonHamburger';
-import { Text, Container } from '../components/ui';
+import { Text, Container, Card } from '../components/ui';
 import Layout from '../constants/Layout';
 import Colors from '../constants/Colors';
 import { model_hero } from '../constants/Models';
-
-import Card from '../components/ui/Card';
 
 import Abilities from '../components/Hero/Abilities';
 import Attributes from '../components/Hero/Attributes';

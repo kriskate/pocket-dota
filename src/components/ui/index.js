@@ -4,6 +4,8 @@ import Separator from "./Separator";
 import StatusBar from "./StatusBar";
 import Text from "./Text";
 import Thumbnail from "./Thumbnail";
+import Button from "./Button";
+import Card from "./Card";
 
 export {
   Container,
@@ -12,4 +14,6 @@ export {
   StatusBar,
   Text,
   Thumbnail,
+  Button,
+  Card,
 }

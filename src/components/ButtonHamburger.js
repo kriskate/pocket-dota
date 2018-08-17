@@ -3,7 +3,7 @@ import { Platform, StyleSheet, TouchableOpacity } from 'react-native';
 import { Header, withNavigation } from 'react-navigation';
 
 import { Ionicons } from '@expo/vector-icons';
-import Button from './Button';
+import Button from './ui/Button';
 import Colors from '../constants/Colors';
 
 

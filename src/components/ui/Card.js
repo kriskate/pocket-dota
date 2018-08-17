@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View, StyleSheet, Platform, LayoutAnimation } from "react-native";
 import Colors from "../../constants/Colors";
 import Text from "./Text";
-import Button from "../Button";
+import Button from "./Button";
 import Layout from "../../constants/Layout";
 import { animation } from "../../utils/screen";
 
