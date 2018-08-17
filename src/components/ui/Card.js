@@ -28,7 +28,7 @@ export default class Card extends Component {
     return (
       <View style={[styles.card, style]}>
         { !collapsedTitle ? null :
-          <Button style={styles.btnCollapse} viewStyle={styles.btnCollapseView} onPress={this._toggleCollapse}><Text>{ collapsed ? '+' : '-' }</Text></Button>
+          <Button style={styles.btnCollapse} viewStyle={styles.btnCollapseView} onPress={this._toggleCollapse}><Text pointerEvents='none'>{ collapsed ? '+' : '-' }</Text></Button>
         }
         <View>
           { !title || collapsed ? null : <Text style={styles.title}>{title}</Text> }
