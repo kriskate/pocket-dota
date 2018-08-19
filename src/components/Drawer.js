@@ -9,17 +9,39 @@ import Colors from '../constants/Colors';
 import { assets } from '../constants/Data';
 import Layout from '../constants/Layout';
 
-export default class Drawer extends React.Component {
+const ListItem = ({ label, navigate, selected }) => (
+  <Button viewStyle={[styles.item, selected && styles.selectedItem]} 
+      onPress={() => !selected && navigate(label)} >
+    <Text style={styles.label}>{ label }</Text>
+  </Button>
+)
+const ListHeader = ({ label }) => <Text style={styles.labelHeader}>{label}</Text>
+
+export default class Drawer extends React.Component {  
+  // if home, there is no key, as Home is not in the drawer by default
+  _selected = (label) => {
+    const { index, routes } = this.props.navigation.state;
+    const { routeName } = routes[index];
+    return routeName == label;
+  }
+  
   render() {
+    const { navigate } = this.props.navigation;
+
     return (
       <Container scrollable>
+          <Image style={styles.imgBackground} source={assets.app.menuProfile} />
         <View style={styles.imgIconWrapper}>
           <Image style={styles.imgIcon} source={assets.app.logoRed} />
         </View>
-        <Button style={styles.item} onPress={() => this.props.navigation.navigate(SCREEN_LABELS.HOME)} >
-          <Text style={[styles.label]}>{ SCREEN_LABELS.HOME }</Text>
-        </Button>
-        <DrawerItems {...this.props} />
+
+
+        { Object.keys(SCREEN_LABELS).map(label =>
+          label.substr(0, 6) == 'HEADER'
+            ? <ListHeader key={label} label={SCREEN_LABELS[label]} />
+            : <ListItem key={label} label={SCREEN_LABELS[label]} navigate={navigate} 
+                selected={this._selected(SCREEN_LABELS[label])} />
+        ) }
       </Container>
     );
   }
@@ -29,23 +51,38 @@ export default class Drawer extends React.Component {
 const styles = StyleSheet.create({
   imgIconWrapper: {
     marginTop: Layout.padding_regular + getStatusBarHeight(),
-    marginVertical: Layout.padding_regular,
     paddingVertical: Layout.padding_regular,
+    marginBottom: Layout.padding_regular,
+    alignItems: 'center',
   },
   imgIcon: {
     width: 180,
     height: 50,
     resizeMode: 'contain',
-
   },
+  imgBackground: {
+    height: 110,
+    position: "absolute",
+  },
+  
   item: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
+  },
+  selectedItem: {
+    backgroundColor: Colors.dota_ui1_light,
   },
   label: {
-    textAlign: 'left',
-    margin: 16,
+    margin: Layout.padding_big,
+    marginLeft: Layout.padding_big + Layout.padding_small,
     fontWeight: 'bold',
     color: Colors.dota_white,
-  }
+  },
+  labelHeader: {
+    marginTop: Layout.padding_regular,
+    paddingTop: Layout.padding_big,
+    marginLeft: Layout.padding_regular,
+    borderTopColor: Colors.dota_ui1,
+    borderTopWidth: 1,
+    color: Colors.goldenrod,
+  },
 });

@@ -8,17 +8,23 @@ export const HOME_LABELS = {
 export const SCREEN_LABELS = {
   HOME: 'Home',
 
+  HEADER_WIKI: 'Wiki',
   HEROES: 'Heroes',
   ITEMS: 'Items',
-
+  
+  HEADER_GAME: 'Game info',
   TIPS: 'Tips',
   PATCH_NOTES: 'Patch notes',
-
+  
+  HEADER_STATS: 'Player stats',
   STATS: 'Stats',
-  STATS_WEB: 'StatsWebScreen',
   PROFILE: 'Profile',
-
+  
+  HEADER_ABOUT: 'About and legal',
   ABOUT: 'About',
+}
+export const SCREEN_LABELS_HIDDEN = {
+  STATS_WEB: 'StatsWebScreen',
 }
 
 export const ATTRIBUTES = {

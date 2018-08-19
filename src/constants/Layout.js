@@ -13,4 +13,6 @@ export default {
   padding_small: 5,
 
   padding_regular: 10,
+  
+  padding_big: 15,
 };
