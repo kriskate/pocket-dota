@@ -83,6 +83,8 @@ export default class StatsScreen extends React.Component {
         <Container backToHome >
           <View style={styles.search}>
             <TextInput style={styles.searchBox} 
+              autoFocus
+              selectTextOnFocus
               placeholder='Type in profile name to look up'
               onSubmitEditing={this._handleSubmit}
               returnKeyType='search'
