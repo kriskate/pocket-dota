@@ -15,6 +15,7 @@ export const SCREEN_LABELS = {
   PATCH_NOTES: 'Patch notes',
 
   STATS: 'Stats',
+  STATS_WEB: 'StatsWebScreen',
   PROFILE: 'Profile',
 
   ABOUT: 'About',
@@ -32,4 +33,10 @@ export const DOWNLOAD_REASONS = {
   FRESH: 'Because this is the first time you open the app, additional files need to be downloaded (eg: hero/ item descriptions, images).',
   MISSING: 'Some wiki data on your device seems to be missing. Please wait while the app re-downloads the data.',
   UPDATE: 'Downloading new wiki database.'
+}
+
+
+export const URL_ODOTA = {
+  SEARCH: 'https://api.opendota.com/api/search?q=',
+  PROFILE: 'https://www.opendota.com/players/',
 }

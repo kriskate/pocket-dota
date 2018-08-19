@@ -16,6 +16,14 @@ export function model_settings (settings) {
   const { showProfileOnHome, autoUpdateApp, autoUpdateDB } = settings;
   return { showProfileOnHome, autoUpdateApp, autoUpdateDB };
 }
+export function model_odota (data) {
+  const {
+    account_id, avatarfull, last_match_time, personaname,
+  } = data;
+  return {
+    account_id, avatarfull, last_match_time, personaname,
+  }
+}
 
 
 export function model_item (item) {
