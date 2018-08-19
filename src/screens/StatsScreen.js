@@ -35,10 +35,12 @@ class Results extends React.PureComponent {
     const { search_results, navigation, submitted_text } = this.props;
 
     return (
-      <Container scrollable padInner style={styles.results}>
-      { search_results == null 
-        ? <ActivityIndicator size='large' color={Colors.goldenrod} />
-        : search_results.length < 1
+      search_results == null
+      ? <Container style={styles.resultsLoading}>
+          <ActivityIndicator size='large' color={Colors.goldenrod} />
+        </Container>
+      : <Container scrollable padInner style={styles.results}>
+        { search_results.length < 1
           ? <Text>Could not find any results for <Text style={{color: Colors.dota_white}}>{submitted_text}</Text>
             </Text>
           : <FlatList
@@ -46,8 +48,8 @@ class Results extends React.PureComponent {
               renderItem={this._renderItem}
               keyExtractor={item => item.account_id ? item.account_id.toString() : 'empty'}
             />
-      }
-      </Container>
+        }
+        </Container>
     )
   }
 }
@@ -121,6 +123,10 @@ const styles = StyleSheet.create({
   },
 
   results: {
+    backgroundColor: Colors.dota_ui1,
+    flex: 1,
+  },
+  resultsLoading: {
     backgroundColor: Colors.dota_ui1,
     justifyContent: 'center',
     flex: 1,
