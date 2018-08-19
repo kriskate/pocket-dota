@@ -3,7 +3,7 @@ import { View, WebView, ActivityIndicator, StyleSheet, TextInput, Keyboard, Touc
 import { Container, Text, Button } from '../components/ui';
 
 import { headerStyle } from '../utils/screen';
-import { SCREEN_LABELS, URL_ODOTA } from '../constants/Constants';
+import { SCREEN_LABELS, URL_ODOTA, SCREEN_LABELS_HIDDEN } from '../constants/Constants';
 import Colors from '../constants/Colors';
 import Layout from '../constants/Layout';
 import { model_odota } from '../constants/Models';
@@ -17,7 +17,7 @@ class ProfileThumb extends React.PureComponent {
 
     return (
       <Button style={styles.thumb_button} viewStyle={styles.thumb_buttonView}
-          onPress={() => navigation.navigate(SCREEN_LABELS.STATS_WEB, { account_id })} >
+          onPress={() => navigation.navigate(SCREEN_LABELS_HIDDEN.STATS_WEB, { account_id })} >
         <Image source={src} style={styles.thumb_img} />
         <View style={styles.thumb_texts}>
           <Text style={styles.thumb_name}>{personaname}</Text>

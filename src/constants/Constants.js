@@ -24,6 +24,8 @@ export const SCREEN_LABELS = {
   ABOUT: 'About',
 }
 export const SCREEN_LABELS_HIDDEN = {
+  HERO: 'HeroScreen',
+  ITEM: 'ItemScreen',
   STATS_WEB: 'StatsWebScreen',
 }
 

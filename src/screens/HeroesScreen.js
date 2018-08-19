@@ -2,7 +2,7 @@ import React from 'react';
 import { Image, View, Text, StyleSheet, TouchableHighlight, Platform, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 
-import { SCREEN_LABELS } from '../constants/Constants';
+import { SCREEN_LABELS, SCREEN_LABELS_HIDDEN } from '../constants/Constants';
 import { Container } from '../components/ui';
 import { url, local_uri } from '../constants/Data';
 import Colors from '../constants/Colors';
@@ -25,7 +25,7 @@ export default class HeroesScreen extends React.PureComponent {
     const imgSource = { uri: url.images.small(hero.tag) };
 
     return (
-      <TouchableHighlight onPress={() => navigate('HeroScreen', { hero })}>
+      <TouchableHighlight onPress={() => navigate(SCREEN_LABELS_HIDDEN.HERO, { hero })}>
         <View style={styles.thumb}>
           <Image style={styles.thumbImg} source={imgSource} />
           <View style={styles.thumbTextWrapper}>
