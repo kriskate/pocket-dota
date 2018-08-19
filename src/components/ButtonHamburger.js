@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, StyleSheet, TouchableOpacity } from 'react-native';
+import { Platform, StyleSheet, TouchableOpacity, Keyboard } from 'react-native';
 import { Header, withNavigation } from 'react-navigation';
 
 import { Ionicons } from '@expo/vector-icons';
@@ -8,7 +8,7 @@ import Colors from '../constants/Colors';
 
 
 export default withNavigation( ({ navigation }) => (
-  <Button onPress={() => navigation.openDrawer()} viewStyle={styles.hamburger}>
+  <Button onPress={() => { navigation.openDrawer(); Keyboard.dismiss(); }} viewStyle={styles.hamburger}>
     <Ionicons size={24} name={ Platform == "ios" ? "ios-menu" : "md-menu" }
       color={Colors.dota_white} pointerEvents='none' />
   </Button>
