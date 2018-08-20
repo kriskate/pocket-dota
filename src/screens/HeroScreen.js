@@ -15,7 +15,7 @@ import { url } from '../constants/Data';
 import { ATTRIBUTES } from '../constants/Constants';
 
 import { headerStyle } from '../utils/screen';
-import Item from '../components/Item';
+import ItemThumb from '../components/ItemThumb';
 
 
 @connect(state => ({
@@ -70,7 +70,7 @@ export default class HeroScreen extends React.Component {
           <View style={styles.popular_items}>
             { popular_items.map(item_tag => {
               const iTAG = item_tag.replace('item_', '');
-              return <Item key={iTAG} tag={iTAG} items={game_items} showPrice />
+              return <ItemThumb key={iTAG} tag={iTAG} items={game_items} showPrice />
             }) }
           </View>
         </Card>

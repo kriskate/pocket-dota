@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { model_item } from '../constants/Models';
 
 
-export default class Item extends React.PureComponent {
+export default class ItemThumb extends React.PureComponent {
   render() {
     const { tag, items, showPrice=false } = this.props;
 
