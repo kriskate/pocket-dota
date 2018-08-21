@@ -11,20 +11,23 @@ import { model_item } from '../constants/Models';
 
 export default class ItemThumb extends React.PureComponent {
   render() {
-    const { tag, items, showPrice=false } = this.props;
+    const { item, showPrice=false, onPress } = this.props;
 
-    const item = model_item(items.find(i => i.tag.tag == tag).tag);
-    const { dname, cost } = item;
+    const { tag, name, cost } = model_item(item);
 
     return (
-      <Button style={styles.container}>
+      <Button style={styles.container} onPress={onPress}>
         <View>
           <Image pointerEvents='none' style={styles.img} source={{ uri: url.images.items(tag.replace('item_','')) }} />
-          <Text labelBottom pointerEvents='none' style={styles.label}>{dname}</Text>
+          <Text pointerEvents='none'
+              labelBottom={showPrice} labelBelow={!showPrice}
+              style={styles.label} labelBelowWrapperStyle={styles.labelWrapper} >
+            {name}
+          </Text>
         </View>
         {!showPrice ? null : 
           <View style={styles.price}>
-            <Image style={styles.priceImg} source={assets.gold} />
+            <Image style={styles.priceImg} source={assets.game.gold} />
             <Text style={styles.priceTxt}> {cost}</Text>
           </View>
         }
@@ -68,6 +71,10 @@ const styles = StyleSheet.create({
 
   label: {
     fontSize: 11,
+  },
+  labelWrapper: {
+    width: thumbSize,
+    height: 30,
   },
   img: {
     width: thumbSize,
