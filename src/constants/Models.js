@@ -1,3 +1,9 @@
+export const model_section = ({ title }) => ({
+  title,
+  data: [],
+});
+
+
 export function model_wiki (data) {
   const { heroes, items, tips, patch_notes, info } = data;
   return { heroes, items, tips, patch_notes, info };

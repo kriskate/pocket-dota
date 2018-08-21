@@ -6,6 +6,7 @@ import Text from "./Text";
 import Thumbnail from "./Thumbnail";
 import Button from "./Button";
 import Card from "./Card";
+import ListThumb from "./ListThumb";
 
 export {
   Container,
@@ -16,4 +17,5 @@ export {
   Thumbnail,
   Button,
   Card,
+  ListThumb,
 }
