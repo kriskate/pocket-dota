@@ -68,9 +68,11 @@ export default class HeroScreen extends React.Component {
 
         <Card collapsedTitle='Popular items' title='Popular items'>
           <View style={styles.popular_items}>
-            { popular_items.map(item_tag => {
-              const iTAG = item_tag.replace('item_', '');
-              return <ItemThumb key={iTAG} tag={iTAG} items={game_items} showPrice />
+            { popular_items.map(tag => {
+              const iTAG = tag.replace('item_', '');
+              const item = game_items.find(i => i.tag == iTAG);
+
+              return <ItemThumb key={iTAG} item={item} showPrice />
             }) }
           </View>
         </Card>
