@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Platform, StatusBar, StyleSheet } from 'react-native';
+import { Image, Platform, StatusBar, StyleSheet, View } from 'react-native';
 
 import { Container, Text, Progress, Separator } from '../components/ui';
 import { downloadImages, downloadWiki } from '../utils/downloaders';
@@ -30,7 +30,7 @@ export default class AppDownloading extends React.PureComponent {
     const { reason } = this.props;
 
     return (
-      <Container padTop padInner style={styles.content}>
+      <View style={styles.content}>
         
         <Image resizeMode='contain' style={styles.logo}
           source={ assets.app.logoRed } 
@@ -48,7 +48,7 @@ export default class AppDownloading extends React.PureComponent {
         <Progress label={`Caching images`} 
           progress={this.state.progress_images} />
         
-      </Container>
+      </View>
     )
   }
 }
@@ -58,9 +58,10 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 25,
     justifyContent: 'center',
+    backgroundColor: Colors.dota_ui2,
   },
   reason: {
-    color: Colors.dota_,
+    color: Colors.dota_agi,
   },
   logo: {
     flex: 1,
