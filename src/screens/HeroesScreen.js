@@ -39,7 +39,7 @@ export default class HeroesScreen extends React.PureComponent {
     const { heroes } = this.props;
 
     return (
-      <Container>
+      <Container backToHome>
         <FlatList numColumns={columns}
           data={heroes}
           renderItem={this._renderItem}
