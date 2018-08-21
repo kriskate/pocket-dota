@@ -1,7 +1,7 @@
 import { FileSystem } from 'expo';
 import { Image } from 'react-native';
 import { url, } from '../constants/Data';
-import { loadCurrentWikiInfo, loadWiki, cacheImages } from './loaders';
+import { loadCurrentWikiInfo, loadWiki, } from './loaders';
 import Logger from './Logger';
 
 export const folder_img = `${FileSystem.cacheDirectory}dota-images/`;
@@ -13,20 +13,16 @@ export const downloadImages = async (wiki, progress_callback) => {
 
   const { heroes, items, } = wiki;
   const images = { icons: [], small: [], vert: [], abilities: [], items: [] };
-  // to-do - remove these from here; put rule on backend
-  const ignore = { 
-    items: ['trident', 'combo_breaker', 'ward_dispenser', 'pocket_tower', 'super_blink', 'mutation_tombstone', 'river_painter7', 'river_painter6', 'river_painter5', 'river_painter4', 'river_painter3', 'river_painter2', 'river_painter1', 'river_painter'],
-  }
 
   heroes.forEach(({ tag, abilities }) => {
     ['small', 'vert', 'icons'].forEach(type => images[type].push(url.images[type](tag)));
 
     abilities.forEach(ability => images.abilities.push(url.images.abilities(ability.tag)));
   });
-  items.forEach(({tag}) => {
-    if(!ignore.items.includes(tag.tag))
-      images.items.push(url.images.items(tag.tag));
+  items.forEach(({ tag }) => {
+    images.items.push(url.images.items(tag));
   });
+  images.items.push(url.images.items('recipe'));
 
   
   let cProgress = 0;

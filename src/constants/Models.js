@@ -31,19 +31,48 @@ export function model_odota (data) {
   }
 }
 
-
-export function model_item (item) {
+export const model_item_bonuses = (bonuses) => {
   const {
-    tag, id, img,
-    dname, desc, notes, lore,
-    qual, cost, ItemDisassembleRule, components,
-    attrib, mc, cd, created, AbilityCastRange,
+    bonus_damage, bonus_armor, bonus_magical_armor, bonus_spell_resist,
+    bonus_movement_speed, bonus_attack_speed,
+    bonus_health, bonus_health_regen,
+    bonus_mana, bonus_mana_regen_pct, bonus_mana_regen,
+    bonus_strength, bonus_agility, bonus_intellect, bonus_all_stats, bonus_stats,
+  } = bonuses
+  return {
+    bonus_damage, bonus_armor, bonus_magical_armor, bonus_spell_resist,
+    bonus_movement_speed, bonus_attack_speed,
+    bonus_health, bonus_health_regen,
+    bonus_mana, bonus_mana_regen_pct, bonus_mana_regen,
+    bonus_strength, bonus_agility, bonus_intellect, bonus_all_stats, bonus_stats,
+  }
+}
+export const model_item_npc = (item) => {
+  const {
+    UpgradeRecipe, ItemDisassembleRule,
+    SideShop, SecretShop, GlobalShop,
   } = item;
   return {
-    tag, id, img,
-    dname, desc, notes, lore,
-    qual, cost, ItemDisassembleRule, components,
-    attrib, mc, cd, created, AbilityCastRange,
+    UpgradeRecipe, ItemDisassembleRule,
+    SideShop, SecretShop, GlobalShop,
+  }
+}
+export function model_item (item) {
+  const {
+    tag,
+    name, description, notes, lore,
+    cost, mc, cd, attrib,
+    category, components,
+    npc,
+    bonuses,
+  } = item;
+  return {
+    tag,
+    name, description, notes, lore,
+    cost, mc, cd, attrib,
+    category, components,
+    npc,
+    bonuses,
   };
 }
 
@@ -90,7 +119,6 @@ export function model_hero_attributes (attributes) {
 export function model_hero (hero) {
   return {
     tag, name, bio, hype,
-    img_small, img_full, img_vert,
     popular_items,
     abilities: [], abilities_special: [], abilities_aghs: [], abilities_hidden: [], talents: [],
     attributes = new model_hero_attributes({}),
