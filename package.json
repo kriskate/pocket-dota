@@ -14,13 +14,15 @@
     "react-native-render-html": "^3.10.0",
     "react-native-slider": "^0.11.0",
     "react-native-status-bar-height": "2.0.0",
-    "react-navigation": "2.12.2",
+    "react-navigation": "2.11.2",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0"
   },
   "devDependencies": {
     "@types/react": "^16.4.7",
     "@types/react-native": "0.49.3",
+    "@types/react-redux": "^6.0.6",
+    "@types/redux": "^3.6.0",
     "jest-expo": "^29.0.0"
   }
 }
