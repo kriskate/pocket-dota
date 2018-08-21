@@ -37,7 +37,7 @@ export default class Itemscreen extends React.Component {
 
       section.data.push(item);
     });
-    console.log(itemSections.length)
+
     return (
       <Container backToHome style={ styles.container }>
         <ListScreen
