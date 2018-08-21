@@ -1,9 +1,21 @@
 import React from 'react';
-import { Container, Text } from '../components/ui';
+import { connect } from 'react-redux';
+import { StyleSheet } from 'react-native';
 
 import { headerStyle } from '../utils/screen';
 import { SCREEN_LABELS } from '../constants/Constants';
 
+import { Container } from '../components/ui';
+import ListScreen from '../components/ListScreen';
+import Layout from '../constants/Layout';
+import { url } from '../constants/Data';
+import { model_section } from '../constants/Models';
+
+
+
+@connect(state => ({
+  items: state.wiki.items,
+}))
 export default class Itemscreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: SCREEN_LABELS.ITEMS,
@@ -11,10 +23,39 @@ export default class Itemscreen extends React.Component {
   });
 
   render() {
+    const { items } = this.props;
+    
+    const itemSections = [];
+
+    items.forEach(item => {
+      const { category } = item;
+      let section = itemSections.find(({ title }) => title == category);
+      if(!section) {
+        section = new model_section({ title: category });
+        itemSections.push(section);
+      }
+
+      section.data.push(item);
+    });
+    console.log(itemSections.length)
     return (
-      <Container backToHome>
-        <Text>Items content</Text>
+      <Container backToHome style={ styles.container }>
+        <ListScreen
+          hasSections
+          itemList={itemSections}
+          imageAspectRatio={88/64}
+          keyExtractor={(item) => item.tag}
+          imageExtractor={item => url.images.items(item.tag)}
+          labelExtractor={item => item.name}
+        />
       </Container>
     );
   }
 }
+
+
+const styles = StyleSheet.create({
+  container: {
+    padding: Layout.padding_small,
+  }
+})
