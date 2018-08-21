@@ -14,7 +14,7 @@ export default class Button extends React.Component {
     if (Platform.OS === 'android' && Platform.Version >= 21) {
       return (
         <View style={[styles.touch, style]}>
-          <TouchableNativeFeedback onPress={onPress}
+          <TouchableNativeFeedback onPress={onPress} useForeground
               background={TouchableNativeFeedback.Ripple(pressColor, borderless)}>
             <View style={[styles.button, viewStyle]}>{children}</View>
           </TouchableNativeFeedback>
