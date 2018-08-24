@@ -4,11 +4,13 @@ import Button from './Button';
 import Text from './Text';
 import Layout from '../../constants/Layout';
 import Colors from '../../constants/Colors';
+import { assets } from '../../constants/Data';
 
 
 export default class ListThumb extends React.PureComponent {
   render() {
-    const { onPress, imgSource, imgSize, label, width } = this.props;
+    // cost is only used for items
+    const { onPress, imgSource, imgSize, label, width, cost } = this.props;
 
     return (
       <Button onPress={onPress} pressColor={Colors.dota_red_darker}>
@@ -18,6 +20,12 @@ export default class ListThumb extends React.PureComponent {
             <Text style={styles.thumbText}>{label}</Text>
           </View>
         </View>
+        {!cost ? null : 
+          <View style={styles.price}>
+            <Image style={styles.priceImg} source={assets.game.gold} />
+            <Text style={styles.priceTxt}> {cost}</Text>
+          </View>
+        }
       </Button>
     )
   }

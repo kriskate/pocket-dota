@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 
 import ButtonHamburger from '../components/ButtonHamburger';
-import { Text, Container, Card } from '../components/ui';
+import { Text, Container, Card, ListThumb } from '../components/ui';
 import Layout from '../constants/Layout';
 import Colors from '../constants/Colors';
 import { model_hero } from '../constants/Models';
@@ -15,7 +15,6 @@ import { url } from '../constants/Data';
 import { ATTRIBUTES } from '../constants/Constants';
 
 import { headerStyle } from '../utils/screen';
-import ItemThumb from '../components/ItemThumb';
 
 
 @connect(state => ({
@@ -68,11 +67,16 @@ export default class HeroScreen extends React.Component {
 
         <Card collapsedTitle='Popular items' title='Popular items'>
           <View style={styles.popular_items}>
-            { popular_items.map(tag => {
-              const iTAG = tag.replace('item_', '');
+            { popular_items.map(item_tag => {
+              const iTAG = item_tag.replace('item_', '');
               const item = game_items.find(i => i.tag == iTAG);
 
-              return <ItemThumb key={iTAG} item={item} showPrice />
+              return <ListThumb 
+                        key={iTAG} label={item.name}
+                        imgSource={{ uri: url.images.items(tag) }}
+                        imgSize={{ width: thumbSize, height: thumbSize/imgRatio }}
+                        cost={item.cost}
+                      />
             }) }
           </View>
         </Card>
@@ -80,6 +84,9 @@ export default class HeroScreen extends React.Component {
     )
   }
 }
+
+const imgRatio = 88/64;
+const thumbSize = 70;
 
 const styles = StyleSheet.create({
   container: {
