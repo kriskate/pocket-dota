@@ -6,13 +6,14 @@ import { Button, Text, ListThumb } from '../components/ui';
 import Colors from '../constants/Colors';
 import Layout from '../constants/Layout';
 import { SCREEN_LABELS_HIDDEN } from '../constants/Constants';
+import { withNavigation } from 'react-navigation';
 
 
-
+@withNavigation
 export default class ListScreen extends React.PureComponent {
   _renderItem = ({ item }) => {
-    const { imageExtractor, labelExtractor, navigation, imageAspectRatio } = this.props;
-    const onPress = () => navigation.navigate(SCREEN_LABELS_HIDDEN.ITEM, { item });
+    const { navTo, imageExtractor, labelExtractor, navigation, imageAspectRatio } = this.props;
+    const onPress = () => navigation.navigate(navTo, { item });
     const imgSource = { uri: imageExtractor(item) };
     const imgSize = { width: thumbWidth, height: thumbWidth/imageAspectRatio };
     const label = labelExtractor(item);

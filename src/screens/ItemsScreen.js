@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { StyleSheet } from 'react-native';
 
 import { headerStyle } from '../utils/screen';
-import { SCREEN_LABELS } from '../constants/Constants';
+import { SCREEN_LABELS, SCREEN_LABELS_HIDDEN } from '../constants/Constants';
 
 import { Container } from '../components/ui';
 import ListScreen from '../components/ListScreen';
@@ -44,6 +44,7 @@ export default class Itemscreen extends React.Component {
           hasSections
           itemList={itemSections}
           imageAspectRatio={88/64}
+          navTo={SCREEN_LABELS_HIDDEN.ITEM}
           keyExtractor={(item) => item.tag}
           imageExtractor={item => url.images.items(item.tag)}
           labelExtractor={item => item.name}
