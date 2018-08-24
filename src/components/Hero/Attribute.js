@@ -22,6 +22,7 @@ export default class Attribute extends React.PureComponent {
 const styles = StyleSheet.create({
   attribute_img: {
     resizeMode: 'contain',
+    width: Layout.isSmallDevice ? 40 : 50,
     height: Layout.isSmallDevice ? 30 : 40,
   },
   attribute: {

@@ -6,9 +6,9 @@ const base_data = 'https://raw.githubusercontent.com/kriskate/dota-data/master/$
 
 export const assets = {
   attributes: {
-    agi: require('../assets/images/game/overview/overviewicon_agi.png'),
-    int: require('../assets/images/game/overview/overviewicon_int.png'),
-    str: require('../assets/images/game/overview/overviewicon_str.png'),
+    agi: require('../assets/images/game/overview/pip_agi.png'),
+    int: require('../assets/images/game/overview/pip_int.png'),
+    str: require('../assets/images/game/overview/pip_str.png'),
     attack: require('../assets/images/game/overview/overviewicon_attack.png'),
     defense: require('../assets/images/game/overview/overviewicon_defense.png'),
     speed: require('../assets/images/game/overview/overviewicon_speed.png'),
