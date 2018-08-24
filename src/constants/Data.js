@@ -14,6 +14,8 @@ export const assets = {
     speed: require('../assets/images/game/overview/overviewicon_speed.png'),
   },
   game: {
+    cooldown: require('../assets/images/game/cooldown.png'),
+    mana: require('../assets/images/game/mana.png'),
     gold: require('../assets/images/game/gold.png'),
   },
 
