@@ -48,10 +48,19 @@ class HTML extends React.PureComponent {
 
 
 export default class ItemScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: navigation.getParam('item').name,
-    ...headerStyle,
-  });
+  static navigationOptions = ({ navigation }) => {
+    const { category, name } = navigation.getParam('item');
+    const _cat = parseCategory(category);
+    const color = Colors.items[_cat];
+    
+    return {
+      title: navigation.getParam('item').name,
+      ...headerStyle,
+      headerTitleStyle: {
+        color,
+      },
+    }
+  };
 
   render() {
     const item = model_item(this.props.navigation.getParam('item'));
