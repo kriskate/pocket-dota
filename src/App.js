@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { AppLoading } from 'expo';
 import AppDownloading from './screens/AppDownloading';
 
-import { loadInitialAssets, loadCurrentWikiInfo, loadWiki, loadProfileStateFromStorage, } from './utils/loaders';
+import { loadInitialAssets, loadCurrentWikiInfo, loadWiki, loadProfileStateFromStorage, removeWiki, } from './utils/loaders';
 import AppNavigator from './navigation/AppNavigator';
 import Logger from './utils/Logger';
 import { DOWNLOAD_REASONS } from './constants/Constants';
@@ -38,6 +38,7 @@ export default class App extends React.Component {
 
 
   _createStore = async () => {
+    // await removeWiki();
     const wiki = await loadWiki();
     
     if(!wiki) {

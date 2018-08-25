@@ -37,7 +37,10 @@ export const loadProfileStateFromStorage = async () => {
   return data;
 }
 
-   
+// used for testing purposes 
+export const removeWiki = async () => {
+  await FileSystem.deleteAsync(folder_data, { idempotent: true });
+}
 
 export const loadWiki = async () => {
   Logger.debug('loading wiki data');
