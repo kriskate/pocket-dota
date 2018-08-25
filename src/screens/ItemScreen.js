@@ -10,6 +10,7 @@ import { assets, url } from '../constants/Data';
 import Layout from '../constants/Layout';
 import Colors from '../constants/Colors';
 import { trimAbilities, parseCategory } from '../utils/utils';
+import { ITEM_CONSTANTS } from '../constants/Constants';
 
 const removeSpace = (str) => str.replace(/\+ \<span/g, '+<span')
 const removeH1 = (str) => str.replace(/\<h1/g, `<span style="color:${Colors.dota_radiant};font-weight:bold;"`)
@@ -47,7 +48,7 @@ class HTML extends React.PureComponent {
 }
 
 
-export default class ItemScreen extends React.Component {
+export default class ItemScreen extends React.PureComponent {
   static navigationOptions = ({ navigation }) => {
     const { category, name } = navigation.getParam('item');
     const _cat = parseCategory(category);
@@ -72,6 +73,8 @@ export default class ItemScreen extends React.Component {
       category, components,
     } = item;
     const npc = model_item_npc(item.npc);
+    const { ItemDisassembleRule } = npc;
+    const dissasemble = ItemDisassembleRule == ITEM_CONSTANTS.DISSASEMBLE ? "Yes" : "No";
     const bonuses = model_item_bonuses(item.bonuses);
 
     const _category = parseCategory(category);
@@ -102,6 +105,14 @@ export default class ItemScreen extends React.Component {
           </View>
         </View>
 
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Text>Can be dissasembled:</Text>
+          <Text style={{
+                fontWeight: 'bold', color: dissasemble == "Yes" ? Colors.dota_radiant : Colors.dota_dire, 
+              }}>
+            {dissasemble}
+          </Text>
+        </View>
 
         <View style={styles.category}>
           <Text>Item category: </Text>

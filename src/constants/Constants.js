@@ -1,3 +1,7 @@
+export const ITEM_CONSTANTS = {
+  DISSASEMBLE: 'DOTA_ITEM_DISASSEMBLE_ALWAYS',
+}
+
 export const HOME_LABELS = {
   HEROES: 'HEROES',
   ITEMS: 'ITEMS',
