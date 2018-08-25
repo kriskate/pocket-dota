@@ -1,5 +1,5 @@
 import { FileSystem } from 'expo';
-import { Image } from 'react-native';
+import { Image, Platform } from 'react-native';
 import { url, } from '../constants/Data';
 import { loadCurrentWikiInfo, loadWiki, } from './loaders';
 import Logger from './Logger';
@@ -75,6 +75,7 @@ export const downloadWiki = async (progress_callback) => {
   const keys = Object.keys(url.data);
 
   const progress = overallProgress(keys, progress_callback);
+  let iosProgress = 0;
 
   await Promise.all(
     keys.map(async key => {
@@ -85,7 +86,10 @@ export const downloadWiki = async (progress_callback) => {
         folder_data,
         progress(key)
       );
-
+      if(Platform.OS === 'ios') {
+        iosProgress += 1/keys.length;
+        progress_callback(iosProgress);
+      }
       Logger.silly(`- downloaded ${key}`);
     })
   );
@@ -106,6 +110,8 @@ const overallProgress = (keys, progress_callback) => {
   const step = 1 / keys.length;
   const progressAll = [];
   keys.forEach(() => progressAll.push(0));
+
+  if(Platform.OS === 'ios') return () => {}
   
   return (key) => 
     ({totalBytesWritten, totalBytesExpectedToWrite}) => {
