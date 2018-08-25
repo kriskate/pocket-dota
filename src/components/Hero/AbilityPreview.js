@@ -50,11 +50,6 @@ export default class AbilityPreview extends React.PureComponent {
         <HTML htmlContent={notes} style={styles.description} />
         
         <HTML htmlContent={lore} style={styles.lore} />
-        {/* <HTML containerStyle={styles.html} alterNode={this._alterNodeDark} html={_html(description)}/>
-        <HTML containerStyle={styles.html} alterNode={this._alterNodeDark} html={_html(attrib)}/>
-        <HTML containerStyle={styles.html} alterNode={this._alterNodeDark} html={_html(notes)}/>
-        <HTML containerStyle={styles.html} alterNode={this._alterNodeDark} html={_html(cmb)}/>
-        <HTML containerStyle={styles.html} alterNode={this._alterNodeDark} html={_html(lore)}/> */}
       </View>
     )
   }
