@@ -36,12 +36,16 @@ export default {
   noticeText: '#fff',
   
   items: {
-    rare: "#1A87F9",
-    artifact: "#E29B01",
-    secret_shop: "#FFFFFF",
-    consumable: "#1D80E7",
+    consumables: "#1D80E7",
+    attributes: "#598307",
+    armaments: "#A83806",
+    arcane: "#B812F9",
     common: "#2BAB01",
-    epic: "#B812F9",
-    component: "#FFFFFF",
+    support: "#DAA520",
+    caster: "#1A87F9",
+    weapons: "#A83806",
+    armor: "#598307",
+    artifacts: "#E29B01",
+    secret_shop: "#FFFFFF",
   }
 };

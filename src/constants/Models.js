@@ -1,5 +1,9 @@
-export const model_section = ({ title }) => ({
-  title,
+import Colors from "./Colors";
+import { parseCategory } from "../utils/utils";
+
+export const model_section = ({ category }) => ({
+  title: category,
+  color: Colors.items[parseCategory(category)],
   data: [],
 });
 

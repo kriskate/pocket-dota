@@ -44,8 +44,8 @@ export default class ListScreen extends React.PureComponent {
     )
   }
 
-  _renderSectionHeader = ({section: {title}}) => (
-    <Text style={styles.sectionTitle}>{title}</Text>
+  _renderSectionHeader = ({section: {title, color}}) => (
+    <Text style={[styles.sectionTitle, color ? { color } : null ]}>{title}</Text>
   )
 
   render() {
