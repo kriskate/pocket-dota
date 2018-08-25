@@ -21,7 +21,7 @@ class ProfileThumb extends React.PureComponent {
         <Image source={src} style={styles.thumb_img} />
         <View style={styles.thumb_texts}>
           <Text style={styles.thumb_name}>{personaname}</Text>
-          <Text style={styles.thumb_date}>{ !last_match_time ? '' : 'Last match:' + new Date(last_match_time).toUTCString()}</Text>
+          <Text style={styles.thumb_date}>{ !last_match_time ? '' : 'Last match: ' + new Date(last_match_time).toUTCString()}</Text>
         </View>
       </Button>
 
