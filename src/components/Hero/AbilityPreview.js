@@ -1,7 +1,7 @@
 import React, { Children } from 'react';
 
 import { View, Image, StyleSheet, WebView } from 'react-native';
-import { url } from '../../constants/Data';
+import { url, assets } from '../../constants/Data';
 import { Text } from '../ui';
 import { model_ability } from '../../constants/Models';
 import RenderHTML from 'react-native-render-html';
@@ -35,9 +35,9 @@ export default class AbilityPreview extends React.PureComponent {
   render() {
     const ability = model_ability(this.props.ability);
     const { 
-      affects, attrib, cmb, 
-      description, lore, name, notes,
-      HasScepterUpgrade, IsGrantedByScepter
+      tag, name, affects, description,
+      notes, attrib, cooldown, manacost,
+      lore, IsGrantedByScepter, HasScepterUpgrade
     } = ability;
     
     return (
@@ -45,7 +45,13 @@ export default class AbilityPreview extends React.PureComponent {
         <HTML htmlContent={affects} />
         <HTML htmlContent={description} style={styles.description} />
         <HTML htmlContent={attrib} />
-        <HTML htmlContent={cmb} />
+
+        <Prop text={manacost}>}
+          <Image source={assets.game.mana} />
+        </Prop>
+        <Prop text={cooldown}>}
+          <Image source={assets.game.cooldown} />
+        </Prop>
         
         <HTML htmlContent={notes} style={styles.description} />
         
@@ -54,6 +60,13 @@ export default class AbilityPreview extends React.PureComponent {
     )
   }
 }
+
+const Prop = ({ children, style, text, }) => !text ? null : (
+  <View style={[styles.cdm, style]}>
+    {children}
+    { !text ? null : <Text style={styles.cdmText}> {text} </Text> }
+  </View>
+)
 
 const styles = StyleSheet.create({
   container: {
@@ -72,6 +85,16 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.dota_ui2,
     flexDirection: 'row',
     padding: Layout.padding_small,
+  },
+
+
+  cdm: {
+    padding: Layout.padding_small,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  cdmText: {
+    color: Colors.dota_white,
   },
 
 })
