@@ -46,10 +46,10 @@ export default class AbilityPreview extends React.PureComponent {
         <HTML htmlContent={description} style={styles.description} />
         <HTML htmlContent={attrib} />
 
-        <Prop text={manacost}>}
+        <Prop text={manacost}>
           <Image source={assets.game.mana} />
         </Prop>
-        <Prop text={cooldown}>}
+        <Prop text={cooldown}>
           <Image source={assets.game.cooldown} />
         </Prop>
         

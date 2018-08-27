@@ -13,7 +13,7 @@ export default class Ability extends React.PureComponent {
     const ss = selected ? { borderColor: Colors.gold } : {};
 
     return (
-      <Button key={tag} style={[styles.ab, ss]} onPress={() => this.props.onPress(tag)}>
+      <Button key={tag} style={[styles.ab, ss]} pressColor={Colors.goldenrod} onPress={() => this.props.onPress(tag)}>
       <View>
         <Image  pointerEvents='none' style={styles.abImg} source={{ uri: url.images.abilities(tag) }} />
         <Text  pointerEvents='none' style={styles.abText} labelBottom>{name}</Text>
