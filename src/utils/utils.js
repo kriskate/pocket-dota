@@ -5,6 +5,9 @@ export const parseCategory = category => category.split(' ').join('_').toLowerCa
 
 
 const r_trailingBR = /(<br\s*\/>)+$/;
+const r_beginingBR = /(^<br\s*\/>)+/;
 const r_whitespaceBR = /(<br\s*\/> )/g;
 export const trimAbilities = (htmlContent) =>
-  htmlContent.trim().replace(r_whitespaceBR, '<br/>').replace(r_trailingBR, '');
+  htmlContent.trim().replace(r_whitespaceBR, '<br/>')
+  .replace(r_trailingBR, '')
+  .replace(r_beginingBR, '');
