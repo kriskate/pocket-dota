@@ -8,9 +8,23 @@ import Layout from '../constants/Layout';
 import { SCREEN_LABELS_HIDDEN } from '../constants/Constants';
 import { withNavigation } from 'react-navigation';
 
+const getLayout = (layoutWidth = Layout.window.width) => {
+  const borderWidth = 1;
+  const maxWidth = 80;
+  columns = Math.floor((layoutWidth - 2 * Layout.padding_regular) / maxWidth);
+
+  thumbWidth = (layoutWidth - (columns + 1) * Layout.padding_regular - borderWidth * 2 * columns) / columns;
+}
+let columns, thumbWidth;
+
 
 @withNavigation
 export default class ListScreen extends React.PureComponent {
+  constructor(props) {
+    super(props);
+
+    getLayout(props.layoutWidth);
+  }
   _renderItem = ({ item }) => {
     const { navTo, imageExtractor, labelExtractor, navigation, imageAspectRatio } = this.props;
     const onPress = () => navigation.navigate(navTo, { item });
@@ -35,7 +49,8 @@ export default class ListScreen extends React.PureComponent {
     const { keyExtractor } = this.props;  
     
     return (
-      <FlatList 
+      <FlatList
+        key={section.title}
         data={section.data}
         renderItem={this._renderItem}
         keyExtractor={keyExtractor}
@@ -66,12 +81,6 @@ export default class ListScreen extends React.PureComponent {
       return this._renderList({ section: { data: itemList }, index: 0 })
   }
 }
-
-const borderWidth = 1;
-const maxWidth = 90;
-const columns = Math.floor((Layout.window.width - 2 * Layout.padding_regular) / maxWidth);
-
-const thumbWidth = (Layout.window.width - (columns + 1) * Layout.padding_regular - borderWidth * 2 * columns) / columns;
 
 
 const styles = StyleSheet.create({
