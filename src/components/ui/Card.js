@@ -22,17 +22,19 @@ export default class Card extends React.PureComponent {
     this.setState({ collapsed: !this.state.collapsed });
   }
   render() {
-    const { style, children, collapsedTitle, title } = this.props;
+    const { style, children, collapsedTitle, title, showTitleWhenOpened } = this.props;
     const { collapsed } = this.state;
 
     return (
       <View style={[styles.card, style]}>
-        { !collapsedTitle ? null :
+        { !title ? null :
           <Button style={styles.btnCollapse} viewStyle={styles.btnCollapseView} onPress={this._toggleCollapse}><Text pointerEvents='none'>{ collapsed ? '+' : '-' }</Text></Button>
         }
         <View>
-          { !title || collapsed ? null : <Text style={styles.title}>{title}</Text> }
-          { collapsed ? <Text>{collapsedTitle}</Text> : children }
+          { !title || !(showTitleWhenOpened || collapsed) ? null : 
+            <Text style={collapsed ? styles.collapsedTitle : styles.title}>{title}</Text>
+          }
+          { collapsed ? null : children }
 
         </View>
       </View>
@@ -43,10 +45,13 @@ export default class Card extends React.PureComponent {
 const btnPad = 10;
 const styles = StyleSheet.create({
   title: {
-    fontSize: 17,
-    color: Colors.dota_white,
+    fontSize: 16,
+    color: Colors.dota_red,
     marginBottom: Layout.padding_regular,
-    textAlign: 'center',
+  },
+  collapsedTitle: {
+    fontSize: 16,
+    color: Colors.dota_red,
   },
   btnCollapse: {
     position: 'absolute',

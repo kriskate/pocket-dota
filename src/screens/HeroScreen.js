@@ -43,21 +43,21 @@ export default class HeroScreen extends React.Component {
 
     return (
       <Container scrollable style={styles.container} >
-        <Card collapsedTitle='Hype and Stats'>
+        <Card title='Hype and Stats'>
           <Text style={styles.hype}>{hype}</Text>
 
           <Attributes attributes={attributes} tag={tag} />
         </Card>
 
-        <Card collapsedTitle='Abilities'>
+        <Card title='Abilities'>
           <Abilities abilities={abilities} />
         </Card>
 
-        <Card collapsedTitle='BIOGRAPHY' title='Biography'>
+        <Card title='Biography' showTitleWhenOpened>
           <Text>{bio}</Text>
         </Card>
 
-        <Card collapsedTitle='Recommended item build' title='Recommended item build'>
+        <Card title='Recommended item build' showTitleWhenOpened>
           <ItemBuild item_builds={item_builds} />
         </Card>
       </Container>
