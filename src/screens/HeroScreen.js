@@ -12,6 +12,7 @@ import ItemBuild from '../components/Hero/ItemBuild';
 import { ATTRIBUTES } from '../constants/Constants';
 
 import { headerStyle } from '../utils/screen';
+import { HTML } from '../components/Hero/AbilityPreview';
 
 
 export default class HeroScreen extends React.Component {
@@ -54,7 +55,8 @@ export default class HeroScreen extends React.Component {
         </Card>
 
         <Card title='Biography' showTitleWhenOpened>
-          <Text>{bio}</Text>
+          <HTML htmlContent={bio} style={{ backgroundColor: Colors.dota_ui1 }} />
+          {/* <Text>{bio}</Text> */}
         </Card>
 
         <Card title='Recommended item build' showTitleWhenOpened>

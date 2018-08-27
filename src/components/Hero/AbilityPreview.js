@@ -17,7 +17,7 @@ const alterNode = (node) => {
     return node;
   }
 }
-class HTML extends React.PureComponent {
+export class HTML extends React.PureComponent {
   render() {
     const { htmlContent, style } = this.props;
     let trimmedHtml = trimAbilities(htmlContent);
