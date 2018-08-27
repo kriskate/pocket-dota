@@ -1,9 +1,6 @@
 import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
-import { connect } from 'react-redux';
 
-
-import ButtonHamburger from '../components/ButtonHamburger';
 import { Text, Container, Card, ListThumb } from '../components/ui';
 import Layout from '../constants/Layout';
 import Colors from '../constants/Colors';
@@ -11,15 +8,12 @@ import { model_hero } from '../constants/Models';
 
 import Abilities from '../components/Hero/Abilities';
 import Attributes from '../components/Hero/Attributes';
-import { url } from '../constants/Data';
+import ItemBuild from '../components/Hero/ItemBuild';
 import { ATTRIBUTES } from '../constants/Constants';
 
 import { headerStyle } from '../utils/screen';
 
 
-@connect(state => ({
-  game_items: state.wiki.items
-}))
 export default class HeroScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     let primaryAttColor;
@@ -45,9 +39,7 @@ export default class HeroScreen extends React.Component {
 
   render() {
     const hero = model_hero(this.props.navigation.getParam('hero'));
-    const { name, bio, hype, tag, abilities, popular_items } = hero;
-    const { game_items } = this.props;
-
+    const { name, bio, hype, tag, abilities, item_builds } = hero;
 
     return (
       <Container scrollable style={styles.container} >
@@ -65,20 +57,8 @@ export default class HeroScreen extends React.Component {
           <Text>{bio}</Text>
         </Card>
 
-        <Card collapsedTitle='Popular items' title='Popular items'>
-          <View style={styles.popular_items}>
-            { popular_items.map(item_tag => {
-              const iTAG = item_tag.replace('item_', '');
-              const item = game_items.find(i => i.tag == iTAG);
-
-              return <ListThumb 
-                        key={iTAG} label={item.name}
-                        imgSource={{ uri: url.images.items(tag) }}
-                        imgSize={{ width: thumbSize, height: thumbSize/imgRatio }}
-                        cost={item.cost}
-                      />
-            }) }
-          </View>
+        <Card collapsedTitle='Recommended item build' title='Recommended item build'>
+          <ItemBuild item_builds={item_builds} />
         </Card>
       </Container>
     )
@@ -95,8 +75,4 @@ const styles = StyleSheet.create({
   
   hype: { marginBottom: Layout.padding_regular, },
 
-  popular_items: { 
-    flexDirection: 'row', flexWrap: 'wrap',
-    justifyContent: 'space-around',
-  },
 })

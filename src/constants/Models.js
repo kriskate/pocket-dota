@@ -78,17 +78,43 @@ export function model_item (item) {
   };
 }
 
+export function model_itembuild (build) {
+  const {
+    DOTA_Item_Build_Starting_Items,
+    DOTA_Item_Build_Starting_Items_Secondary,
+    DOTA_Item_Build_Early_Game,
+    DOTA_Item_Build_Early_Game_Secondary,
+    DOTA_Item_Build_Core_Items,
+    DOTA_Item_Build_Core_Items_Secondary,
+    DOTA_Item_Build_Mid_Items,
+    DOTA_Item_Build_Late_Items,
+    DOTA_Item_Build_Other_Items,
+    DOTA_Item_Build_Luxury,
+  } = build;
+  return {
+    DOTA_Item_Build_Starting_Items,
+    DOTA_Item_Build_Starting_Items_Secondary,
+    DOTA_Item_Build_Early_Game,
+    DOTA_Item_Build_Early_Game_Secondary,
+    DOTA_Item_Build_Core_Items,
+    DOTA_Item_Build_Core_Items_Secondary,
+    DOTA_Item_Build_Mid_Items,
+    DOTA_Item_Build_Late_Items,
+    DOTA_Item_Build_Other_Items,
+    DOTA_Item_Build_Luxury,
+  }
+}
 export function model_ability (ability) {
   const {
-    tag, name, description, lore,
-    img, affects, notes, 
-    attrib, cmb, IsGrantedByScepter, HasScepterUpgrade, 
+    tag, name, affects, description,
+    notes, attrib, cooldown, manacost,
+    lore, IsGrantedByScepter, HasScepterUpgrade
   } = ability;
 
-  return { 
-    tag, name, description, lore,
-    img, affects, notes, 
-    attrib, cmb, IsGrantedByScepter, HasScepterUpgrade, 
+  return {
+    tag, name, affects, description,
+    notes, attrib, cooldown, manacost,
+    lore, IsGrantedByScepter, HasScepterUpgrade
   }
 }
 export function model_talent (talent) {
