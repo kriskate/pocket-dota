@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 1,
     borderRadius: 5,
-    borderColor: Colors.dota_ui1,
+    borderColor: Colors.dota_ui3,
   },
   thumbTextWrapper: {
     padding: 2,

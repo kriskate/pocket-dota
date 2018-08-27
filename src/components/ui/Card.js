@@ -64,11 +64,11 @@ const styles = StyleSheet.create({
   card: {
 
     backgroundColor: Colors.dota_ui1,
-    borderColor: Colors.dota_ui2,
+    borderColor: Colors.dota_ui3,
     borderWidth: 1,
     padding: Layout.padding_regular,
     marginHorizontal: Layout.padding_regular,
-    marginVertical: Layout.padding_regular/2,
+    marginVertical: Layout.padding_small,
     ...Platform.select({
       ios: {
         shadowColor: 'rgba(0,0,0, .2)',
