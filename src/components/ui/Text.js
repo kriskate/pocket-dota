@@ -8,7 +8,7 @@ export default ({ style, children, labelBottom }) => (
 
 const styles = StyleSheet.create({
   text: {
-    color: Colors.dota_red_light,
+    color: Colors.dota_white,
   },
   labelBottom: {
     textAlign: 'center',
