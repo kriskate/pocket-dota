@@ -10,6 +10,8 @@ import ListScreen from '../components/ListScreen';
 import Layout from '../constants/Layout';
 import { url } from '../constants/Data';
 import { model_section } from '../constants/Models';
+import Colors from '../constants/Colors';
+import { parseCategory } from '../utils/utils';
 
 
 
@@ -31,7 +33,10 @@ export default class Itemscreen extends React.Component {
       const { category } = item;
       let section = itemSections.find(({ title }) => title == category);
       if(!section) {
-        section = new model_section({ category });
+        section = new model_section({ 
+          title: category,
+          color: Colors.items[parseCategory(category)],
+        });
         itemSections.push(section);
       }
 

@@ -1,10 +1,7 @@
-import Colors from "./Colors";
-import { parseCategory } from "../utils/utils";
-
-export const model_section = ({ category }) => ({
-  title: category,
-  color: Colors.items[parseCategory(category)],
-  data: [],
+export const model_section = ({ title, color, data=[] }) => ({
+  title,
+  color,
+  data,
 });
 
 
@@ -34,6 +31,7 @@ export function model_odota (data) {
     account_id, avatarfull, last_match_time, personaname,
   }
 }
+
 
 export const model_item_bonuses = (bonuses) => {
   const {
