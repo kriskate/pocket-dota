@@ -9,16 +9,16 @@ const ERRORS = {
 
 
 /* GET/SET items */
-export const setItem = async (key, value, namespace='localdata') => {
+export const setItem = async (key, value) => {
   try {
-    await AsyncStorage.setItem(`@${namespace}:${key}`, JSON.stringify(value));
+    await AsyncStorage.setItem(`@localdata:${key}`, JSON.stringify(value));
   } catch (e) {
     Logger.log(ERRORS.SET(key, e));
   }
 }
 export const getItem = async (key) => {
   try {
-    const val = await AsyncStorage.getItem(`@${namespace}:${key}`);
+    const val = await AsyncStorage.getItem(`@localdata:${key}`);
     return val ? JSON.parse(val) : undefined;
   } catch (e) {
     Logger.log(ERRORS.GET(key, e));
