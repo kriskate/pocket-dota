@@ -55,11 +55,14 @@ export default class ItemScreen extends React.PureComponent {
     const color = Colors.items[_cat];
     
     return {
-      title: navigation.getParam('item').name,
       ...headerStyle,
-      headerTitleStyle: {
-        color,
-      },
+      headerTitle: (
+        <View style={{ justifyContent: 'center', alignItems: 'center', }}>
+          <Text adjustsFontSizeToFit style={{ fontSize: 17, fontWeight: 'bold', color }}>
+            {navigation.getParam('item').name}
+          </Text>
+        </View>
+      ),
     }
   };
 
@@ -105,8 +108,8 @@ export default class ItemScreen extends React.PureComponent {
           </View>
         </View>
 
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Text>Can be dissasembled:</Text>
+        <View style={styles.category}>
+          <Text>Can be dissasembled: </Text>
           <Text style={{
                 fontWeight: 'bold', color: dissasemble == "Yes" ? Colors.dota_radiant : Colors.dota_dire, 
               }}>
