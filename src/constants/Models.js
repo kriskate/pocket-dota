@@ -63,7 +63,7 @@ export function model_item (item) {
   const {
     tag,
     name, description, notes, lore,
-    cost, mc, cd, attrib,
+    cost, manacost, cooldown, attrib,
     category, components,
     npc,
     bonuses,
@@ -71,7 +71,7 @@ export function model_item (item) {
   return {
     tag,
     name, description, notes, lore,
-    cost, mc, cd, attrib,
+    cost, manacost, cooldown, attrib,
     category, components,
     npc,
     bonuses,
