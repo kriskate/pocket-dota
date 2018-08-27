@@ -27,7 +27,7 @@ export default class ListScreen extends React.PureComponent {
   }
   _renderItem = ({ item }) => {
     const { navTo, imageExtractor, labelExtractor, navigation, imageAspectRatio } = this.props;
-    const onPress = () => navigation.navigate(navTo, { item });
+    const onPress = () => navigation.navigate(navTo, { data: item });
     const imgSource = { uri: imageExtractor(item) };
     const imgSize = { width: thumbWidth, height: thumbWidth/imageAspectRatio };
     const label = labelExtractor(item);

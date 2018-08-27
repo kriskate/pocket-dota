@@ -17,8 +17,10 @@ import { HTML } from '../components/Hero/AbilityPreview';
 
 export default class HeroScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
+    const hero = model_hero(navigation.getParam('data'));
+
     let primaryAttColor;
-    switch(navigation.getParam('hero').attributes.AttributePrimary) {
+    switch(hero.attributes.AttributePrimary) {
       case ATTRIBUTES.agility:
         primaryAttColor = Colors.dota_agi;
         break;
@@ -30,7 +32,7 @@ export default class HeroScreen extends React.Component {
         break;
     }
     return {
-      title: navigation.getParam('hero').name,
+      title: hero.name,
       ...headerStyle,
       headerTitleStyle: {
         color: primaryAttColor,
@@ -39,7 +41,7 @@ export default class HeroScreen extends React.Component {
   };
 
   render() {
-    const hero = model_hero(this.props.navigation.getParam('hero'));
+    const hero = model_hero(this.props.navigation.getParam('data'));
     const { name, bio, hype, tag, abilities, item_builds } = hero;
 
     return (

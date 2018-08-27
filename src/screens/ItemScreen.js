@@ -50,7 +50,7 @@ class HTML extends React.PureComponent {
 
 export default class ItemScreen extends React.PureComponent {
   static navigationOptions = ({ navigation }) => {
-    const { category, name } = navigation.getParam('item');
+    const { category, name } = navigation.getParam('data');
     const _cat = parseCategory(category);
     const color = Colors.items[_cat];
     
@@ -59,7 +59,7 @@ export default class ItemScreen extends React.PureComponent {
       headerTitle: (
         <View style={{ justifyContent: 'center', alignItems: 'center', }}>
           <Text adjustsFontSizeToFit style={{ fontSize: 17, fontWeight: 'bold', color, textAlign: 'center', }}>
-            {navigation.getParam('item').name}
+            {name}
           </Text>
         </View>
       ),
@@ -68,7 +68,7 @@ export default class ItemScreen extends React.PureComponent {
 
 
   render() {
-    const item = model_item(this.props.navigation.getParam('item'));
+    const item = model_item(this.props.navigation.getParam('data'));
 
     const { 
       tag,
