@@ -1,6 +1,11 @@
 import React from 'react'
-import { View, Platform, TouchableNativeFeedback, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Platform, TouchableNativeFeedback, TouchableOpacity, StyleSheet, Text } from 'react-native'
+import Colors from '../../constants/Colors';
+import Layout from '../../constants/Layout';
 
+
+const Title = ({ title, disabled, style }) => !title ? null :
+  <Text style={[styles.title, style, disabled && styles.disabledTitle]}>{title}</Text>
 export default class Button extends React.Component {
   static defaultProps = {
     borderless: false,
@@ -9,21 +14,31 @@ export default class Button extends React.Component {
   
   render() {
     // android lollipop
-    const { pressColor, borderless, onPress, style, viewStyle, children } = this.props;
+    const {
+      onPress,
+      pressColor, borderless, style, viewStyle, titleStyle,
+      children, title,
+      disabled, prestyled,
+    } = this.props;
 
     if (Platform.OS === 'android' && Platform.Version >= 21) {
       return (
-        <View style={[styles.touch, style]}>
-          <TouchableNativeFeedback onPress={onPress} useForeground
+        <View style={[styles.touch, style, prestyled && styles.prestyled, disabled && styles.disabled]}>
+          <TouchableNativeFeedback onPress={onPress} useForeground disabled={disabled}
               background={TouchableNativeFeedback.Ripple(pressColor, borderless)}>
-            <View style={[styles.button, viewStyle]}>{children}</View>
+            <View style={[styles.button, viewStyle]}>
+              <Title title={title} disabled={disabled} />
+              {children}
+            </View>
           </TouchableNativeFeedback>
         </View>
       );
     } else {
       return (
-        <TouchableOpacity onPress={onPress} style={[styles.touch, style]}>
+        <TouchableOpacity onPress={onPress} style={[styles.touch, style, prestyled && styles.prestyled, disabled && styles.disabled]}
+            disabled={disabled}>
           <View style={[styles.button, viewStyle]}>
+            <Title title={title} disabled={disabled} style={titleStyle} />
             {children}
           </View>
         </TouchableOpacity>
@@ -32,8 +47,26 @@ export default class Button extends React.Component {
   }
 }
 
-
 const styles = StyleSheet.create({
+  prestyled: {
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: Colors.dota_ui1,
+    marginVertical: Layout.padding_small,
+    marginHorizontal: Layout.padding_regular,
+    padding: Layout.padding_regular,
+    backgroundColor: Colors.dota_red_dark,
+  },
+
+  title: {
+    color: Colors.dota_white,
+  },
+  disabledTitle: {
+    color: Colors.dota_ui1,
+  },
+  disabled: {
+    backgroundColor: Colors.disabled,
+  },
   button: {
     alignItems: 'center',
     justifyContent: 'center',

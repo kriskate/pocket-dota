@@ -22,6 +22,7 @@ export default {
   dota_black: '#000',
   gold: '#FFD700',
   goldenrod: '#DAA520',
+  disabled: '#777777',
 
 
   tintColor,
