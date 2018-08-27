@@ -27,6 +27,9 @@ export default class ItemBuild extends React.Component {
       //!data-point - add try catch
       item_builds[moment].forEach(npc_tag => {
         if(npc_tag == 'item_dagon_5') npc_tag = 'item_dagon';
+        if(npc_tag == 'item_necronomicon_3') npc_tag = 'item_necronomicon';
+        if(npc_tag == 'item_travel_boots_2') npc_tag = 'item_travel_boots';
+
         const item = game_items.find(({ tag }) => tag == npc_tag.replace('item_', ''));
         section.data.push(item);
       });

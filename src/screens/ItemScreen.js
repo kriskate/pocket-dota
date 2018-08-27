@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Text } from '../components/ui';
+import { Container, Text, Card } from '../components/ui';
 
 import { headerStyle } from '../utils/screen';
 import { model_item, model_item_npc, model_item_bonuses } from '../constants/Models';
@@ -13,8 +13,8 @@ import { trimAbilities, parseCategory } from '../utils/utils';
 import { ITEM_CONSTANTS } from '../constants/Constants';
 
 const removeSpace = (str) => str.replace(/\+ \<span/g, '+<span')
-const removeH1 = (str) => str.replace(/\<h1/g, `<span style="color:${Colors.dota_radiant};font-weight:bold;"`)
-      .replace(/\/h1/g, '/span')
+const removeH1 = (str) => str.replace(/\<h1/g, `<br/><span style="color:${Colors.dota_radiant};font-weight:bold;"`)
+      .replace(/\/h1>/g, '/span><br/>')
 const alterHtml = (str) => trimAbilities(removeSpace(removeH1(str)))
 
 const alterNode = (node) => {
@@ -35,8 +35,8 @@ class HTML extends React.PureComponent {
 
     return !trimmedHtml ? null : (
       <RenderHTML containerStyle={[styles.html, style]}
-      alterData={({parent, data}) => 
-        parent && parent.name === 'span' && data + ' '
+        alterData={({parent, data}) => 
+          parent && parent.name === 'span' && data + ' '
       }
       alterNode={alterNode}
       classesStyles={classesStyles}
@@ -58,7 +58,7 @@ export default class ItemScreen extends React.PureComponent {
       ...headerStyle,
       headerTitle: (
         <View style={{ justifyContent: 'center', alignItems: 'center', }}>
-          <Text adjustsFontSizeToFit style={{ fontSize: 17, fontWeight: 'bold', color }}>
+          <Text adjustsFontSizeToFit style={{ fontSize: 17, fontWeight: 'bold', color, textAlign: 'center', }}>
             {navigation.getParam('item').name}
           </Text>
         </View>
@@ -66,13 +66,14 @@ export default class ItemScreen extends React.PureComponent {
     }
   };
 
+
   render() {
     const item = model_item(this.props.navigation.getParam('item'));
 
     const { 
       tag,
       name, description, notes, lore,
-      cost, mc, cd, attrib,
+      cost, manacost, cooldown, attrib,
       category, components,
     } = item;
     const npc = model_item_npc(item.npc);
@@ -83,57 +84,61 @@ export default class ItemScreen extends React.PureComponent {
     const _category = parseCategory(category);
 
     return (
-      <Container padInner scrollable>
+      <Container scrollable>
 
 
-        <View style={styles.rowImage}>
-
+        <Card style={{ marginHorizontal: 0 }}>
           <View style={styles.loreAndImage}>
             <Text style={styles.lore}>{lore}</Text>
             <Image style={styles.image} source={{ uri: url.images.items(tag) }} />
           </View>
+        </Card>
 
-          <View style={styles.props}>
-            <Prop text={mc}>
-              <Image source={assets.game.mana} />
-            </Prop>
-            <Prop text={cd}>
-              <Image source={assets.game.cooldown} />
-            </Prop>
-            <View style={styles.cost}>
-              <Text style={styles.costText}>Cost: </Text>
-              <Image source={assets.game.gold} />
-              <Text style={styles.costText}> {cost}</Text>
-            </View>
+
+        <Card style={styles.stats}>
+
+          <View style={styles.stat}>
+            <Text style={styles.costText}>Cost: </Text>
+            <Image source={assets.game.gold} />
+            <Text style={styles.costText}> {cost}</Text>
           </View>
-        </View>
 
-        <View style={styles.category}>
-          <Text>Can be dissasembled: </Text>
-          <Text style={{
-                fontWeight: 'bold', color: dissasemble == "Yes" ? Colors.dota_radiant : Colors.dota_dire, 
-              }}>
-            {dissasemble}
-          </Text>
-        </View>
+          <Prop text={manacost} textStyle={{ color: Colors.dota_int }}>
+            <Image source={assets.game.mana} />
+          </Prop>
+          <Prop text={cooldown} textStyle={{ color: Colors.disabled }}>
+            <Image source={assets.game.cooldown} />
+          </Prop>
 
-        <View style={styles.category}>
-          <Text>Item category: </Text>
-          <Text style={[styles.textHighlight, {color: Colors.items[_category]} ]}>
-            {category}
-          </Text>
-        </View>
+          <View style={styles.stat}>
+            <Text>Can be dissasembled: </Text>
+            <Text style={{
+                  fontWeight: 'bold', color: dissasemble == "Yes" ? Colors.dota_radiant : Colors.dota_dire, 
+                }}>
+              {dissasemble}
+            </Text>
+          </View>
+
+          <View style={styles.stat}>
+            <Text>Item category: </Text>
+            <Text style={[styles.textHighlight, {color: Colors.items[_category]} ]}>
+              {category}
+            </Text>
+          </View>
+          <HTML htmlContent={attrib} style={styles.attrib} />
+        </Card>
 
         
-        <HTML htmlContent={attrib} style={styles.attrib} />
 
-
-        <HTML htmlContent={description} style={styles.description} />
+        <Card>
+          <HTML htmlContent={description} style={styles.description} />
+        </Card>
         
 
         { !notes ? null :
           <View style={styles.notes}>
-            <HTML htmlContent={notes.trim()} />
+            <Text style={styles.notesText}>Notes:</Text>
+            <HTML htmlContent={notes.trim()} style={styles.notesHTML} />
           </View>
         }
 
@@ -144,17 +149,24 @@ export default class ItemScreen extends React.PureComponent {
   }
 }
 
-const Prop = ({ children, style, text, }) => !text ? null : (
-  <View style={[styles.cdm, style]}>
+const Prop = ({ children, style, text, textStyle, }) => !text ? null : (
+  <View style={[styles.stat, style]}>
+    <Text style={textStyle}> {text} </Text>
     {children}
-    { !text ? null : <Text style={styles.cdmText}> {text} </Text> }
   </View>
 )
 
 const styles = StyleSheet.create({
-  rowImage: {
-    padding: Layout.padding_regular,
-    backgroundColor: Colors.dota_ui1,
+
+  textHighlight: {
+    fontWeight: 'bold',
+  },
+
+
+  loreAndImage: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
   },
   lore: {
     backgroundColor: Colors.dota_red_darker,
@@ -164,64 +176,62 @@ const styles = StyleSheet.create({
     marginRight: Layout.padding_regular,
     flex: 1,
   },
-  loreAndImage: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-  },
   image: {
+    borderColor: Colors.dota_ui2,
+    borderWidth: 1,
     width: 88,
     height: 64,
   },
 
 
-  props: {
-    marginTop: Layout.padding_regular,
-    padding: Layout.padding_small,
-    flexDirection: 'row',
+  stats: {
+    backgroundColor: Colors.dota_ui1+'70',
+    padding: 0,
+    paddingTop: Layout.padding_regular,
   },
-  cdm: {
-    flexDirection: 'row',
+  stat: {
     alignItems: 'center',
-  },
-  cdmText: {
-    color: Colors.dota_white,
-  },
-  cost: {
+    justifyContent: 'flex-end',
     flexDirection: 'row',
-    alignItems: 'center',
-    marginLeft: 'auto',
-    right: 0,
+    marginBottom: Layout.padding_small,
+    marginRight: Layout.padding_regular,
   },
+  
   costText: {
     color: Colors.gold,
   },
 
-  description: {
-    backgroundColor: Colors.dota_ui1,
-  },
   attrib: {
+    padding: Layout.padding_regular,
+    backgroundColor: Colors.dota_ui1+'70',
+    borderColor: Colors.dota_ui1,
+    borderWidth: 1,
+  },
+
+
+  description: {
 
   },
+
+  
   notes: {
     backgroundColor: Colors.dota_ui1,
+    marginVertical: Layout.padding_small,
   },
-
-  category: {
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: Layout.padding_small,
-    flexDirection: 'row',
-  },
-
-  textHighlight: {
+  notesText: {
+    marginLeft: Layout.padding_regular,
+    marginTop: Layout.padding_regular,
+    color: Colors.dota_radiant,
     fontWeight: 'bold',
   },
+  notesHTML: {
+    paddingTop: 0,
+  },
+
+
 
 
   html: {
-    marginVertical: 5,
     flexDirection: 'row',
-    padding: Layout.padding_small,
   },
 })
