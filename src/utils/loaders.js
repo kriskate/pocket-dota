@@ -1,5 +1,5 @@
 import { Image } from 'react-native';
-import { Asset, Font, Icon, FileSystem } from 'expo';
+import { Asset, Font, Icon, FileSystem, Util } from 'expo';
 import Logger from './Logger';
 import { model_profile, model_wiki } from '../constants/Models';
 import { folder_data } from './downloaders';
@@ -40,6 +40,8 @@ export const loadProfileStateFromStorage = async () => {
 // used for testing purposes 
 export const removeWiki = async () => {
   await FileSystem.deleteAsync(folder_data, { idempotent: true });
+
+  Util.reload();
 }
 
 export const loadWiki = async () => {
