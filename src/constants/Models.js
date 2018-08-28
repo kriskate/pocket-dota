@@ -64,7 +64,7 @@ export function model_item (item) {
     tag,
     name, description, notes, lore,
     cost, manacost, cooldown, attrib,
-    category, components,
+    category, components, recipeCost,
     npc,
     bonuses,
   } = item;
@@ -72,7 +72,7 @@ export function model_item (item) {
     tag,
     name, description, notes, lore,
     cost, manacost, cooldown, attrib,
-    category, components,
+    category, components, recipeCost,
     npc,
     bonuses,
   };

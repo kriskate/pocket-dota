@@ -16,9 +16,11 @@ export default class ListThumb extends React.PureComponent {
       <Button onPress={onPress} pressColor={Colors.dota_red_darker}>
         <View style={styles.thumb}>
           <Image style={imgSize} source={imgSource} />
-          <View style={[styles.thumbTextWrapper, {width}]}>
-            <Text style={styles.thumbText}>{label}</Text>
-          </View>
+          { !label ? null :
+            <View style={[styles.thumbTextWrapper, {width}]}>
+              <Text adjustsFontSizeToFit style={styles.thumbText}>{label}</Text>
+            </View>
+          }
         </View>
         {!cost ? null : 
           <View style={styles.price}>
@@ -54,7 +56,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 12,
     textAlign: 'center',
-    
-    color: Colors.dota_white,
+  },
+
+  price: {
+    flexDirection: 'row',
+  },
+  priceTxt: {
+    color: Colors.gold,
   },
 })

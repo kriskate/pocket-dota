@@ -26,15 +26,16 @@ export default class ListScreen extends React.PureComponent {
     getLayout(props.layoutWidth);
   }
   _renderItem = ({ item }) => {
-    const { navTo, imageExtractor, labelExtractor, navigation, imageAspectRatio } = this.props;
+    const { navTo, imageExtractor, labelExtractor, costExtractor, navigation, imageAspectRatio } = this.props;
     const onPress = () => navigation.navigate(navTo, { data: item });
     const imgSource = { uri: imageExtractor(item) };
+    const cost = costExtractor && costExtractor(item);
     const imgSize = { width: thumbWidth, height: thumbWidth/imageAspectRatio };
     const label = labelExtractor(item);
   
     return (
       <ListThumb 
-        item={item} 
+        cost={cost}
         imgSource={imgSource} imgSize={imgSize}
         label={label} 
         onPress={onPress}

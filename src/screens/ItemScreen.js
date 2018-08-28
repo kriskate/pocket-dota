@@ -74,7 +74,7 @@ export default class ItemScreen extends React.PureComponent {
       tag,
       name, description, notes, lore,
       cost, manacost, cooldown, attrib,
-      category, components,
+      category, components, hasRecipe,
     } = item;
     const npc = model_item_npc(item.npc);
     const { ItemDisassembleRule } = npc;
