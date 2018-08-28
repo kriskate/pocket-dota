@@ -22,7 +22,7 @@ export default class Card extends React.PureComponent {
     this.setState({ collapsed: !this.state.collapsed });
   }
   render() {
-    const { style, children, collapsedTitle, title, showTitleWhenOpened } = this.props;
+    const { style, children, collapsedTitle, title, showTitleWhenOpened, viewStyle } = this.props;
     const { collapsed } = this.state;
 
     return (
@@ -30,7 +30,7 @@ export default class Card extends React.PureComponent {
         { !title ? null :
           <Button style={styles.btnCollapse} viewStyle={styles.btnCollapseView} onPress={this._toggleCollapse}><Text pointerEvents='none'>{ collapsed ? '+' : '-' }</Text></Button>
         }
-        <View>
+        <View style={viewStyle}>
           { !title || !(showTitleWhenOpened || collapsed) ? null : 
             <Text style={collapsed ? styles.collapsedTitle : styles.title}>{title}</Text>
           }
