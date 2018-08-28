@@ -20,7 +20,6 @@ export default class ItemComponents extends React.PureComponent {
       height: 1,
     },
     thumbs: {
-      recipe: {},
     },
   }
   _onLayoutThumb = (component, e) => {
@@ -69,8 +68,6 @@ export default class ItemComponents extends React.PureComponent {
     const { components, recipeCost, tag, name } = current_item;
     const { width, height } = this.state.svg;
     
-    const recipeX = this.state.thumbs.recipe.x;
-    const recipeWidth = this.state.thumbs.recipe.width;
     const svg = this._getSVG();
 
     return (
@@ -87,34 +84,26 @@ export default class ItemComponents extends React.PureComponent {
           viewBox={`0 0 ${width} ${height}`}
         >
           <Line {...svg.line} {...svg.line1} />
-          { components.map(component => {
-            if(!this.state.thumbs[component]) return;
+          { Object.keys(this.state.thumbs).map(component => {
+            const { x, width } = this.state.thumbs[component];
 
-            const { x, width } = this.state.thumbs[component]
             return [
-              <Line key={component + '_horizontal'} {...svg.line}
+              <Line key={x.toString() + '_horizontal'} {...svg.line}
                 {...svg.horizontal(x + width/2)} />,
-              <Line key={component + '_vertical'} {...svg.line}
+              <Line key={x.toString() + '_vertical'} {...svg.line}
                 {...svg.vertical(x + width/2)} />
             ]
           })}
-          { !recipeCost || recipeCost == "0" || !recipeX ? null : [
-              <Line key={'recipe' + '_horizontal'} {...svg.line}
-                {...svg.horizontal(recipeX + recipeWidth/2)} />,
-              <Line key={'recipe' + '_vertical'} {...svg.line}
-                {...svg.vertical(recipeX + recipeWidth/2)} />
-            ]
-          }
         </Svg>
 
 
         <View style={styles.container}>
-          { components.map(component => {
+          { components.map((component, idx) => {
             const item = items.find(({ tag }) => tag == component.replace('item_', ''));
             const { tag, cost, name } = item;
 
             return (
-              <ListThumb key={tag} onLayout={(e) => this._onLayoutThumb(component, e)}
+              <ListThumb key={tag + idx} onLayout={(e) => this._onLayoutThumb(tag+idx, e)}
                 cost={cost}
                 imgSource={{ uri: url.images.items(tag) }}
                 imgSize={{ width: thumbWidth, height: thumbWidth/imgRatio }}
