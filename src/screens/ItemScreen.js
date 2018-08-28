@@ -87,11 +87,9 @@ export default class ItemScreen extends React.PureComponent {
       <Container scrollable>
 
 
-        <Card style={{ marginHorizontal: 0 }}>
-          <View style={styles.loreAndImage}>
-            <Text style={styles.lore}>{lore}</Text>
-            <Image style={styles.image} source={{ uri: url.images.items(tag) }} />
-          </View>
+        <Card style={{ marginHorizontal: 0 }} viewStyle={styles.loreAndImage}>
+          <Text style={styles.lore}>{lore}</Text>
+          <Image style={styles.image} source={{ uri: url.images.items(tag) }} />
         </Card>
 
 
@@ -102,13 +100,6 @@ export default class ItemScreen extends React.PureComponent {
             <Image source={assets.game.gold} />
             <Text style={styles.costText}> {cost}</Text>
           </View>
-
-          <Prop text={manacost} textStyle={{ color: Colors.dota_int }}>
-            <Image source={assets.game.mana} />
-          </Prop>
-          <Prop text={cooldown} textStyle={{ color: Colors.disabled }}>
-            <Image source={assets.game.cooldown} />
-          </Prop>
 
           <View style={styles.stat}>
             <Text>Can be dissasembled: </Text>
@@ -129,17 +120,28 @@ export default class ItemScreen extends React.PureComponent {
         </Card>
 
         
-
-        <Card>
-          <HTML htmlContent={description} style={styles.description} />
-        </Card>
+        { !description ? null :
+          <Card>
+            { !manacost && !cooldown ? null :
+              <View style={styles.mcd}>
+                <Prop text={manacost} textStyle={{ color: Colors.dota_int }}>
+                  <Image source={assets.game.mana} />
+                </Prop>
+                <Prop text={cooldown} textStyle={{ color: Colors.disabled }}>
+                  <Image source={assets.game.cooldown} />
+                </Prop>
+              </View>
+            }
+            <HTML htmlContent={description} />
+          </Card>
+        }
         
 
         { !notes ? null :
-          <View style={styles.notes}>
+          <Card>
             <Text style={styles.notesText}>Notes:</Text>
             <HTML htmlContent={notes.trim()} style={styles.notesHTML} />
-          </View>
+          </Card>
         }
 
 
@@ -149,10 +151,10 @@ export default class ItemScreen extends React.PureComponent {
   }
 }
 
-const Prop = ({ children, style, text, textStyle, }) => !text ? null : (
-  <View style={[styles.stat, style]}>
-    <Text style={textStyle}> {text} </Text>
+const Prop = ({ children, text, textStyle, }) => !text || text == "0" ? null : (
+  <View style={[styles.mcdprop]}>
     {children}
+    <Text style={textStyle}> {text} </Text>
   </View>
 )
 
@@ -196,6 +198,19 @@ const styles = StyleSheet.create({
     marginBottom: Layout.padding_small,
     marginRight: Layout.padding_regular,
   },
+  mcd: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    borderColor: Colors.dota_ui2,
+    borderBottomWidth: 1,
+    marginBottom: Layout.padding_regular,
+    paddingBottom: Layout.padding_small,
+  },
+  mcdprop: {
+    marginLeft: Layout.padding_big,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   
   costText: {
     color: Colors.gold,
@@ -208,19 +223,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
 
-
-  description: {
-
-  },
-
   
-  notes: {
-    backgroundColor: Colors.dota_ui1,
-    marginVertical: Layout.padding_small,
-  },
   notesText: {
-    marginLeft: Layout.padding_regular,
-    marginTop: Layout.padding_regular,
     color: Colors.dota_radiant,
     fontWeight: 'bold',
   },
