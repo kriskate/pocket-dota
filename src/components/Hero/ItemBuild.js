@@ -30,8 +30,11 @@ export default class ItemBuild extends React.Component {
         else if(npc_tag == 'item_necronomicon_3') npc_tag = 'item_necronomicon';
         else if(npc_tag == 'item_travel_boots_2') npc_tag = 'item_travel_boots';
         else if(npc_tag == 'item_refresher_orb') npc_tag = 'item_refresher';
+        else if(npc_tag == 'item_shadow_blade') npc_tag = 'item_invis_sword';
+        else if(npc_tag == 'item_veil_of_dicord') npc_tag = 'item_veil_of_discord';
 
         const item = game_items.find(({ tag }) => tag == npc_tag.replace('item_', ''));
+        if(!item) console.log(npc_tag)
         section.data.push(item);
       });
     });
