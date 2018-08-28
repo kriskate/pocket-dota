@@ -26,7 +26,7 @@ export default class Card extends React.PureComponent {
     const { collapsed } = this.state;
 
     return (
-      <View style={[styles.card, style]}>
+      <View {...this.props} style={[styles.card, style]}>
         { !title ? null :
           <Button style={styles.btnCollapse} viewStyle={styles.btnCollapseView} onPress={this._toggleCollapse}><Text pointerEvents='none'>{ collapsed ? '+' : '-' }</Text></Button>
         }

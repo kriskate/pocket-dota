@@ -10,10 +10,10 @@ import { assets } from '../../constants/Data';
 export default class ListThumb extends React.PureComponent {
   render() {
     // cost is only used for items
-    const { onPress, imgSource, imgSize, label, width, cost } = this.props;
+    const { onLayout, onPress, imgSource, imgSize, label, width, cost } = this.props;
 
     return (
-      <Button onPress={onPress} pressColor={Colors.dota_red_darker}>
+      <Button onLayout={onLayout} onPress={onPress} pressColor={Colors.dota_red_darker}>
         <View style={styles.thumb}>
           <Image style={imgSize} source={imgSource} />
           { !label ? null :

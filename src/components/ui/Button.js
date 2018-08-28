@@ -19,11 +19,13 @@ export default class Button extends React.Component {
       pressColor, borderless, style, viewStyle, titleStyle,
       children, title,
       disabled, prestyled,
+      onLayout,
     } = this.props;
 
     if (Platform.OS === 'android' && Platform.Version >= 21) {
       return (
-        <View style={[styles.touch, style, prestyled && styles.prestyled, disabled && styles.disabled]}>
+        <View style={[styles.touch, style, prestyled && styles.prestyled, disabled && styles.disabled]}
+        onLayout={onLayout}>
           <TouchableNativeFeedback onPress={onPress} useForeground disabled={disabled}
               background={TouchableNativeFeedback.Ripple(pressColor, borderless)}>
             <View style={[styles.button, viewStyle]}>
@@ -36,7 +38,8 @@ export default class Button extends React.Component {
     } else {
       return (
         <TouchableOpacity onPress={onPress} style={[styles.touch, style, prestyled && styles.prestyled, disabled && styles.disabled]}
-            disabled={disabled}>
+            disabled={disabled}
+            onLayout={onLayout}>
           <View style={[styles.button, viewStyle]}>
             <Title title={title} disabled={disabled} style={titleStyle} />
             {children}
