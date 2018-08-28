@@ -38,7 +38,7 @@ export default class ItemComponents extends React.PureComponent {
         width: e.nativeEvent.layout.width,
         height: e.nativeEvent.layout.height,
 
-        x_start: e.nativeEvent.layout.width/2,
+        x_start: e.nativeEvent.layout.width/2 - (Layout.padding_regular + 1),
         y_start: thumbHeight + Layout.padding_small, // thumb height and margin
         y_mid: thumbHeight + Layout.padding_small + Layout.padding_big,
         y_end: thumbHeight + Layout.padding_small + Layout.padding_big + Layout.padding_big,
