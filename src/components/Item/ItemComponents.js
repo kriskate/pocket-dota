@@ -7,9 +7,11 @@ import { StyleSheet, View } from 'react-native';
 import { Svg } from 'expo';
 import Layout from '../../constants/Layout';
 import Colors from '../../constants/Colors';
+import { withNavigation } from 'react-navigation';
+import { SCREEN_LABELS_HIDDEN } from '../../constants/Constants';
 const { Line,} = Svg;
 
-
+@withNavigation
 @connect(state => ({
   items: state.wiki.items,
 }))
@@ -64,7 +66,7 @@ export default class ItemComponents extends React.PureComponent {
     }
   }
   render() {
-    const { current_item, items } = this.props;
+    const { current_item, items, navigation } = this.props;
     const { components, recipeCost, tag, name } = current_item;
     const { width, height } = this.state.svg;
     
@@ -107,7 +109,7 @@ export default class ItemComponents extends React.PureComponent {
                 cost={cost}
                 imgSource={{ uri: url.images.items(tag) }}
                 imgSize={{ width: thumbWidth, height: thumbWidth/imgRatio }}
-                // onPress={onPress}
+                onPress={() => navigation.navigate(SCREEN_LABELS_HIDDEN.ITEM, { data: item })}
                 width={thumbWidth}
               />
             )
