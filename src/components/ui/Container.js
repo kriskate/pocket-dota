@@ -18,7 +18,11 @@ export default class Container extends React.Component {
   }
 
   onBackButtonPressAndroid = () => {
-    return this.props.navigation.navigate(SCREEN_LABELS.HOME);
+    if(this.props.navigation.isFocused()) {
+      this.props.navigation.navigate(SCREEN_LABELS.HOME);
+      return true;
+    }
+    return false
   }
 
   render() {
