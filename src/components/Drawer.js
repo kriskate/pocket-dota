@@ -12,6 +12,7 @@ import Layout from '../constants/Layout';
 const ListItem = ({ label, navigation, selected }) => (
   <Button viewStyle={[styles.item, selected && styles.selectedItem]} 
       onPress={() => {
+        if(selected) navigation.closeDrawer()
         else {
           const navigateAction = NavigationActions.navigate({
             routeName: label,
