@@ -47,6 +47,6 @@ export default {
     weapons: "#A83806",
     armor: "#598307",
     artifacts: "#E29B01",
-    secret_shop: "#FFFFFF",
+    secret_shop: "#d6d6d6",
   }
 };
