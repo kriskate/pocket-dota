@@ -1,5 +1,5 @@
 import React from 'react';
-import { DrawerItems } from 'react-navigation';
+import { NavigationActions } from 'react-navigation';
 import { ScrollView, StyleSheet, View, Image } from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 
@@ -9,9 +9,18 @@ import Colors from '../constants/Colors';
 import { assets } from '../constants/Data';
 import Layout from '../constants/Layout';
 
-const ListItem = ({ label, navigate, selected }) => (
+const ListItem = ({ label, navigation, selected }) => (
   <Button viewStyle={[styles.item, selected && styles.selectedItem]} 
-      onPress={() => !selected && navigate(label)} >
+      onPress={() => {
+        else {
+          const navigateAction = NavigationActions.navigate({
+            routeName: label,
+            action: NavigationActions.navigate({ routeName: label }),
+          });
+
+          navigation.dispatch(navigateAction);
+        }
+      } }>
     <Text style={styles.label}>{ label }</Text>
   </Button>
 )
@@ -26,7 +35,7 @@ export default class Drawer extends React.Component {
   }
   
   render() {
-    const { navigate } = this.props.navigation;
+    const { navigation } = this.props;
 
     return (
       <Container scrollable>
@@ -39,7 +48,7 @@ export default class Drawer extends React.Component {
         { Object.keys(SCREEN_LABELS).map(label =>
           label.substr(0, 6) == 'HEADER'
             ? <ListHeader key={label} label={SCREEN_LABELS[label]} />
-            : <ListItem key={label} label={SCREEN_LABELS[label]} navigate={navigate} 
+            : <ListItem key={label} label={SCREEN_LABELS[label]} navigation={navigation} 
                 selected={this._selected(SCREEN_LABELS[label])} />
         ) }
       </Container>

@@ -18,10 +18,10 @@ import Drawer from '../components/Drawer';
 import Colors from '../constants/Colors';
 
 const drawerNav = createDrawerNavigator({
-  [SCREEN_LABELS.HEROES]: createStackNavigator({ HeroesScreen, HeroScreen }),
-  [SCREEN_LABELS.ITEMS]: createStackNavigator({ ItemsScreen, ItemScreen }),
+  [SCREEN_LABELS.HEROES]: createStackNavigator({ [SCREEN_LABELS.HEROES]: HeroesScreen, HeroScreen }),
+  [SCREEN_LABELS.ITEMS]: createStackNavigator({ [SCREEN_LABELS.ITEMS]: ItemsScreen, ItemScreen }),
 
-  [SCREEN_LABELS.STATS]: createStackNavigator({ StatsScreen, StatsWebScreen, }),
+  [SCREEN_LABELS.STATS]: createStackNavigator({ [SCREEN_LABELS.STATS]: StatsScreen, StatsWebScreen, }),
   [SCREEN_LABELS.PROFILE]: createStackNavigator({ ProfileScreen }),
 
   [SCREEN_LABELS.TIPS]: createStackNavigator({ TipsScreen }),
