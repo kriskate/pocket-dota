@@ -7,6 +7,7 @@ import { ITEM_CONSTANTS, SCREEN_LABELS_HIDDEN } from '../../constants/Constants'
 import { model_itembuild, model_section } from '../../constants/Models';
 import { url } from '../../constants/Data';
 import Layout from '../../constants/Layout';
+import Logger from '../../utils/Logger';
 
 const skip_items = ['']
 @connect(state => ({
@@ -34,7 +35,7 @@ export default class ItemBuild extends React.Component {
         else if(npc_tag == 'item_veil_of_dicord') npc_tag = 'item_veil_of_discord';
 
         const item = game_items.find(({ tag }) => tag == npc_tag.replace('item_', ''));
-        if(!item) console.log(npc_tag)
+        if(!item) Logger.debug(npc_tag)
         section.data.push(item);
       });
     });
