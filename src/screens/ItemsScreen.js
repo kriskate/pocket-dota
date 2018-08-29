@@ -47,6 +47,7 @@ export default class Itemscreen extends React.Component {
       <Container backToHome style={ styles.container }>
         <ListScreen
           hasSections
+          initialNumToRender={3}
           itemList={itemSections}
           imageAspectRatio={88/64}
           navTo={SCREEN_LABELS_HIDDEN.ITEM}

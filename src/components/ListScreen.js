@@ -18,6 +18,24 @@ const getLayout = (layoutWidth = Layout.window.width) => {
 let columns, thumbWidth;
 
 
+class List extends React.PureComponent {
+  render() {
+    const { section, renderItem, keyExtractor } = this.props;
+    const { data, color, title } = section;
+
+    return (
+      <View key={title} style={[ styles.section, { borderColor: color + '60' } ]}>
+        <Text style={[styles.sectionTitle, color ? { color, borderColor: color + '60', } : null ]}>{title}</Text>
+        <FlatList
+          data={data}
+          renderItem={renderItem}
+          keyExtractor={keyExtractor}
+          numColumns={columns}
+        />
+      </View>
+    )
+  }
+}
 @withNavigation
 export default class ListScreen extends React.PureComponent {
   constructor(props) {
@@ -44,37 +62,25 @@ export default class ListScreen extends React.PureComponent {
     )
   }
 
-  _renderList = ({ section, index, item }) => {
-    if (index !== 0) return null;
+  _renderList = ({ item, index }) => {
+    const { data, title, color } = item;
 
     const { keyExtractor } = this.props;  
-    
     return (
-      <FlatList
-        key={section.title}
-        data={section.data}
-        renderItem={this._renderItem}
-        keyExtractor={keyExtractor}
-        numColumns={columns}
-      />
+      <List section={item} renderItem={this._renderItem} keyExtractor={keyExtractor} />
     )
   }
 
-  _renderSectionHeader = ({section: {title, color}}) => (
-    <Text style={[styles.sectionTitle, color ? { color } : null ]}>{title}</Text>
-  )
-
   render() {
-    const { itemList, keyExtractor, hasSections } = this.props;
+    const { itemList, keyExtractor, hasSections, initialNumToRender } = this.props;
 
     if(hasSections)
       return (
-        <SectionList
-          stickySectionHeadersEnabled
+        <FlatList
+          initialNumToRender={initialNumToRender || 1}
+          data={itemList}
           renderItem={this._renderList}
-          renderSectionHeader={this._renderSectionHeader}
-          sections={itemList}
-          keyExtractor={keyExtractor}
+          keyExtractor={({title}) => title}
         />
       )
           
@@ -85,18 +91,22 @@ export default class ListScreen extends React.PureComponent {
 
 
 const styles = StyleSheet.create({
+  container: {
+    paddingTop: Layout.padding_regular,
+  },
+  section: {
+    marginBottom: Layout.padding_regular,
+    borderWidth: 1,
+  },
   sectionTitle: {
-    width: 200,
-    textAlign: 'center',
+    width: '100%',
+
     alignSelf: 'center',
 
     fontWeight: 'bold',
-    margin: Layout.padding_regular,
-    marginTop: Layout.padding_big,
     padding: Layout.padding_regular,
     backgroundColor: Colors.dota_ui1,
-    borderColor: Colors.dota_white+'50',
-    borderRadius: 5,
+    borderColor: Colors.dota_ui3,
     borderWidth: 1,
     color: Colors.dota_white,
   },
