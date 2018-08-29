@@ -19,10 +19,10 @@ export default class HeroesScreen extends React.PureComponent {
     title: SCREEN_LABELS.HEROES,
     ...headerStyle,
   });
-
-
-  render() {
-    const { heroes } = this.props;
+  constructor(props) {
+    super(props);
+    
+    const { heroes } = props;
     
     const heroSections = [];
 
@@ -59,8 +59,15 @@ export default class HeroesScreen extends React.PureComponent {
       (a.name.toUpperCase() <= b.name.toUpperCase()) ? -1 : 1
     ))
 
+    this.state = { heroSections };
+  }
+
+
+  render() {
+    const { heroSections } = this.state;
+
     return (
-      <Container backToHome>
+      <Container backToHome style={ styles.container }>
         <ListScreen
           hasSections
           itemList={heroSections}
@@ -76,11 +83,8 @@ export default class HeroesScreen extends React.PureComponent {
 }
 
 
-const thumbAspectRatio = 127/71;
-const columns = 3;
-const borderWidth = 1;
-const thumbWidth = (Layout.window.width - (columns + 1) * Layout.padding_regular - borderWidth * 2 * columns) / columns;
-const thumbHeight = thumbWidth/thumbAspectRatio;
-
 const styles = StyleSheet.create({
-});
+  container: {
+    padding: Layout.padding_small,
+  }
+})
