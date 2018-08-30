@@ -25,9 +25,12 @@ import Layout from '../../constants/Layout';
 
   })),
   (dispatch => ({ 
-    showTip: (tip) => dispatch(
-      Actions.snack({ visible: true, textMessage: `TIP: ${tip}`, actionText: "HIDE", tipToHide: 'attributeSlider' })
-    ),
+    showTip: (tip) => {
+      dispatch(
+        Actions.snack({ visible: true, textMessage: `TIP: ${tip}`, actionText: "DON'T SHOW AGAIN", tipToHide: 'attributeSlider' })
+      );
+      setTimeout(() => dispatch(Actions.snack({ visible: false })), 11000);
+    },
   }))
 )
 export default class extends React.Component {
