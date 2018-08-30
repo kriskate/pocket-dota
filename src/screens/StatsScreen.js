@@ -7,6 +7,8 @@ import { SCREEN_LABELS, URL_ODOTA, SCREEN_LABELS_HIDDEN } from '../constants/Con
 import Colors from '../constants/Colors';
 import Layout from '../constants/Layout';
 import { model_odota } from '../constants/Models';
+import { connect } from 'react-redux';
+import { Actions } from '../reducers/profile';
 
 
 class ProfileThumb extends React.PureComponent {
@@ -53,11 +55,20 @@ class Results extends React.PureComponent {
     )
   }
 }
+
+@connect(
+  (state => ({ lastSearch: state.profile.lastSearch })),
+  (dispatch => ({ searchFor: submitted_text => dispatch(Actions.searchFor(submitted_text)) }) )
+)
 export default class StatsScreen extends React.Component {
-  state = {
-    submitted_text: '',
-    search_results: null,
-    search_text: '',
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      submitted_text: '',
+      search_results: null,
+      search_text: props.lastSearch || '',
+    }
   }
   static navigationOptions = ({ navigation }) => ({
     title: SCREEN_LABELS.STATS,
@@ -68,6 +79,7 @@ export default class StatsScreen extends React.Component {
     Keyboard.dismiss();
     const { search_text } = this.state;
     this.setState({ submitted_text: search_text, search_results: null });
+    this.props.searchFor(search_text);
 
     const search_results = await (await fetch(URL_ODOTA.SEARCH + search_text)).json();
     this.setState({ search_results });
