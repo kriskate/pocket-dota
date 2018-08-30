@@ -32,6 +32,7 @@ export default connect(
   ({ snackbar: { actionText, textMessage, visible, tipToHide }, hideSnack, hideTip }) => (
     <View style={{ flex: 1 }}>
       <SnackBar 
+        actionTextWrapperStyle={{ maxWidth: 80 }}
         visible={visible}
         textMessage={textMessage}
         actionText={actionText}
