@@ -64,3 +64,10 @@ export const URL_ODOTA = {
   SEARCH: 'https://api.opendota.com/api/search?q=',
   PROFILE: 'https://www.opendota.com/players/',
 }
+
+
+export const APP_TIPS = {
+  slideBackIOS: ["Swipe to go back", "You can swipe from the left side of the screen to go to the previous screen."],
+  drawerSlide: ["Swipe for drawer", "You can swipe from the right side of the screen to open the drawer."],
+  addProfile: ["Add profile to home screen", "You can add a Dota profile and show it on the homescreen. This way, you can quickly acces your Dota stats when openin the app."],
+}

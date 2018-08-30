@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Text, Button } from '../components/ui';
 
 import { headerStyle } from '../utils/screen';
-import { SCREEN_LABELS, SCREEN_LABELS_HIDDEN } from '../constants/Constants';
+import { SCREEN_LABELS, SCREEN_LABELS_HIDDEN, APP_TIPS } from '../constants/Constants';
 import { StyleSheet, Switch as RNSwitch, View, Alert } from 'react-native';
 import Colors from '../constants/Colors';
 import Layout from '../constants/Layout';
@@ -10,6 +10,8 @@ import { removeWiki } from '../utils/loaders';
 import { connect } from 'react-redux';
 import { model_user, model_settings, model_profile } from '../constants/Models';
 import { Actions } from '../reducers/profile';
+import Modal from "react-native-modal";
+
 
 
 const Header = ({ label }) => (
@@ -17,10 +19,10 @@ const Header = ({ label }) => (
     <Text style={styles.labelHeader}>{label}</Text>
   </View>
 )
-const Switch = ({ label, value, onValueChange, disabled }) => (
-  <View style={styles.switchWrapper}>
+const Switch = ({ label, value, onValueChange, disabled, style }) => (
+  <View style={[styles.switchWrapper, style]}>
     <Text>{label}</Text>
-    <RNSwitch style={styles.switch} disabled={disabled}
+    <RNSwitch style={styles.switch} disabled={disabled} onTintColor={Colors.dota_agi}
       value={value} onValueChange={onValueChange} />
   </View>
 )
@@ -41,6 +43,11 @@ export default class SettingsScreen extends React.Component {
     title: SCREEN_LABELS.SETTINGS,
     ...headerStyle,
   });
+
+  state = {
+    tipsModalVisible: false,
+    allTipsOff: false,
+  }
 
   _removeProfileData = () => {
     Alert.alert(
@@ -76,12 +83,15 @@ export default class SettingsScreen extends React.Component {
     )
   }
 
+  _hideTipsModal = () => this.setState({ tipsModalVisible: false })
+
   render() {
     const { user, settings, lastSearch } = this.props.profile;
     const { name, account_id } = model_user(user);
-    const { showProfileOnHome, autoUpdateApp, autoUpdateDB, showTips } = model_settings(settings);
+    const { showProfileOnHome, autoUpdateApp, autoUpdateDB, tipsState } = model_settings(settings);
 
     const { navigate } = this.props.navigation;
+    const { allTipsOff, tipsModalVisible } = this.state;
 
     return (
       <Container backToHome scrollable style={{ paddingBottom: Layout.padding_regular }}>
@@ -127,13 +137,41 @@ export default class SettingsScreen extends React.Component {
 
 
         <Header label="App settings:" />
-        
+
         <View style={styles.switchWrapper}>
           <Text>In-app tips</Text>
-          <Button prestyled title="Tips" style={{ marginHorizontal: 0 }} />
+          <Button prestyled style={{ marginHorizontal: 0 }}
+            title="Tips"
+            onPress={() => this.setState({ tipsModalVisible: true })} />
         </View>
-        {/* <Switch label="Show tips"
-          value={showTips} onValueChange={val => this.props.updateSettings({ showTips: val })} /> */}
+
+        <Modal isVisible={tipsModalVisible}
+            onBackdropPress={this._hideTipsModal}
+            onBackButtonPress={this._hideTipsModal}
+            onSwipe={this._hideTipsModal} swipeDirection="down"
+          >
+          <View style={styles.tipsModal}>
+            <Text style={styles.inAppTipsText} >In-app tips</Text>
+
+            <Switch label="Turn all tips ON/ OFF"
+              style={{ marginBottom: Layout.padding_big + Layout.padding_regular, }}
+              value={allTipsOff} onValueChange={() => {
+                const tipsOff = {};
+                Object.keys(tipsState).forEach(tip => tipsOff[tip] = !allTipsOff);
+                this.props.updateSettings({ tipsState: tipsOff });
+                this.setState({ allTipsOff: !allTipsOff });
+              }} />
+
+            { Object.keys(tipsState).map(s => (
+                <Switch key={s} label={APP_TIPS[s][0]}
+                  value={tipsState[s]} onValueChange={() => this.props.updateSettings({ tipsState: {...tipsState, [s]: !tipsState[s]} })} />
+            ))}
+            <Button prestyled style={styles.tipsModalButton}
+              title="DONE"
+              onPress={this._hideTipsModal} />
+          </View>
+        </Modal>
+
         <Switch label="Auto update app"
           value={autoUpdateApp} onValueChange={val => this.props.updateSettings({ autoUpdateApp: val })} />
         <Button prestyled
@@ -175,6 +213,28 @@ const styles = StyleSheet.create({
     color: Colors.goldenrod,
   },
   
+  tipsModal: {
+    flex: 1,
+    backgroundColor: Colors.dota_ui1,
+    borderRadius: 3,
+
+    marginHorizontal: Layout.padding_small,
+    marginVertical: Layout.padding_big + Layout.padding_regular,
+    padding: Layout.padding_regular,
+  },
+  tipsModalButton: {
+    position: 'absolute',
+    bottom: Layout.padding_small,
+    width: '100%',
+    borderWidth: 1,
+    borderColor: Colors.dota_ui2,
+  },
+  inAppTipsText: {
+    textAlign: 'center',
+    marginBottom: Layout.padding_big,
+  },
+
+
   switch: {
   },
   switchWrapper: {
