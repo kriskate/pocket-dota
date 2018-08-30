@@ -26,7 +26,7 @@ const Switch = ({ label, description, value, onValueChange, disabled, style }) =
       { !description ? null : <Text style={{ color: Colors.disabled, fontSize: 10, }}>{description}</Text> }
     </View>
     
-    <RNSwitch style={styles.switch} disabled={disabled} onTintColor={Colors.dota_agi}
+    <RNSwitch style={styles.switch} disabled={disabled} onTintColor={Colors.dota_agi + '70'}
       value={value} onValueChange={onValueChange} />
   </View>
 )
