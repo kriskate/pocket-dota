@@ -7,7 +7,7 @@ import ItemScreen from '../screens/ItemScreen';
 import ItemsScreen from '../screens/ItemsScreen';
 import StatsScreen from '../screens/StatsScreen';
 import StatsWebScreen from '../screens/StatsWebScreen';
-import ProfileScreen from '../screens/ProfileScreen';
+import SettingsScreen from '../screens/SettingsScreen';
 import TipsScreen from '../screens/TipsScreen';
 import PatchNotesScreen from '../screens/PatchNotesScreen';
 import AboutScreen from '../screens/AboutScreen';
@@ -22,7 +22,7 @@ const drawerNav = createDrawerNavigator({
   [SCREEN_LABELS.ITEMS]: createStackNavigator({ [SCREEN_LABELS.ITEMS]: ItemsScreen, ItemScreen }),
 
   [SCREEN_LABELS.STATS]: createStackNavigator({ [SCREEN_LABELS.STATS]: StatsScreen, StatsWebScreen, }),
-  [SCREEN_LABELS.PROFILE]: createStackNavigator({ ProfileScreen }),
+  [SCREEN_LABELS.SETTINGS]: createStackNavigator({ SettingsScreen }),
 
   [SCREEN_LABELS.TIPS]: createStackNavigator({ TipsScreen }),
   [SCREEN_LABELS.PATCH_NOTES]: createStackNavigator({ PatchNotesScreen }),

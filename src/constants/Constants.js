@@ -32,9 +32,9 @@ export const SCREEN_LABELS = {
   TIPS: 'Tips',
   PATCH_NOTES: 'Patch notes',
   
-  HEADER_STATS: 'Player stats',
+  HEADER_STATS: 'Player',
   STATS: 'Stats',
-  PROFILE: 'Profile',
+  SETTINGS: 'Settings',
   
   HEADER_ABOUT: 'About and legal',
   ABOUT: 'About',

@@ -36,9 +36,9 @@ const Switch = ({ label, value, onValueChange, disabled }) => (
     setUser: val => dispatch(Actions.setUser(val)),
   }))
 )
-export default class ProfileScreen extends React.Component {
+export default class SettingsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: SCREEN_LABELS.PROFILE,
+    title: SCREEN_LABELS.SETTINGS,
     ...headerStyle,
   });
 
