@@ -1,3 +1,7 @@
+export const model_snack = ({ visible=false, textMessage, actionText }) => ({
+  visible, textMessage, actionText,
+})
+
 export const model_section = ({ title, color, data=[] }) => ({
   title,
   color,
