@@ -15,7 +15,7 @@
     "react-native-modal": "^6.5.0",
     "react-native-render-html": "^3.10.0",
     "react-native-slider": "^0.11.0",
-    "react-native-snackbar-component": "^1.0.9",
+    "react-native-snackbar-component": "kriskate/React-Native-SnackBar-Component#master",
     "react-native-status-bar-height": "2.0.0",
     "react-navigation": "2.11.2",
     "react-redux": "^5.0.7",

@@ -4764,9 +4764,9 @@ react-native-slider@^0.11.0:
   dependencies:
     prop-types "^15.5.6"
 
-react-native-snackbar-component@^1.0.9:
+react-native-snackbar-component@kriskate/React-Native-SnackBar-Component#master:
   version "1.0.9"
-  resolved "https://registry.yarnpkg.com/react-native-snackbar-component/-/react-native-snackbar-component-1.0.9.tgz#6f95a6acc0ed587d14864404299c2d164c418042"
+  resolved "https://codeload.github.com/kriskate/React-Native-SnackBar-Component/tar.gz/78c60f1f1bde4b4b7f830b29d505807479359e18"
   dependencies:
     prop-types "^15.6.0"
 
