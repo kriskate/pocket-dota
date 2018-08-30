@@ -9,6 +9,7 @@ import SnackBar from 'react-native-snackbar-component'
 import { connect } from 'react-redux';
 import Colors from '../constants/Colors';
 import { Actions } from '../reducers/snackbar';
+import { Actions as ProfileActions } from '../reducers/profile';
 
 
 const MainStack = createStackNavigator({
@@ -24,16 +25,20 @@ export default connect(
   })),
   (dispatch => ({
     hideSnack: () => dispatch(Actions.snack({ visible: false, actionText: '' })),
+    hideTip: (tip) => dispatch(ProfileActions.setTip({ [tip]: false })),
   }))
   )
 (
-  ({ snackbar: { actionText, textMessage, visible }, hideSnack }) => (
+  ({ snackbar: { actionText, textMessage, visible, tipToHide }, hideSnack, hideTip }) => (
     <View style={{ flex: 1 }}>
       <SnackBar 
         visible={visible}
         textMessage={textMessage}
         actionText={actionText}
-        actionHandler={hideSnack}
+        actionHandler={() => {
+          hideSnack();
+          tipToHide && hideTip(tipToHide);
+        }}
         backgroundColor={Colors.dota_ui1}
         accentColor={Colors.goldenrod}
         messageColor={Colors.dota_white}

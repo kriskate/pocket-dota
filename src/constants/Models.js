@@ -1,5 +1,13 @@
-export const model_snack = ({ visible=false, textMessage, actionText }) => ({
-  visible, textMessage, actionText,
+export const model_snack = ({ 
+  visible=false,
+  textMessage,
+  actionText,
+  tipToHide,
+}) => ({
+  visible,
+  textMessage,
+  actionText,
+  tipToHide,
 })
 
 export const model_section = ({ title, color='#1B1E21', data=[] }) => ({
@@ -57,10 +65,12 @@ export const model_tips = ({
   slideBackIOS=true,
   drawerSlide=true,
   addProfile=true,
+  attributeSlider=true,
 }) => ({
   slideBackIOS,
   drawerSlide,
   addProfile,
+  attributeSlider,
 })
 
 
