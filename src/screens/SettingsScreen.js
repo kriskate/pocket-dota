@@ -19,9 +19,13 @@ const Header = ({ label }) => (
     <Text style={styles.labelHeader}>{label}</Text>
   </View>
 )
-const Switch = ({ label, value, onValueChange, disabled, style }) => (
+const Switch = ({ label, description, value, onValueChange, disabled, style }) => (
   <View style={[styles.switchWrapper, style]}>
-    <Text>{label}</Text>
+    <View style={{ flex: 1 }}>
+      <Text>{label}</Text>
+      { !description ? null : <Text style={{ color: Colors.disabled, fontSize: 10, }}>{description}</Text> }
+    </View>
+    
     <RNSwitch style={styles.switch} disabled={disabled} onTintColor={Colors.dota_agi}
       value={value} onValueChange={onValueChange} />
   </View>
@@ -163,7 +167,7 @@ export default class SettingsScreen extends React.Component {
               }} />
 
             { Object.keys(tipsState).map(s => (
-                <Switch key={s} label={APP_TIPS[s][0]}
+                <Switch key={s} label={APP_TIPS[s][0]} description={APP_TIPS[s][1]}
                   value={tipsState[s]} onValueChange={() => this.props.updateSettings({ tipsState: {...tipsState, [s]: !tipsState[s]} })} />
             ))}
             <Button prestyled style={styles.tipsModalButton}
