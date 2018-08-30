@@ -127,9 +127,13 @@ export default class SettingsScreen extends React.Component {
 
 
         <Header label="App settings:" />
-
-        <Switch label="Show tips"
-          value={showTips} onValueChange={val => this.props.updateSettings({ showTips: val })} />
+        
+        <View style={styles.switchWrapper}>
+          <Text>In-app tips</Text>
+          <Button prestyled title="Tips" style={{ marginHorizontal: 0 }} />
+        </View>
+        {/* <Switch label="Show tips"
+          value={showTips} onValueChange={val => this.props.updateSettings({ showTips: val })} /> */}
         <Switch label="Auto update app"
           value={autoUpdateApp} onValueChange={val => this.props.updateSettings({ autoUpdateApp: val })} />
         <Button prestyled

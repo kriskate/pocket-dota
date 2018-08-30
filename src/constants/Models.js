@@ -44,15 +44,26 @@ export function model_settings (settings) {
     showProfileOnHome=true,
     autoUpdateApp=true,
     autoUpdateDB=true,
-    showTips=true,
+    tipsState=model_tips({}),
   } = settings;
   return {
     showProfileOnHome,
     autoUpdateApp,
     autoUpdateDB,
-    showTips,
+    tipsState,
   };
 }
+export const model_tips = ({
+  slideBackIOS=true,
+  drawerSlide=true,
+  addProfile=true,
+}) => ({
+  slideBackIOS,
+  drawerSlide,
+  addProfile,
+})
+
+
 export function model_odota (data) {
   const {
     account_id, avatarfull, last_match_time, personaname,
