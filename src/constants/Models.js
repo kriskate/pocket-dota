@@ -62,12 +62,12 @@ export function model_settings (settings) {
   };
 }
 export const model_tips = ({
-  slideBackIOS=true,
+  IOS_slideBack=true,
   drawerSlide=true,
   addProfile=true,
   attributeSlider=true,
 }) => ({
-  slideBackIOS,
+  IOS_slideBack,
   drawerSlide,
   addProfile,
   attributeSlider,

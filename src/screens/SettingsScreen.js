@@ -3,7 +3,7 @@ import { Container, Text, Button } from '../components/ui';
 
 import { headerStyle } from '../utils/screen';
 import { SCREEN_LABELS, SCREEN_LABELS_HIDDEN, APP_TIPS } from '../constants/Constants';
-import { StyleSheet, Switch as RNSwitch, View, Alert } from 'react-native';
+import { StyleSheet, Switch as RNSwitch, View, Alert, Platform } from 'react-native';
 import Colors from '../constants/Colors';
 import Layout from '../constants/Layout';
 import { removeWiki } from '../utils/loaders';
@@ -166,7 +166,7 @@ export default class SettingsScreen extends React.Component {
                 this.setState({ allTipsOff: !allTipsOff });
               }} />
 
-            { Object.keys(tipsState).map(s => (
+            { Object.keys(tipsState).map(s => ( s.split('_') [0] == "IOS" && Platform.OS !== "ios" ? null :
                 <Switch key={s} label={APP_TIPS[s][0]} description={APP_TIPS[s][1]}
                   value={tipsState[s]} onValueChange={() => this.props.updateSettings({ tipsState: {...tipsState, [s]: !tipsState[s]} })} />
             ))}
