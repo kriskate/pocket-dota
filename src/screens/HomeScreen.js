@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import Colors from '../constants/Colors';
 import { HOME_LABELS, SCREEN_LABELS } from '../constants/Constants';
 import { assets } from '../constants/Data';
+import Layout from '../constants/Layout';
 
 
 const MenuItem = ({onPress, label, cardImage, profileImage}) => (
@@ -86,11 +87,17 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   textWrapper: {
-    right: 20,
-    bottom: 20,
+    flex:1,
+    top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center',
     position: 'absolute',
   },
   text: {
-    color: 'white',
+    borderRadius: 5,
+    borderColor: Colors.disabled,
+    borderWidth: 1,
+    padding: Layout.padding_small,
+    backgroundColor: Colors.dota_ui1+99,
+    color: Colors.dota_white,
+    fontSize: 17,
   },
 });
