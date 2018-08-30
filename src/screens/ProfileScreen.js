@@ -65,7 +65,15 @@ export default class ProfileScreen extends React.Component {
     )
   }
   _removeWikiData = () => {
-    removeWiki()
+    Alert.alert(
+      "to-do: remove this, as it's ment for testing purposes only",
+      "to-do: remove this, as it's ment for testing purposes only",
+      [
+        { text: 'No', style: 'cancel' },
+        { text: 'Yes', onPress: removeWiki },
+      ],
+      { cancelable: true }
+    )
   }
 
   render() {
