@@ -12,16 +12,42 @@ export function model_wiki (data) {
 
 
 export function model_profile (data) {
-  const { user=model_user({}), settings=model_settings({}), lastSearch } = data;
-  return { user, settings, lastSearch };
+  const {
+    user=model_user({}),
+    settings=model_settings({}),
+    lastSearch,
+  } = data;
+  return {
+    user,
+    settings,
+    lastSearch,
+  };
 }
 export function model_user (user) {
-  const { name, image, url_profile } = user;
-  return { name, image, url_profile };
+  const {
+    name,
+    image,
+    account_id,
+  } = user;
+  return {
+    name,
+    image,
+    account_id,
+  };
 }
 export function model_settings (settings) {
-  const { showProfileOnHome, autoUpdateApp, autoUpdateDB } = settings;
-  return { showProfileOnHome, autoUpdateApp, autoUpdateDB };
+  const {
+    showProfileOnHome=true,
+    autoUpdateApp=true,
+    autoUpdateDB=true,
+    showTips=true,
+  } = settings;
+  return {
+    showProfileOnHome,
+    autoUpdateApp,
+    autoUpdateDB,
+    showTips,
+  };
 }
 export function model_odota (data) {
   const {
