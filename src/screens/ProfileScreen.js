@@ -3,12 +3,12 @@ import { Container, Text, Button } from '../components/ui';
 
 import { headerStyle } from '../utils/screen';
 import { SCREEN_LABELS, SCREEN_LABELS_HIDDEN } from '../constants/Constants';
-import { StyleSheet, Switch as RNSwitch, View } from 'react-native';
+import { StyleSheet, Switch as RNSwitch, View, Alert } from 'react-native';
 import Colors from '../constants/Colors';
 import Layout from '../constants/Layout';
 import { removeWiki } from '../utils/loaders';
 import { connect } from 'react-redux';
-import { model_user, model_settings } from '../constants/Models';
+import { model_user, model_settings, model_profile } from '../constants/Models';
 import { Actions } from '../reducers/profile';
 
 
@@ -32,6 +32,8 @@ const Switch = ({ label, value, onValueChange, disabled }) => (
   })),
   (dispatch => ({
     updateSettings: val => dispatch(Actions.settings(val)),
+    setProfile: val => dispatch(Actions.setProfile(val)),
+    setUser: val => dispatch(Actions.setUser(val)),
   }))
 )
 export default class ProfileScreen extends React.Component {
@@ -40,18 +42,31 @@ export default class ProfileScreen extends React.Component {
     ...headerStyle,
   });
 
-  _gotoStats = () => {
-
-  }
-
-  _gotoProfile = () => {
-
-  }
   _removeProfileData = () => {
-
+    Alert.alert(
+      'Are you sure you want to remove your profile?',
+      'This will remove the Dota profile data.',
+      [
+        {text: 'No', style: 'cancel'},
+        {text: 'Yes', onPress: () => this.props.setUser(model_user({})) },
+      ],
+      { cancelable: true }
+    )
   }
-  _checkForUpdate = () => {}
-  _removeWikiData = () => removeWiki
+  _resetSettings = () => {
+    Alert.alert(
+      'Are you sure you want to reset settings to default?',
+      'This will reset the settings to default, including the removal of the Dota profile data.',
+      [
+        { text: 'No', style: 'cancel' },
+        { text: 'Yes', onPress: () => this.props.setProfile(model_profile({})) },
+      ],
+      { cancelable: true }
+    )
+  }
+  _removeWikiData = () => {
+    removeWiki()
+  }
 
   render() {
     const { user, settings, lastSearch } = this.props.profile;
@@ -75,7 +90,7 @@ export default class ProfileScreen extends React.Component {
         }
 
         <Button prestyled
-          title={`${name ? 'Replace the' : "Add a"} dota user profile`}
+          title={`${name ? 'Replace the' : "Add a"} Dota 2 user profile (Stats Screen)`}
           onPress={() => navigate(SCREEN_LABELS.STATS)} />
 
         <Button disabled={!name} prestyled secondary
@@ -86,7 +101,7 @@ export default class ProfileScreen extends React.Component {
           label="Show profile on Home screen"
           value={showProfileOnHome} onValueChange={val => this.props.updateSettings({ showProfileOnHome: val })} />
 
-        <Button disabled={!name} prestyled warning
+        <Button prestyled warning disabled={!name}
           title="Remove profile data"
           onPress={this._removeProfileData} />
 
@@ -113,6 +128,9 @@ export default class ProfileScreen extends React.Component {
           title="Check for app update"
           onPress={this._checkForUpdate} />
 
+        <Button prestyled warning
+          title="Reset to default settings"
+          onPress={this._resetSettings} />
 
 
       </Container>
