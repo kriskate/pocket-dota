@@ -20,12 +20,15 @@ export default class Button extends React.Component {
       children, title,
       disabled, prestyled,
       onLayout,
+      secondary, warning,
     } = this.props;
+    const backgroundColor = !prestyled ? null : secondary ? Colors.dota_ui3 : warning ? Colors.dota_red_dark : Colors.dota_ui1;
+
+    const touchStyle = StyleSheet.flatten([styles.touch, { backgroundColor }, prestyled && styles.prestyled, style, disabled && styles.disabled]);
 
     if (Platform.OS === 'android' && Platform.Version >= 21) {
       return (
-        <View style={[styles.touch, style, prestyled && styles.prestyled, disabled && styles.disabled]}
-        onLayout={onLayout}>
+        <View style={touchStyle} onLayout={onLayout}>
           <TouchableNativeFeedback onPress={onPress} useForeground disabled={disabled}
               background={TouchableNativeFeedback.Ripple(pressColor, borderless)}>
             <View style={[styles.button, viewStyle]}>
@@ -37,7 +40,7 @@ export default class Button extends React.Component {
       );
     } else {
       return (
-        <TouchableOpacity onPress={onPress} style={[styles.touch, style, prestyled && styles.prestyled, disabled && styles.disabled]}
+        <TouchableOpacity onPress={onPress} style={touchStyle}
             disabled={disabled}
             onLayout={onLayout}>
           <View style={[styles.button, viewStyle]}>
@@ -58,7 +61,6 @@ const styles = StyleSheet.create({
     marginVertical: Layout.padding_small,
     marginHorizontal: Layout.padding_regular,
     padding: Layout.padding_regular,
-    backgroundColor: Colors.dota_red_dark,
   },
 
   title: {
