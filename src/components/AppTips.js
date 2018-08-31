@@ -19,7 +19,12 @@ let singletonInstance;
   }))
 )
 export default class AppTips extends React.PureComponent {
-  static showTip = (tip) => {
+  static showTip = (tip, duration=10) => {
+    if(duration > 0) setTimeout(() => singletonInstance.setState({
+      show: false,
+      tip: '',
+    }), duration*1000);
+
     singletonInstance && singletonInstance.setState({
       show: true,
       tip,
