@@ -5,6 +5,7 @@ import { Container, Text } from '../components/ui';
 import { headerStyle } from '../utils/screen';
 import { SCREEN_LABELS, URL_ODOTA } from '../constants/Constants';
 import Colors from '../constants/Colors';
+import { showTip, APP_TIPS } from '../components/AppTips';
 
 const bkC = `background-color:${Colors.dota_ui1}!important;`;
 const bkCL = `background-color:${Colors.dota_ui1_light}!important;`;
@@ -35,6 +36,13 @@ export default class StatsWebScreen extends React.Component {
     title: SCREEN_LABELS.STATS,
     ...headerStyle,
   });
+
+  constructor(props) {
+    super(props);
+
+    showTip(APP_TIPS.ADD_PROFILE, 15);
+  }
+
   _renderLoading = () => (
     <View style={styles.activityWrapper}>
       <ActivityIndicator size='large' color={Colors.goldenrod} />
