@@ -15,6 +15,7 @@ import Updater from './Updater';
 import { loadInitialAssets, loadCurrentWikiInfo, loadWiki, } from './utils/loaders';
 import Logger from './utils/Logger';
 import { DOWNLOAD_REASONS } from './constants/Constants';
+import AppTips from './components/AppTips';
 
 
 /* SETUP */
@@ -87,6 +88,7 @@ export default class App extends React.Component {
           <View style={{ flex: 1}}>
             <Updater />
             <AppNavigator />
+            <AppTips />
           </View>
         </Provider>
       )

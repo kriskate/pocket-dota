@@ -5,7 +5,6 @@ import HomeScreen from '../screens/HomeScreen';
 import DrawerNavigator from './DrawerNavigator';
 import { SCREEN_LABELS } from '../constants/Constants';
 import { View } from 'react-native';
-import SnackBar from 'react-native-snackbar-component'
 import { connect } from 'react-redux';
 import Colors from '../constants/Colors';
 import { Actions } from '../reducers/snackbar';
@@ -19,32 +18,4 @@ const MainStack = createStackNavigator({
   headerMode: 'none',
 });
 
-export default connect(
-  (state => ({
-    snackbar: state.snackbar,
-  })),
-  (dispatch => ({
-    hideSnack: () => dispatch(Actions.snack({ visible: false, actionText: '' })),
-    hideTip: (tip) => dispatch(ProfileActions.setTip({ [tip]: false })),
-  }))
-  )
-(
-  ({ snackbar: { actionText, textMessage, visible, tipToHide }, hideSnack, hideTip }) => (
-    <View style={{ flex: 1, backgroundColor: Colors.dota_ui1 }}>
-      <SnackBar 
-        actionTextWrapperStyle={{ maxWidth: 80 }}
-        visible={visible}
-        textMessage={textMessage}
-        actionText={actionText}
-        actionHandler={() => {
-          hideSnack();
-          tipToHide && hideTip(tipToHide);
-        }}
-        backgroundColor={Colors.dota_ui1}
-        accentColor={Colors.goldenrod}
-        messageColor={Colors.dota_white}
-      />
-      <MainStack />
-    </View>
-  )
-)
+export default MainStack;
