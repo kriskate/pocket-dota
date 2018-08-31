@@ -23,7 +23,7 @@ const Switch = ({ label, description, value, onValueChange, disabled, style }) =
   <View style={[styles.switchWrapper, style]}>
     <View style={{ flex: 1 }}>
       <Text>{label}</Text>
-      { !description ? null : <Text style={{ color: Colors.disabled, fontSize: 10, }}>{description}</Text> }
+      { !description ? null : <Text style={styles.switchDescription}>{description}</Text> }
     </View>
     
     <RNSwitch style={styles.switch} disabled={disabled} onTintColor={Colors.dota_agi + '70'}
@@ -247,5 +247,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginHorizontal: Layout.padding_big,
     marginVertical: Layout.padding_regular,
+  },
+  switchDescription: {
+    color: Colors.disabled,
+    fontSize: 10,
+    marginRight: Layout.padding_regular,
   },
 })
