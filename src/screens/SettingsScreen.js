@@ -111,12 +111,14 @@ export default class SettingsScreen extends React.Component {
           </View>
         }
 
-        <Button prestyled
-          title={`${name ? 'Replace the' : "Add a"} Dota 2 user profile (Stats Screen)`}
-          onPress={() => navigate(SCREEN_LABELS.STATS)} />
+        { name ? null : (
+          <Button prestyled
+            title={`${name ? 'Replace the' : "Add a"} Dota 2 user profile (Stats Screen)`}
+            onPress={() => navigate(SCREEN_LABELS.STATS)} />
+        )}
 
-        <Button disabled={!name} prestyled secondary
-          title={name || 'Your profile'}
+        <Button disabled={!name} prestyled
+          title={`Your profile${!name ? '' : ' (' + name + ')'}` }
           onPress={() => navigate(SCREEN_LABELS_HIDDEN.STATS_WEB, { player: {...user, personaname: name} })} />
         
         <Switch disabled={!name}
