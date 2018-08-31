@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Text, Button } from '../components/ui';
 
 import { headerStyle } from '../utils/screen';
-import { SCREEN_LABELS, SCREEN_LABELS_HIDDEN, APP_TIPS } from '../constants/Constants';
+import { SCREEN_LABELS, SCREEN_LABELS_HIDDEN } from '../constants/Constants';
 import { StyleSheet, Switch as RNSwitch, View, Alert, Platform } from 'react-native';
 import Colors from '../constants/Colors';
 import Layout from '../constants/Layout';
@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import { model_user, model_settings, model_profile } from '../constants/Models';
 import { Actions } from '../reducers/profile';
 import Modal from "react-native-modal";
-
+import { APP_TIPS } from '../components/AppTips';
 
 
 const Header = ({ label }) => (
@@ -161,15 +161,27 @@ export default class SettingsScreen extends React.Component {
               style={{ marginBottom: Layout.padding_big + Layout.padding_regular, }}
               value={allTipsOff} onValueChange={() => {
                 const tipsOff = {};
+
                 Object.keys(tipsState).forEach(tip => tipsOff[tip] = !allTipsOff);
                 this.props.updateSettings({ tipsState: tipsOff });
                 this.setState({ allTipsOff: !allTipsOff });
               }} />
 
-            { Object.keys(tipsState).map(s => ( s.split('_') [0] == "IOS" && Platform.OS !== "ios" ? null :
-                <Switch key={s} label={APP_TIPS[s][0]} description={APP_TIPS[s][1]}
-                  value={tipsState[s]} onValueChange={() => this.props.updateSettings({ tipsState: {...tipsState, [s]: !tipsState[s]} })} />
-            ))}
+            { Object.keys(APP_TIPS).map(tip => {
+                const prefix = tip.split('_')[0];
+                if((prefix == 'IOS' && Platform.OS !== 'ios') || 
+                  (prefix == 'ANDROID' && Platform.OS !== 'android'))
+                  return null;
+
+                const { short, description, stateLink } = APP_TIPS[tip];
+
+                return (
+                  <Switch key={tip} label={short} description={description}
+                    value={tipsState[stateLink]} 
+                    onValueChange={() => this.props.updateSettings({ tipsState: {...tipsState, [stateLink]: !tipsState[stateLink]} })} />
+                )
+              }
+            )}
             <Button prestyled style={styles.tipsModalButton}
               title="DONE"
               onPress={this._hideTipsModal} />

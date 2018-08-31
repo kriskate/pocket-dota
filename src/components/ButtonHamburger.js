@@ -5,7 +5,7 @@ import { Header, withNavigation } from 'react-navigation';
 import { Ionicons } from '@expo/vector-icons';
 import Button from './ui/Button';
 import Colors from '../constants/Colors';
-import AppTips from './AppTips';
+import { showTip, APP_TIPS } from './AppTips';
 
 
 export default withNavigation( ({ navigation }) => (
@@ -14,7 +14,7 @@ export default withNavigation( ({ navigation }) => (
         navigation.openDrawer();
         Keyboard.dismiss();
 
-        AppTips.showTip('drawerSlide');
+        showTip(APP_TIPS.DRAWER_SLIDE);
       }}
     >
     <Ionicons size={24} name={ Platform == "ios" ? "ios-menu" : "md-menu" }
