@@ -1,3 +1,8 @@
+import React from 'react';
+import { FontAwesome } from '@expo/vector-icons';
+import Colors from './Colors';
+
+
 export const ITEM_CONSTANTS = {
   DISSASEMBLE: 'DOTA_ITEM_DISASSEMBLE_ALWAYS',
   BUILDS: {
@@ -63,4 +68,11 @@ export const DOWNLOAD_REASONS = {
 export const URL_ODOTA = {
   SEARCH: 'https://api.opendota.com/api/search?q=',
   PROFILE: 'https://www.opendota.com/players/',
+}
+
+
+export const ICONS = {
+  USER: () => <FontAwesome name="user" size={17} color={Colors.dota_white} />,
+  BACK: () => <FontAwesome name="arrow-circle-left" size={17} color={Colors.dota_white} />,
+  FORWARD: () => <FontAwesome name="arrow-circle-right" size={17} color={Colors.dota_white} />,
 }

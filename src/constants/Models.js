@@ -28,11 +28,13 @@ export function model_user (user) {
     name,
     image,
     account_id,
+    last_match_time,
   } = user;
   return {
     name,
     image,
     account_id,
+    last_match_time,
   };
 }
 export function model_settings (settings) {

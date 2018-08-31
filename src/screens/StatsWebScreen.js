@@ -1,11 +1,17 @@
 import React from 'react';
 import { View, WebView, ActivityIndicator, StyleSheet } from 'react-native';
-import { Container, Text } from '../components/ui';
+import { Container, Text, Button } from '../components/ui';
 
 import { headerStyle } from '../utils/screen';
-import { SCREEN_LABELS, URL_ODOTA } from '../constants/Constants';
+import { SCREEN_LABELS, URL_ODOTA, ICONS } from '../constants/Constants';
 import Colors from '../constants/Colors';
 import { showTip, APP_TIPS } from '../components/AppTips';
+import { connect } from 'react-redux';
+import { Actions } from '../reducers/profile';
+import { model_odota } from '../constants/Models';
+
+import Layout from '../constants/Layout';
+
 
 const bkC = `background-color:${Colors.dota_ui1}!important;`;
 const bkCL = `background-color:${Colors.dota_ui1_light}!important;`;
@@ -31,10 +37,65 @@ const jsString = `
   main.childNodes[0].remove();
 
 `
+
+const refs = { view: {} };
+
+let singleton;
+
+@connect(
+  (state => ({
+    c_account_id: state.profile.user.account_id,
+    user: state.profile.user,
+  })),
+  (dispatch => ({
+    setProfile: (user) => dispatch(Actions.setUser(user)),
+  }))
+)
+class NavigationControls extends React.PureComponent {
+  constructor(props) {
+    super(props);
+
+    singleton = this;
+
+    this.state = { loading: true };
+  }
+  render() {
+    const { loading } = this.state;
+    const { account_id, avatarfull, last_match_time, personaname } = this.props.player;
+
+    if(loading) return <Text>{personaname}</Text>
+
+    const { c_account_id, setProfile, } = this.props;
+
+    return (
+      <View style={styles.navigation_controls}>
+        <Button prestyled style={ styles.buttonHeader }
+            onPress={() => refs.view.goBack()}>
+          <ICONS.BACK />
+        </Button>
+        <Button prestyled style={ styles.buttonHeader }
+            onPress={() => refs.view.goForward()} >
+          <ICONS.FORWARD />
+        </Button>
+        <Button prestyled style={[styles.buttonHeader, { borderColor: c_account_id == account_id ? Colors.goldenrod : Colors.dota_ui2 }]}
+            onPress={() => {
+              if(c_account_id !== account_id) {
+                setProfile({ name: personaname, image: avatarfull, account_id, last_match_time });
+              }
+            }}>
+          <ICONS.USER />
+        </Button>
+      </View>
+    )
+  }
+}
+
+
+
 export default class StatsWebScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: SCREEN_LABELS.STATS,
     ...headerStyle,
+    headerTitle: <NavigationControls player={navigation.state.params.player} />,
   });
 
   constructor(props) {
@@ -48,16 +109,21 @@ export default class StatsWebScreen extends React.Component {
       <ActivityIndicator size='large' color={Colors.goldenrod} />
     </View>
   )
+
+  _onLoadEnd = () => {
+    singleton && singleton.setState({ loading: false });
+  }
   render() {
-    const { account_id } = this.props.navigation.state.params;
-    const source = { uri: URL_ODOTA.PROFILE + account_id };
+    const { account_id } = model_odota(this.props.navigation.state.params.player);
+    const source = { uri: URL_ODOTA.PROFILE + account_id + '/overview' };
 
     return (
       <Container>
         <WebView
+          ref={el => refs.view = el}
           startInLoadingState
           renderLoading={this._renderLoading}
-
+          onLoadEnd={this._onLoadEnd}
           javaScriptEnabled
           injectedJavaScript={jsString}
           source={source}
@@ -68,8 +134,14 @@ export default class StatsWebScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  wview: {
-    backgroundColor: Colors.dota_ui2,
+  navigation_controls: {
+    flexDirection: 'row',
+    margin: 0,
+  },
+  buttonHeader: {
+    padding: Layout.padding_small,
+    paddingHorizontal: Layout.padding_regular,
+    borderColor: Colors.dota_ui2
   },
   activityWrapper: {
     flex: 1,
