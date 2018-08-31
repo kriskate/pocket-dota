@@ -6,6 +6,7 @@ import { Actions as ProfileActions } from '../reducers/profile';
 import Colors from '../constants/Colors';
 import { Platform } from 'react-native';
 import { Button } from './ui';
+import Layout from '../constants/Layout';
 
 // we will only have one instance of this class, and only use this for setState
 let singletonInstance;
@@ -96,7 +97,7 @@ export default class AppTips extends React.PureComponent {
             hideTip(stateLink);
           }}
           
-          actionTextWrapperStyle={{ maxWidth: 80 }}
+          actionTextWrapperStyle={{ maxWidth: 80, marginLeft: Layout.padding_regular }}
           backgroundColor={Colors.dota_ui1}
           accentColor={Colors.goldenrod}
           messageColor={Colors.dota_white}
