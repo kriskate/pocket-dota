@@ -4,11 +4,8 @@ import { createStackNavigator } from 'react-navigation';
 import HomeScreen from '../screens/HomeScreen';
 import DrawerNavigator from './DrawerNavigator';
 import { SCREEN_LABELS } from '../constants/Constants';
-import { View } from 'react-native';
 import { connect } from 'react-redux';
 import Colors from '../constants/Colors';
-import { Actions } from '../reducers/snackbar';
-import { Actions as ProfileActions } from '../reducers/profile';
 
 
 const MainStack = createStackNavigator({

@@ -1,15 +1,3 @@
-export const model_snack = ({ 
-  visible=false,
-  textMessage,
-  actionText,
-  tipToHide,
-}) => ({
-  visible,
-  textMessage,
-  actionText,
-  tipToHide,
-})
-
 export const model_section = ({ title, color='#1B1E21', data=[] }) => ({
   title,
   color,
