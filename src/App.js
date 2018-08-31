@@ -3,13 +3,16 @@ import React from 'react';
 import reducers from './reducers';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+import { persistReducer, persistStore } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+
 import { StatusBar, Platform, UIManager, View } from 'react-native';
 
 import { AppLoading, Constants } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 import Updater from './Updater';
 
-import { loadInitialAssets, loadCurrentWikiInfo, loadWiki, loadProfileStateFromStorage, } from './utils/loaders';
+import { loadInitialAssets, loadCurrentWikiInfo, loadWiki, } from './utils/loaders';
 import Logger from './utils/Logger';
 import { DOWNLOAD_REASONS } from './constants/Constants';
 
@@ -19,7 +22,7 @@ Platform === 'android' && StatusBar.setTranslucent(true);
 StatusBar.setBarStyle('light-content');
 UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
 
-let store = null;
+let store, persistor;
 
 // handles splash screen, via AppLoading
 // implements redux at top-level
@@ -43,7 +46,6 @@ export default class App extends React.Component {
     if(store) return;
 
     const wiki = await loadWiki();
-    const profile = await loadProfileStateFromStorage();
     
     let downloadReason = '';
     if(!wiki) {
@@ -51,15 +53,23 @@ export default class App extends React.Component {
       // if we do have wikiInfo it means wiki was downloaded before, so we have some missing wiki data
       downloadReason = wikiInfo ? DOWNLOAD_REASONS.MISSING : DOWNLOAD_REASONS.FRESH;
     }
-
-    store = createStore(reducers, {
+    
+    const persistConfig = {
+      key: 'pocket-dota',
+      storage,
+      whitelist: ['profile'],
+    }
+    const persistedReducer = persistReducer(persistConfig, reducers);
+    
+    store = createStore(persistedReducer, {
       wiki,
-      profile,
       update: {
         downloading: !wiki,
         downloadReason,
       },
     });
+
+    persistor = persistStore(store);
   }
 
   render() {
