@@ -15,7 +15,7 @@ class ProfileThumb extends React.PureComponent {
   render() {
     const { navigation, result } = this.props;
     const { account_id, avatarfull, last_match_time, personaname } = model_odota(result);
-    const src = { uri: avatarfull, cache: 'force-cache' };
+    const src = { uri: avatarfull.replace('_full','_medium'), cache: 'force-cache' };
 
     return (
       <Button style={styles.thumb_button} viewStyle={styles.thumb_buttonView}
