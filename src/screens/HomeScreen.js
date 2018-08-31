@@ -4,7 +4,7 @@ import { Thumbnail } from '../components/ui/';
 import { connect } from 'react-redux';
 
 import Colors from '../constants/Colors';
-import { HOME_LABELS, SCREEN_LABELS } from '../constants/Constants';
+import { HOME_LABELS, SCREEN_LABELS, SCREEN_LABELS_HIDDEN } from '../constants/Constants';
 import { assets } from '../constants/Data';
 import Layout from '../constants/Layout';
 
@@ -36,7 +36,7 @@ export default class HomeScreen extends React.PureComponent {
   };
 
   render() {
-    const { name, image } = this.props.user;
+    const { name, image, account_id } = this.props.user;
     const { navigate } = this.props.navigation;
 
     return (
@@ -48,7 +48,7 @@ export default class HomeScreen extends React.PureComponent {
         <MenuItem onPress={() => navigate(SCREEN_LABELS.STATS)} label={HOME_LABELS.STATS}
           cardImage={assets.app.menuStats} />
         { !image ? null :
-          <MenuItem onPress={() => navigate(SCREEN_LABELS.SETTINGS)} label={name}
+          <MenuItem onPress={() => navigate(SCREEN_LABELS_HIDDEN.STATS_WEB, { player: { account_id, personaname: name } })} label={name}
             cardImage={assets.app.menuProfile}
             profileImage={image} /> 
         }

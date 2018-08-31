@@ -117,7 +117,7 @@ export default class SettingsScreen extends React.Component {
 
         <Button disabled={!name} prestyled secondary
           title={name || 'Your profile'}
-          onPress={() => navigate(SCREEN_LABELS_HIDDEN.STATS_WEB, { account_id })} />
+          onPress={() => navigate(SCREEN_LABELS_HIDDEN.STATS_WEB, { player: {...user, personaname: name} })} />
         
         <Switch disabled={!name}
           label="Show profile on Home screen"
