@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, WebView, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, WebView, ActivityIndicator, StyleSheet, Platform } from 'react-native';
 import { Container, Text, Button } from '../components/ui';
 
 import { headerStyle } from '../utils/screen';
@@ -57,7 +57,7 @@ class NavigationControls extends React.PureComponent {
 
     singleton = this;
 
-    this.state = { loading: true };
+    this.state = { loading: false };
   }
   render() {
     const { loading } = this.state;
@@ -85,6 +85,10 @@ class NavigationControls extends React.PureComponent {
               }
             }}>
           <ICONS.USER />
+        </Button>
+        <Button prestyled style={styles.buttonHeader}
+          onPress={() => {}}>
+          <ICONS.INFO />
         </Button>
       </View>
     )
@@ -138,13 +142,13 @@ const styles = StyleSheet.create({
   navigation_controls: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: Platform.OS === 'ios' ? 'flex-start' : 'center',
     margin: 0,
   },
   buttonHeader: {
     padding: Layout.padding_small,
     paddingHorizontal: Layout.padding_regular,
-    borderColor: Colors.dota_ui2
+    borderColor: Colors.dota_ui2,
   },
   activityWrapper: {
     flex: 1,

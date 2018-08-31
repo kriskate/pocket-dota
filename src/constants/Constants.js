@@ -75,4 +75,5 @@ export const ICONS = {
   USER: () => <FontAwesome name="user" size={17} color={Colors.dota_white} />,
   BACK: () => <FontAwesome name="arrow-circle-left" size={17} color={Colors.dota_white} />,
   FORWARD: () => <FontAwesome name="arrow-circle-right" size={17} color={Colors.dota_white} />,
+  INFO: () => <FontAwesome name="info" size={17} color={Colors.dota_white} />,
 }
