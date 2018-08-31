@@ -29,6 +29,7 @@ const MenuItem = ({onPress, label, cardImage, profileImage}) => (
 
 @connect(state => ({
   user: state.profile.user,
+  showProfileOnHome: state.profile.settings.showProfileOnHome,
 }))
 export default class HomeScreen extends React.PureComponent {
   static defaultProps = {
@@ -47,7 +48,7 @@ export default class HomeScreen extends React.PureComponent {
           cardImage={assets.app.menuItems} />
         <MenuItem onPress={() => navigate(SCREEN_LABELS.STATS)} label={HOME_LABELS.STATS}
           cardImage={assets.app.menuStats} />
-        { !image ? null :
+        { !image || !this.props.showProfileOnHome ? null :
           <MenuItem onPress={() => navigate(SCREEN_LABELS_HIDDEN.STATS_WEB, { player: { account_id, personaname: name } })} label={name}
             cardImage={assets.app.menuProfile}
             profileImage={image} /> 
