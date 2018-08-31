@@ -4,40 +4,22 @@ import { StyleSheet, View, Image, Animated, Platform } from "react-native";
 // import Slider from 'react-native-slider';
 import Slider from '../../utils/RNSlider_fork';
 
-import { connect } from 'react-redux';
-import { Actions } from '../../reducers/snackbar';
-
 import { assets, url } from "../../constants/Data";
 import Colors from '../../constants/Colors';
-import { ATTRIBUTES, APP_TIPS } from '../../constants/Constants';
+import { ATTRIBUTES } from '../../constants/Constants';
 import { Text } from '../ui';
 import { model_hero_attributes } from '../../constants/Models';
 
 import Attribute from './Attribute';
 import { calculateAttributes, parseAsNumbers } from '../../utils/CalculateAttributes';
 import Layout from '../../constants/Layout';
+import showTip from '../showTip';
 
 
-
-@connect(
-  (state => ({
-    attributeSliderEnabled: state.profile.settings.tipsState.attributeSlider,
-
-  })),
-  (dispatch => ({ 
-    showTip: (tip) => {
-      dispatch(
-        Actions.snack({ visible: true, textMessage: `TIP: ${tip}`, actionText: "DON'T SHOW AGAIN", tipToHide: 'attributeSlider' })
-      );
-      setTimeout(() => dispatch(Actions.snack({ visible: false })), 11000);
-    },
-  }))
-)
+@showTip('attributeSlider')
 export default class extends React.Component {
   constructor(props) {
-    super(props, attributes);
-
-    props.attributeSliderEnabled && props.showTip(APP_TIPS.attributeSlider[1]);
+    super(props);
 
     this.state = {
       level: 1,
