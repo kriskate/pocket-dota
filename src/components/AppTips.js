@@ -5,6 +5,7 @@ import SnackBar from 'react-native-snackbar-component';
 import { APP_TIPS } from '../constants/Constants';
 import { Actions as ProfileActions } from '../reducers/profile';
 import Colors from '../constants/Colors';
+import { Platform } from 'react-native';
 
 // we will only have one instance of this class, and only use this for setState
 let singletonInstance;
@@ -41,8 +42,8 @@ export default class AppTips extends React.PureComponent {
     const { tip, show } = this.state;
     const { hideTip, tipsState, } = this.props;
     const textMessage = APP_TIPS[tip] ? APP_TIPS[tip][1] : '';
-    const visible = show && tipsState[tip];
-    console.log(show, tipsState.IOS_slideBack)
+    const platformOk = tip.split('_')[0] === 'IOS' ? Platform.OS == 'ios' : true;
+    const visible = show && tipsState[tip] && textMessage && platformOk;
 
     return (
       <SnackBar
