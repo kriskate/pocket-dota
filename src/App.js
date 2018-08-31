@@ -3,74 +3,64 @@ import React from 'react';
 import reducers from './reducers';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+import { StatusBar, Platform, UIManager, View } from 'react-native';
 
-import { AppLoading } from 'expo';
-import AppDownloading from './screens/AppDownloading';
-
-import { loadInitialAssets, loadCurrentWikiInfo, loadWiki, loadProfileStateFromStorage, removeWiki, } from './utils/loaders';
+import { AppLoading, Constants } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
+import Updater from './Updater';
+
+import { loadInitialAssets, loadCurrentWikiInfo, loadWiki, loadProfileStateFromStorage, } from './utils/loaders';
 import Logger from './utils/Logger';
 import { DOWNLOAD_REASONS } from './constants/Constants';
-import { StatusBar, Platform, UIManager } from 'react-native';
 
+
+/* SETUP */
 Platform === 'android' && StatusBar.setTranslucent(true);
 StatusBar.setBarStyle('light-content');
 UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
 
-let store;
+let store = null;
+
 // handles splash screen, via AppLoading
 // implements redux at top-level
 export default class App extends React.Component {
-  state = { 
+  state = {
     loaded: false,
-    downloading: false,
-    downloadReason: '',
   };
+
 
   _loadAssets = async () => {
     await loadInitialAssets();
-
-    await this._createStore();
   };
-  _handleFinishLoading = () => {
+  _handleFinishLoading = async () => {
+    await this._loadLocalStore();
+
     this.setState({ loaded: true });
   };
 
+  _loadLocalStore = async () => {
+    // if the store is already loaded, return (ie when hot-reloading)
+    if(store) return;
 
-  _createStore = async () => {
-    // await removeWiki();
     const wiki = await loadWiki();
+    const profile = await loadProfileStateFromStorage();
     
+    let downloadReason = '';
     if(!wiki) {
-      const downloadReason = !await loadCurrentWikiInfo() 
-      ? DOWNLOAD_REASONS.FRESH
-      : DOWNLOAD_REASONS.MISSING;
-      
-      this.setState({ downloading: true, downloadReason });
-    } else {
-      const profile = await loadProfileStateFromStorage();
-      // todo - move loading data to redux, in order to refresh store on updates
-      // avoid replacing the whole store for App when hot loading
-      if (module.hot && store) {
-        module.hot.accept(() => {
-          store.replaceReducer(reducers);
-        });
-      } else {
-        store = createStore(reducers, { wiki, profile });
-      } 
+      const wikiInfo = await loadCurrentWikiInfo();
+      // if we do have wikiInfo it means wiki was downloaded before, so we have some missing wiki data
+      downloadReason = wikiInfo ? DOWNLOAD_REASONS.MISSING : DOWNLOAD_REASONS.FRESH;
     }
+
+    store = createStore(reducers, {
+      wiki,
+      profile,
+      update: {
+        downloading: !wiki,
+        downloadReason,
+      },
+    });
   }
-
-  _handleFinishDownLoading = async () => {
-    await this._createStore();
-
-    if(store) {
-      this.setState({ downloading: false });
-    } else {
-      // please restart app
-    }
-  };
-
 
   render() {
     if (!this.state.loaded) {
@@ -81,21 +71,15 @@ export default class App extends React.Component {
           onError={Logger.error}
         />
       );
-    } else if(this.state.downloading) {
-      return (
-        <AppDownloading
-          reason={this.state.downloadReason}
-          onFinish={this._handleFinishDownLoading}
-          onError={Logger.error}
-        />
-      )
     } else {
       return (
         <Provider store={store}>
-          <AppNavigator />
+          <View style={{ flex: 1}}>
+            <Updater />
+            <AppNavigator />
+          </View>
         </Provider>
-      );
-    }
+      )
+    } 
   }
 }
-

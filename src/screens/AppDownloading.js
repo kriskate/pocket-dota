@@ -23,7 +23,7 @@ export default class AppDownloading extends React.PureComponent {
     
     Platform.OS === 'ios' && StatusBar.setNetworkActivityIndicatorVisible(false);
 
-    this.props.onFinish();
+    this.props.onFinish(wiki);
   }
   
   render() {
