@@ -56,11 +56,13 @@ export const model_tips = ({
   drawerSlide=true,
   addProfile=true,
   attributesSlider=true,
+  dotaProfileAdded=true,
 }) => ({
   IOS_slideBack,
   drawerSlide,
   addProfile,
   attributesSlider,
+  dotaProfileAdded,
 })
 
 
