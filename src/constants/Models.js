@@ -65,12 +65,12 @@ export const model_tips = ({
   IOS_slideBack=true,
   drawerSlide=true,
   addProfile=true,
-  attributeSlider=true,
+  attributesSlider=true,
 }) => ({
   IOS_slideBack,
   drawerSlide,
   addProfile,
-  attributeSlider,
+  attributesSlider,
 })
 
 

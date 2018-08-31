@@ -70,5 +70,5 @@ export const APP_TIPS = {
   IOS_slideBack: ["Swipe to go back", "You can swipe from the left side of the screen to go to the previous screen."],
   drawerSlide: ["Swipe for drawer", "You can swipe from the right side of the screen to open the drawer."],
   addProfile: ["Add profile to home screen", "You can add a Dota profile and show it on the homescreen. This way, you can quickly acces your Dota stats when openin the app."],
-  attributeSlider: ["Attribute slider", "You can use the slider below the hero image to see how the attributes behave at different hero levels."],
+  attributesSlider: ["Attribute slider", "You can use the slider below the hero image to see how the attributes behave at different hero levels."],
 }
