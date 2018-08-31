@@ -15,7 +15,7 @@ import { headerStyle } from '../utils/screen';
 import { HTML } from '../components/Hero/AbilityPreview';
 
 
-export default class HeroScreen extends React.Component {
+export default class HeroScreen extends React.PureComponent {
   static navigationOptions = ({ navigation }) => {
     const hero = model_hero(navigation.getParam('data'));
 
