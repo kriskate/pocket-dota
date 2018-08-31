@@ -136,7 +136,9 @@ export default class StatsWebScreen extends React.Component {
 
 const styles = StyleSheet.create({
   navigation_controls: {
+    flex: 1,
     flexDirection: 'row',
+    justifyContent: 'center',
     margin: 0,
   },
   buttonHeader: {

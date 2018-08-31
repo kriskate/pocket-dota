@@ -21,7 +21,7 @@ const MenuItem = ({onPress, label, cardImage, profileImage}) => (
         </View> 
     }
 
-    <View style={styles.textWrapper} pointerEvents='none'>
+    <View style={[styles.textWrapper, profileImage && { marginTop: 5*Layout.padding_big, } ]} pointerEvents='none'>
       <Text style={styles.text}>{label}</Text>
     </View>
   </View>
