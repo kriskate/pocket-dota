@@ -94,8 +94,7 @@ export default class StatsScreen extends React.Component {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <Container backToHome >
           <View style={styles.search}>
-            <TextInput style={styles.searchBox} 
-              autoFocus
+            <TextInput style={styles.searchBox}
               selectTextOnFocus
               placeholder='Type in profile name to look up'
               onSubmitEditing={this._handleSubmit}
