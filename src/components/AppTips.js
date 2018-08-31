@@ -5,6 +5,7 @@ import SnackBar from 'react-native-snackbar-component';
 import { Actions as ProfileActions } from '../reducers/profile';
 import Colors from '../constants/Colors';
 import { Platform } from 'react-native';
+import { Button } from './ui';
 
 // we will only have one instance of this class, and only use this for setState
 let singletonInstance;
@@ -85,20 +86,22 @@ export default class AppTips extends React.PureComponent {
 
 
     return (
-      <SnackBar
-        visible={visible}
-        textMessage={description}
-        actionText={"DON'T SHOW AGAIN"}
-        actionHandler={() => {
-          this._hide();
-          hideTip(stateLink);
-        }}
-        
-        actionTextWrapperStyle={{ maxWidth: 80 }}
-        backgroundColor={Colors.dota_ui1}
-        accentColor={Colors.goldenrod}
-        messageColor={Colors.dota_white}
-      />
+      <Button onPress={this._hide}>
+        <SnackBar
+          visible={visible}
+          textMessage={description}
+          actionText={"DON'T SHOW AGAIN"}
+          actionHandler={() => {
+            this._hide();
+            hideTip(stateLink);
+          }}
+          
+          actionTextWrapperStyle={{ maxWidth: 80 }}
+          backgroundColor={Colors.dota_ui1}
+          accentColor={Colors.goldenrod}
+          messageColor={Colors.dota_white}
+        />
+      </Button>
     )
   }
 }
