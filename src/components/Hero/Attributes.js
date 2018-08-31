@@ -13,13 +13,14 @@ import { model_hero_attributes } from '../../constants/Models';
 import Attribute from './Attribute';
 import { calculateAttributes, parseAsNumbers } from '../../utils/CalculateAttributes';
 import Layout from '../../constants/Layout';
-import showTip from '../showTip';
+import AppTips from '../AppTips';
 
 
-@showTip('attributeSlider')
 export default class extends React.Component {
   constructor(props) {
     super(props);
+
+    AppTips.showTip('attributesSlider');
 
     this.state = {
       level: 1,
