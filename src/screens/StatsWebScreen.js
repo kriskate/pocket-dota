@@ -50,7 +50,7 @@ class NavigationControls extends React.PureComponent {
 
     singleton = this;
 
-    this.state = { loading: false };
+    this.state = { loading: true };
   }
   render() {
     const { loading } = this.state;
@@ -62,15 +62,15 @@ class NavigationControls extends React.PureComponent {
 
     return (
       <View style={styles.navigation_controls}>
-        <Button prestyled style={ styles.buttonHeader }
+        <Button prestyled forceTouchableOpacity style={ styles.buttonHeader }
             onPress={() => refs.view.goBack()}>
           <ICONS.BACK />
         </Button>
-        <Button prestyled style={ styles.buttonHeader }
+        <Button prestyled forceTouchableOpacity style={ styles.buttonHeader }
             onPress={() => refs.view.goForward()} >
           <ICONS.FORWARD />
         </Button>
-        <Button prestyled style={[styles.buttonHeader, { borderColor: c_account_id == account_id ? Colors.goldenrod : Colors.dota_ui2 }]}
+        <Button prestyled forceTouchableOpacity style={[styles.buttonHeader, { borderColor: c_account_id == account_id ? Colors.goldenrod : Colors.dota_ui2 }]}
             onPress={() => {
               if(c_account_id !== account_id) {
                 setProfile({ name: personaname, image: avatarfull, account_id, last_match_time });
@@ -79,7 +79,7 @@ class NavigationControls extends React.PureComponent {
             }}>
           <ICONS.USER />
         </Button>
-        <Button prestyled style={styles.buttonHeader}
+        <Button prestyled forceTouchableOpacity style={styles.buttonHeader}
           onPress={() => {}}>
           <ICONS.INFO />
         </Button>

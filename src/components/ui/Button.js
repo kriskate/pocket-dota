@@ -6,6 +6,7 @@ import Layout from '../../constants/Layout';
 
 const Title = ({ title, disabled, style }) => !title ? null :
   <Text style={[styles.title, style, disabled && styles.disabledTitle]}>{title}</Text>
+  
 export default class Button extends React.Component {
   static defaultProps = {
     borderless: false,
@@ -21,12 +22,13 @@ export default class Button extends React.Component {
       disabled, prestyled,
       onLayout,
       secondary, warning,
+      forceTouchableOpacity
     } = this.props;
     const backgroundColor = !prestyled ? null : secondary ? Colors.dota_ui3 : warning ? Colors.dota_red_dark : Colors.dota_ui1;
 
     const touchStyle = StyleSheet.flatten([styles.touch, { backgroundColor }, prestyled && styles.prestyled, style, disabled && styles.disabled]);
 
-    if (Platform.OS === 'android' && Platform.Version >= 21) {
+    if (Platform.OS === 'android' && Platform.Version >= 21 && !forceTouchableOpacity) {
       return (
         <View style={touchStyle} onLayout={onLayout}>
           <TouchableNativeFeedback onPress={onPress} useForeground disabled={disabled}
