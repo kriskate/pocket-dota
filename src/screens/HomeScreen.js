@@ -15,15 +15,15 @@ const MenuItem = ({onPress, label, cardImage, profileImage}) => (
       <Image style={styles.image} source={cardImage} />
     </TouchableOpacity>
 
-    { !profileImage ? null :
-        <View style={styles.profileImageWrapper} pointerEvents='none'> 
-          <Thumbnail round source={{uri: profileImage}} />
-        </View> 
-    }
+    
+    <View style={styles.profileImageWrapper} pointerEvents='none'> 
+      { !profileImage ? null :<Thumbnail round source={{uri: profileImage}} /> }
+      <View style={styles.textWrapper} pointerEvents='none'>
+        <Text style={styles.text}>{label}</Text>
+      </View>
+    </View> 
+    
 
-    <View style={[styles.textWrapper, profileImage && { marginTop: 5*Layout.padding_big, } ]} pointerEvents='none'>
-      <Text style={styles.text}>{label}</Text>
-    </View>
   </View>
 );
 
@@ -85,12 +85,10 @@ const styles = StyleSheet.create({
     height: '100%',
     
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
   },
   textWrapper: {
-    flex:1,
-    top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center',
-    position: 'absolute',
+    marginBottom: Layout.padding_big,
   },
   text: {
     borderRadius: 5,
