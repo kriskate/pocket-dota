@@ -1,5 +1,3 @@
-import { Linking } from "react-native";
-
 // to-do - add some kind of error popup to inform about this
 export const connectionIssue = () => console.log('Internet might be down');
 
@@ -13,7 +11,3 @@ export const trimAbilities = (htmlContent) =>
   htmlContent.trim().replace(r_whitespaceBR, '<br/>')
   .replace(r_trailingBR, '')
   .replace(r_beginingBR, '');
-
-  export const openURL = (url) =>
-    Linking.canOpenURL(url).then(supported => supported && Linking.openURL(url));
-
