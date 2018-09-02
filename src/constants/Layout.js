@@ -21,9 +21,6 @@ export default {
     flex: 1,
     backgroundColor: Colors.dota_ui1,
     borderRadius: 3,
-
-    // marginHorizontal: 5,
-    // marginVertical: 25,
     padding: 10,
   },
   modal_header: {
@@ -31,7 +28,7 @@ export default {
     marginBottom: 15,
     fontSize: 15,
     textAlign: 'center',
-    color: Colors.dota_int,
+    color: Colors.dota_red,
   },
   modal_close_button: {
     position: 'absolute',
