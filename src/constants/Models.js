@@ -1,4 +1,4 @@
-export const model_section = ({ title, color='#1B1E21', data=[] }) => ({
+export const model_section = ({ title, color='#d6d6d6', data=[] }) => ({
   title,
   color,
   data,
