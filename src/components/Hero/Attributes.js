@@ -4,11 +4,10 @@ import { StyleSheet, View, Image, Animated, Platform } from "react-native";
 // import Slider from 'react-native-slider';
 import Slider from '../../utils/RNSlider_fork';
 
-import { assets, url } from "../../constants/Data";
+import { url } from "../../constants/Data";
 import Colors from '../../constants/Colors';
 import { ATTRIBUTES } from '../../constants/Constants';
 import { Text } from '../ui';
-import { model_hero_attributes } from '../../constants/Models';
 
 import Attribute from './Attribute';
 import { calculateAttributes, parseAsNumbers } from '../../utils/CalculateAttributes';

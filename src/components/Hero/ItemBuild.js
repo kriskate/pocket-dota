@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import ListScreen from '../ListScreen';
 import { ITEM_CONSTANTS, SCREEN_LABELS_HIDDEN } from '../../constants/Constants';

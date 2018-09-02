@@ -3,7 +3,7 @@ import { View, WebView, ActivityIndicator, StyleSheet, Platform } from 'react-na
 import { Container, Text, Button } from '../components/ui';
 
 import { headerStyle } from '../utils/screen';
-import { SCREEN_LABELS, URL_ODOTA, ICONS, HELP_TEXTS, URLS } from '../constants/Constants';
+import { URL_ODOTA, ICONS, HELP_TEXTS, URLS } from '../constants/Constants';
 import Colors from '../constants/Colors';
 import { showTip, APP_TIPS } from '../components/AppTips';
 import { connect } from 'react-redux';

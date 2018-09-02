@@ -1,7 +1,7 @@
-import React, { Children } from 'react';
+import React from 'react';
 
-import { View, Image, StyleSheet, WebView } from 'react-native';
-import { url, assets } from '../../constants/Data';
+import { View, Image, StyleSheet } from 'react-native';
+import {  assets } from '../../constants/Data';
 import { Text } from '../ui';
 import { model_ability } from '../../constants/Models';
 import RenderHTML from 'react-native-render-html';

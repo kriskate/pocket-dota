@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavigationActions } from 'react-navigation';
-import { ScrollView, StyleSheet, View, Image } from 'react-native';
+import { StyleSheet, View, Image } from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 import { SCREEN_LABELS } from '../constants/Constants';

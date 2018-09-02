@@ -1,4 +1,3 @@
-import { Image } from 'react-native';
 import { Asset, Font, Icon, FileSystem, Util } from 'expo';
 import Logger from './Logger';
 import { model_profile, model_wiki } from '../constants/Models';
@@ -16,7 +15,6 @@ export const loadInitialAssets = async () => {
 
   const fontAssets = Font.loadAsync({
     ...Icon.Ionicons.font,
-    //'space-mono': require('../assets/fonts/SpaceMono-Regular.ttf'),
   })
 
   await Promise.all([...imageAssets, fontAssets])

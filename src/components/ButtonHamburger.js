@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, StyleSheet, TouchableOpacity, Keyboard } from 'react-native';
+import { Platform, StyleSheet, Keyboard } from 'react-native';
 import { Header, withNavigation } from 'react-navigation';
 
 import { Ionicons } from '@expo/vector-icons';

@@ -24,7 +24,6 @@ export default function reducer(state=initialState, action) {
   switch(action.type) {
     case ActionTypes.SEARCH_PROFILE:
       return { ...state, lastSearch };
-    break;
     case ActionTypes.SETTINGS:
       return { ...state, settings: {...state.settings, ...settings} };
     case ActionTypes.SET_USER:

@@ -5,7 +5,7 @@ import { headerStyle } from '../utils/screen';
 import { SCREEN_LABELS } from '../constants/Constants';
 
 export default class TipsScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => ({
+  static navigationOptions = () => ({
     title: SCREEN_LABELS.TIPS,
     ...headerStyle,
   });

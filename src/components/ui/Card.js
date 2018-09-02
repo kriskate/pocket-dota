@@ -22,7 +22,7 @@ export default class Card extends React.PureComponent {
     this.setState({ collapsed: !this.state.collapsed });
   }
   render() {
-    const { style, children, collapsedTitle, title, showTitleWhenOpened, viewStyle } = this.props;
+    const { style, children, title, showTitleWhenOpened, viewStyle } = this.props;
     const { collapsed } = this.state;
 
     return (

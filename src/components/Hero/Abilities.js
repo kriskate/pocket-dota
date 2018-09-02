@@ -1,11 +1,7 @@
 import React from 'react';
-import { View, Image, StyleSheet, LayoutAnimation } from 'react-native';
-import { url } from '../../constants/Data';
-import { Text } from '../ui';
-import Layout from '../../constants/Layout';
+import { View, StyleSheet, LayoutAnimation } from 'react-native';
 import Ability from './Ability';
 import AbilityPreview from './AbilityPreview';
-import { model_ability } from '../../constants/Models';
 import { animation } from '../../utils/screen';
 
 
@@ -25,7 +21,6 @@ export default class Abilities extends React.Component {
   render() {
     const { abilities } = this.props;
     const { selected } = this.state;
-    const cAbility = model_ability(abilities.find(a => a.tag === selected));
 
     return (
       <View style={styles.container}>

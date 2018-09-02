@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
-import { Text, Container, Card, ListThumb } from '../components/ui';
+import { Text, Container, Card, } from '../components/ui';
 import Layout from '../constants/Layout';
 import Colors from '../constants/Colors';
 import { model_hero } from '../constants/Models';
@@ -58,7 +58,6 @@ export default class HeroScreen extends React.PureComponent {
 
         <Card title='Biography' showTitleWhenOpened>
           <HTML htmlContent={bio} style={{ backgroundColor: Colors.dota_ui1 }} />
-          {/* <Text>{bio}</Text> */}
         </Card>
 
         <Card title='Recommended item build' showTitleWhenOpened>
@@ -69,8 +68,6 @@ export default class HeroScreen extends React.PureComponent {
   }
 }
 
-const imgRatio = 88/64;
-const thumbSize = 70;
 
 const styles = StyleSheet.create({
   container: {

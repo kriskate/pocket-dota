@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { View, Image, StyleSheet, TouchableHighlight, TouchableOpacity } from 'react-native';
+import { View, Image, StyleSheet, } from 'react-native';
 import { url } from '../../constants/Data';
 import { Text, Button } from '../ui';
 import Colors from '../../constants/Colors';

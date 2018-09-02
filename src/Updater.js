@@ -2,8 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import AppDownloading from './screens/AppDownloading';
-import AppNavigator from './navigation/AppNavigator';
-import { View } from 'react-native';
 import Modal from 'react-native-modal';
 import { Actions as UpdateActions } from './reducers/update';
 import { Actions as WikiActions } from './reducers/wiki';

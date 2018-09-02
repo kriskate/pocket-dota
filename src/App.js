@@ -8,7 +8,7 @@ import storage from 'redux-persist/lib/storage';
 
 import { StatusBar, Platform, UIManager, View } from 'react-native';
 
-import { AppLoading, Constants } from 'expo';
+import { AppLoading } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 import Updater from './Updater';
 

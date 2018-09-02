@@ -1,10 +1,10 @@
 import React from 'react';
-import { Image, View, Text, StyleSheet, TouchableHighlight, Platform, FlatList } from 'react-native';
+import { StyleSheet, } from 'react-native';
 import { connect } from 'react-redux';
 
 import { SCREEN_LABELS, SCREEN_LABELS_HIDDEN, ATTRIBUTES } from '../constants/Constants';
 import { Container } from '../components/ui';
-import { url, local_uri } from '../constants/Data';
+import { url } from '../constants/Data';
 import Colors from '../constants/Colors';
 import Layout from '../constants/Layout';
 import { headerStyle } from '../utils/screen';

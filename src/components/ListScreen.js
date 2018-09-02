@@ -1,11 +1,10 @@
 import React from 'react';
-import { Image, View, StyleSheet, Platform, FlatList, SectionList } from 'react-native';
+import { View, StyleSheet, FlatList } from 'react-native';
 
-import { Button, Text, ListThumb } from '../components/ui';
+import { Text, ListThumb } from '../components/ui';
 
 import Colors from '../constants/Colors';
 import Layout from '../constants/Layout';
-import { SCREEN_LABELS_HIDDEN } from '../constants/Constants';
 import { withNavigation } from 'react-navigation';
 
 const getLayout = (layoutWidth = Layout.window.width) => {
@@ -62,17 +61,16 @@ export default class ListScreen extends React.PureComponent {
     )
   }
 
-  _renderList = ({ item, index }) => {
-    const { data, title, color } = item;
+  _renderList = ({ item }) => {
+    const { keyExtractor } = this.props;
 
-    const { keyExtractor } = this.props;  
     return (
       <List section={item} renderItem={this._renderItem} keyExtractor={keyExtractor} />
     )
   }
 
   render() {
-    const { itemList, keyExtractor, hasSections, initialNumToRender } = this.props;
+    const { itemList, hasSections, initialNumToRender } = this.props;
 
     if(hasSections)
       return (

@@ -2,7 +2,6 @@ import React from 'react';
 import { FontAwesome } from '@expo/vector-icons';
 import Colors from './Colors';
 import { Text } from '../components/ui';
-import { openURL } from '../utils/utils';
 
 
 export const ITEM_CONSTANTS = {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, WebView, ActivityIndicator, StyleSheet, TextInput, Keyboard, TouchableWithoutFeedback, Image, FlatList } from 'react-native';
+import { View, ActivityIndicator, StyleSheet, TextInput, Keyboard, TouchableWithoutFeedback, Image, FlatList } from 'react-native';
 import { Container, Text, Button } from '../components/ui';
 
 import { headerStyle } from '../utils/screen';
@@ -34,7 +34,7 @@ class Results extends React.PureComponent {
   _renderItem = ({item}) => <ProfileThumb result={item} navigation={this.props.navigation} />
 
   render() {
-    const { search_results, navigation, submitted_text } = this.props;
+    const { search_results, submitted_text } = this.props;
 
     return (
       search_results == null

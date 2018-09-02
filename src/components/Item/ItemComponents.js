@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Text, ListThumb } from '../ui';
+import { Card, ListThumb } from '../ui';
 import { connect } from 'react-redux';
 import { url } from '../../constants/Data';
 import { StyleSheet, View } from 'react-native';
@@ -67,7 +67,7 @@ export default class ItemComponents extends React.PureComponent {
   }
   render() {
     const { current_item, items, navigation } = this.props;
-    const { components, recipeCost, tag, name } = current_item;
+    const { components, recipeCost, tag } = current_item;
     const { width, height } = this.state.svg;
     
     const svg = this._getSVG();
