@@ -40,11 +40,16 @@ export const APP_TIPS = {
     description: "This Dota 2 profile has been added to the app. The profile will be available on the app's HomeScreen, unless this option is disabled under \"Settings\"."
   },
 }
+
+let tipTimeout;
 export const showTip = (tip, duration=10) => {
-  if(duration > 0) setTimeout(() => singletonInstance.setState({
-    show: false,
-    tip: '',
-  }), duration*1000);
+  if(duration > 0) {
+    if(tipTimeout) clearTimeout(tipTimeout);
+    tipTimeout = setTimeout(() => singletonInstance.setState({
+      show: false,
+      tip: '',
+    }), duration*1000);
+  }
 
   singletonInstance && singletonInstance.setState({
     show: true,
