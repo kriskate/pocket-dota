@@ -3,7 +3,7 @@ import { View, WebView, ActivityIndicator, StyleSheet, Platform } from 'react-na
 import { Container, Text, Button } from '../components/ui';
 
 import { headerStyle } from '../utils/screen';
-import { SCREEN_LABELS, URL_ODOTA, ICONS, HELP_TEXTS } from '../constants/Constants';
+import { SCREEN_LABELS, URL_ODOTA, ICONS, HELP_TEXTS, URLS } from '../constants/Constants';
 import Colors from '../constants/Colors';
 import { showTip, APP_TIPS } from '../components/AppTips';
 import { connect } from 'react-redux';
@@ -90,7 +90,6 @@ class NavigationControls extends React.PureComponent {
 }
 
 
-
 export default class StatsWebScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     ...headerStyle,
@@ -103,7 +102,7 @@ export default class StatsWebScreen extends React.Component {
     showTip(APP_TIPS.ADD_PROFILE, 15);
 
     this.state = {
-      isModalVisible: true,
+      isModalVisible: false,
     }
   }
 
@@ -133,15 +132,23 @@ export default class StatsWebScreen extends React.Component {
         >
           <Container style={Layout.modal_body}>
             <Text style={Layout.modal_header}>{HELP_TEXTS.HELP_HEADER}</Text>
-            <Text style={styles.help_row}>{HELP_TEXTS.HELP_CONTENT}</Text>
+            <Text style={styles.help_row} hasUrl URLS={URLS}>{HELP_TEXTS.HELP_CONTENT}</Text>
 
             { Object.keys(HELP_TEXTS).map(hText => {
               if(hText.split('_')[0] == "HELP") return;
+
               const IconComponent = ICONS[hText];
+              const TextComponent = HELP_TEXTS[hText];
+
               return (
                 <View key={hText} style={styles.help_row}>
                   <Button prestyled forceTouchableOpacity style={ styles.buttonHeader }><IconComponent /></Button>
-                  <Text style={styles.help_text}>{HELP_TEXTS[hText]}</Text>
+                  <Text style={styles.help_text}>
+                    { typeof TextComponent == 'string' 
+                      ? TextComponent
+                      : <TextComponent />
+                    }
+                  </Text>
                 </View>
               )
             })}
