@@ -25,7 +25,7 @@ export const HOME_LABELS = {
   ITEMS: 'ITEMS',
   TIPS: 'TIPS',
 
-  STATS: 'STATS',
+  STATS: 'PLAYER STATISTICS',
 }
 export const SCREEN_LABELS = {
   HOME: 'Home',
@@ -38,8 +38,8 @@ export const SCREEN_LABELS = {
   TIPS: 'Tips',
   PATCH_NOTES: 'Patch notes',
   
-  HEADER_STATS: 'Player',
-  STATS: 'Stats',
+  HEADER_STATS: 'User',
+  STATS: 'Player Statistics',
   SETTINGS: 'Settings',
   
   HEADER_ABOUT: 'About and legal',

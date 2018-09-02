@@ -94,6 +94,7 @@ export default class StatsWebScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     ...headerStyle,
     headerTitle: <NavigationControls player={navigation.state.params.player} />,
+    headerTruncatedBackTitle: 'Stats',
   });
 
   constructor(props) {
