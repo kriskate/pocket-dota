@@ -28,7 +28,7 @@ const ListItem = ({ label, navigation, selected }) => (
     <Text style={styles.label}>{ label }</Text>
   </Button>
 )
-const ListHeader = ({ label }) => <Text style={styles.labelHeader}>{label}</Text>
+const ListHeader = ({ label }) => <View style={styles.labelHeader}><Text style={styles.labelHeaderText}>{label}</Text></View>
 
 export default class Drawer extends React.Component {  
   // if home, there is no key, as Home is not in the drawer by default
@@ -94,8 +94,10 @@ const styles = StyleSheet.create({
     marginTop: Layout.padding_regular,
     paddingTop: Layout.padding_big,
     marginLeft: Layout.padding_regular,
-    borderTopColor: Colors.dota_ui1,
+    borderTopColor: Colors.dota_red_dark,
     borderTopWidth: 1,
+  },
+  labelHeaderText:{
     color: Colors.goldenrod,
   },
 });
