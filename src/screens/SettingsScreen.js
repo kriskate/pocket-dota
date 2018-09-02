@@ -102,7 +102,6 @@ export default class SettingsScreen extends React.Component {
 
         <Header label="Profile" />
 
-        { name ? null : <Text style={styles.noprofile}>{"* In order to enable some of the functions below, you have to add a profile from the Stats screen"}</Text> }
 
         { !lastSearch ? null :
           <View style={styles.lastSearch}>
@@ -113,9 +112,10 @@ export default class SettingsScreen extends React.Component {
 
         { name ? null : (
           <Button prestyled
-            title={`${name ? 'Replace the' : "Add a"} Dota 2 user profile (Stats Screen)`}
-            onPress={() => navigate(SCREEN_LABELS.STATS)} />
+          title={`${name ? 'Replace the' : "Add a"} Dota 2 user profile`}
+          onPress={() => navigate(SCREEN_LABELS.STATS)} />
         )}
+        { name ? null : <Text style={styles.noprofile}>{"* In order to enable the functions below, you have to add a Dota 2 profile"}</Text> }
 
         <Button disabled={!name} prestyled
           title={`Your profile${!name ? '' : ' (' + name + ')'}` }

@@ -27,7 +27,7 @@ export const APP_TIPS = {
   ADD_PROFILE: {
     stateLink: 'addProfile',
     short: "Add profile to home screen",
-    description: "You can add a Dota profile by clicking the profile icon at the top of this screen. This way, you can quickly acces your Dota stats when opening the app.",
+    description: "You can add a Dota 2 profile by clicking the profile icon at the top of this screen. This way, you can quickly acces your Dota 2 stats when opening the app.",
   },
   ATTRIBUTES_SLIDER: {
     stateLink: 'attributesSlider',
@@ -36,8 +36,8 @@ export const APP_TIPS = {
   },
   DOTA_PROFILE_ADDED: {
     stateLink: 'dotaProfileAdded',
-    short: "Dota profile added",
-    description: "This Dota profile has been added to the app. The Dota profile will be available on the app's HomeScreen, unless disabled under \"Settings\"."
+    short: "Dota 2 profile added",
+    description: "This Dota 2 profile has been added to the app. The profile will be available on the app's HomeScreen, unless this option is disabled under \"Settings\"."
   },
 }
 export const showTip = (tip, duration=10) => {
