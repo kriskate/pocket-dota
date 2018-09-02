@@ -1,6 +1,8 @@
 import React from 'react';
 import { FontAwesome } from '@expo/vector-icons';
 import Colors from './Colors';
+import { Text } from '../components/ui';
+import { openURL } from '../utils/utils';
 
 
 export const ITEM_CONSTANTS = {
@@ -72,8 +74,25 @@ export const URL_ODOTA = {
 
 
 export const ICONS = {
-  USER: () => <FontAwesome name="user" size={17} color={Colors.dota_white} />,
   BACK: () => <FontAwesome name="arrow-circle-left" size={17} color={Colors.dota_white} />,
   FORWARD: () => <FontAwesome name="arrow-circle-right" size={17} color={Colors.dota_white} />,
+  USER: () => <FontAwesome name="user" size={17} color={Colors.dota_white} />,
   INFO: () => <FontAwesome name="info" size={17} color={Colors.dota_white} />,
+}
+
+
+export const URLS = {
+  ODOTA: 'https://www.opendota.com',
+}
+
+export const HELP_TEXTS = {
+  HELP_HEADER: 'The Dota 2 player statistics screen',
+  HELP_CONTENT: `The Dota 2 player profiles are a collection of statistics gathered and parsed by the ${<Text onPress={() => openURL(URLS.ODOTA)}Open Dota></Text>} platform.
+These statistics show an in-depth analysis of the player's activity in the Dota 2 game.
+
+Because the statistics screen is a preview of the Open Dota website, you will need the following buttons in order to navigate the Dota 2 player profiles:`,
+  HELP_DOTA_PROFILE: 'To set another player profile, simply navigate to another Dota 2 profile (from the Stats screen) and press the PROFILE button.',
+  BACK: 'Use the BACK button to navigate back in the current (statistics) screen.',
+  FORWARD: 'Use the FORWARD button to navigate back in the current (statistics) screen.',
+  USER: `When the PROFILE button is pressed, it will ${<Text style={{color: Colors.goldenrod}}>glow</Text>}, indicating that the current Dota 2 profile is the one that will appear on the app's home screen.`,
 }

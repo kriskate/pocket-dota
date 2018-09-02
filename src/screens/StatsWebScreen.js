@@ -3,7 +3,7 @@ import { View, WebView, ActivityIndicator, StyleSheet, Platform } from 'react-na
 import { Container, Text, Button } from '../components/ui';
 
 import { headerStyle } from '../utils/screen';
-import { SCREEN_LABELS, URL_ODOTA, ICONS } from '../constants/Constants';
+import { SCREEN_LABELS, URL_ODOTA, ICONS, HELP_TEXTS } from '../constants/Constants';
 import Colors from '../constants/Colors';
 import { showTip, APP_TIPS } from '../components/AppTips';
 import { connect } from 'react-redux';
@@ -11,6 +11,7 @@ import { Actions } from '../reducers/profile';
 import { model_odota } from '../constants/Models';
 
 import Layout from '../constants/Layout';
+import Modal from 'react-native-modal';
 
 
 const bkC = `background-color:${Colors.dota_ui1}!important;`;
@@ -79,8 +80,8 @@ class NavigationControls extends React.PureComponent {
             }}>
           <ICONS.USER />
         </Button>
-        <Button prestyled forceTouchableOpacity style={styles.buttonHeader}
-          onPress={() => {}}>
+        <Button prestyled forceTouchableOpacity style={styles.buttonHeader_info}
+          onPress={() => refs.screen.setState({ isModalVisible: true })}>
           <ICONS.INFO />
         </Button>
       </View>
@@ -100,6 +101,10 @@ export default class StatsWebScreen extends React.Component {
     super(props);
 
     showTip(APP_TIPS.ADD_PROFILE, 15);
+
+    this.state = {
+      isModalVisible: true,
+    }
   }
 
   _renderLoading = () => (
@@ -109,14 +114,43 @@ export default class StatsWebScreen extends React.Component {
   )
 
   _onLoadEnd = () => {
+    refs.screen = this;
     singleton && singleton.setState({ loading: false });
   }
+
+  _hideModal = () => this.setState({ isModalVisible: false })
+
   render() {
     const { account_id } = model_odota(this.props.navigation.state.params.player);
     const source = { uri: URL_ODOTA.PROFILE + account_id + '/overview' };
 
     return (
       <Container>
+        <Modal isVisible={this.state.isModalVisible}
+          onBackdropPress={this._hideModal}
+          onBackButtonPress={this._hideModal}
+          onSwipe={this._hideModal} swipeDirection="down"
+        >
+          <Container style={Layout.modal_body}>
+            <Text style={Layout.modal_header}>{HELP_TEXTS.HELP_HEADER}</Text>
+            <Text style={styles.help_row}>{HELP_TEXTS.HELP_CONTENT}</Text>
+
+            { Object.keys(HELP_TEXTS).map(hText => {
+              if(hText.split('_')[0] == "HELP") return;
+              const IconComponent = ICONS[hText];
+              return (
+                <View key={hText} style={styles.help_row}>
+                  <Button prestyled forceTouchableOpacity style={ styles.buttonHeader }><IconComponent /></Button>
+                  <Text style={styles.help_text}>{HELP_TEXTS[hText]}</Text>
+                </View>
+              )
+            })}
+            <Text>{HELP_TEXTS.HELP_DOTA_PROFILE}</Text>
+            <Button prestyled style={Layout.modal_close_button}
+              title="DONE"
+              onPress={this._hideModal} />
+          </Container>
+        </Modal>
         <WebView
           ref={el => refs.view = el}
           startInLoadingState
@@ -142,9 +176,25 @@ const styles = StyleSheet.create({
     padding: Layout.padding_small,
     paddingHorizontal: Layout.padding_regular,
     borderColor: Colors.dota_ui2,
+    // icon size + buttonHeader padding + <Button margin
+    height: 17 + Layout.padding_small*2 + Layout.padding_small,
+    width: 17 + Layout.padding_small*2 + Layout.padding_small*2,
+  },
+  buttonHeader_info: {
+    padding: Layout.padding_small,
+    paddingHorizontal: Layout.padding_regular,
+    borderColor: Colors.dota_ui2,
   },
   activityWrapper: {
     flex: 1,
     justifyContent: 'center',
+  },
+
+  help_row: {
+    flexDirection: 'row',
+    marginBottom: Layout.padding_big,
+  },
+  help_text: {
+    flex: 1,
   },
 })
