@@ -16,11 +16,13 @@ export function model_profile (data) {
     user=model_user({}),
     settings=model_settings({}),
     lastSearch,
+    lastSearchResults,
   } = data;
   return {
     user,
     settings,
     lastSearch,
+    lastSearchResults,
   };
 }
 export function model_user (user) {

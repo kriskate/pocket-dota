@@ -34,19 +34,19 @@ class Results extends React.PureComponent {
   _renderItem = ({item}) => <ProfileThumb result={item} navigation={this.props.navigation} />
 
   render() {
-    const { search_results, submitted_text } = this.props;
+    const { lastSearch, lastSearchResults } = this.props;
 
     return (
-      search_results == null
+      lastSearchResults == null
       ? <Container style={styles.resultsLoading}>
           <ActivityIndicator size='large' color={Colors.goldenrod} />
         </Container>
       : <Container scrollable padInner style={styles.results}>
-        { search_results.length < 1
-          ? <Text>Could not find any results for <Text style={{color: Colors.dota_white}}>{submitted_text}</Text>
+        { lastSearchResults.length < 1
+          ? <Text>Could not find any results for <Text style={{color: Colors.dota_white}}>{lastSearch}</Text>
             </Text>
           : <FlatList
-              data={search_results}
+              data={lastSearchResults}
               renderItem={this._renderItem}
               keyExtractor={item => item.account_id ? item.account_id.toString() : 'empty'}
             />
@@ -57,16 +57,20 @@ class Results extends React.PureComponent {
 }
 
 @connect(
-  (state => ({ lastSearch: state.profile.lastSearch })),
-  (dispatch => ({ searchFor: submitted_text => dispatch(Actions.searchFor(submitted_text)) }) )
+  (state => ({ 
+    lastSearch: state.profile.lastSearch,
+    lastSearchResults: state.profile.lastSearchResults,
+  })),
+  (dispatch => ({ 
+    searchFor: submitted_text => dispatch(Actions.searchFor(submitted_text)),
+    searchForResults: results => dispatch(Actions.searchForResults(results)),
+  }) )
 )
 export default class StatsScreen extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      submitted_text: '',
-      search_results: null,
       search_text: props.lastSearch || '',
     }
   }
@@ -78,17 +82,18 @@ export default class StatsScreen extends React.Component {
   _handleSubmit = async () => {
     Keyboard.dismiss();
     const { search_text } = this.state;
-    this.setState({ submitted_text: search_text, search_results: null });
     this.props.searchFor(search_text);
+    this.props.searchForResults(null);
 
-    const search_results = await (await fetch(URL_ODOTA.SEARCH + search_text)).json();
-    this.setState({ search_results });
+    const lastSearchResults = await (await fetch(URL_ODOTA.SEARCH + search_text)).json();
+
+    this.props.searchForResults(lastSearchResults);
   }
   _handleChange = (search_text) => this.setState({ search_text })
 
   render() {
-    const { search_results, submitted_text } = this.state;
-    const { navigation } = this.props;
+    const { lastSearch, lastSearchResults, navigation, } = this.props;
+    const { search_text } = this.state;
 
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -101,11 +106,11 @@ export default class StatsScreen extends React.Component {
               returnKeyType='search'
               enablesReturnKeyAutomatically
               onChangeText={this._handleChange}
-              value={this.state.search_text}
+              value={search_text}
             />
             <Button style={styles.searchButton} onPress={this._handleSubmit}><Text>Search</Text></Button>
           </View>
-          { !submitted_text ? null : <Results navigation={navigation} submitted_text={submitted_text} search_results={search_results} /> }
+          { !lastSearch ? null : <Results navigation={navigation} lastSearch={lastSearch} lastSearchResults={lastSearchResults} /> }
         </Container>
       </TouchableWithoutFeedback>
     );
