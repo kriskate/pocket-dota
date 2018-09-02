@@ -156,8 +156,8 @@ export default class SettingsScreen extends React.Component {
             onBackButtonPress={this._hideTipsModal}
             onSwipe={this._hideTipsModal} swipeDirection="down"
           >
-          <View style={styles.tipsModal}>
-            <Text style={styles.inAppTipsText} >In-app tips</Text>
+          <Container scrollable style={Layout.modal_body}>
+            <Text style={Layout.modal_header} >In-app tips</Text>
 
             <Switch label="Turn all tips ON/ OFF"
               style={{ marginBottom: Layout.padding_big + Layout.padding_regular, }}
@@ -184,10 +184,10 @@ export default class SettingsScreen extends React.Component {
                 )
               }
             )}
-            <Button prestyled style={styles.tipsModalButton}
-              title="DONE"
-              onPress={this._hideTipsModal} />
-          </View>
+          </Container>
+          <Button prestyled style={Layout.modal_close_button}
+            title="DONE"
+            onPress={this._hideTipsModal} />
         </Modal>
 
         <Switch label="Auto update app"
@@ -230,28 +230,6 @@ const styles = StyleSheet.create({
   labelHeader: {
     color: Colors.goldenrod,
   },
-  
-  tipsModal: {
-    flex: 1,
-    backgroundColor: Colors.dota_ui1,
-    borderRadius: 3,
-
-    marginHorizontal: Layout.padding_small,
-    marginVertical: Layout.padding_big + Layout.padding_regular,
-    padding: Layout.padding_regular,
-  },
-  tipsModalButton: {
-    position: 'absolute',
-    bottom: Layout.padding_small,
-    width: '100%',
-    borderWidth: 1,
-    borderColor: Colors.dota_ui2,
-  },
-  inAppTipsText: {
-    textAlign: 'center',
-    marginBottom: Layout.padding_big,
-  },
-
 
   switch: {
   },
