@@ -44,17 +44,22 @@ export const APP_TIPS = {
 let tipTimeout;
 export const showTip = (tip, duration=10) => {
   if(duration > 0) {
-    if(tipTimeout) clearTimeout(tipTimeout);
+    if(tipTimeout) {
+      clearTimeout(tipTimeout);
+      singletonInstance && singletonInstance.setState({
+        show: false,
+        tip: '',
+      })
+    }
     tipTimeout = setTimeout(() => singletonInstance.setState({
       show: false,
       tip: '',
     }), duration*1000);
   }
-
-  singletonInstance && singletonInstance.setState({
+  setTimeout(() => singletonInstance && singletonInstance.setState({
     show: true,
     tip,
-  })
+  }), 750);
 }
 
 
@@ -107,7 +112,7 @@ export default class AppTips extends React.PureComponent {
         }}
         onPress={this._hide}
         actionTextWrapperStyle={{ maxWidth: 80, marginLeft: Layout.padding_regular }}
-        backgroundColor={Colors.dota_ui1}
+        backgroundColor={Colors.dota_ui3}
         accentColor={Colors.goldenrod}
         messageColor={Colors.dota_white}
       />
