@@ -10,7 +10,7 @@ const Title = ({ title, disabled, style }) => !title ? null :
 export default class Button extends React.Component {
   static defaultProps = {
     borderless: false,
-    pressColor: 'rgba(0, 0, 0, .32)'
+    pressColor: Colors.dota_white,
   };
   
   render() {
@@ -30,10 +30,10 @@ export default class Button extends React.Component {
 
     if (Platform.OS === 'android' && Platform.Version >= 21 && !forceTouchableOpacity) {
       return (
-        <View style={touchStyle} onLayout={onLayout}>
+        <View onLayout={onLayout}>
           <TouchableNativeFeedback onPress={onPress} useForeground disabled={disabled}
               background={TouchableNativeFeedback.Ripple(pressColor, borderless)}>
-            <View style={[styles.button, viewStyle]}>
+            <View style={[touchStyle, !prestyled && styles.button, viewStyle]}>
               <Title title={title} disabled={disabled} />
               {children}
             </View>
@@ -42,13 +42,11 @@ export default class Button extends React.Component {
       );
     } else {
       return (
-        <TouchableOpacity onPress={onPress} style={touchStyle}
+        <TouchableOpacity onPress={onPress} style={[touchStyle, !prestyled && styles.button, viewStyle]}
             disabled={disabled}
             onLayout={onLayout}>
-          <View style={[styles.button, viewStyle]}>
             <Title title={title} disabled={disabled} style={titleStyle} />
             {children}
-          </View>
         </TouchableOpacity>
       );
     }
@@ -57,11 +55,8 @@ export default class Button extends React.Component {
 
 const styles = StyleSheet.create({
   prestyled: {
-    borderRadius: 5,
     borderWidth: 1,
-    borderColor: Colors.dota_ui1,
-    marginVertical: Layout.padding_small,
-    marginHorizontal: Layout.padding_regular,
+    borderColor: Colors.dota_ui2,
     padding: Layout.padding_regular,
   },
 
