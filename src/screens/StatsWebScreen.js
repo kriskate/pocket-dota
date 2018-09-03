@@ -185,6 +185,8 @@ const styles = StyleSheet.create({
     padding: Layout.padding_small,
     paddingHorizontal: Layout.padding_regular,
     borderColor: Colors.dota_ui2,
+    alignItems: 'center',
+    justifyContent: 'center',
     // icon size + buttonHeader padding + <Button margin
     height: 17 + Layout.padding_small*2 + Layout.padding_small,
     width: 17 + Layout.padding_small*2 + Layout.padding_small*2,

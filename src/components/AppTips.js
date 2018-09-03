@@ -4,7 +4,7 @@ import SnackBar from 'react-native-snackbar-component';
 
 import { Actions as ProfileActions } from '../reducers/profile';
 import Colors from '../constants/Colors';
-import { Platform, View } from 'react-native';
+import { Platform } from 'react-native';
 import { Button } from './ui';
 import Layout from '../constants/Layout';
 
