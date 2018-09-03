@@ -34,7 +34,7 @@ export default class Button extends React.Component {
           <TouchableNativeFeedback onPress={onPress} useForeground disabled={disabled}
               background={TouchableNativeFeedback.Ripple(pressColor, borderless)}>
             <View style={[touchStyle, !prestyled && styles.button, viewStyle]}>
-              <Title title={title} disabled={disabled} />
+              { !title ? null : <Title title={title} disabled={disabled} /> }
               {children}
             </View>
           </TouchableNativeFeedback>
