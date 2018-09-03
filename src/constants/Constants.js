@@ -68,7 +68,8 @@ export const DOWNLOAD_REASONS = {
 
 export const URL_ODOTA = {
   SEARCH: 'https://api.opendota.com/api/search?q=',
-  PROFILE: 'https://www.opendota.com/players/',
+  PROFILE: 'https://api.opendota.com/api/players/',
+  PROFILE_WEB: 'https://www.opendota.com/players/',
 }
 
 

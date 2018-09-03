@@ -122,7 +122,7 @@ export default class StatsWebScreen extends React.Component {
 
   render() {
     const { account_id } = model_odota(this.props.navigation.state.params.player);
-    const source = { uri: URL_ODOTA.PROFILE + account_id + '/overview' };
+    const source = { uri: URL_ODOTA.PROFILE_WEB + account_id + '/overview' };
 
     return (
       <Container>
