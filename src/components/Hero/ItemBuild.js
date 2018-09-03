@@ -77,6 +77,7 @@ export default class ItemBuild extends React.Component {
     // layoutWidth deductions from Card.marginHorizontal and Card.paddingHorizontal
     return (
       <ListScreen layoutWidth={Layout.window.width - 3*Layout.padding_regular - 4}
+        overlayed
         hasSections
         itemList={itemSections}
         imageAspectRatio={88/64}

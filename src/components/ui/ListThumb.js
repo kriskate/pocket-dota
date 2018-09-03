@@ -10,14 +10,19 @@ import { assets } from '../../constants/Data';
 export default class ListThumb extends React.PureComponent {
   render() {
     // cost is only used for items
-    const { onLayout, onPress, imgSource, imgSize, label, width, cost } = this.props;
+    const {
+      onLayout, onPress,
+      imgSource, imgSize, width,
+      label, cost,
+      overlayed,
+    } = this.props;
 
     return (
       <Button onLayout={onLayout} onPress={onPress} pressColor={Colors.dota_red_darker}>
         <View style={styles.thumb}>
           <Image style={imgSize} source={imgSource} />
           { !label ? null :
-            <View style={[styles.thumbTextWrapper, {width}]}>
+            <View style={[styles.thumbTextWrapper, overlayed && styles.thumbTextWrapper_overlay, {width}]}>
               <Text adjustsFontSizeToFit style={styles.thumbText}>{label}</Text>
             </View>
           }
@@ -41,16 +46,18 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.dota_ui1,
     alignItems: 'center',
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: 2,
     borderColor: Colors.dota_ui3,
   },
   thumbTextWrapper: {
     padding: 2,
     
-    position: 'absolute',
     bottom: 0,
     
     backgroundColor: Colors.dota_ui1 + '99',
+  },
+  thumbTextWrapper_overlay: {
+    position: 'absolute',
   },
   thumbText: {
     fontWeight: 'bold',

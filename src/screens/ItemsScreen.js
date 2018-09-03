@@ -46,6 +46,7 @@ export default class Itemscreen extends React.Component {
     return (
       <Container backToHome style={ styles.container }>
         <ListScreen
+          overlayed
           hasSections
           initialNumToRender={3}
           itemList={itemSections}
