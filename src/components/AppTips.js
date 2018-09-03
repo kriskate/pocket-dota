@@ -105,7 +105,7 @@ export default class AppTips extends React.PureComponent {
           this._hide();
           hideTip(stateLink);
         }}
-        
+        onPress={this._hide}
         actionTextWrapperStyle={{ maxWidth: 80, marginLeft: Layout.padding_regular }}
         backgroundColor={Colors.dota_ui1}
         accentColor={Colors.goldenrod}
