@@ -20,15 +20,15 @@ const Header = ({ label }) => (
   </View>
 )
 const Switch = ({ label, description, value, onValueChange, disabled, style }) => (
-  <View style={[styles.switchWrapper, style]}>
+  <Button prestyled style={[styles.switchWrapper, style]} onPress={() => onValueChange(!!!value)} disabled={disabled}>
     <View style={{ flex: 1 }}>
-      <Text>{label}</Text>
+      <Text style={disabled ? { color: Colors.dota_ui1 } : null}>{label}</Text>
       { !description ? null : <Text style={styles.switchDescription}>{description}</Text> }
     </View>
-    
-    <RNSwitch style={styles.switch} disabled={disabled} onTintColor={Colors.dota_agi + '70'}
+
+    <RNSwitch style={styles.switch} disabled={disabled} onTintColor={Colors.dota_agi + '70'} thumbTintColor={Platform.OS ==='android' ? Colors.dota_agi : null}
       value={value} onValueChange={onValueChange} />
-  </View>
+  </Button>
 )
 
 
@@ -134,6 +134,7 @@ export default class SettingsScreen extends React.Component {
 
         <Switch label="Auto update Database"
           value={autoUpdateDB} onValueChange={val => this.props.updateSettings({ autoUpdateDB: val })} />
+
         <Button prestyled
           title="Check for update"
           onPress={this._checkForUpdate} />
@@ -144,12 +145,9 @@ export default class SettingsScreen extends React.Component {
 
         <Header label="App settings:" />
 
-        <View style={styles.switchWrapper}>
-          <Text>In-app tips</Text>
-          <Button prestyled style={{ marginHorizontal: 0 }}
-            title="Tips"
-            onPress={() => this.setState({ tipsModalVisible: true })} />
-        </View>
+        <Button prestyled style={{ marginHorizontal: 0 }}
+          title="In-app tips"
+          onPress={() => this.setState({ tipsModalVisible: true })} />
 
         <Modal isVisible={tipsModalVisible}
             onBackdropPress={this._hideTipsModal}
@@ -213,7 +211,7 @@ const styles = StyleSheet.create({
   },
   lastSearch: {
     padding: Layout.padding_regular,
-    marginHorizontal: Layout.padding_regular,
+    // marginHorizontal: Layout.padding_regular,
     borderColor: Colors.dota_ui1,
     borderWidth: 2,
   },
@@ -237,8 +235,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginHorizontal: Layout.padding_big,
-    marginVertical: Layout.padding_regular,
+    padding: Layout.padding_small,
+    paddingHorizontal: Layout.padding_regular,
+    backgroundColor: Colors.dota_ui1,
+    borderWidth: 1,
+    borderColor: Colors.dota_ui2,
   },
   switchDescription: {
     color: Colors.disabled,
