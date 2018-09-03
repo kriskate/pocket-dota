@@ -32,10 +32,6 @@ const MenuItem = ({onPress, label, cardImage, profileImage}) => (
   showProfileOnHome: state.profile.settings.showProfileOnHome,
 }))
 export default class HomeScreen extends React.PureComponent {
-  static defaultProps = {
-    profileName: HOME_LABELS.PROFILE,
-  };
-
   render() {
     const { name, image, account_id } = this.props.user;
     const { navigate } = this.props.navigation;
