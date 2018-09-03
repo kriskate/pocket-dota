@@ -19,6 +19,7 @@ export const animation = {
 }
 
 export const headerStyle = {
+  headerPressColorAndroid: Colors.dota_white,
   headerRight: <ButtonHamburger />,
   headerStyle: {
     backgroundColor: Colors.dota_ui1,
