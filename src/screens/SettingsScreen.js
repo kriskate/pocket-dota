@@ -104,10 +104,10 @@ export default class SettingsScreen extends React.Component {
 
 
         { !lastSearch ? null :
-          <View style={styles.lastSearch}>
+          <Button style={styles.lastSearch} onPress={() => navigate(SCREEN_LABELS.STATS)}>
             <Text>{"Last profile search: "}</Text>
             <Text style={{ color: Colors.goldenrod }}>{lastSearch}</Text>
-          </View>
+          </Button>
         }
 
         { name ? null : (
@@ -210,10 +210,9 @@ const styles = StyleSheet.create({
     color: Colors.disabled,
   },
   lastSearch: {
-    padding: Layout.padding_regular,
-    // marginHorizontal: Layout.padding_regular,
+    padding: Layout.padding_small,
     borderColor: Colors.dota_ui1,
-    borderWidth: 2,
+    borderWidth: 3,
   },
   labelHeaderWrapper: {
     marginTop: Layout.padding_regular,
