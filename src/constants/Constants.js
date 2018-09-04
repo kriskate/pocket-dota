@@ -2,7 +2,15 @@ import React from 'react';
 import { FontAwesome } from '@expo/vector-icons';
 import Colors from './Colors';
 import { Text } from '../components/ui';
+import { Constants } from 'expo';
 
+let _wikiVersion;
+export const setWikiVersion = ({ app_version, currentWikiVersion }) => {
+  _wikiVersion = !app_version ? null :
+    `${app_version}.${currentWikiVersion}`;
+}
+
+export const GET_WIKI_VERSION = () => _wikiVersion;
 
 export const ITEM_CONSTANTS = {
   DISSASEMBLE: 'DOTA_ITEM_DISASSEMBLE_ALWAYS',

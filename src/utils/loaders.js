@@ -4,6 +4,7 @@ import { model_profile, model_wiki } from '../constants/Models';
 import { folder_data } from './downloaders';
 import { getItem } from './storage';
 import { assets } from '../constants/Data';
+import { setWikiVersion } from '../constants/Constants';
 
 
 export const loadInitialAssets = async () => {
@@ -58,6 +59,7 @@ export const loadWiki = async () => {
       Logger.silly(`- loaded local data: wiki : ${key} : ${!!data[key]}`);
     })
   )
+  setWikiVersion(data.info);
   
   return badData ? null : data;
 }
@@ -69,6 +71,7 @@ export const loadCurrentWikiInfo = async () => {
     info = JSON.parse(await FileSystem.readAsStringAsync(folder_data + 'info.json'));
   } catch(e) { 
     info = null;
-   }
+  }
+
   return info;
 }

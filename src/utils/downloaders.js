@@ -67,7 +67,7 @@ export const downloadImages = async (wiki, progress_callback) => {
 export const downloadWiki = async (progress_callback) => {
   Logger.debug('downloading new wiki');
   let info = await loadCurrentWikiInfo();
-  if(!info) info = await downloadWikiInfo()
+  if(!info) info = await downloadWikiInfo();
 
   const { currentWikiVersion, currentWikiVersionDate } = await loadCurrentWikiInfo();
 
@@ -132,4 +132,11 @@ const download = async (uri, folder, progress=()=>{}) => {
 const checkFolder = async (folder) => {
   const folderInfo = await FileSystem.getInfoAsync(folder);
   if (!folderInfo.exists) await FileSystem.makeDirectoryAsync(folder, { intermediates: true });
+}
+
+export const getJSONwikiInfo = async () => {
+  const res = await fetch(url.currentWiki);
+  if(!res) return null;
+
+  return res.json();
 }
