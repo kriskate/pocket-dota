@@ -10,6 +10,7 @@ export const setWikiVersion = ({ app_version, currentWikiVersion }) => {
     `${app_version}.${currentWikiVersion}`;
 }
 
+export const APP_VERSION = Constants.manifest.version;
 export const GET_WIKI_VERSION = () => _wikiVersion;
 
 export const ITEM_CONSTANTS = {

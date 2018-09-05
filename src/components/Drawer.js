@@ -3,7 +3,7 @@ import { NavigationActions } from 'react-navigation';
 import { StyleSheet, View, Image } from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 
-import { SCREEN_LABELS } from '../constants/Constants';
+import { SCREEN_LABELS, APP_VERSION } from '../constants/Constants';
 import { Button, Container, Text } from './ui';
 import Colors from '../constants/Colors';
 import { assets } from '../constants/Data';
@@ -43,9 +43,10 @@ export default class Drawer extends React.Component {
 
     return (
       <Container scrollable>
-          <Image style={styles.imgBackground} source={assets.app.menuProfile} />
+        <Image style={styles.imgBackground} source={assets.app.menuProfile} />
         <View style={styles.imgIconWrapper}>
           <Image style={styles.imgIcon} source={assets.app.logoRed} />
+          <Text style={styles.appVersion}>v. {APP_VERSION}</Text>
         </View>
 
 
@@ -76,6 +77,13 @@ const styles = StyleSheet.create({
   imgBackground: {
     height: 110,
     position: "absolute",
+  },
+  appVersion: {
+    color: Colors.goldenrod,
+    marginRight: Layout.padding_small,
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
   },
   
   item: {
