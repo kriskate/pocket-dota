@@ -14,6 +14,7 @@ import { Actions as UpdateActions } from '../reducers/update';
 import Modal from "react-native-modal";
 import { APP_TIPS } from '../components/AppTips';
 import { wiki_needsUpdate, app_needsUpdate } from '../utils/updaters';
+import { alertUpdateCheckError, alertUpdateCheckAvailable, alertRemoveProfileData, alertResetSettings } from '../utils/Alerts';
 
 
 const Header = ({ label }) => (
@@ -112,54 +113,24 @@ export default class SettingsScreen extends React.PureComponent {
     }
 
     if(newV.error) {
-      Alert.alert(
-        `Error`,
-        `There was an error while trying to retrieve new ${What} version
-        ${newV.error}
-        Please try again later.`,
-        [
-          { text: 'Dismiss', onPress: () => this._updateCanceled(What) },
-        ],
-        { cancelable: true }
-      );
+      const onDismiss = () => this._updateCanceled(What);
+      alertUpdateCheckError(What, newV.error, onDismiss);
     } else {
-      Alert.alert(
-        `New version found! (${newV})`,
-        `A new ${What} version has been found.
-        Would you like to begin downloading it?
-        It is recoomended to be connected to a WI-FI network before downloading new data.`,
-        [
-          { text: 'No', style: 'cancel', onPress: () => this._updateCanceled(What) },
-          { text: 'Yes', onPress: () => this._updateToV(What, newV) },
-        ],
-        { cancelable: true }
-      );
+      const onNo = () => this._updateCanceled(What);
+      const onYes = () => this._updateToV(What, newV);
+      alertUpdateCheckAvailable(What, newV, onNo, onYes);
     }
 
   }
 
 
   _removeProfileData = () => {
-    Alert.alert(
-      'Are you sure you want to remove your profile?',
-      'This will remove the Dota profile data.',
-      [
-        {text: 'No', style: 'cancel'},
-        {text: 'Yes', onPress: () => this.props.setUser(model_user({})) },
-      ],
-      { cancelable: true }
-    )
+    const onYes = () => this.props.setUser(model_user({}));
+    alertRemoveProfileData(onYes);
   }
   _resetSettings = () => {
-    Alert.alert(
-      'Are you sure you want to reset settings to default?',
-      'This will reset the settings to default, including the removal of the Dota profile data.',
-      [
-        { text: 'No', style: 'cancel' },
-        { text: 'Yes', onPress: () => this.props.setProfile(model_profile({})) },
-      ],
-      { cancelable: true }
-    )
+    const onYes = () => this.props.setProfile(model_profile({}));
+    alertResetSettings(onYes);
   }
   _removeWikiData = () => {
     Alert.alert(
