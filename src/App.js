@@ -16,6 +16,7 @@ import { loadInitialAssets, loadCurrentWikiInfo, loadWiki, } from './utils/loade
 import Logger from './utils/Logger';
 import { DOWNLOAD_REASONS } from './constants/Constants';
 import AppTips from './components/AppTips';
+import { initialState } from './reducers/update';
 
 
 /* SETUP */
@@ -48,11 +49,11 @@ export default class App extends React.Component {
 
     const wiki = await loadWiki();
     
-    let downloadReason = '';
+    let downloadingWiki_reason = '';
     if(!wiki) {
       const wikiInfo = await loadCurrentWikiInfo();
       // if we do have wikiInfo it means wiki was downloaded before, so we have some missing wiki data
-      downloadReason = wikiInfo ? DOWNLOAD_REASONS.MISSING : DOWNLOAD_REASONS.FRESH;
+      downloadingWiki_reason = wikiInfo ? DOWNLOAD_REASONS.MISSING : DOWNLOAD_REASONS.FRESH;
     }
     
     const persistConfig = {
@@ -65,8 +66,9 @@ export default class App extends React.Component {
     store = createStore(persistedReducer, {
       wiki,
       update: {
-        downloading: !wiki,
-        downloadReason,
+        ...initialState,
+        showWiki: !!downloadingWiki_reason,
+        downloadingWiki_reason,
       },
     });
 

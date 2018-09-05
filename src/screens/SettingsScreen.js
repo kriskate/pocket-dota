@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Text, Button } from '../components/ui';
 
 import { headerStyle } from '../utils/screen';
-import { SCREEN_LABELS, SCREEN_LABELS_HIDDEN, APP_VERSION, GET_WIKI_VERSION } from '../constants/Constants';
+import { SCREEN_LABELS, SCREEN_LABELS_HIDDEN, APP_VERSION, GET_WIKI_VERSION, DOWNLOAD_REASONS } from '../constants/Constants';
 import { StyleSheet, Switch as RNSwitch, View, Alert, Platform } from 'react-native';
 import Colors from '../constants/Colors';
 import Layout from '../constants/Layout';
@@ -44,6 +44,7 @@ const CheckButton = ({ label, message, current, onPress }) => (
 const checkMessages = {
   CHECK: '...checking for update',
   LATEST: 'is up to date',
+  UPDATING: '...updating',
 }
 const TYPES = {
   WIKI: 'Wiki',
@@ -54,17 +55,20 @@ const TYPES = {
 @connect(
   (state => ({
     profile: state.profile,
+
+    updatingWiki: state.update.downloadWiki_reason,
+    updatingApp: state.update.downloadApp_version,
   })),
   (dispatch => ({
     updateSettings: val => dispatch(Actions.settings(val)),
     setProfile: val => dispatch(Actions.setProfile(val)),
     setUser: val => dispatch(Actions.setUser(val)),
 
-    updateWiki: dispatch(UpdateActions.redownload()),
-    updateApp: dispatch(UpdateActions.updateApp()),
+    updateWiki: (version) => dispatch(UpdateActions.downloadWiki(DOWNLOAD_REASONS.UPDATE, version)),
+    updateApp: (version) => dispatch(UpdateActions.updateApp(version)),
   }))
 )
-export default class SettingsScreen extends React.Component {
+export default class SettingsScreen extends React.PureComponent {
   static navigationOptions = () => ({
     title: SCREEN_LABELS.SETTINGS,
     ...headerStyle,
@@ -77,17 +81,37 @@ export default class SettingsScreen extends React.Component {
     wikiUpdatingMessage: '',
     appUpdatingMessage: '',
   }
+  
+  _updateToV = (What, newV) => {
+    const stater = What == TYPES.WIKI ? 'wikiUpdatingMessage' : 'appUpdatingMessage';
+    this.setState({ [stater]: checkMessages.UPDATING });
 
-  __updateCanceled = (What) => {
+    What == TYPES.WIKI ? this.props.updateWiki(newV) : this.props.updateApp(newV);
+  }
+
+  _updateCanceled = (What) => {
     const stater = What == TYPES.WIKI ? 'wikiUpdatingMessage' : 'appUpdatingMessage';
     this.setState({ [stater]: '' });
   }
-  __checkForUpdate = async (What) => {
+  _checkForUpdate = async (What) => {
     const stater = What == TYPES.WIKI ? 'wikiUpdatingMessage' : 'appUpdatingMessage';
+
+    if(this.state[stater] === checkMessages.UPDATING) {
+      // if update is already in progress, open modal directly
+      this._updateToV(What, What == 'Wiki' ? this.props.updatingWiki : this.props.updatingApp);
+      return;
+    }
 
     this.setState({ [stater]: checkMessages.CHECK });
 
-    const newV = What == TYPES.WIKI ? await  wiki_needsUpdate() : await app_needsUpdate();
+    if(this.props._testUpdates || this.props.navigation.getParam('_testUpdates')) {
+      // props _testUpdates should be used in unit tests, while navigation testUpdates can be used while working on features
+      this._updateToV(What, '1.0.test');
+
+      return;
+    }
+
+    const newV = What == TYPES.WIKI ? await wiki_needsUpdate() : await app_needsUpdate();
 
     if(!newV) {
       this.setState({ [stater]: `${What} ${checkMessages.LATEST}` });
@@ -101,7 +125,7 @@ export default class SettingsScreen extends React.Component {
         ${newV.error}
         Please try again later.`,
         [
-          { text: 'Dismiss', onPress: () => this.__updateCanceled(What) },
+          { text: 'Dismiss', onPress: () => this._updateCanceled(What) },
         ],
         { cancelable: true }
       );
@@ -112,8 +136,8 @@ export default class SettingsScreen extends React.Component {
         Would you like to begin downloading it?
         It is recoomended to be connected to a WI-FI network before downloading new data.`,
         [
-          { text: 'No', style: 'cancel', onPress: () => this.__updateCanceled(What) },
-          { text: 'Yes', onPress: () => What == TYPES.WIKI ? this.props.updateWiki() : this.props.updateApp() },
+          { text: 'No', style: 'cancel', onPress: () => this._updateCanceled(What) },
+          { text: 'Yes', onPress: () => this._updateToV(What, newV) },
         ],
         { cancelable: true }
       );
@@ -206,7 +230,7 @@ export default class SettingsScreen extends React.Component {
           value={autoUpdateDB} onValueChange={val => this.props.updateSettings({ autoUpdateDB: val })} />
 
         <CheckButton label='Check for wiki update'
-          onPress={() => this.__checkForUpdate(TYPES.WIKI)}
+          onPress={() => this._checkForUpdate(TYPES.WIKI)}
           message={wikiUpdatingMessage}
           current={GET_WIKI_VERSION()}
         />
@@ -264,7 +288,7 @@ export default class SettingsScreen extends React.Component {
           value={autoUpdateApp} onValueChange={val => this.props.updateSettings({ autoUpdateApp: val })} />
 
         <CheckButton label='Check for app update'
-          onPress={() => this.__checkForUpdate(TYPES.APP)}
+          onPress={() => this._checkForUpdate(TYPES.APP)}
           message={appUpdatingMessage}
           current={APP_VERSION}
         />

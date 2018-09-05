@@ -1,41 +1,67 @@
 import { DOWNLOAD_REASONS } from "../constants/Constants";
+import { Util } from "expo";
 
 const ActionTypes = {
-  DOWNLOAD: 'DOWNLOAD',
-  REDOWNLOAD: 'REDOWNLOAD',
-  UPDATE: 'UPDATE',
-  DONE: 'DONE',
+  DOWNLOAD_WIKI: 'DOWNLOAD_WIKI',
+  DONE_WIKI: 'DONE_WIKI',
 
   UPDATE_APP: 'UPDATE_APP',
+  DONE_UPDATE_APP: 'DONE_UPDATE_APP',
+
+  HIDE: 'HIDE',
 }
 export const Actions = {
-  download: payload => ({ type: ActionTypes.DOWNLOAD }),
-  redownload: payload => ({ type: ActionTypes.REDOWNLOAD }),
-  update: payload => ({ type: ActionTypes.UPDATE }),
-  done: payload => ({ type: ActionTypes.DONE }),
+  downloadWiki: (reason, version) => ({ type: ActionTypes.DOWNLOAD_WIKI, reason, version }),
+  doneWiki: () => ({ type: ActionTypes.DONE_WIKI }),
+  
+  updateApp: version => ({ type: ActionTypes.UPDATE_APP, version }),
+  doneApp: () => ({ type: ActionTypes.DONE_UPDATE_APP }),
 
-  updateApp: () => ({ type: ActionTypes.UPDATE_APP }),
+  hide: what => ({ type: ActionTypes.HIDE, what }),
 }
 
+export const DOWNLOAD_STATE = {
+  WIKI: 'showWiki',
+  APP: 'showApp',
+}
 export const initialState = {
-  downloadingApp: false,
-  downloading: false,
-  downloadReason: '',
+  showApp: false,
+  downloadingApp_version: '',
+  
+  showWiki: true,
+  downloadingWiki_reason: DOWNLOAD_REASONS.UPDATE,
+  downloadingWiki_version: '',
+
+  testUpdateModals: true,
 };
 
 export default function reducer(state=initialState, action) {
   switch(action.type) {
-    case ActionTypes.DOWNLOAD:
-      return { downloading: true, downloadReason: DOWNLOAD_REASONS.FRESH };
-    case ActionTypes.REDOWNLOAD:
-      return { downloading: true, downloadReason: DOWNLOAD_REASONS.MISSING };
-    case ActionTypes.UPDATE:
-      return { downloading: true, downloadReason: DOWNLOAD_REASONS.UPDATE };
-    case ActionTypes.DONE:
-      return { downloading: false, downloadReason: '' };
+    case ActionTypes.DOWNLOAD_WIKI:
+      return { ...state,
+        showWiki: true,
+        downloadingWiki_reason: action.reason,
+        downloadingWiki_version: action.version,
+      };
+    case ActionTypes.DONE_WIKI:
+      return { ...state,
+        showWiki: false,
+        downloadingWiki_reason: '',
+        downloadingWiki_version: '',
+      };
 
     case ActionTypes.UPDATE_APP:
-      return { downloadingApp: true, }
+      return { ...state,
+        showApp: true,
+        downloadingApp_version: action.version,
+      };
+    case ActionTypes.DONE_UPDATE_APP:
+      Util.reload();
+
+    case ActionTypes.HIDE:
+      return { ...state,
+        [action.what]: false,
+      }
     default:
       return state;
   }
