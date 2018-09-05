@@ -9,6 +9,7 @@ const ActionTypes = {
   DONE_UPDATE_APP: 'DONE_UPDATE_APP',
 
   HIDE: 'HIDE',
+  SHOW: 'SHOW',
 }
 export const Actions = {
   downloadWiki: (reason, version) => ({ type: ActionTypes.DOWNLOAD_WIKI, reason, version }),
@@ -18,6 +19,7 @@ export const Actions = {
   doneApp: () => ({ type: ActionTypes.DONE_UPDATE_APP }),
 
   hide: what => ({ type: ActionTypes.HIDE, what }),
+  show: what => ({ type: ActionTypes.SHOW, what }),
 }
 
 export const DOWNLOAD_STATE = {
@@ -56,10 +58,15 @@ export default function reducer(state=initialState, action) {
       };
     case ActionTypes.DONE_UPDATE_APP:
       Util.reload();
+      return state;
 
     case ActionTypes.HIDE:
       return { ...state,
         [action.what]: false,
+      }
+    case ActionTypes.SHOW:
+      return { ...state,
+        [action.what]: true,
       }
 
     default:

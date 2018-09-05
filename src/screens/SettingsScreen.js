@@ -68,6 +68,8 @@ const TYPES = {
 
     updateWiki: (version) => dispatch(UpdateActions.downloadWiki(DOWNLOAD_REASONS.UPDATE, version)),
     updateApp: (version) => dispatch(UpdateActions.updateApp(version)),
+
+    show: (what) => dispatch(UpdateActions.show(what)),
   }))
 )
 export default class SettingsScreen extends React.PureComponent {
@@ -98,7 +100,7 @@ export default class SettingsScreen extends React.PureComponent {
 
     if((What === TYPES.WIKI && updatingWiki) || (What === TYPES.APP && updatingApp)) {
       // if update is already in progress, open modal directly
-      this._updateToV(What, What == 'Wiki' ? updatingWiki : updatingApp);
+      this.props.show(What === TYPES.WIKI ? 'wiki' : 'app');
       return;
     }
 
