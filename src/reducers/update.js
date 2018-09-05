@@ -28,15 +28,14 @@ export const initialState = {
   showApp: false,
   downloadingApp_version: '',
   
-  showWiki: true,
-  downloadingWiki_reason: DOWNLOAD_REASONS.UPDATE,
+  showWiki: false,
+  downloadingWiki_reason: '',
   downloadingWiki_version: '',
-
-  testUpdateModals: true,
 };
 
 export default function reducer(state=initialState, action) {
   switch(action.type) {
+    
     case ActionTypes.DOWNLOAD_WIKI:
       return { ...state,
         showWiki: true,
@@ -62,6 +61,7 @@ export default function reducer(state=initialState, action) {
       return { ...state,
         [action.what]: false,
       }
+
     default:
       return state;
   }

@@ -5,6 +5,7 @@ import { Text, Progress, Separator } from '../components/ui';
 import { downloadImages, downloadWiki } from '../utils/downloaders';
 import Colors from '../constants/Colors';
 import { assets } from '../constants/Data';
+import { DOWNLOAD_REASONS } from '../constants/Constants';
 
 export default class AppDownloading extends React.PureComponent {
   state = {
@@ -27,7 +28,7 @@ export default class AppDownloading extends React.PureComponent {
   }
   
   render() {
-    const { reason } = this.props;
+    const { reason, version } = this.props;
 
     return (
       <View style={styles.content}>
@@ -37,6 +38,7 @@ export default class AppDownloading extends React.PureComponent {
         />
 
         <Text style={styles.reason}>{reason}</Text>
+        { reason == DOWNLOAD_REASONS.UPDATE && <Text style={styles.reason}>Updating to version: {version}</Text>}
 
         <Separator />
 
@@ -58,6 +60,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 25,
     justifyContent: 'center',
+    paddingBottom: 75,
     backgroundColor: Colors.dota_ui2,
   },
   reason: {

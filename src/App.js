@@ -88,9 +88,9 @@ export default class App extends React.Component {
       return (
         <Provider store={store}>
           <View style={{ flex: 1}}>
-            <Updater />
             <AppNavigator />
             <AppTips />
+            <Updater />
           </View>
         </Provider>
       )

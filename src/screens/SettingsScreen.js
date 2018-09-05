@@ -104,13 +104,6 @@ export default class SettingsScreen extends React.PureComponent {
 
     this.setState({ [stater]: checkMessages.CHECK });
 
-    if(this.props._testUpdates || this.props.navigation.getParam('_testUpdates')) {
-      // props _testUpdates should be used in unit tests, while navigation testUpdates can be used while working on features
-      this._updateToV(What, '1.0.test');
-
-      return;
-    }
-
     const newV = What == TYPES.WIKI ? await wiki_needsUpdate() : await app_needsUpdate();
 
     if(!newV) {
