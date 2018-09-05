@@ -11,3 +11,7 @@ export const trimAbilities = (htmlContent) =>
   htmlContent.trim().replace(r_whitespaceBR, '<br/>')
   .replace(r_trailingBR, '')
   .replace(r_beginingBR, '');
+
+
+
+export const sleep = async (ms) => new Promise(resolve => setTimeout(resolve, ms));

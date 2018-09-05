@@ -15,6 +15,7 @@ import Modal from "react-native-modal";
 import { APP_TIPS } from '../components/AppTips';
 import { wiki_needsUpdate, app_needsUpdate } from '../utils/updaters';
 import { alertUpdateCheckError, alertUpdateCheckAvailable, alertRemoveProfileData, alertResetSettings } from '../utils/Alerts';
+import { sleep } from '../utils/utils';
 
 
 const Header = ({ label }) => (
@@ -103,7 +104,11 @@ export default class SettingsScreen extends React.PureComponent {
 
     this.setState({ [stater]: checkMessages.CHECK });
 
+    const maybeTooFast = new Date();
+
     const newV = What == TYPES.WIKI ? await wiki_needsUpdate() : await app_needsUpdate();
+
+    if(new Date() - maybeTooFast < 1500) await sleep(1500);
 
     if(!newV) {
       this.setState({ [stater]: `${What} ${checkMessages.LATEST}` });
