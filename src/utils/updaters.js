@@ -1,7 +1,7 @@
-import { Constants } from "expo";
+import { GET_WIKI_VERSION, APP_VERSION } from "../constants/Constants";
+import { url } from "../constants/Data";
 import { Platform } from "react-native";
-import { GET_WIKI_VERSION } from "../constants/Constants";
-import { getJSONwikiInfo } from "./downloaders";
+import { Constants } from "expo";
 
 export const ERRORS = {
   NO_REVID: 'No revision id',
@@ -20,15 +20,14 @@ const getJSONwikiInfo = async () => {
   }
 }
 export const wiki_needsUpdate = async () => {
-  const localVersion = GET_WIKI_VERSION();
   const currentVersion = await getJSONwikiInfo();
-  if(!currentVersion) return { error: ERRORS.NO_WIKI_VERSION };
+  if(currentVersion.error) return { error: ERRORS.NO_WIKI_VERSION + `\r\n${currentVersion.error}`};
 
 
   const { currentWikiVersion, app_version } = currentVersion;
   const newV = `${app_version}.${currentWikiVersion}`;
 
-  if(localVersion == newV)
+  if(GET_WIKI_VERSION() === newV)
     return false;
   else
     return newV;
@@ -37,8 +36,29 @@ export const wiki_needsUpdate = async () => {
 
 export const app_needsUpdate = async () => {
   try {
-    return await Expo.Updates.checkForUpdateAsync();
+    const newApp = await Expo.Updates.checkForUpdateAsync();
+
+    if(newApp && newApp.isAvailable) {
+      try {
+        const { id, sdkVersion } = Constants.manifest;
+    
+        const res = await fetch(`https://expo.io/${id}/index.exp`, {
+          headers: {
+            'Exponent-SDK-Version': sdkVersion,
+            'Exponent-Platform': Platform.OS,
+          },
+          method: 'GET',
+        });
+    
+        const newV = (await res.json()).version;
+        if(APP_VERSION === newV) return false;
+        else return newV;
+
+      } catch(e) {
+        return { error: e };
+      }
+    } else return false;
   } catch(e) {
-    return false;
+    return { error: e };
   }
 }

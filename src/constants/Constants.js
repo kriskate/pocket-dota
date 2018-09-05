@@ -9,9 +9,9 @@ export const setWikiVersion = ({ app_version, currentWikiVersion }) => {
   _wikiVersion = !app_version ? null :
     `${app_version}.${currentWikiVersion}`;
 }
+export const GET_WIKI_VERSION = () => _wikiVersion;
 
 export const APP_VERSION = Constants.manifest.version;
-export const GET_WIKI_VERSION = () => _wikiVersion;
 
 export const ITEM_CONSTANTS = {
   DISSASEMBLE: 'DOTA_ITEM_DISASSEMBLE_ALWAYS',
