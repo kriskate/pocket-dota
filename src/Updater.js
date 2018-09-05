@@ -5,6 +5,7 @@ import AppDownloading from './screens/AppDownloading';
 import Modal from 'react-native-modal';
 import { Actions as UpdateActions } from './reducers/update';
 import { Actions as WikiActions } from './reducers/wiki';
+import { View } from 'react-native';
 
 @connect(
   (state => ({
@@ -29,6 +30,7 @@ export default class Updater extends React.PureComponent {
 
     return (
       <Modal isVisible={downloading}>
+        <View>
         { downloading && 
           <AppDownloading
             reason={downloadReason}
@@ -36,6 +38,7 @@ export default class Updater extends React.PureComponent {
             onError={Logger.error}
           />
         }
+        </View>
       </Modal>
     )
   }
