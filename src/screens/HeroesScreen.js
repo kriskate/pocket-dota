@@ -27,7 +27,6 @@ export default class HeroesScreen extends React.PureComponent {
     const heroSections = [];
 
     heroes.forEach(hero => {
-      const { AttributePrimary } = hero;
       let att, color;
 
       switch(hero.attributes.AttributePrimary) {
