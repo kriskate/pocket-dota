@@ -31,6 +31,23 @@ const Switch = ({ label, description, value, onValueChange, disabled, style }) =
   </Button>
 )
 
+const CheckButton = ({ label, message, current, onPress }) => (
+  <Button prestyled style={styles.versionButton} disabled={message==checkMessages.CHECK}
+      onPress={onPress} >
+    <Text>{ message ? message : label }</Text>
+    <Text style={{ color: Colors.goldenrod }}>current: {current}</Text>
+  </Button>
+)
+
+const checkMessages = {
+  CHECK: '...checking for update',
+  LATEST: 'is up to date',
+}
+const TYPES = {
+  WIKI: 'Wiki',
+  APP: 'App',
+}
+
 
 @connect(
   (state => ({
@@ -51,6 +68,9 @@ export default class SettingsScreen extends React.Component {
   state = {
     tipsModalVisible: false,
     allTipsOff: false,
+
+    wikiUpdatingMessage: '',
+    appUpdatingMessage: '',
   }
 
   _removeProfileData = () => {
@@ -95,7 +115,8 @@ export default class SettingsScreen extends React.Component {
     const { showProfileOnHome, autoUpdateApp, autoUpdateDB, tipsState } = model_settings(settings);
 
     const { navigate } = this.props.navigation;
-    const { allTipsOff, tipsModalVisible } = this.state;
+    const { wikiUpdatingMessage, appUpdatingMessage, allTipsOff, tipsModalVisible } = this.state;
+
 
     return (
       <Container backToHome scrollable style={{ paddingBottom: Layout.padding_regular }}>
@@ -135,9 +156,11 @@ export default class SettingsScreen extends React.Component {
         <Switch label="Auto update Database"
           value={autoUpdateDB} onValueChange={val => this.props.updateSettings({ autoUpdateDB: val })} />
 
-        <Button prestyled
-          title="Check for update"
-          onPress={this._checkForUpdate} />
+        <CheckButton label='Check for wiki update'
+          onPress={this._checkForWikiUpdate}
+          message={wikiUpdatingMessage}
+          current={GET_WIKI_VERSION()}
+        />
         <Button prestyled warning
           title="Clear wiki"
           onPress={this._removeWikiData} />
@@ -190,9 +213,12 @@ export default class SettingsScreen extends React.Component {
 
         <Switch label="Auto update app"
           value={autoUpdateApp} onValueChange={val => this.props.updateSettings({ autoUpdateApp: val })} />
-        <Button prestyled
-          title="Check for app update"
-          onPress={this._checkForUpdate} />
+
+        <CheckButton label='Check for app update'
+          onPress={this._checkForAppUpdate}
+          message={appUpdatingMessage}
+          current={APP_VERSION}
+        />
 
         <Button prestyled warning
           title="Reset to default settings"
@@ -228,6 +254,11 @@ const styles = StyleSheet.create({
     color: Colors.goldenrod,
   },
 
+  versionButton: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
   switch: {
   },
   switchWrapper: {
