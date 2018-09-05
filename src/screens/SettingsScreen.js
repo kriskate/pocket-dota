@@ -43,9 +43,9 @@ const CheckButton = ({ label, message, current, onPress }) => (
 )
 
 const checkMessages = {
-  CHECK: '...checking for update',
+  CHECK: '(checking for update)',
   LATEST: 'is up to date',
-  UPDATING: '...updating',
+  UPDATING: '(updating)',
 }
 const TYPES = {
   WIKI: 'Wiki',
@@ -57,8 +57,8 @@ const TYPES = {
   (state => ({
     profile: state.profile,
 
-    updatingWiki: state.update.downloadWiki_reason,
-    updatingApp: state.update.downloadApp_version,
+    updatingWiki: state.update.downloadingWiki_version,
+    updatingApp: state.update.downloadingApp_version,
   })),
   (dispatch => ({
     updateSettings: val => dispatch(Actions.settings(val)),
@@ -79,27 +79,25 @@ export default class SettingsScreen extends React.PureComponent {
     tipsModalVisible: false,
     allTipsOff: false,
 
-    wikiUpdatingMessage: '',
-    appUpdatingMessage: '',
+    checkingWiki: '',
+    checkingApp: '',
   }
   
   _updateToV = (What, newV) => {
-    const stater = What == TYPES.WIKI ? 'wikiUpdatingMessage' : 'appUpdatingMessage';
-    this.setState({ [stater]: checkMessages.UPDATING });
-
     What == TYPES.WIKI ? this.props.updateWiki(newV) : this.props.updateApp(newV);
   }
 
   _updateCanceled = (What) => {
-    const stater = What == TYPES.WIKI ? 'wikiUpdatingMessage' : 'appUpdatingMessage';
-    this.setState({ [stater]: '' });
+    // is already handled in _checkForUpdate
   }
-  _checkForUpdate = async (What) => {
-    const stater = What == TYPES.WIKI ? 'wikiUpdatingMessage' : 'appUpdatingMessage';
 
-    if(this.state[stater] === checkMessages.UPDATING) {
+  _checkForUpdate = async (What) => {
+    const stater = What == TYPES.WIKI ? 'checkingWiki' : 'checkingApp';
+    const { updatingWiki, updatingApp } = this.props;
+
+    if((What === TYPES.WIKI && updatingWiki) || (What === TYPES.APP && updatingApp)) {
       // if update is already in progress, open modal directly
-      this._updateToV(What, What == 'Wiki' ? this.props.updatingWiki : this.props.updatingApp);
+      this._updateToV(What, What == 'Wiki' ? updatingWiki : updatingApp);
       return;
     }
 
@@ -121,6 +119,7 @@ export default class SettingsScreen extends React.PureComponent {
       alertUpdateCheckAvailable(What, newV, onNo, onYes);
     }
 
+    this.setState({ [stater]: '' });
   }
 
 
@@ -152,7 +151,13 @@ export default class SettingsScreen extends React.PureComponent {
     const { showProfileOnHome, autoUpdateApp, autoUpdateDB, tipsState } = model_settings(settings);
 
     const { navigate } = this.props.navigation;
-    const { wikiUpdatingMessage, appUpdatingMessage, allTipsOff, tipsModalVisible } = this.state;
+    const { allTipsOff, tipsModalVisible } = this.state;
+
+    const { checkingApp, checkingWiki } = this.state;
+    const { updatingApp, updatingWiki } = this.props;
+
+    const wikiUpdatingMessage = checkingWiki || (updatingWiki && checkMessages.UPDATING);
+    const appUpdatingMessage = checkingApp || (updatingApp && checkMessages.UPDATING);
 
 
     return (
@@ -195,7 +200,7 @@ export default class SettingsScreen extends React.PureComponent {
 
         <CheckButton label='Check for wiki update'
           onPress={() => this._checkForUpdate(TYPES.WIKI)}
-          message={wikiUpdatingMessage}
+          message={wikiUpdatingMessage && wikiUpdatingMessage + " - wiki"}
           current={GET_WIKI_VERSION()}
         />
         <Button prestyled warning
@@ -253,7 +258,7 @@ export default class SettingsScreen extends React.PureComponent {
 
         <CheckButton label='Check for app update'
           onPress={() => this._checkForUpdate(TYPES.APP)}
-          message={appUpdatingMessage}
+          message={appUpdatingMessage && appUpdatingMessage + " - app"}
           current={APP_VERSION}
         />
 
