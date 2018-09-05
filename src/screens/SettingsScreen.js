@@ -35,8 +35,8 @@ const Switch = ({ label, description, value, onValueChange, disabled, style }) =
   </Button>
 )
 
-const CheckButton = ({ label, message, current, onPress }) => (
-  <Button prestyled style={styles.versionButton} disabled={message==checkMessages.CHECK}
+const CheckButton = ({ label, message, current, onPress, disabled }) => (
+  <Button prestyled style={styles.versionButton} disabled={disabled}
       onPress={onPress} >
     <Text>{ message ? message : label }</Text>
     <Text style={{ color: Colors.goldenrod }}>current: {current}</Text>
@@ -208,6 +208,7 @@ export default class SettingsScreen extends React.PureComponent {
         <CheckButton label='Check for wiki update'
           onPress={() => this._checkForUpdate(TYPES.WIKI)}
           message={wikiUpdatingMessage && wikiUpdatingMessage + " - wiki"}
+          disabled={!!wikiUpdatingMessage}
           current={GET_WIKI_VERSION()}
         />
         <Button prestyled warning
@@ -266,6 +267,7 @@ export default class SettingsScreen extends React.PureComponent {
         <CheckButton label='Check for app update'
           onPress={() => this._checkForUpdate(TYPES.APP)}
           message={appUpdatingMessage && appUpdatingMessage + " - app"}
+          disabled={!!appUpdatingMessage}
           current={APP_VERSION}
         />
 
