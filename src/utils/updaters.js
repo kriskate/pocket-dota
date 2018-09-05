@@ -10,6 +10,15 @@ export const ERRORS = {
   NO_WIKI_VERSION: 'Could not retrieve external wiki version.',
 }
 
+const getJSONwikiInfo = async () => {
+  try {
+    const info = await (await fetch(url.currentWiki)).json();
+
+    return info;
+  } catch (e) {
+    return { error: e };
+  }
+}
 export const wiki_needsUpdate = async () => {
   const localVersion = GET_WIKI_VERSION();
   const currentVersion = await getJSONwikiInfo();

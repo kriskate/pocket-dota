@@ -133,10 +133,3 @@ const checkFolder = async (folder) => {
   const folderInfo = await FileSystem.getInfoAsync(folder);
   if (!folderInfo.exists) await FileSystem.makeDirectoryAsync(folder, { intermediates: true });
 }
-
-export const getJSONwikiInfo = async () => {
-  const res = await fetch(url.currentWiki);
-  if(!res) return null;
-
-  return res.json();
-}
