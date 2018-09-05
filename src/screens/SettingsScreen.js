@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Text, Button } from '../components/ui';
 
 import { headerStyle } from '../utils/screen';
-import { SCREEN_LABELS, SCREEN_LABELS_HIDDEN } from '../constants/Constants';
+import { SCREEN_LABELS, SCREEN_LABELS_HIDDEN, APP_VERSION, GET_WIKI_VERSION } from '../constants/Constants';
 import { StyleSheet, Switch as RNSwitch, View, Alert, Platform } from 'react-native';
 import Colors from '../constants/Colors';
 import Layout from '../constants/Layout';
@@ -10,8 +10,10 @@ import { removeWiki } from '../utils/loaders';
 import { connect } from 'react-redux';
 import { model_user, model_settings, model_profile } from '../constants/Models';
 import { Actions } from '../reducers/profile';
+import { Actions as UpdateActions } from '../reducers/update';
 import Modal from "react-native-modal";
 import { APP_TIPS } from '../components/AppTips';
+import { wiki_needsUpdate, app_needsUpdate } from '../utils/updaters';
 
 
 const Header = ({ label }) => (
@@ -57,10 +59,13 @@ const TYPES = {
     updateSettings: val => dispatch(Actions.settings(val)),
     setProfile: val => dispatch(Actions.setProfile(val)),
     setUser: val => dispatch(Actions.setUser(val)),
+
+    updateWiki: dispatch(UpdateActions.redownload()),
+    updateApp: dispatch(UpdateActions.updateApp()),
   }))
 )
 export default class SettingsScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => ({
+  static navigationOptions = () => ({
     title: SCREEN_LABELS.SETTINGS,
     ...headerStyle,
   });
@@ -72,6 +77,50 @@ export default class SettingsScreen extends React.Component {
     wikiUpdatingMessage: '',
     appUpdatingMessage: '',
   }
+
+  __updateCanceled = (What) => {
+    const stater = What == TYPES.WIKI ? 'wikiUpdatingMessage' : 'appUpdatingMessage';
+    this.setState({ [stater]: '' });
+  }
+  __checkForUpdate = async (What) => {
+    const stater = What == TYPES.WIKI ? 'wikiUpdatingMessage' : 'appUpdatingMessage';
+
+    this.setState({ [stater]: checkMessages.CHECK });
+
+    const newV = What == TYPES.WIKI ? await  wiki_needsUpdate() : await app_needsUpdate();
+
+    if(!newV) {
+      this.setState({ [stater]: `${What} ${checkMessages.LATEST}` });
+      return;
+    }
+
+    if(newV.error) {
+      Alert.alert(
+        `Error`,
+        `There was an error while trying to retrieve new ${What} version
+        ${newV.error}
+        Please try again later.`,
+        [
+          { text: 'Dismiss', onPress: () => this.__updateCanceled(What) },
+        ],
+        { cancelable: true }
+      );
+    } else {
+      Alert.alert(
+        `New version found! (${newV})`,
+        `A new ${What} version has been found.
+        Would you like to begin downloading it?
+        It is recoomended to be connected to a WI-FI network before downloading new data.`,
+        [
+          { text: 'No', style: 'cancel', onPress: () => this.__updateCanceled(What) },
+          { text: 'Yes', onPress: () => What == TYPES.WIKI ? this.props.updateWiki() : this.props.updateApp() },
+        ],
+        { cancelable: true }
+      );
+    }
+
+  }
+
 
   _removeProfileData = () => {
     Alert.alert(
@@ -157,7 +206,7 @@ export default class SettingsScreen extends React.Component {
           value={autoUpdateDB} onValueChange={val => this.props.updateSettings({ autoUpdateDB: val })} />
 
         <CheckButton label='Check for wiki update'
-          onPress={this._checkForWikiUpdate}
+          onPress={() => this.__checkForUpdate(TYPES.WIKI)}
           message={wikiUpdatingMessage}
           current={GET_WIKI_VERSION()}
         />
@@ -215,7 +264,7 @@ export default class SettingsScreen extends React.Component {
           value={autoUpdateApp} onValueChange={val => this.props.updateSettings({ autoUpdateApp: val })} />
 
         <CheckButton label='Check for app update'
-          onPress={this._checkForAppUpdate}
+          onPress={() => this.__checkForUpdate(TYPES.APP)}
           message={appUpdatingMessage}
           current={APP_VERSION}
         />
