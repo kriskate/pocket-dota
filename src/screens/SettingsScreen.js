@@ -17,9 +17,10 @@ import { sleep } from '../utils/utils';
 import TipsModal from '../components/Settings/TipsModal';
 
 
-const Header = ({ label }) => (
-  <View style={styles.labelHeaderWrapper}>
-    <Text style={styles.labelHeader}>{label}</Text>
+const Section = ({ label, children }) => (
+  <View>
+    <Text style={styles.sectionLabel}>{label}</Text>
+    {children}
   </View>
 )
 
@@ -156,74 +157,74 @@ export default class SettingsScreen extends React.PureComponent {
     return (
       <Container backToHome scrollable >
 
-        <Header label="Profile" />
+
+        <Section label="Profile">
+          { !lastSearch || !name ? null :
+            <Button prestyled style={styles.versionButton} onPress={() => navigate(SCREEN_LABELS.STATS)}>
+              <Text>{"Last profile search: "}</Text>
+              <Text style={{ color: Colors.goldenrod }}>{lastSearch}</Text>
+            </Button>
+          }
+
+          { name ? null : (
+            <Button prestyled
+            title={`${name ? 'Replace the' : "Add a"} Dota 2 user profile`}
+            onPress={() => navigate(SCREEN_LABELS.STATS)} />
+          )}
+          { name ? null : <Text style={styles.noprofile}>{"In order to enable the functions below, you have to add a Dota 2 profile"}</Text> }
+
+          <Button disabled={!name} prestyled
+            title={`Your profile${!name ? '' : ' (' + name + ')'}` }
+            onPress={() => navigate(SCREEN_LABELS_HIDDEN.STATS_WEB, { player: {...user, personaname: name} })} />
+
+          <Switch disabled={!name}
+            label="Show profile on Home screen"
+            value={showProfileOnHome} onValueChange={val => this.props.updateSettings({ showProfileOnHome: val })} />
+
+          <Button prestyled warning disabled={!name}
+            title="Remove profile data"
+            onPress={this._removeProfileData} />
+        </Section>
 
 
-        { !lastSearch || !name ? null :
-          <Button prestyled style={styles.versionButton} onPress={() => navigate(SCREEN_LABELS.STATS)}>
-            <Text>{"Last profile search: "}</Text>
-            <Text style={{ color: Colors.goldenrod }}>{lastSearch}</Text>
-          </Button>
-        }
+        <Section label="Heroes & Items database:">
+          <Switch label="Auto update Database"
+            value={autoUpdateDB} onValueChange={val => this.props.updateSettings({ autoUpdateDB: val })} />
 
-        { name ? null : (
-          <Button prestyled
-          title={`${name ? 'Replace the' : "Add a"} Dota 2 user profile`}
-          onPress={() => navigate(SCREEN_LABELS.STATS)} />
-        )}
-        { name ? null : <Text style={styles.noprofile}>{"In order to enable the functions below, you have to add a Dota 2 profile"}</Text> }
-
-        <Button disabled={!name} prestyled
-          title={`Your profile${!name ? '' : ' (' + name + ')'}` }
-          onPress={() => navigate(SCREEN_LABELS_HIDDEN.STATS_WEB, { player: {...user, personaname: name} })} />
-        
-        <Switch disabled={!name}
-          label="Show profile on Home screen"
-          value={showProfileOnHome} onValueChange={val => this.props.updateSettings({ showProfileOnHome: val })} />
-
-        <Button prestyled warning disabled={!name}
-          title="Remove profile data"
-          onPress={this._removeProfileData} />
+          <CheckButton label='Check for wiki update'
+            onPress={() => this._checkForUpdate(TYPES.WIKI)}
+            message={wikiUpdatingMessage && wikiUpdatingMessage + " - wiki"}
+            disabled={!!wikiUpdatingMessage}
+            current={GET_WIKI_VERSION()}
+          />
+          <Button prestyled warning
+            title="Clear wiki"
+            onPress={this._removeWikiData} />
+        </Section>
 
 
-        <Header label="Heroes & Items database:" />
+        <Section label="App settings:">
+          <Button prestyled style={{ marginHorizontal: 0 }}
+            title="In-app tips"
+            onPress={() => this.setState({ tipsModalVisible: true })} />
+          
+          <TipsModal isVisible={tipsModalVisible} hideModal={this._hideTipsModal} 
+            updateSettings={this.props.updateSettings} tipsState={tipsState} />
 
-        <Switch label="Auto update Database"
-          value={autoUpdateDB} onValueChange={val => this.props.updateSettings({ autoUpdateDB: val })} />
+          <Switch label="Auto update app"
+            value={autoUpdateApp} onValueChange={val => this.props.updateSettings({ autoUpdateApp: val })} />
 
-        <CheckButton label='Check for wiki update'
-          onPress={() => this._checkForUpdate(TYPES.WIKI)}
-          message={wikiUpdatingMessage && wikiUpdatingMessage + " - wiki"}
-          disabled={!!wikiUpdatingMessage}
-          current={GET_WIKI_VERSION()}
-        />
-        <Button prestyled warning
-          title="Clear wiki"
-          onPress={this._removeWikiData} />
+          <CheckButton label='Check for app update'
+            onPress={() => this._checkForUpdate(TYPES.APP)}
+            message={appUpdatingMessage && appUpdatingMessage + " - app"}
+            disabled={!!appUpdatingMessage}
+            current={APP_VERSION}
+          />
 
-
-        <Header label="App settings:" />
-
-        <Button prestyled style={{ marginHorizontal: 0 }}
-          title="In-app tips"
-          onPress={() => this.setState({ tipsModalVisible: true })} />
-        
-        <TipsModal isVisible={tipsModalVisible} hideModal={this._hideTipsModal} 
-          updateSettings={this.props.updateSettings} tipsState={tipsState} />
-
-        <Switch label="Auto update app"
-          value={autoUpdateApp} onValueChange={val => this.props.updateSettings({ autoUpdateApp: val })} />
-
-        <CheckButton label='Check for app update'
-          onPress={() => this._checkForUpdate(TYPES.APP)}
-          message={appUpdatingMessage && appUpdatingMessage + " - app"}
-          disabled={!!appUpdatingMessage}
-          current={APP_VERSION}
-        />
-
-        <Button prestyled warning
-          title="Reset to default settings"
-          onPress={this._resetSettings} />
+          <Button prestyled warning
+            title="Reset to default settings"
+            onPress={this._resetSettings} />
+        </Section>
 
 
       </Container>
@@ -238,12 +239,11 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: Colors.disabled,
   },
-  labelHeaderWrapper: {
+
+  sectionLabel: {
     marginTop: Layout.padding_regular,
     marginHorizontal: Layout.padding_small,
     marginBottom: Layout.padding_small,
-  },
-  labelHeader: {
     color: Colors.goldenrod,
   },
 
