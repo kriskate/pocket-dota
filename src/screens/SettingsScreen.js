@@ -168,7 +168,7 @@ export default class SettingsScreen extends React.PureComponent {
 
 
     return (
-      <Container backToHome scrollable style={{ paddingBottom: Layout.padding_regular }}>
+      <Container backToHome scrollable >
 
         <Header label="Profile" />
 

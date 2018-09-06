@@ -90,11 +90,8 @@ export default class ListScreen extends React.PureComponent {
 
 
 const styles = StyleSheet.create({
-  container: {
-    paddingTop: Layout.padding_regular,
-  },
   section: {
-    marginBottom: Layout.padding_regular,
+    marginVertical: Layout.padding_small,
     borderWidth: 1,
   },
   sectionTitle: {

@@ -64,6 +64,6 @@ export default class Itemscreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    padding: Layout.padding_small,
+    paddingHorizontal: Layout.padding_small,
   }
 })

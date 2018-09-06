@@ -92,6 +92,6 @@ export default class HeroesScreen extends React.PureComponent {
 
 const styles = StyleSheet.create({
   container: {
-    padding: Layout.padding_small,
+    paddingHorizontal: Layout.padding_small,
   }
 })
