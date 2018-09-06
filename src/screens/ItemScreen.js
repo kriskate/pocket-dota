@@ -147,7 +147,10 @@ export default class ItemScreen extends React.PureComponent {
 
 
         { !components ? null : 
-          <ItemComponents current_item={item} />
+          <View style={styles.components}>
+            <Text style={styles.componentsText}>Components</Text>
+            <ItemComponents current_item={item} />
+          </View>
         }
 
       </Container>
@@ -236,7 +239,15 @@ const styles = StyleSheet.create({
     paddingTop: 0,
   },
 
-
+  components: {
+    padding: Layout.padding_regular,
+    backgroundColor: Colors.dota_ui1,
+  },
+  componentsText: {
+    color: Colors.dota_radiant,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
 
 
   html: {
