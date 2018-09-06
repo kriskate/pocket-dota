@@ -109,7 +109,7 @@ export default class ItemComponents extends React.PureComponent {
                 cost={cost}
                 imgSource={{ uri: url.images.items(tag) }}
                 imgSize={{ width: thumbWidth, height: thumbWidth/imgRatio }}
-                onPress={() => navigation.navigate(SCREEN_LABELS_HIDDEN.ITEM, { data: item })}
+                onPress={() => navigation.push(SCREEN_LABELS_HIDDEN.ITEM, { data: item })}
                 width={thumbWidth}
               />
             )
