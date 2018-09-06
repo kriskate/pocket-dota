@@ -6,7 +6,7 @@ export const alertWikiUpdateDone = (version) =>
     `Success!`,
     `Downloading new wiki files for version ${version} has finished succesfully.`,
     [
-      { text: 'Dismiss' },
+      { text: 'OK' },
     ],
     { cancelable: true }
   );
@@ -19,7 +19,7 @@ export const alertUpdateCheckError = (What, error, onDismiss) =>
     ${error}
     Please try again later.`,
     [
-      { text: 'Dismiss', onPress: onDismiss },
+      { text: 'OK', onPress: onDismiss },
     ],
     { cancelable: true }
   );
