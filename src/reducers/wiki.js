@@ -14,7 +14,8 @@ export default function reducer(state=initialState, action) {
   switch(action.type) {
     case Types.NEW_WIKI:
       const { wiki } = action;
-      return { ...state, ...wiki };
+
+      return wiki;
     default:
       return state;
   }
