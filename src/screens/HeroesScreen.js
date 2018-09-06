@@ -11,6 +11,45 @@ import { headerStyle } from '../utils/screen';
 import ListScreen from '../components/ListScreen';
 import { model_section } from '../constants/Models';
 
+
+const _getHeroSections = (heroes) => {    
+  const heroSections = [];
+
+  heroes.forEach(hero => {
+    let att, color;
+
+    switch(hero.attributes.AttributePrimary) {
+      case ATTRIBUTES.agility:
+        color = Colors.dota_agi;
+        att = 'Agility';
+        break;
+      case ATTRIBUTES.intelligence:
+        color = Colors.dota_int;
+        att = 'Intelligence';
+        break;
+      case ATTRIBUTES.strength:
+        color = Colors.dota_str;
+        att = 'Strength';
+        break;
+    }
+    let section = heroSections.find(({ title }) => title == att);
+    if(!section) {
+      section = new model_section({ 
+        title: att,
+        color,
+      });
+      heroSections.push(section);
+    }
+
+    section.data.push(hero);
+  });
+  heroSections.forEach(section => section.data.sort((a, b) => 
+    (a.name.toUpperCase() <= b.name.toUpperCase()) ? -1 : 1
+  ))
+
+  return heroSections;
+}
+
 @connect(state => ({ 
   heroes: state.wiki.heroes,
 }))
@@ -22,43 +61,12 @@ export default class HeroesScreen extends React.PureComponent {
   constructor(props) {
     super(props);
     
-    const { heroes } = props;
-    
-    const heroSections = [];
+    this.state = { heroSections: [] }
+  }
 
-    heroes.forEach(hero => {
-      let att, color;
 
-      switch(hero.attributes.AttributePrimary) {
-        case ATTRIBUTES.agility:
-          color = Colors.dota_agi;
-          att = 'Agility';
-          break;
-        case ATTRIBUTES.intelligence:
-          color = Colors.dota_int;
-          att = 'Intelligence';
-          break;
-        case ATTRIBUTES.strength:
-          color = Colors.dota_str;
-          att = 'Strength';
-          break;
-      }
-      let section = heroSections.find(({ title }) => title == att);
-      if(!section) {
-        section = new model_section({ 
-          title: att,
-          color,
-        });
-        heroSections.push(section);
-      }
-
-      section.data.push(hero);
-    });
-    heroSections.forEach(section => section.data.sort((a, b) => 
-      (a.name.toUpperCase() <= b.name.toUpperCase()) ? -1 : 1
-    ))
-
-    this.state = { heroSections };
+  static getDerivedStateFromProps(newProps) {
+    return { heroSections: _getHeroSections(newProps.heroes) };
   }
 
 
