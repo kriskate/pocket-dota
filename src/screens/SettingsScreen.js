@@ -173,8 +173,8 @@ export default class SettingsScreen extends React.PureComponent {
         <Header label="Profile" />
 
 
-        { !lastSearch ? null :
-          <Button style={styles.lastSearch} onPress={() => navigate(SCREEN_LABELS.STATS)}>
+        { !lastSearch || !name ? null :
+          <Button prestyled style={styles.versionButton} onPress={() => navigate(SCREEN_LABELS.STATS)}>
             <Text>{"Last profile search: "}</Text>
             <Text style={{ color: Colors.goldenrod }}>{lastSearch}</Text>
           </Button>
@@ -185,7 +185,7 @@ export default class SettingsScreen extends React.PureComponent {
           title={`${name ? 'Replace the' : "Add a"} Dota 2 user profile`}
           onPress={() => navigate(SCREEN_LABELS.STATS)} />
         )}
-        { name ? null : <Text style={styles.noprofile}>{"* In order to enable the functions below, you have to add a Dota 2 profile"}</Text> }
+        { name ? null : <Text style={styles.noprofile}>{"In order to enable the functions below, you have to add a Dota 2 profile"}</Text> }
 
         <Button disabled={!name} prestyled
           title={`Your profile${!name ? '' : ' (' + name + ')'}` }
@@ -283,23 +283,15 @@ export default class SettingsScreen extends React.PureComponent {
 
 const styles = StyleSheet.create({
   noprofile: {
-    padding: Layout.padding_regular,
+    marginHorizontal: Layout.padding_small,
+    paddingTop: Layout.padding_small,
+    fontSize: 13,
     color: Colors.disabled,
-  },
-  lastSearch: {
-    padding: Layout.padding_small,
-    borderColor: Colors.dota_ui1,
-    borderWidth: 3,
   },
   labelHeaderWrapper: {
     marginTop: Layout.padding_regular,
     marginHorizontal: Layout.padding_small,
     marginBottom: Layout.padding_small,
-    paddingBottom: Layout.padding_small,
-    borderBottomColor: Colors.dota_white,
-    borderBottomWidth: 1,
-    borderRadius: 3,
-
   },
   labelHeader: {
     color: Colors.goldenrod,
@@ -318,9 +310,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: Layout.padding_small,
     paddingHorizontal: Layout.padding_regular,
-    backgroundColor: Colors.dota_ui1,
-    borderWidth: 1,
-    borderColor: Colors.dota_ui2,
+
   },
   switchDescription: {
     color: Colors.disabled,

@@ -24,9 +24,9 @@ export default class Button extends React.Component {
       secondary, warning,
       forceTouchableOpacity
     } = this.props;
-    const backgroundColor = !prestyled ? null : secondary ? Colors.dota_ui3 : warning ? Colors.dota_red_dark : Colors.dota_ui1;
+    const color = !prestyled ? null : secondary ? Colors.goldenrod : warning ? Colors.dota_red : Colors.dota_white;
 
-    const touchStyle = StyleSheet.flatten([styles.touch, { backgroundColor }, prestyled && styles.prestyled, style, disabled && styles.disabled]);
+    const touchStyle = StyleSheet.flatten([styles.touch, prestyled && styles.prestyled, style, disabled && styles.disabled]);
 
     if (Platform.OS === 'android' && Platform.Version >= 21 && !forceTouchableOpacity) {
       return (
@@ -34,7 +34,7 @@ export default class Button extends React.Component {
           <TouchableNativeFeedback onPress={onPress} useForeground disabled={disabled}
               background={TouchableNativeFeedback.Ripple(pressColor, borderless)}>
             <View style={[touchStyle, !prestyled && styles.button, viewStyle]}>
-              { !title ? null : <Title title={title} disabled={disabled} /> }
+              { !title ? null : <Title title={title} disabled={disabled} style={[titleStyle, { color }]} /> }
               {children}
             </View>
           </TouchableNativeFeedback>
@@ -45,7 +45,7 @@ export default class Button extends React.Component {
         <TouchableOpacity onPress={onPress} style={[touchStyle, !prestyled && styles.button, viewStyle]}
             disabled={disabled}
             onLayout={onLayout}>
-            <Title title={title} disabled={disabled} style={titleStyle} />
+            <Title title={title} disabled={disabled} style={[titleStyle, { color }]} />
             {children}
         </TouchableOpacity>
       );
@@ -56,7 +56,9 @@ export default class Button extends React.Component {
 const styles = StyleSheet.create({
   prestyled: {
     borderWidth: 1,
-    borderColor: Colors.dota_ui2,
+    borderTopColor: Colors.dota_ui2,
+    borderBottomColor: Colors.dota_ui2,
+    backgroundColor: Colors.dota_ui1,
     padding: Layout.padding_regular,
   },
 
