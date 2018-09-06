@@ -66,7 +66,7 @@ const TYPES = {
     setProfile: val => dispatch(Actions.setProfile(val)),
     setUser: val => dispatch(Actions.setUser(val)),
 
-    updateWiki: (version) => dispatch(UpdateActions.downloadWiki(DOWNLOAD_REASONS.UPDATE, version)),
+    updateWiki: (res) => dispatch(UpdateActions.downloadWiki(DOWNLOAD_REASONS.UPDATE, res)),
     updateApp: (version) => dispatch(UpdateActions.updateApp(version)),
 
     show: (what) => dispatch(UpdateActions.show(what)),
@@ -86,8 +86,8 @@ export default class SettingsScreen extends React.PureComponent {
     checkingApp: '',
   }
   
-  _updateToV = (What, newV) => {
-    What == TYPES.WIKI ? this.props.updateWiki(newV) : this.props.updateApp(newV);
+  _updateToV = (What, res) => {
+    What == TYPES.WIKI ? this.props.updateWiki(res) : this.props.updateApp(res.newVersion);
   }
 
   _updateCanceled = (What) => {
@@ -108,22 +108,21 @@ export default class SettingsScreen extends React.PureComponent {
 
     const maybeTooFast = new Date();
 
-    const newV = What == TYPES.WIKI ? await wiki_needsUpdate() : await app_needsUpdate();
+    const res = What == TYPES.WIKI ? await wiki_needsUpdate() : await app_needsUpdate();
 
     if(new Date() - maybeTooFast < 1500) await sleep(1500);
 
-    if(!newV) {
+    if(!res) {
       this.setState({ [stater]: `${What} ${checkMessages.LATEST}` });
       return;
     }
-
-    if(newV.error) {
+    if(res.error) {
       const onDismiss = () => this._updateCanceled(What);
-      alertUpdateCheckError(What, newV.error, onDismiss);
+      alertUpdateCheckError(What, res.error, onDismiss);
     } else {
       const onNo = () => this._updateCanceled(What);
-      const onYes = () => this._updateToV(What, newV);
-      alertUpdateCheckAvailable(What, newV, onNo, onYes);
+      const onYes = () => this._updateToV(What, res);
+      alertUpdateCheckAvailable(What, res.newVersion, onNo, onYes);
     }
 
     this.setState({ [stater]: '' });

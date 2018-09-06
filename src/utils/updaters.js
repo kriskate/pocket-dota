@@ -20,17 +20,17 @@ const getJSONwikiInfo = async () => {
   }
 }
 export const wiki_needsUpdate = async () => {
-  const currentVersion = await getJSONwikiInfo();
-  if(currentVersion.error) return { error: ERRORS.NO_WIKI_VERSION + `\r\n${currentVersion.error}`};
+  const latestVersionInfo = await getJSONwikiInfo();
+  if(latestVersionInfo.error) return { error: ERRORS.NO_WIKI_VERSION + `\r\n${latestVersionInfo.error}`};
 
 
-  const { currentWikiVersion, app_version } = currentVersion;
-  const newV = `${app_version}.${currentWikiVersion}`;
+  const { currentWikiVersion, app_version } = latestVersionInfo;
+  const newVersion = `${app_version}.${currentWikiVersion}`;
 
-  if(GET_WIKI_VERSION() === newV)
+  if(GET_WIKI_VERSION() === newVersion)
     return false;
   else
-    return newV;
+    return { newVersion, latestVersionInfo };
 }
 
 
@@ -50,9 +50,9 @@ export const app_needsUpdate = async () => {
           method: 'GET',
         });
     
-        const newV = (await res.json()).version;
-        if(APP_VERSION === newV) return false;
-        else return newV;
+        const newVersion = (await res.json()).version;
+        if(APP_VERSION === newVersion) return false;
+        else return { newVersion };
 
       } catch(e) {
         return { error: e };

@@ -13,18 +13,26 @@ export default class AppDownloading extends React.PureComponent {
     progress_images: 0,
   }
 
+  static defaultProps = {
+    reason: '',
+    version: '',
+    versionInfo: null,
+    onFinish: () => {},
+  }
+
   _progress = (key, value) => {
     this.setState({ [`progress_${key}`]: value });
   }
   async componentDidMount() {
+    const { versionInfo, onFinish } = this.props;
     Platform.OS === 'ios' && StatusBar.setNetworkActivityIndicatorVisible(true);
 
-    const wiki = await downloadWiki(p => this._progress('wiki', p));
-    await downloadImages(wiki, p => this._progress('images', p));
+    const wiki = await downloadWiki(versionInfo, p => this._progress('wiki', p));
+    //await downloadImages(wiki, p => this._progress('images', p));
     
     Platform.OS === 'ios' && StatusBar.setNetworkActivityIndicatorVisible(false);
 
-    this.props.onFinish(wiki);
+    onFinish(wiki);
   }
   
   render() {

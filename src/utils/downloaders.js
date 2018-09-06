@@ -64,12 +64,13 @@ export const downloadImages = async (wiki, progress_callback) => {
 }
 
 
-export const downloadWiki = async (progress_callback) => {
+export const downloadWiki = async (wikiInfo, progress_callback) => {
   Logger.debug('downloading new wiki');
-  let info = await loadCurrentWikiInfo();
+  // wikiInfo is passed in through the update reducer, to the WikiDownloading Component
+  let info = wikiInfo || await loadCurrentWikiInfo();
   if(!info) info = await downloadWikiInfo();
 
-  const { currentWikiVersion, currentWikiVersionDate } = await loadCurrentWikiInfo();
+  const { currentWikiVersion, currentWikiVersionDate } = info;
 
   const cWikiFolder = `v_${currentWikiVersion}_${currentWikiVersionDate}`;
   const keys = Object.keys(url.data);

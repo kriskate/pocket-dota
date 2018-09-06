@@ -12,7 +12,7 @@ const ActionTypes = {
   SHOW: 'SHOW',
 }
 export const Actions = {
-  downloadWiki: (reason, version) => ({ type: ActionTypes.DOWNLOAD_WIKI, reason, version }),
+  downloadWiki: (reason, res) => ({ type: ActionTypes.DOWNLOAD_WIKI, reason, res }),
   doneWiki: () => ({ type: ActionTypes.DONE_WIKI }),
   
   updateApp: version => ({ type: ActionTypes.UPDATE_APP, version }),
@@ -33,22 +33,26 @@ export const initialState = {
   showWiki: false,
   downloadingWiki_reason: '',
   downloadingWiki_version: '',
+  downloadingWiki_versionInfo: '',
 };
 
 export default function reducer(state=initialState, action) {
   switch(action.type) {
     
     case ActionTypes.DOWNLOAD_WIKI:
+      const { newVersion, latestVersionInfo } = action.res;
       return { ...state,
         showWiki: true,
         downloadingWiki_reason: action.reason,
-        downloadingWiki_version: action.version,
+        downloadingWiki_version: newVersion,
+        downloadingWiki_versionInfo: latestVersionInfo,
       };
     case ActionTypes.DONE_WIKI:
       return { ...state,
         showWiki: false,
         downloadingWiki_reason: '',
         downloadingWiki_version: '',
+        downloadingWiki_versionInfo: '',
       };
 
     case ActionTypes.UPDATE_APP:

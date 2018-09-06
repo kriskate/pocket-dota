@@ -18,6 +18,7 @@ import Colors from './constants/Colors';
     showWiki: state.update.showWiki,
     downloadingWiki_reason: state.update.downloadingWiki_reason,
     downloadingWiki_version: state.update.downloadingWiki_version,
+    downloadingWiki_versionInfo: state.update.downloadingWiki_versionInfo,
 
     showApp: state.update.showApp,
     downloadingApp_version: state.update.downloadingApp_version,
@@ -52,9 +53,10 @@ export default class Updater extends React.PureComponent {
 
   render() {
     const {
-      showWiki, downloadingWiki_reason, downloadingWiki_version,
+      showWiki, downloadingWiki_reason, downloadingWiki_version, downloadingWiki_versionInfo,
       showApp, downloadingApp_version,
     } = this.props;
+
 
     /* the wiki modal should not be able to be hidden if:
       * there is no wiki data (DOWNLOAD_REASONS.FRESH)
@@ -66,6 +68,7 @@ export default class Updater extends React.PureComponent {
         <View style={[styles.modal, !showWiki && styles.modal_hidden]}>
           <AppDownloading
             version={downloadingWiki_version}
+            versionInfo={downloadingWiki_versionInfo}
             reason={downloadingWiki_reason}
             onFinish={this._handleFinishDownLoadingWiki}
             onError={Logger.error}
