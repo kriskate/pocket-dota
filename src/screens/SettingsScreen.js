@@ -1,9 +1,9 @@
 import React from 'react';
-import { Container, Text, Button } from '../components/ui';
+import { Container, Text, Button, Switch } from '../components/ui';
 
 import { headerStyle } from '../utils/screen';
 import { SCREEN_LABELS, SCREEN_LABELS_HIDDEN, APP_VERSION, GET_WIKI_VERSION, DOWNLOAD_REASONS } from '../constants/Constants';
-import { StyleSheet, Switch as RNSwitch, View, Alert, Platform } from 'react-native';
+import { StyleSheet, View, Alert, Platform } from 'react-native';
 import Colors from '../constants/Colors';
 import Layout from '../constants/Layout';
 import { removeWiki } from '../utils/loaders';
@@ -11,28 +11,16 @@ import { connect } from 'react-redux';
 import { model_user, model_settings, model_profile } from '../constants/Models';
 import { Actions } from '../reducers/profile';
 import { Actions as UpdateActions } from '../reducers/update';
-import Modal from "react-native-modal";
-import { APP_TIPS } from '../components/AppTips';
 import { wiki_needsUpdate, app_needsUpdate } from '../utils/updaters';
 import { alertUpdateCheckError, alertUpdateCheckAvailable, alertRemoveProfileData, alertResetSettings } from '../utils/Alerts';
 import { sleep } from '../utils/utils';
+import TipsModal from '../components/Settings/TipsModal';
 
 
 const Header = ({ label }) => (
   <View style={styles.labelHeaderWrapper}>
     <Text style={styles.labelHeader}>{label}</Text>
   </View>
-)
-const Switch = ({ label, description, value, onValueChange, disabled, style }) => (
-  <Button prestyled style={[styles.switchWrapper, style]} onPress={() => onValueChange(!!!value)} disabled={disabled}>
-    <View style={{ flex: 1 }}>
-      <Text style={disabled ? { color: Colors.dota_ui1 } : null}>{label}</Text>
-      { !description ? null : <Text style={styles.switchDescription}>{description}</Text> }
-    </View>
-
-    <RNSwitch style={styles.switch} disabled={disabled} onTintColor={Colors.dota_agi + '70'} thumbTintColor={Platform.OS ==='android' ? Colors.dota_agi : null}
-      value={value} onValueChange={onValueChange} />
-  </Button>
 )
 
 const CheckButton = ({ label, message, current, onPress, disabled }) => (
@@ -80,7 +68,6 @@ export default class SettingsScreen extends React.PureComponent {
 
   state = {
     tipsModalVisible: false,
-    allTipsOff: false,
 
     checkingWiki: '',
     checkingApp: '',
@@ -157,7 +144,7 @@ export default class SettingsScreen extends React.PureComponent {
     const { showProfileOnHome, autoUpdateApp, autoUpdateDB, tipsState } = model_settings(settings);
 
     const { navigate } = this.props.navigation;
-    const { allTipsOff, tipsModalVisible } = this.state;
+    const { tipsModalVisible } = this.state;
 
     const { checkingApp, checkingWiki } = this.state;
     const { updatingApp, updatingWiki } = this.props;
@@ -220,45 +207,9 @@ export default class SettingsScreen extends React.PureComponent {
         <Button prestyled style={{ marginHorizontal: 0 }}
           title="In-app tips"
           onPress={() => this.setState({ tipsModalVisible: true })} />
-
-        <Modal isVisible={tipsModalVisible}
-            onBackdropPress={this._hideTipsModal}
-            onBackButtonPress={this._hideTipsModal}
-            onSwipe={this._hideTipsModal} swipeDirection="down"
-          >
-          <Container scrollable style={Layout.modal_body}>
-            <Text style={Layout.modal_header} >In-app tips</Text>
-
-            <Switch label="Turn all tips ON/ OFF"
-              style={{ marginBottom: Layout.padding_big + Layout.padding_regular, }}
-              value={allTipsOff} onValueChange={() => {
-                const tipsOff = {};
-
-                Object.keys(tipsState).forEach(tip => tipsOff[tip] = !allTipsOff);
-                this.props.updateSettings({ tipsState: tipsOff });
-                this.setState({ allTipsOff: !allTipsOff });
-              }} />
-
-            { Object.keys(APP_TIPS).map(tip => {
-                const prefix = tip.split('_')[0];
-                if((prefix == 'IOS' && Platform.OS !== 'ios') || 
-                  (prefix == 'ANDROID' && Platform.OS !== 'android'))
-                  return null;
-
-                const { short, description, stateLink } = APP_TIPS[tip];
-
-                return (
-                  <Switch key={tip} label={short} description={description}
-                    value={tipsState[stateLink]} 
-                    onValueChange={() => this.props.updateSettings({ tipsState: {...tipsState, [stateLink]: !tipsState[stateLink]} })} />
-                )
-              }
-            )}
-          </Container>
-          <Button prestyled style={Layout.modal_close_button}
-            title="DONE"
-            onPress={this._hideTipsModal} />
-        </Modal>
+        
+        <TipsModal isVisible={tipsModalVisible} hideModal={this._hideTipsModal} 
+          updateSettings={this.props.updateSettings} tipsState={tipsState} />
 
         <Switch label="Auto update app"
           value={autoUpdateApp} onValueChange={val => this.props.updateSettings({ autoUpdateApp: val })} />
@@ -302,18 +253,5 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   switch: {
-  },
-  switchWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: Layout.padding_small,
-    paddingHorizontal: Layout.padding_regular,
-
-  },
-  switchDescription: {
-    color: Colors.disabled,
-    fontSize: 10,
-    marginRight: Layout.padding_regular,
   },
 })

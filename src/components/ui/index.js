@@ -7,6 +7,7 @@ import Thumbnail from "./Thumbnail";
 import Button from "./Button";
 import Card from "./Card";
 import ListThumb from "./ListThumb";
+import Switch from "./Switch";
 
 export {
   Container,
@@ -18,4 +19,5 @@ export {
   Button,
   Card,
   ListThumb,
+  Switch,
 }
