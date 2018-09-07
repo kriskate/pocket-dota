@@ -16,7 +16,7 @@ const bkC = `background-color:${Colors.dota_ui1}!important;`;
 const bkCL = `background-color:${Colors.dota_ui1_light}!important;`;
 const bkC2 = `background-color:${Colors.dota_ui2}!important;`;
 const jsString = `
-  var css = "#root { ${bkC2} background-image:none; } ul { ${bkC} } .gauge-container { ${bkC} } thead { ${bkCL} }";
+  var css = "body { ${bkC2} } #root { ${bkC2} background-image:none; } ul { ${bkC} } .gauge-container { ${bkC} } thead { ${bkCL} }";
   var head = document.getElementsByTagName("head")[0];
   var style = document.createElement("style");
   style.appendChild(document.createTextNode(css));
