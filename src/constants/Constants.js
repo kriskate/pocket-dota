@@ -105,6 +105,6 @@ Because the statistics screen is a preview of the Open Dota website, you will ne
   BACK: 'Use the BACK button to navigate back in the current (statistics) screen.',
   FORWARD: 'Use the FORWARD button to navigate back in the current (statistics) screen.',
   USER: () => (
-    <Text>When the PROFILE button is pressed, it will <Text style={{color: Colors.goldenrod}}>glow</Text> indicating that the current Dota 2 profile is the one that will appear on the app's home screen.</Text>
+    <Text>When the PROFILE button is pressed, it will be <Text style={{color: Colors.goldenrod}}>highlighted</Text>, indicating that the current Dota 2 profile is the one that will appear on the app's home screen.</Text>
   ),
 }
