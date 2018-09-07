@@ -26,6 +26,13 @@ export default class SettingsTipsScreen extends React.Component {
   state = {
     allTipsOff: false,
   }
+  _allTipsOff_handler = () => {
+    const tipsOff = {};
+
+    Object.keys(tipsState).forEach(tip => tipsOff[tip] = !allTipsOff);
+    this.props.updateSettings({ tipsState: tipsOff });
+    this.setState({ allTipsOff: !allTipsOff });
+  }
 
   render() {
     const { allTipsOff } = this.state;
@@ -35,15 +42,10 @@ export default class SettingsTipsScreen extends React.Component {
       <Container scrollable>
         <Switch label="Turn all tips ON/ OFF"
           style={{ marginBottom: Layout.padding_big + Layout.padding_regular, }}
-          value={allTipsOff} onValueChange={() => {
-            const tipsOff = {};
+          value={allTipsOff} onValueChange={this._allTipsOff_handler} />
 
-            Object.keys(tipsState).forEach(tip => tipsOff[tip] = !allTipsOff);
-            updateSettings({ tipsState: tipsOff });
-            this.setState({ allTipsOff: !allTipsOff });
-          }} />
-          }
         { Object.keys(APP_TIPS).map(tip => {
+            // if the current tip is not ment for the current platform
             const prefix = tip.split('_')[0];
             if((prefix == 'IOS' && Platform.OS !== 'ios') || 
               (prefix == 'ANDROID' && Platform.OS !== 'android'))
@@ -54,10 +56,12 @@ export default class SettingsTipsScreen extends React.Component {
             return (
               <Switch key={tip} label={short} description={description}
                 value={tipsState[stateLink]} 
-                onValueChange={() => updateSettings({ tipsState: {...tipsState, [stateLink]: !tipsState[stateLink]} })} />
+                onValueChange={() => 
+                  updateSettings({ tipsState: {...tipsState, [stateLink]: !tipsState[stateLink]} })
+                }
+              />
             )
-          }
-        )}
+        })}
       </Container>
     )
   }

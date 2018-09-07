@@ -54,7 +54,7 @@ const _getHeroSections = (heroes) => {
   heroes: state.wiki.heroes,
 }))
 export default class HeroesScreen extends React.PureComponent {
-  static navigationOptions = ({ navigation }) => ({
+  static navigationOptions = () => ({
     title: SCREEN_LABELS.HEROES,
     ...headerStyle,
   });

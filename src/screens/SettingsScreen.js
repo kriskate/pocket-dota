@@ -163,8 +163,8 @@ export default class SettingsScreen extends React.PureComponent {
 
           { name ? null : (
             <Button prestyled
-            title={`${name ? 'Replace the' : "Add a"} Dota 2 user profile`}
-            onPress={() => navigate(SCREEN_LABELS.STATS)} />
+              title={`${name ? 'Replace the' : "Add a"} Dota 2 user profile`}
+              onPress={() => navigate(SCREEN_LABELS.STATS)} />
           )}
           { name ? null : <Text style={styles.noprofile}>{"In order to enable the functions below, you have to add a Dota 2 profile"}</Text> }
 
