@@ -64,7 +64,7 @@ export default class Updater extends React.PureComponent {
       */
     return (
       <View style={[styles.modalsWrapper, !showWiki && !showApp && styles.modalsWrapper_hidden]}>
-        { downloadingWiki_reason &&
+        { !downloadingWiki_reason ? null :
         <View style={[styles.modal, !showWiki && styles.modal_hidden]}>
           <AppDownloading
             version={downloadingWiki_version}
@@ -81,7 +81,7 @@ export default class Updater extends React.PureComponent {
         </View>
         }
 
-        { downloadingApp_version &&
+        { !downloadingApp_version ? null :
         <View style={[styles.modal, !showApp && styles.modal_hidden]}>
           <View style={styles.container}>
             <Text>Downloading new app version: ${downloadingApp_version}</Text>
