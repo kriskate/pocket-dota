@@ -7,7 +7,7 @@ import { Actions as UpdateActions, DOWNLOAD_STATE } from './reducers/update';
 import { Actions as WikiActions } from './reducers/wiki';
 
 import WikiDownloading from './components/WikiDownloading';
-import { alertWikiUpdateDone, alertAppUpdateDone } from './utils/Alerts';
+import { alertWikiUpdateDone, alertAppUpdateDone, alertUpdateCheckAvailable } from './utils/Alerts';
 
 import { DOWNLOAD_REASONS } from './constants/Constants';
 import Layout from './constants/Layout';
@@ -15,6 +15,7 @@ import Colors from './constants/Colors';
 import Styles from './constants/Styles';
 import AppDownloading from './components/AppDownloading';
 import { Updates } from 'expo';
+import { app_needsUpdate } from './utils/updaters';
 
 @connect(
   (state => ({
@@ -32,6 +33,8 @@ import { Updates } from 'expo';
     hide: (what) => dispatch(UpdateActions.hide(what)),
     doneWiki: () => dispatch(UpdateActions.doneWiki()),
     doneApp: () => dispatch(UpdateActions.doneApp()),
+
+    updateApp: (version) => dispatch(UpdateActions.updateApp(version)),
   }))
 )
 export default class Updater extends React.PureComponent {
@@ -59,6 +62,20 @@ export default class Updater extends React.PureComponent {
   }
 
   
+
+  async componentWillMount() {
+    const res = await app_needsUpdate();
+
+    if(!res) return;
+
+    if(!res.error) {
+      const onNo = () => {};
+      const onYes = () => this.props.updateApp(res.newVersion);
+      alertUpdateCheckAvailable('App', res.newVersion, onNo, onYes);
+    }
+  }
+
+
 
   render() {
     const {
