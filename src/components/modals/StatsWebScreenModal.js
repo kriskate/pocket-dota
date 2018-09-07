@@ -14,8 +14,8 @@ export default ({ visible, hide }) => (
     onBackButtonPress={hide}
     onSwipe={hide} swipeDirection="down"
   >
-    <Container style={Layout.modal_body}>
-      <Text style={Layout.modal_header}>{HELP_TEXTS.HELP_HEADER}</Text>
+    <Container style={Styles.modal_body}>
+      <Text style={Styles.modal_header}>{HELP_TEXTS.HELP_HEADER}</Text>
       <Text style={styles.help_row} hasUrl URLS={URLS}>{HELP_TEXTS.HELP_CONTENT}</Text>
 
       { Object.keys(HELP_TEXTS).map(hText => {
@@ -37,7 +37,7 @@ export default ({ visible, hide }) => (
         )
       })}
       <Text>{HELP_TEXTS.HELP_DOTA_PROFILE}</Text>
-      <Button prestyled style={Layout.modal_close_button}
+      <Button prestyled style={Styles.modal_close_button}
         title="DONE"
         onPress={hide} />
     </Container>

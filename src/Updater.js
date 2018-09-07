@@ -12,6 +12,7 @@ import { alertWikiUpdateDone } from './utils/Alerts';
 import { DOWNLOAD_REASONS } from './constants/Constants';
 import Layout from './constants/Layout';
 import Colors from './constants/Colors';
+import Styles from './constants/Styles';
 
 @connect(
   (state => ({
@@ -74,7 +75,7 @@ export default class Updater extends React.PureComponent {
             onError={Logger.error}
           />
         { downloadingWiki_reason === DOWNLOAD_REASONS.UPDATE &&
-          <Button prestyled style={Layout.modal_close_button}
+          <Button prestyled style={Styles.modal_close_button}
             title="RUN IN BACKGROUND"
             onPress={this._hideWikiModal} />
         }
@@ -86,7 +87,7 @@ export default class Updater extends React.PureComponent {
           <View style={styles.container}>
             <Text>Downloading new app version: ${downloadingApp_version}</Text>
             <Text>When the update is done, the application will restart.</Text>
-            <Button prestyled style={Layout.modal_close_button}
+            <Button prestyled style={Styles.modal_close_button}
               title="RUN IN BACKGROUND"
               onPress={this._hideAppModal} />
           </View>
