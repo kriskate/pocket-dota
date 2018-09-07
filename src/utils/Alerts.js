@@ -4,8 +4,8 @@ import { Alert } from "react-native";
 export const alertAppUpdateDone = (version, onYes) =>
   Alert.alert(
     'Success!',
-    `Downloading new app version ${version} has finished successfully.
-    The app will now restart, in order for the new version to be applied.`,
+`Downloading new app version ${version} has finished successfully.
+The app will now restart, in order for the new version to be applied.`,
     [
       { text: `Don't restart`, style: 'cancel' },
       { text: 'OK', onPress: onYes },
@@ -26,9 +26,9 @@ export const alertWikiUpdateDone = (version) =>
 export const alertUpdateCheckError = (What, error, onDismiss) =>
   Alert.alert(
     `Error`,
-    `There was an error while trying to retrieve new ${What} version
-    ${error}
-    Please try again later.`,
+`There was an error while trying to retrieve new ${What} version
+${error}
+Please try again later.`,
     [
       { text: 'OK', onPress: onDismiss },
     ],
@@ -38,9 +38,9 @@ export const alertUpdateCheckError = (What, error, onDismiss) =>
 export const alertUpdateCheckAvailable = (What, newV, onNo, onYes) =>
   Alert.alert(
     `New version found! (${newV})`,
-    `A new ${What} version has been found.
-    Would you like to begin downloading it?
-    It is recoomended to be connected to a WI-FI network before downloading new data.`,
+`A new ${What} version has been found.
+Would you like to begin downloading it?
+It is recoomended to be connected to a WI-FI network before downloading new data.`,
     [
       { text: 'No', style: 'cancel', onPress: onNo },
       { text: 'Yes', onPress: onYes },
