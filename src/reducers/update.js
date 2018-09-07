@@ -1,6 +1,3 @@
-import { DOWNLOAD_REASONS } from "../constants/Constants";
-import { Util } from "expo";
-
 const ActionTypes = {
   DOWNLOAD_WIKI: 'DOWNLOAD_WIKI',
   DONE_WIKI: 'DONE_WIKI',
@@ -61,8 +58,10 @@ export default function reducer(state=initialState, action) {
         downloadingApp_version: action.version,
       };
     case ActionTypes.DONE_UPDATE_APP:
-      Util.reload();
-      return state;
+      return { ...state,
+       showApp: false,
+       downloadingApp_version: '', 
+      };
 
     case ActionTypes.HIDE:
       return { ...state,
