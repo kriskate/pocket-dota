@@ -19,11 +19,18 @@ import Drawer from '../components/Drawer';
 import Colors from '../constants/Colors';
 
 const drawerNav = createDrawerNavigator({
-  [SCREEN_LABELS.HEROES]: createStackNavigator({ [SCREEN_LABELS.HEROES]: HeroesScreen, HeroScreen }),
-  [SCREEN_LABELS.ITEMS]: createStackNavigator({ [SCREEN_LABELS.ITEMS]: ItemsScreen, ItemScreen }),
+  [SCREEN_LABELS.HEROES]: createStackNavigator({
+    [SCREEN_LABELS.HEROES]: HeroesScreen,
+    [SCREEN_LABELS_HIDDEN.HERO]: HeroScreen,
+  }),
+  [SCREEN_LABELS.ITEMS]: createStackNavigator({
+    [SCREEN_LABELS.ITEMS]: ItemsScreen,
+    [SCREEN_LABELS_HIDDEN.ITEM]: ItemScreen,
+  }),
 
   [SCREEN_LABELS.STATS]: createStackNavigator({ 
-    [SCREEN_LABELS.STATS]: StatsScreen, StatsWebScreen,
+    [SCREEN_LABELS.STATS]: StatsScreen, 
+    [SCREEN_LABELS_HIDDEN.STATS_WEB]: StatsWebScreen,
   }, {
     navigationOptions: {
       headerBackTitle: 'Stats',
