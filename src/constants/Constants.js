@@ -1,5 +1,5 @@
 import React from 'react';
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import Colors from './Colors';
 import { Text } from '../components/ui';
 import { Constants } from 'expo';
@@ -58,6 +58,7 @@ export const SCREEN_LABELS_HIDDEN = {
   HERO: 'HeroScreen',
   ITEM: 'ItemScreen',
   STATS_WEB: 'StatsWebScreen',
+  SETTINGS_TIPS: 'In-app tips',
 }
 
 export const ATTRIBUTES = {
@@ -83,8 +84,8 @@ export const URL_ODOTA = {
 
 
 export const ICONS = {
-  BACK: () => <FontAwesome name="arrow-circle-left" size={17} color={Colors.dota_white} />,
-  FORWARD: () => <FontAwesome name="arrow-circle-right" size={17} color={Colors.dota_white} />,
+  BACK: () => <Ionicons name="ios-arrow-back" size={17} color={Colors.dota_white} />,
+  FORWARD: () => <Ionicons name="ios-arrow-forward" size={17} color={Colors.dota_white} />,
   USER: () => <FontAwesome name="user" size={17} color={Colors.dota_white} />,
   INFO: () => <FontAwesome name="info" size={17} color={Colors.dota_white} />,
 }

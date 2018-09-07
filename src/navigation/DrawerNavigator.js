@@ -11,8 +11,9 @@ import SettingsScreen from '../screens/SettingsScreen';
 import TipsScreen from '../screens/TipsScreen';
 import PatchNotesScreen from '../screens/PatchNotesScreen';
 import AboutScreen from '../screens/AboutScreen';
+import SettingsTipsScreen from '../screens/SettingsTipsScreen';
 
-import { SCREEN_LABELS } from '../constants/Constants';
+import { SCREEN_LABELS, SCREEN_LABELS_HIDDEN } from '../constants/Constants';
 
 import Drawer from '../components/Drawer';
 import Colors from '../constants/Colors';
@@ -28,7 +29,10 @@ const drawerNav = createDrawerNavigator({
       headerBackTitle: 'Stats',
     }
   }),
-  [SCREEN_LABELS.SETTINGS]: createStackNavigator({ SettingsScreen }),
+  [SCREEN_LABELS.SETTINGS]: createStackNavigator({ 
+    [SCREEN_LABELS.SETTINGS]: SettingsScreen,
+    [SCREEN_LABELS_HIDDEN.SETTINGS_TIPS]: SettingsTipsScreen,
+  }),
 
   [SCREEN_LABELS.TIPS]: createStackNavigator({ TipsScreen }),
   [SCREEN_LABELS.PATCH_NOTES]: createStackNavigator({ PatchNotesScreen }),

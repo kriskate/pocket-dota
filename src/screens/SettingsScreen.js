@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Text, Button, Switch } from '../components/ui';
 
 import { headerStyle } from '../utils/screen';
-import { SCREEN_LABELS, SCREEN_LABELS_HIDDEN, APP_VERSION, GET_WIKI_VERSION, DOWNLOAD_REASONS } from '../constants/Constants';
+import { SCREEN_LABELS, SCREEN_LABELS_HIDDEN, APP_VERSION, GET_WIKI_VERSION, DOWNLOAD_REASONS, ICONS } from '../constants/Constants';
 import { StyleSheet, View, Alert, Platform } from 'react-native';
 import Colors from '../constants/Colors';
 import Layout from '../constants/Layout';
@@ -14,7 +14,6 @@ import { Actions as UpdateActions } from '../reducers/update';
 import { wiki_needsUpdate, app_needsUpdate } from '../utils/updaters';
 import { alertUpdateCheckError, alertUpdateCheckAvailable, alertRemoveProfileData, alertResetSettings } from '../utils/Alerts';
 import { sleep } from '../utils/utils';
-import TipsModal from '../components/Settings/TipsModal';
 
 
 const Section = ({ label, children }) => (
@@ -68,8 +67,6 @@ export default class SettingsScreen extends React.PureComponent {
   });
 
   state = {
-    tipsModalVisible: false,
-
     checkingWiki: '',
     checkingApp: '',
   }
@@ -137,15 +134,13 @@ export default class SettingsScreen extends React.PureComponent {
     )
   }
 
-  _hideTipsModal = () => this.setState({ tipsModalVisible: false })
 
   render() {
     const { user, settings, lastSearch } = this.props.profile;
     const { name, account_id } = model_user(user);
-    const { showProfileOnHome, autoUpdateApp, autoUpdateDB, tipsState } = model_settings(settings);
+    const { showProfileOnHome, autoUpdateApp, autoUpdateDB } = model_settings(settings);
 
     const { navigate } = this.props.navigation;
-    const { tipsModalVisible } = this.state;
 
     const { checkingApp, checkingWiki } = this.state;
     const { updatingApp, updatingWiki } = this.props;
@@ -204,12 +199,11 @@ export default class SettingsScreen extends React.PureComponent {
 
 
         <Section label="App settings:">
-          <Button prestyled style={{ marginHorizontal: 0 }}
-            title="In-app tips"
-            onPress={() => this.setState({ tipsModalVisible: true })} />
-          
-          <TipsModal isVisible={tipsModalVisible} hideModal={this._hideTipsModal} 
-            updateSettings={this.props.updateSettings} tipsState={tipsState} />
+          <Button prestyled style={styles.versionButton}
+              onPress={() => navigate(SCREEN_LABELS_HIDDEN.SETTINGS_TIPS)} >
+            <Text>{SCREEN_LABELS_HIDDEN.SETTINGS_TIPS}</Text>
+            <ICONS.FORWARD />
+          </Button>
 
           <Switch label="Auto update app"
             value={autoUpdateApp} onValueChange={val => this.props.updateSettings({ autoUpdateApp: val })} />
