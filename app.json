@@ -9,13 +9,16 @@
     "platforms": ["ios", "android"],
     "orientation": "portrait",
     "icon": "./src/assets/images/app-icon.png",
+    "primaryColor": "#1B1E21",
     "splash": {
       "image": "./src/assets/images/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#1B1E21"
     },
+    "androidShowExponentNotificationInShellApp": false,
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "checkAutomatically": "ON_ERROR_RECOVERY"
     },
     "assetBundlePatterns": [
       "**/*"
