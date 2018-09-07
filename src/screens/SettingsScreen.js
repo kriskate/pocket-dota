@@ -80,6 +80,8 @@ export default class SettingsScreen extends React.PureComponent {
   }
 
   _checkForUpdate = async (What) => {
+    // this._updateToV(What, {newVersion:'3'})
+    // return
     const stater = What == TYPES.WIKI ? 'checkingWiki' : 'checkingApp';
     const { updatingWiki, updatingApp } = this.props;
 
