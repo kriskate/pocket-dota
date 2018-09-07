@@ -1,6 +1,17 @@
 import { Alert } from "react-native";
 
 
+export const alertAppUpdateDone = (version, onYes) =>
+  Alert.alert(
+    'Success!',
+    `Downloading new app version ${version} has finished successfully.
+    The app will now restart, in order for the new version to be applied.`,
+    [
+      { text: `Don't restart`, style: 'cancel' },
+      { text: 'OK', onPress: onYes },
+    ]
+  )
+
 export const alertWikiUpdateDone = (version) => 
   Alert.alert(
     `Success!`,

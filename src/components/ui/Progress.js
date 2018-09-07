@@ -6,7 +6,7 @@ import { Text } from './';
 import Colors from '../../constants/Colors';
 
 export default ({ progress, label }) => (
-  <View>
+  <View style={{paddingVertical: 15}}>
     <Text style={styles.label}>{label} {Math.round(progress*100)}%</Text>
 
     { !progress && progress !== 0

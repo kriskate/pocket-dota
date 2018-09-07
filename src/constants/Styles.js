@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import Layout from "./Layout";
 import Colors from "./Colors";
 
@@ -20,6 +20,7 @@ export default StyleSheet.create({
     flex: undefined,
   },
 
+
   modal_body: {
     flex: 1,
     backgroundColor: Colors.dota_ui1,
@@ -40,4 +41,21 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.dota_ui2,
   },
+
+
+  modal_downloading_body: {
+    flex: 1,
+    padding: 25,
+    paddingVertical: 50,
+    justifyContent: 'center',
+    backgroundColor: Colors.dota_ui2,
+  },
+  modal_downloading_close_button: {
+    width: '100%',
+  },
+
+  text_highlight_gold: {
+    color: Colors.goldenrod,
+    fontWeight: 'bold',
+  }
 })

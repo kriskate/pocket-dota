@@ -6,13 +6,15 @@ import { connect } from 'react-redux';
 import { Actions as UpdateActions, DOWNLOAD_STATE } from './reducers/update';
 import { Actions as WikiActions } from './reducers/wiki';
 
-import AppDownloading from './screens/AppDownloading';
-import { alertWikiUpdateDone } from './utils/Alerts';
+import WikiDownloading from './components/WikiDownloading';
+import { alertWikiUpdateDone, alertAppUpdateDone } from './utils/Alerts';
 
 import { DOWNLOAD_REASONS } from './constants/Constants';
 import Layout from './constants/Layout';
 import Colors from './constants/Colors';
 import Styles from './constants/Styles';
+import AppDownloading from './components/AppDownloading';
+import { Updates } from 'expo';
 
 @connect(
   (state => ({
@@ -42,6 +44,12 @@ export default class Updater extends React.PureComponent {
 
     this.props.doneWiki();
   }
+  _handleFinishDownLoadingApp = () => {
+    const onYes = () => Updates.reloadFromCache();
+    this.props.doneApp();
+
+    alertAppUpdateDone(this.props.downloadingApp_version, onYes);
+  }
 
   _hideWikiModal = () => {
     this.props.hide(DOWNLOAD_STATE.WIKI);
@@ -67,16 +75,16 @@ export default class Updater extends React.PureComponent {
       <View style={[styles.modalsWrapper, !showWiki && !showApp && styles.modalsWrapper_hidden]}>
         { !downloadingWiki_reason ? null :
         <View style={[styles.modal, !showWiki && styles.modal_hidden]}>
-          <AppDownloading
+          <WikiDownloading
             version={downloadingWiki_version}
             versionInfo={downloadingWiki_versionInfo}
             reason={downloadingWiki_reason}
             onFinish={this._handleFinishDownLoadingWiki}
             onError={Logger.error}
           />
-        { downloadingWiki_reason === DOWNLOAD_REASONS.UPDATE &&
-          <Button prestyled style={Styles.modal_close_button}
-            title="RUN IN BACKGROUND"
+        { downloadingWiki_reason !== DOWNLOAD_REASONS.UPDATE ? null :
+          <Button prestyled style={Styles.modal_downloading_close_button}
+            title="RUN IN THE BACKGROUND" titleStyle={{ textAlign: 'center' }}
             onPress={this._hideWikiModal} />
         }
         </View>
@@ -84,13 +92,14 @@ export default class Updater extends React.PureComponent {
 
         { !downloadingApp_version ? null :
         <View style={[styles.modal, !showApp && styles.modal_hidden]}>
-          <View style={styles.container}>
-            <Text>Downloading new app version: ${downloadingApp_version}</Text>
-            <Text>When the update is done, the application will restart.</Text>
-            <Button prestyled style={Styles.modal_close_button}
-              title="RUN IN BACKGROUND"
-              onPress={this._hideAppModal} />
-          </View>
+          <AppDownloading 
+            downloadingApp_version={downloadingApp_version}
+            onFinish={this._handleFinishDownLoadingApp}
+            onError={Logger.error}
+          />
+          <Button prestyled style={Styles.modal_downloading_close_button}
+            title="RUN IN THE BACKGROUND" titleStyle={{ textAlign: 'center' }}
+            onPress={this._hideAppModal} />
         </View>
         }
         
@@ -110,12 +119,15 @@ const styles = StyleSheet.create({
     right: Layout.window.width + 10,
   },
 
+
   modal: {
-    flex: 1,
+    width: '100%',
+    height: '100%',
+
+    position: 'absolute',
   },
   modal_hidden: {
     flex: 1,
-    // opacity: 0,
     right: Layout.window.width + 10,
   },
 
