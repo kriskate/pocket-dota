@@ -1,17 +1,15 @@
 import React from 'react';
 import { View, WebView, ActivityIndicator, StyleSheet, Platform } from 'react-native';
-import { Container, Text, Button } from '../components/ui';
+import { Container } from '../components/ui';
 
 import { headerStyle } from '../utils/screen';
-import { URL_ODOTA, ICONS } from '../constants/Constants';
+import { URL_ODOTA } from '../constants/Constants';
 import Colors from '../constants/Colors';
 import { showTip, APP_TIPS } from '../components/AppTips';
-import { connect } from 'react-redux';
-import { Actions } from '../reducers/profile';
 import { model_odota } from '../constants/Models';
 
-import Styles from '../constants/Styles';
 import StatsWebScreenModal from '../components/modals/StatsWebScreenModal';
+import StatsWebScreenToolbox from '../components/Stats/StatsWebScreenToolbox';
 
 
 const bkC = `background-color:${Colors.dota_ui1}!important;`;
@@ -32,68 +30,11 @@ const jsString = `
   main.childNodes[0].remove();
 `
 
-const refs = { view: {} };
-
-let singleton;
-
-@connect(
-  (state => ({
-    c_account_id: state.profile.user.account_id,
-    user: state.profile.user,
-  })),
-  (dispatch => ({
-    setProfile: (user) => dispatch(Actions.setUser(user)),
-  }))
-)
-class NavigationControls extends React.PureComponent {
-  constructor(props) {
-    super(props);
-
-    singleton = this;
-
-    this.state = { loading: true };
-  }
-  render() {
-    const { loading } = this.state;
-    const { account_id, avatarfull, last_match_time, personaname } = this.props.player;
-
-    if(loading) return <Text>{personaname}</Text>
-
-    const { c_account_id, setProfile, } = this.props;
-
-    return (
-      <View style={styles.navigation_controls}>
-        <Button prestyled forceTouchableOpacity style={ Styles.toolbox_button }
-            onPress={() => refs.view.goBack()}>
-          <ICONS.BACK />
-        </Button>
-        <Button prestyled forceTouchableOpacity style={ Styles.toolbox_button }
-            onPress={() => refs.view.goForward()} >
-          <ICONS.FORWARD />
-        </Button>
-        <Button prestyled forceTouchableOpacity style={[Styles.toolbox_button, { borderColor: c_account_id == account_id ? Colors.goldenrod : Colors.dota_ui2 }]}
-            onPress={() => {
-              if(c_account_id !== account_id) {
-                setProfile({ name: personaname, image: avatarfull, account_id, last_match_time });
-                showTip(APP_TIPS.DOTA_PROFILE_ADDED);
-              }
-            }}>
-          <ICONS.USER />
-        </Button>
-        <Button prestyled forceTouchableOpacity style={[Styles.toolbox_button, {width: 'auto',}]}
-          onPress={() => refs.screen.setState({ isModalVisible: true })}>
-          <ICONS.INFO />
-        </Button>
-      </View>
-    )
-  }
-}
-
 
 export default class StatsWebScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     ...headerStyle,
-    headerTitle: <NavigationControls player={navigation.state.params.player} />,
+    title: navigation.state.params.player.personaname,
     headerTruncatedBackTitle: 'Stats',
   });
 
@@ -102,6 +43,7 @@ export default class StatsWebScreen extends React.Component {
 
     showTip(APP_TIPS.ADD_PROFILE, 15);
 
+    this.view = React.createRef();
     this.state = {
       isModalVisible: false,
     }
@@ -113,43 +55,42 @@ export default class StatsWebScreen extends React.Component {
     </View>
   )
 
-  _onLoadEnd = () => {
-    refs.screen = this;
-    singleton && singleton.setState({ loading: false });
-  }
+  _hideModal = () => this.setState({ isModalVisible: false });
 
-  _hideModal = () => this.setState({ isModalVisible: false })
+  _goBack = () => this.view.goBack();
+  _goForward = () => this.view.goForward();
+  _showHelp = () => this.setState({ isModalVisible: true });
 
   render() {
-    const { account_id } = model_odota(this.props.navigation.state.params.player);
-    const source = { uri: URL_ODOTA.PROFILE_WEB + account_id + '/overview' };
+    const player = model_odota(this.props.navigation.state.params.player);
+    const source = { uri: URL_ODOTA.PROFILE_WEB + player.account_id + '/overview' };
     const { isModalVisible } = this.state;
 
     return (
       <Container>
         <StatsWebScreenModal visible={isModalVisible} hide={this._hideModal} />
+        { Platform.OS !== 'android' ? null : 
+          <StatsWebScreenToolbox player={player}
+            goBack={this._goBack} goForward={this._goForward} showHelp={this._showHelp} />
+        }
         <WebView
-          ref={el => refs.view = el}
+          ref={view => this.view = view}
           startInLoadingState
           renderLoading={this._renderLoading}
-          onLoadEnd={this._onLoadEnd}
           javaScriptEnabled
           injectedJavaScript={jsString}
           source={source}
-        />        
+        />
+        { Platform.OS !== 'ios' ? null : 
+          <StatsWebScreenToolbox player={player}
+            goBack={this._goBack} goForward={this._goForward} showHelp={this._showHelp} />
+        }
       </Container>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  navigation_controls: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginLeft: Platform.OS === 'ios' ? 30 : 0,
-  },
-
   activityWrapper: {
     flex: 1,
     justifyContent: 'center',

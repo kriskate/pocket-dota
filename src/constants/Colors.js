@@ -19,7 +19,7 @@ export default {
   dota_ui2: '#2F363D',
   dota_ui3: '#0C141D',
   dota_white: '#d6d6d6',
-  dota_black: '#000',
+  dota_black: '#000000',
   gold: '#FFD700',
   goldenrod: '#DAA520',
   disabled: '#777777',

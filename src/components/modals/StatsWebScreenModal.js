@@ -26,7 +26,7 @@ export default ({ visible, hide }) => (
 
         return (
           <View key={hText} style={styles.help_row}>
-            <Button prestyled forceTouchableOpacity style={ Styles.toolbox_button }><IconComponent /></Button>
+            <Button prestyled forceTouchableOpacity style={[ Styles.toolbox_button, Styles.toolbox_button_help ]}><IconComponent /></Button>
             <Text style={styles.help_text}>
               { typeof TextComponent == 'string' 
                 ? TextComponent

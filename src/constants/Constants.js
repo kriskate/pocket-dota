@@ -86,7 +86,7 @@ export const URL_ODOTA = {
 export const ICONS = {
   BACK: () => <Ionicons name="ios-arrow-back" size={17} color={Colors.dota_white} />,
   FORWARD: () => <Ionicons name="ios-arrow-forward" size={17} color={Colors.dota_white} />,
-  USER: () => <FontAwesome name="user" size={17} color={Colors.dota_white} />,
+  USER: ({color}) => <FontAwesome name="user" size={17} color={color || Colors.dota_white} />,
   INFO: () => <FontAwesome name="info" size={17} color={Colors.dota_white} />,
 }
 
