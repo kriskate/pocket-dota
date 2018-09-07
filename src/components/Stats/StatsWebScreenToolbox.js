@@ -8,6 +8,7 @@ import { ICONS } from "../../constants/Constants";
 import Styles from '../../constants/Styles';
 import { Button } from '../ui';
 import Colors from '../../constants/Colors';
+import Layout from '../../constants/Layout';
 
 
 @connect(
@@ -32,22 +33,23 @@ export default class StatsWebScreenToolbox extends React.PureComponent {
   render() {
     const { player, c_account_id, goBack, goForward, showHelp } = this.props;
     const { account_id } = player;
+    const width = Layout.window.width/4 - Layout.padding_big;
 
     return (
       <View style={styles.navigation_controls}>
-        <Button prestyled forceTouchableOpacity style={ Styles.toolbox_button }
+        <Button prestyled style={[ Styles.toolbox_button, {width} ]}
             onPress={goBack}>
           <ICONS.BACK />
         </Button>
-        <Button prestyled forceTouchableOpacity style={ Styles.toolbox_button }
+        <Button prestyled style={[ Styles.toolbox_button, {width} ]}
             onPress={goForward} >
           <ICONS.FORWARD />
         </Button>
-        <Button prestyled forceTouchableOpacity style={Styles.toolbox_button}
+        <Button prestyled style={[ Styles.toolbox_button, {width} ]}
             onPress={this._setProfile}>
           <ICONS.USER color={c_account_id == account_id ? Colors.goldenrod : Colors.dota_white}/>
         </Button>
-        <Button prestyled forceTouchableOpacity style={[Styles.toolbox_button, {width: 'auto'}]}
+        <Button prestyled style={[ Styles.toolbox_button, {width} ]}
           onPress={showHelp}>
           <ICONS.INFO />
         </Button>
@@ -58,7 +60,9 @@ export default class StatsWebScreenToolbox extends React.PureComponent {
 
 const styles = StyleSheet.create({
   navigation_controls: {
+    backgroundColor: Colors.dota_ui1,
     flexDirection: 'row',
+    justifyContent: 'space-between',
     ...Platform.select({
       ios: {
         borderTopColor: Colors.disabled,
