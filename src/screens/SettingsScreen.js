@@ -24,14 +24,14 @@ const Section = ({ label, children }) => (
 )
 
 const CheckButton = ({ label, message, current, onPress, disabled }) => (
-  <Button prestyled style={styles.versionButton} disabled={disabled}
+  <Button prestyled style={styles.versionButton} disabled={!!disabled}
       onPress={onPress} >
     <Text>{ message ? message : label }</Text>
     <Text style={{ color: Colors.goldenrod }}>current: {current}</Text>
   </Button>
 )
 
-const checkMessages = {
+const CHECK_MESSAGES = {
   CHECK: '(checking for update)',
   LATEST: 'is up to date',
   UPDATING: '(updating)',
@@ -89,7 +89,7 @@ export default class SettingsScreen extends React.PureComponent {
       return;
     }
 
-    this.setState({ [stater]: checkMessages.CHECK });
+    this.setState({ [stater]: CHECK_MESSAGES.CHECK });
 
     const maybeTooFast = new Date();
 
@@ -98,7 +98,7 @@ export default class SettingsScreen extends React.PureComponent {
     if(new Date() - maybeTooFast < 1500) await sleep(1500);
 
     if(!res) {
-      this.setState({ [stater]: `${What} ${checkMessages.LATEST}` });
+      this.setState({ [stater]: `${What} ${CHECK_MESSAGES.LATEST}` });
       return;
     }
     if(res.error) {
@@ -145,8 +145,8 @@ export default class SettingsScreen extends React.PureComponent {
     const { checkingApp, checkingWiki } = this.state;
     const { updatingApp, updatingWiki } = this.props;
 
-    const wikiUpdatingMessage = checkingWiki || (updatingWiki && checkMessages.UPDATING);
-    const appUpdatingMessage = checkingApp || (updatingApp && checkMessages.UPDATING);
+    const wikiUpdatingMessage = checkingWiki || (updatingWiki && CHECK_MESSAGES.UPDATING);
+    const appUpdatingMessage = checkingApp || (updatingApp && CHECK_MESSAGES.UPDATING);
 
 
     return (
@@ -189,7 +189,7 @@ export default class SettingsScreen extends React.PureComponent {
           <CheckButton label='Check for wiki update'
             onPress={() => this._checkForUpdate(TYPES.WIKI)}
             message={wikiUpdatingMessage && wikiUpdatingMessage + " - wiki"}
-            disabled={!!wikiUpdatingMessage}
+            disabled={wikiUpdatingMessage && wikiUpdatingMessage.includes(CHECK_MESSAGES.CHECK)}
             current={GET_WIKI_VERSION()}
           />
           <Button prestyled warning
@@ -211,7 +211,7 @@ export default class SettingsScreen extends React.PureComponent {
           <CheckButton label='Check for app update'
             onPress={() => this._checkForUpdate(TYPES.APP)}
             message={appUpdatingMessage && appUpdatingMessage + " - app"}
-            disabled={!!appUpdatingMessage}
+            disabled={appUpdatingMessage && appUpdatingMessage.includes(CHECK_MESSAGES.CHECK)}
             current={APP_VERSION}
           />
 
