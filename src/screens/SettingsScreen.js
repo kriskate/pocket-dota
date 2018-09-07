@@ -190,7 +190,7 @@ export default class SettingsScreen extends React.PureComponent {
 
           <CheckButton label='Check for wiki update'
             onPress={() => this._checkForUpdate(TYPES.WIKI)}
-            message={wikiUpdatingMessage && wikiUpdatingMessage + " - wiki"}
+            message={wikiUpdatingMessage && wikiUpdatingMessage}
             disabled={wikiUpdatingMessage && wikiUpdatingMessage.includes(CHECK_MESSAGES.CHECK)}
             current={GET_WIKI_VERSION()}
           />
@@ -212,7 +212,7 @@ export default class SettingsScreen extends React.PureComponent {
 
           <CheckButton label='Check for app update'
             onPress={() => this._checkForUpdate(TYPES.APP)}
-            message={appUpdatingMessage && appUpdatingMessage + " - app"}
+            message={appUpdatingMessage && appUpdatingMessage}
             disabled={appUpdatingMessage && appUpdatingMessage.includes(CHECK_MESSAGES.CHECK)}
             current={APP_VERSION}
           />
