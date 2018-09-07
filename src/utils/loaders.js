@@ -59,7 +59,7 @@ export const loadWiki = async () => {
       Logger.silly(`- loaded local data: wiki : ${key} : ${!!data[key]}`);
     })
   )
-  setWikiVersion(data.info);
+  if(!badData) setWikiVersion(data.info);
   
   return badData ? null : data;
 }
