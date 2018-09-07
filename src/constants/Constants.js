@@ -6,6 +6,7 @@ import { Constants } from 'expo';
 
 let _wikiVersion;
 export const setWikiVersion = ({ app_version, currentWikiVersion }) => {
+  console.log(app_version, currentWikiVersion)
   _wikiVersion = !app_version ? null :
     `${app_version}.${currentWikiVersion}`;
 }
@@ -43,9 +44,9 @@ export const SCREEN_LABELS = {
   HEROES: 'Heroes',
   ITEMS: 'Items',
   
-  HEADER_GAME: 'Game info',
-  TIPS: 'Tips',
-  PATCH_NOTES: 'Patch notes',
+  // HEADER_GAME: 'Game info',
+  // TIPS: 'Tips',
+  // PATCH_NOTES: 'Patch notes',
   
   HEADER_STATS: 'User',
   STATS: 'Player Statistics',
