@@ -21,7 +21,7 @@
       "checkAutomatically": "ON_ERROR_RECOVERY"
     },
     "assetBundlePatterns": [
-      "**/*"
+      "src/assets/*"
     ],
     "ios": {
       "supportsTablet": true
