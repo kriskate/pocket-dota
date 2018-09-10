@@ -51,8 +51,7 @@ export const app_needsUpdate = async () => {
         });
     
         const newVersion = (await res.json()).version;
-        if(APP_VERSION === newVersion) return false;
-        else return { newVersion };
+        return { newVersion };
 
       } catch(e) {
         return { error: e };
