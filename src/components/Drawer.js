@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     marginTop: Layout.padding_regular,
     paddingTop: Layout.padding_big,
     marginLeft: Layout.padding_regular,
-    borderTopColor: Colors.dota_red_dark,
+    borderTopColor: Colors.disabled,
     borderTopWidth: 1,
   },
   labelHeaderText:{
