@@ -93,7 +93,20 @@ export const ICONS = {
 
 
 export const URLS = {
+  'Valve corporation': 'https://www.valvesoftware.com',
+  'Elo': 'https://elo.io/',
+  'Dota buff': 'https://github.com/dotabuff/d2vpkr',
+
   'Open Dota': 'https://www.opendota.com',
+
+  'NodeJS': 'https://nodejs.org/en/',
+
+  'React Native': 'https://facebook.github.io/react-native/',
+  'Expo': 'https://expo.io/',
+
+  'Feature Requests': 'https://discord.gg/mwP3FRM',
+  'Issues': 'https://discord.gg/BMCrMbw',
+  'General': 'https://discord.gg/WXjby2w',
 }
 
 export const HELP_TEXTS = {

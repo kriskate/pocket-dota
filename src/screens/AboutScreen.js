@@ -3,24 +3,11 @@ import { StyleSheet, Image, View } from 'react-native';
 import { Container, Text } from '../components/ui';
 
 import { headerStyle } from '../utils/screen';
-import { SCREEN_LABELS } from '../constants/Constants';
+import { SCREEN_LABELS, URLS } from '../constants/Constants';
 import Layout from '../constants/Layout';
 import Colors from '../constants/Colors';
 import { assets } from '../constants/Data';
 
-
-const URLS = {
-  'Valve corporation': 'https://www.valvesoftware.com',
-  'Elo': 'https://elo.io/',
-  'Dota buff': 'https://github.com/dotabuff/d2vpkr',
-
-  'Open Dota': 'https://www.opendota.com',
-
-  'NodeJS': 'https://nodejs.org/en/',
-
-  'React Native': 'https://facebook.github.io/react-native/',
-  'Expo': 'https://expo.io/',
-}
 
 const Section = ({ title, children }) => (
   <View style={styles.section}>
