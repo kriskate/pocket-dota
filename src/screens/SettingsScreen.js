@@ -70,10 +70,6 @@ export default class SettingsScreen extends React.PureComponent {
     checkingWiki: '',
     checkingApp: '',
   }
-  
-  _updateToV = (What, res) => {
-    What == TYPES.WIKI ? this.props.updateWiki(res) : this.props.updateApp(res.newVersion);
-  }
 
   _updateCanceled = (What) => {
     // is already handled in _checkForUpdate
@@ -108,7 +104,7 @@ export default class SettingsScreen extends React.PureComponent {
       alertUpdateCheckError(What, res.error, onDismiss);
     } else {
       const onNo = () => this._updateCanceled(What);
-      const onYes = () => this._updateToV(What, res);
+      const onYes = () => What == TYPES.WIKI ? this.props.updateWiki(res) : this.props.updateApp(res.newVersion);
       alertUpdateCheckAvailable(What, res.newVersion, onNo, onYes);
     }
 
@@ -140,7 +136,7 @@ export default class SettingsScreen extends React.PureComponent {
   render() {
     const { user, settings, lastSearch } = this.props.profile;
     const { name, account_id } = model_user(user);
-    const { showProfileOnHome, autoUpdateApp, autoUpdateDB } = model_settings(settings);
+    const { showProfileOnHome, autoCheckApp, autoCheckDB } = model_settings(settings);
 
     const { navigate } = this.props.navigation;
 
@@ -187,8 +183,8 @@ export default class SettingsScreen extends React.PureComponent {
 
 
         <Section label="Heroes & Items database:">
-          <Switch label="Auto update Database"
-            value={autoUpdateDB} onValueChange={val => this.props.updateSettings({ autoUpdateDB: val })} />
+          <Switch label="Automatically check for Database updates"
+            value={autoCheckDB} onValueChange={val => this.props.updateSettings({ autoCheckDB: val })} />
 
           <CheckButton label='Check for wiki update'
             onPress={() => this._checkForUpdate(TYPES.WIKI)}
@@ -209,8 +205,8 @@ export default class SettingsScreen extends React.PureComponent {
             <ICONS.FORWARD />
           </Button>
 
-          <Switch label="Auto update app"
-            value={autoUpdateApp} onValueChange={val => this.props.updateSettings({ autoUpdateApp: val })} />
+          <Switch label="Automatically check for app updates"
+            value={autoCheckApp} onValueChange={val => this.props.updateSettings({ autoCheckApp: val })} />
 
           <CheckButton label='Check for app update'
             onPress={() => this._checkForUpdate(TYPES.APP)}

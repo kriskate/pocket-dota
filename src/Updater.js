@@ -15,7 +15,7 @@ import Colors from './constants/Colors';
 import Styles from './constants/Styles';
 import AppDownloading from './components/AppDownloading';
 import { Updates } from 'expo';
-import { app_needsUpdate } from './utils/updaters';
+import { app_needsUpdate, wiki_needsUpdate } from './utils/updaters';
 
 @connect(
   (state => ({
@@ -26,6 +26,9 @@ import { app_needsUpdate } from './utils/updaters';
 
     showApp: state.update.showApp,
     downloadingApp_version: state.update.downloadingApp_version,
+
+    checkUpdateWiki: state.profile.settings.autoCheckDB,
+    checkUpdateApp: state.profile.settings.autoCheckApp,
   })),
   (dispatch => ({
     newWiki: (wiki) => dispatch(WikiActions.newWiki(wiki)),
@@ -35,6 +38,7 @@ import { app_needsUpdate } from './utils/updaters';
     doneApp: () => dispatch(UpdateActions.doneApp()),
 
     updateApp: (version) => dispatch(UpdateActions.updateApp(version)),
+    updateWiki: (res) => dispatch(UpdateActions.downloadWiki(DOWNLOAD_REASONS.UPDATE, res)),
   }))
 )
 export default class Updater extends React.PureComponent {
@@ -63,18 +67,22 @@ export default class Updater extends React.PureComponent {
 
   
 
-  async componentWillMount() {
-    const res = await app_needsUpdate();
+  componentWillMount() {
+    this.props.checkUpdateWiki && this._checkUpdate('App');
+    this.props.checkUpdateApp && this._checkUpdate('Wiki');
+  }
+
+  _checkUpdate = async (What) => {
+    const res = What == 'App' ? await app_needsUpdate() : await wiki_needsUpdate();
 
     if(!res) return;
 
     if(!res.error) {
       const onNo = () => {};
-      const onYes = () => this.props.updateApp(res.newVersion);
+      const onYes = () => What == 'App' ? this.props.updateApp(res.newVersion) : this.props.updateWiki(res);
       alertUpdateCheckAvailable('App', res.newVersion, onNo, onYes);
     }
   }
-
 
 
   render() {

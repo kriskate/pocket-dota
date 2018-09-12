@@ -42,14 +42,14 @@ export function model_user (user) {
 export function model_settings (settings) {
   const {
     showProfileOnHome=true,
-    autoUpdateApp=true,
-    autoUpdateDB=true,
+    autoCheckApp=true,
+    autoCheckDB=true,
     tipsState=model_tips({}),
   } = settings;
   return {
     showProfileOnHome,
-    autoUpdateApp,
-    autoUpdateDB,
+    autoCheckApp,
+    autoCheckDB,
     tipsState,
   };
 }
