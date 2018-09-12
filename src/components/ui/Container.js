@@ -30,12 +30,14 @@ export default class Container extends React.Component {
     
     const paddingTop = padTop ? getStatusBarHeight() : undefined;
     const padding = padInner ? Layout.padding_regular : undefined;
-    const _style = [styles.container, { paddingTop, padding }, style];
+    const _style = [!scrollable && styles.container, { paddingTop, padding }, style];
 
     return scrollable 
-      ? <View style={_style}>
+      ? <View style={styles.container}>
           <ScrollView>
-            {children}
+            <View style={_style}>
+              {children}
+            </View>
           </ScrollView>
         </View>
       : <View style={_style}>{children}</View>
