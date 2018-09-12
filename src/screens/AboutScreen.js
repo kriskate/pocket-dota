@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Image, View } from 'react-native';
+import { StyleSheet, Image, View, Platform } from 'react-native';
 import { Container, Text } from '../components/ui';
 
 import { headerStyle } from '../utils/screen';
@@ -22,7 +22,7 @@ export default class AboutScreen extends React.Component {
     title: SCREEN_LABELS.ABOUT,
     ...headerStyle,
   });
-
+  
   render() {
     return (
       <Container backToHome scrollable style={styles.container}>
@@ -31,19 +31,19 @@ export default class AboutScreen extends React.Component {
 
         <View style={{ padding: Layout.padding_small }}>
           <Text>Notes:</Text>
-          <Text><Text style={styles.highlight}>Wiki data</Text> - refers to all of the information displayed about the heroes, items and patch notes throughout the app.</Text>
+          <Text><Text style={styles.highlight}>Wiki data</Text> - refers to all of the information displayed about the Dota 2 heroes, items and patch notes throughout the app.</Text>
           <Text><Text style={styles.highlight}>Player statistics</Text> - refers to all of the information displayed within the Player statistics screens.</Text>
         </View>
 
         <Section title="App">
-          <Text><Text style={styles.highlight}>Pocket Dota</Text> is an opensource application that aims to give players an insight from within the game, when you're unable to access the actual game. It can also be used while playing the game, in order to keep track of the heroes and items of the opposing teams.</Text>
-          <Text><Text style={styles.highlight}>Pocket Dota</Text> is hereby not created, sponsored or endorsed by any of the companies mentioned on this page, apart from the usage of their open sourced data.</Text>
+          <Text><Text style={styles.highlight}>Pocket Dota</Text> is a free app that aims to give players an insight from within the game, when they're unable to access the actual game. It can also be used while playing the game, in order to keep track of the heroes and items of the opposing teams.</Text>
+          <Text><Text style={styles.highlight}>Pocket Dota</Text> is hereby not created, sponsored or endorsed by any of the companies mentioned on this page. It only uses open source data.</Text>
         </Section>
 
         <Section title="Copyright information">
           <Text style={styles.header2}>Wiki data</Text>
-          <Text hasUrl URLS={URLS}>The Dota 2 game and logo, the contents of game files (heroes, abilities, items, patch notes, tips), as well as their artwork/ names/ descriptions are © {URLS["Valve corporation"]}.</Text>
-          <Text hasUrl URLS={URLS}>Dota2 game files and images provided by {URLS.Elo}, through {URLS["Dota buff"]} and parsed by Pocket Dota's own data generator service.</Text>
+          <Text hasUrl URLS={URLS}>The Dota 2 game, logo, the contents of game files (heroes, abilities, items, patch notes, tips), as well as their artwork/ names/ descriptions are © {URLS["Valve corporation"]}.</Text>
+          <Text hasUrl URLS={URLS}>Dota2 game files and images provided by {URLS["Elo"]}, through {URLS["Dota buff"]} and parsed by Pocket Dota's own data generator service.</Text>
 
           <Text style={styles.header2}>Player statistics</Text>
           <Text hasUrl URLS={URLS}>The data presented through the Player statistics screen are information collected, parsed, displayed and owned by {URLS["Open Dota"]}.</Text>
@@ -51,8 +51,16 @@ export default class AboutScreen extends React.Component {
         </Section>
 
         <Section title="Tech">
-          <Text>The Wiki data is automatically generated from the <Text style={styles.highlight}>Dota2 game files</Text>, and updated when the information in these changes, through a {URLS.NodeJS} backend service.</Text>
-          <Text hasUrl URLS={URLS}>The application is developed in {URLS["React Native"]}, having {URLS.Expo} as a React Native management utility.</Text>
+          <Text>The Wiki data is automatically generated from the <Text style={styles.highlight}>Dota2 game files</Text>, and updated when the information in these changes, through a {URLS["NodeJS"]} backend service.</Text>
+          <Text hasUrl URLS={URLS} style={styles.text_spaced}>The application is developed in {URLS["React Native"]}, having {URLS["Expo"]} as a React Native management utility.</Text>
+          <Text style={styles.highlight}>Recommended software version: {Platform.OS === 'ios' ? "IOS 9+" : "Android 4.4+"}</Text>
+        </Section>
+
+
+        <Section title="Contact (Discord)">
+          <Text hasUrl URLS={URLS} style={styles.text_spaced}>If you experience any issues with the usage of this app, please use the {URLS["Issues"]} channel.</Text>
+          <Text hasUrl URLS={URLS} style={styles.text_spaced}>If you would like to see more functionality brought into the app, use the {URLS["Feature Requests"]} channel.</Text>
+          <Text hasUrl URLS={URLS} style={styles.text_spaced}>If you just wanna have a chat with the app's developer, use the {URLS["General"]} channel.</Text>
         </Section>
 
       </Container>
@@ -101,4 +109,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 
+  text_spaced: {
+    marginBottom: Layout.padding_small,
+  },
 })
