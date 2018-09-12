@@ -34,10 +34,12 @@ export default StyleSheet.create({
     textAlign: 'center',
     color: Colors.dota_red,
   },
-  modal_close_button: {
+  modal_close_button_wrapper: {
     position: 'absolute',
     alignSelf: 'center',
-    bottom: -5,
+    bottom: 5,
+  },
+  modal_close_button: {
     borderWidth: 1,
     borderColor: Colors.dota_ui2,
   },

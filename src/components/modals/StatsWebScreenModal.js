@@ -6,6 +6,7 @@ import Layout from '../../constants/Layout';
 import Styles from '../../constants/Styles';
 import { HELP_TEXTS, ICONS, URLS } from '../../constants/Constants';
 import { Button, Text, Container } from '../ui';
+import Colors from '../../constants/Colors';
 
 
 export default ({ visible, hide }) => (
@@ -37,9 +38,11 @@ export default ({ visible, hide }) => (
         )
       })}
       <Text>{HELP_TEXTS.HELP_DOTA_PROFILE}</Text>
-      <Button prestyled style={Styles.modal_close_button}
-        title="DONE"
-        onPress={hide} />
+      <View style={Styles.modal_close_button_wrapper}>
+        <Button prestyled style={Styles.modal_close_button}
+          title="DONE"
+          onPress={hide} />
+      </View>
     </Container>
   </Modal>
 )
@@ -53,5 +56,6 @@ const styles = StyleSheet.create({
   help_text: {
     flex: 1,
   },
+
 
 })
