@@ -183,7 +183,7 @@ export default class SettingsScreen extends React.PureComponent {
 
 
         <Section label="Heroes & Items database:">
-          <Switch label="Automatically check for Database updates"
+          <Switch label="Automatically check for Wiki updates"
             value={autoCheckDB} onValueChange={val => this.props.updateSettings({ autoCheckDB: val })} />
 
           <CheckButton label='Check for wiki update'
