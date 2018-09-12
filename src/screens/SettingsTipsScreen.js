@@ -28,8 +28,9 @@ export default class SettingsTipsScreen extends React.Component {
   }
   _allTipsOff_handler = () => {
     const tipsOff = {};
+    const { allTipsOff } = this.state;
 
-    Object.keys(tipsState).forEach(tip => tipsOff[tip] = !allTipsOff);
+    Object.keys(this.props.tipsState).forEach(tip => tipsOff[tip] = !allTipsOff);
     this.props.updateSettings({ tipsState: tipsOff });
     this.setState({ allTipsOff: !allTipsOff });
   }
