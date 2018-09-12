@@ -56,15 +56,17 @@ export function model_settings (settings) {
 export const model_tips = ({
   IOS_slideBack=true,
   drawerSlide=true,
-  addProfile=true,
   attributesSlider=true,
-  dotaProfileAdded=true,
+  profileAddRequirements=true,
+  profileAdd=true,
+  profileAdded=true,
 }) => ({
   IOS_slideBack,
   drawerSlide,
-  addProfile,
   attributesSlider,
-  dotaProfileAdded,
+  profileAddRequirements,
+  profileAdd,
+  profileAdded,
 })
 
 

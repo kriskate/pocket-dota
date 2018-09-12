@@ -9,6 +9,7 @@ import Layout from '../constants/Layout';
 import { model_odota } from '../constants/Models';
 import { connect } from 'react-redux';
 import { Actions } from '../reducers/profile';
+import { showTip, APP_TIPS } from '../components/AppTips';
 
 
 class ProfileThumb extends React.PureComponent {
@@ -31,6 +32,11 @@ class ProfileThumb extends React.PureComponent {
   }
 }
 class Results extends React.PureComponent {
+  constructor(props) {
+    super(props);
+
+    showTip(APP_TIPS.PROFILE_ADD_REQUIREMENTS, 15);
+  }
   _renderItem = ({item}) => <ProfileThumb result={item} navigation={this.props.navigation} />
 
   render() {

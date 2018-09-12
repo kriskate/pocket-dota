@@ -41,7 +41,7 @@ export default class StatsWebScreen extends React.Component {
   constructor(props) {
     super(props);
 
-    showTip(APP_TIPS.ADD_PROFILE, 15);
+    showTip(APP_TIPS.PROFILE_ADD, 15);
 
     this.view = React.createRef();
     this.state = {

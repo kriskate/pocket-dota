@@ -27,7 +27,7 @@ export default class StatsWebScreenToolbox extends React.PureComponent {
 
     if(c_account_id !== account_id) {
       setProfile({ name: personaname, image: avatarfull, account_id, last_match_time });
-      showTip(APP_TIPS.DOTA_PROFILE_ADDED);
+      showTip(APP_TIPS.PROFILE_ADDED);
     }
   }
   render() {
