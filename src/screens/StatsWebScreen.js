@@ -74,6 +74,7 @@ export default class StatsWebScreen extends React.Component {
             goBack={this._goBack} goForward={this._goForward} showHelp={this._showHelp} />
         }
         <WebView
+          style={styles.webView}
           ref={view => this.view = view}
           startInLoadingState
           renderLoading={this._renderLoading}
@@ -91,6 +92,9 @@ export default class StatsWebScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  webView: {
+    backgroundColor: Colors.dota_ui2,
+  },
   activityWrapper: {
     flex: 1,
     justifyContent: 'center',
