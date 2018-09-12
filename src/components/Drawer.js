@@ -61,21 +61,27 @@ export default class Drawer extends React.Component {
   }
 }
 
-
+const wrapperHeight = 150;
+const logoRatio = 1600/ 560;
+const logoHeight = wrapperHeight/2 - Layout.padding_regular*2;
 const styles = StyleSheet.create({
   imgIconWrapper: {
     marginTop: Layout.padding_regular + getStatusBarHeight(),
-    paddingVertical: Layout.padding_regular,
-    marginBottom: Layout.padding_regular,
+    padding: Layout.padding_regular,
     alignItems: 'center',
+    justifyContent: 'center',
+    height: wrapperHeight,
   },
   imgIcon: {
-    width: 180,
-    height: 50,
-    resizeMode: 'contain',
+    backgroundColor: Colors.dota_ui1+'99',
+    borderColor: Colors.disabled,
+    borderRadius: 10,
+    borderWidth: 1,
+    width: logoHeight * logoRatio,
+    height: logoHeight,
   },
   imgBackground: {
-    height: 110,
+    height: wrapperHeight + Layout.padding_regular + getStatusBarHeight(),
     position: "absolute",
   },
   appVersion: {
