@@ -67,9 +67,13 @@ export default class Updater extends React.PureComponent {
 
   
 
-  componentWillMount() {
-    this.props.checkUpdateWiki && this._checkUpdate('App');
-    this.props.checkUpdateApp && this._checkUpdate('Wiki');
+  componentDidMount() {
+    setTimeout(() => {
+      // allows the user to see the app for a bit
+      // also allows redux-persist to load its state
+      this.props.checkUpdateApp && this._checkUpdate('App');
+      this.props.checkUpdateWiki && this._checkUpdate('Wiki');
+    }, 10000)
   }
 
   _checkUpdate = async (What) => {
@@ -80,7 +84,7 @@ export default class Updater extends React.PureComponent {
     if(!res.error) {
       const onNo = () => {};
       const onYes = () => What == 'App' ? this.props.updateApp(res.newVersion) : this.props.updateWiki(res);
-      alertUpdateCheckAvailable('App', res.newVersion, onNo, onYes);
+      alertUpdateCheckAvailable(What, res.newVersion, onNo, onYes);
     }
   }
 

@@ -37,7 +37,7 @@ Please try again later.`,
 
 export const alertUpdateCheckAvailable = (What, newV, onNo, onYes) =>
   Alert.alert(
-    `New version found! (${newV})`,
+    `New ${What} version found! (${newV})`,
 `A new ${What} version has been found.
 Would you like to begin downloading it?
 It is recoomended to be connected to a WI-FI network before downloading new data.`,
