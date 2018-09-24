@@ -19,13 +19,12 @@ const Section = ({ title, children }) => (
 )
 export default class AboutScreen extends React.Component {
   static navigationOptions = () => ({
-    title: SCREEN_LABELS.ABOUT,
-    ...headerStyle,
+    header: null,
   });
   
   render() {
     return (
-      <Container backToHome scrollable style={styles.container}>
+      <Container backToHome scrollable style={styles.container} header header_title={SCREEN_LABELS.ABOUT} >
 
         <Image style={styles.logo} source={assets.app.logoRed} />
 

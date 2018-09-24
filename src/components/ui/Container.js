@@ -1,11 +1,12 @@
 import React from 'react';
-import { BackHandler, View, StyleSheet, ScrollView } from 'react-native';
+import { BackHandler, View, StyleSheet, ScrollView, Animated } from 'react-native';
 import { withNavigation, } from 'react-navigation';
 
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import { SCREEN_LABELS } from '../../constants/Constants';
 import Colors from '../../constants/Colors';
 import Layout from '../../constants/Layout';
+import ContainerHeader from './ContainerHeader';
 
 
 @withNavigation
@@ -26,21 +27,34 @@ export default class Container extends React.Component {
   }
 
   render() {
-    const { style, children, padTop, padInner, scrollable } = this.props;
+    const { style, children, padTop, padInner, scrollable, header, header_title, header_titleColor } = this.props;
     
     const paddingTop = padTop ? getStatusBarHeight() : undefined;
     const padding = padInner ? Layout.padding_regular : undefined;
     const _style = [!scrollable && styles.container, { paddingTop, padding }, style];
 
-    return scrollable 
-      ? <View style={styles.container}>
+    if(scrollable) {
+      if(header) return (
+        <View style={styles.container}>
+          <ContainerHeader title={header_title} titleColor={header_titleColor} >
+            <View style={_style}>
+              {children}
+            </View>
+          </ContainerHeader>
+        </View>
+      )
+      else return (
+        <View style={styles.container}>
           <ScrollView>
             <View style={_style}>
               {children}
             </View>
           </ScrollView>
         </View>
-      : <View style={_style}>{children}</View>
+      )
+    } else return (
+      <View style={_style}>{children}</View>
+    )
   }
 }
 
