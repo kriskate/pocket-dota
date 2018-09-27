@@ -27,6 +27,7 @@ export default withNavigation( ({ navigation }) => (
 const styles = StyleSheet.create({
   hamburger: {
     height: Header.HEIGHT,
-    paddingHorizontal: 16,
+    width: Header.HEIGHT,
+    // paddingHorizontal: 16,
   },
 })

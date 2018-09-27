@@ -9,7 +9,7 @@ const Title = ({ title, disabled, style }) => !title ? null :
   
 export default class Button extends React.Component {
   static defaultProps = {
-    borderless: false,
+    borderless: true,
     pressColor: Colors.dota_white,
   };
   

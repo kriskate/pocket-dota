@@ -1,5 +1,5 @@
 import React from 'react';
-import { BackHandler, View, StyleSheet, ScrollView, Animated } from 'react-native';
+import { BackHandler, View, StyleSheet, ScrollView } from 'react-native';
 import { withNavigation, } from 'react-navigation';
 
 import { getStatusBarHeight } from 'react-native-status-bar-height';
@@ -27,7 +27,7 @@ export default class Container extends React.Component {
   }
 
   render() {
-    const { style, children, padTop, padInner, scrollable, header, header_title, header_titleColor } = this.props;
+    const { style, children, padTop, padInner, scrollable, header, header_title, header_titleColor, backToHome } = this.props;
     
     const paddingTop = padTop ? getStatusBarHeight() : undefined;
     const padding = padInner ? Layout.padding_regular : undefined;
@@ -36,7 +36,8 @@ export default class Container extends React.Component {
     if(scrollable) {
       if(header) return (
         <View style={styles.container}>
-          <ContainerHeader title={header_title} titleColor={header_titleColor} >
+          <ContainerHeader backToHome={backToHome}
+            title={header_title} titleColor={header_titleColor} >
             <View style={_style}>
               {children}
             </View>
@@ -53,7 +54,7 @@ export default class Container extends React.Component {
         </View>
       )
     } else return (
-      <View style={_style}>{children}</View>
+      <View style={[styles.container, _style]}>{children}</View>
     )
   }
 }

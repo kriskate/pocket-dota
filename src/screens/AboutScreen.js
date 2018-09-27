@@ -19,7 +19,7 @@ const Section = ({ title, children }) => (
 )
 export default class AboutScreen extends React.Component {
   static navigationOptions = () => ({
-    header: null,
+    header: <View></View>,
   });
   
   render() {
