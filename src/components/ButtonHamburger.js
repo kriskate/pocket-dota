@@ -26,8 +26,14 @@ export default withNavigation( ({ navigation }) => (
 
 const styles = StyleSheet.create({
   hamburger: {
+    ...Platform.select({
+      ios: {
+        width: Header.HEIGHT-16,
+      },
+      android: {
+        width: Header.HEIGHT,
+      },
+    }),
     height: Header.HEIGHT,
-    width: Header.HEIGHT,
-    // paddingHorizontal: 16,
   },
 })

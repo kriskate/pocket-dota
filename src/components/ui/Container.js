@@ -27,17 +27,21 @@ export default class Container extends React.Component {
   }
 
   render() {
-    const { style, children, padTop, padInner, scrollable, header, header_title, header_titleColor, backToHome } = this.props;
+    const {
+      style, children, padTop, padInner, scrollable, backToHome,
+      header, header_title, header_titleColor, stickyComponent,
+    } = this.props;
     
     const paddingTop = padTop ? getStatusBarHeight() : undefined;
     const padding = padInner ? Layout.padding_regular : undefined;
-    const _style = [!scrollable && styles.container, { paddingTop, padding }, style];
+    const _style = [!scrollable && styles.container, { paddingTop, padding }, style, ];
 
     if(scrollable) {
       if(header) return (
         <View style={styles.container}>
           <ContainerHeader backToHome={backToHome}
-            title={header_title} titleColor={header_titleColor} >
+              title={header_title} titleColor={header_titleColor}
+              stickyComponent={stickyComponent} >
             <View style={_style}>
               {children}
             </View>

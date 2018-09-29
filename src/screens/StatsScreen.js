@@ -2,7 +2,7 @@ import React from 'react';
 import { View, ActivityIndicator, StyleSheet, TextInput, Keyboard, TouchableWithoutFeedback, Image, FlatList } from 'react-native';
 import { Container, Text, Button } from '../components/ui';
 
-import { headerStyle } from '../utils/screen';
+import { headerStyle, headerStyleHidden } from '../utils/screen';
 import { SCREEN_LABELS, URL_ODOTA, SCREEN_LABELS_HIDDEN } from '../constants/Constants';
 import Colors from '../constants/Colors';
 import Layout from '../constants/Layout';
@@ -49,7 +49,9 @@ class Results extends React.PureComponent {
         </Container>
       : <Container scrollable padInner style={styles.results}>
         { lastSearchResults.length < 1
-          ? <Text>Could not find any results for <Text style={{color: Colors.dota_white}}>{lastSearch}</Text>
+          ? <Text>
+              Could not find any results for 
+              <Text style={{color: Colors.dota_white}}>{lastSearch}</Text>
             </Text>
           : <FlatList
               data={lastSearchResults}
@@ -80,9 +82,8 @@ export default class StatsScreen extends React.Component {
       search_text: props.lastSearch || '',
     }
   }
-  static navigationOptions = ({ navigation }) => ({
-    title: SCREEN_LABELS.STATS,
-    ...headerStyle,
+  static navigationOptions = () => ({
+    ...headerStyleHidden,
   });
 
   _handleSubmit = async () => {
@@ -101,21 +102,24 @@ export default class StatsScreen extends React.Component {
     const { lastSearch, lastSearchResults, navigation, } = this.props;
     const { search_text } = this.state;
 
+    const search = <View style={styles.search}>
+                      <TextInput style={styles.searchBox}
+                        selectTextOnFocus
+                        placeholder='Type in profile name to look up'
+                        onSubmitEditing={this._handleSubmit}
+                        returnKeyType='search'
+                        enablesReturnKeyAutomatically
+                        onChangeText={this._handleChange}
+                        value={search_text}
+                      />
+                      <Button style={styles.searchButton} onPress={this._handleSubmit}><Text>Search</Text></Button>
+                    </View>
+
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <Container backToHome >
-          <View style={styles.search}>
-            <TextInput style={styles.searchBox}
-              selectTextOnFocus
-              placeholder='Type in profile name to look up'
-              onSubmitEditing={this._handleSubmit}
-              returnKeyType='search'
-              enablesReturnKeyAutomatically
-              onChangeText={this._handleChange}
-              value={search_text}
-            />
-            <Button style={styles.searchButton} onPress={this._handleSubmit}><Text>Search</Text></Button>
-          </View>
+        <Container backToHome scrollable header header_title={SCREEN_LABELS.STATS} 
+          stickyComponent={search}
+        >
           { !lastSearch ? null : <Results navigation={navigation} lastSearch={lastSearch} lastSearchResults={lastSearchResults} /> }
         </Container>
       </TouchableWithoutFeedback>
@@ -129,7 +133,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: Layout.padding_regular,
-    marginVertical: Layout.padding_regular,
   },
   searchBox: {
     height: elemH,
@@ -145,12 +148,15 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.dota_ui1,
     borderRadius: 3,
   },
-
+  
   results: {
+    marginTop: Layout.padding_big,
     backgroundColor: Colors.dota_ui1,
     flex: 1,
   },
   resultsLoading: {
+    marginTop: Layout.padding_big,
+    paddingTop: Layout.padding_small,
     backgroundColor: Colors.dota_ui1,
     justifyContent: 'center',
     flex: 1,

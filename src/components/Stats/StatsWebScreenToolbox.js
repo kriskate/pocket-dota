@@ -31,19 +31,23 @@ export default class StatsWebScreenToolbox extends React.PureComponent {
     }
   }
   render() {
-    const { player, c_account_id, goBack, goForward, showHelp } = this.props;
+    const { player, c_account_id, goHome, goBack, goForward, showHelp, disabledBack, disabledForward, } = this.props;
     const { account_id } = player;
     const width = Layout.window.width/4 - Layout.padding_big;
 
     return (
       <View style={styles.navigation_controls}>
         <Button prestyled style={[ Styles.toolbox_button, {width} ]}
-            onPress={goBack}>
-          <ICONS.BACK />
+            onPress={goHome}>
+          <ICONS.HOME />
         </Button>
         <Button prestyled style={[ Styles.toolbox_button, {width} ]}
-            onPress={goForward} >
-          <ICONS.FORWARD />
+            onPress={disabledBack ? ()=>{} : goBack}>
+          <ICONS.BACK disabled={disabledBack} />
+        </Button>
+        <Button prestyled style={[ Styles.toolbox_button, {width} ]}
+            onPress={disabledForward ? ()=>{} : goForward} >
+          <ICONS.FORWARD disabled={disabledForward} />
         </Button>
         <Button prestyled style={[ Styles.toolbox_button, {width} ]}
             onPress={this._setProfile}>
@@ -67,6 +71,10 @@ const styles = StyleSheet.create({
       ios: {
         borderTopColor: Colors.disabled,
         borderTopWidth: 1,
+
+        shadowOffset:{  height: -3,  },
+        shadowColor: 'black',
+        shadowOpacity: 0.2,
       },
       android: {
         borderBottomColor: Colors.dota_black+'90',
@@ -75,3 +83,4 @@ const styles = StyleSheet.create({
     }),
   },
 })
+

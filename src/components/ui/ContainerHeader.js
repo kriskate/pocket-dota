@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Animated, Platform, StyleSheet, View } from 'react-native';
 import Colors from '../../constants/Colors';
 import ButtonHamburger from '../ButtonHamburger';
-import { Header, withNavigation, HeaderBackButton } from 'react-navigation';
+import { withNavigation, HeaderBackButton } from 'react-navigation';
 
-const NAVBAR_HEIGHT = Header.HEIGHT;
+const NAVBAR_HEIGHT = Platform.select({ ios: 44, android: 56 });
 const STATUS_BAR_HEIGHT = Platform.select({ ios: 20, android: 24 });
 
 @withNavigation
@@ -16,6 +16,7 @@ export default class ContainerHeader extends Component {
     const offsetAnim = new Animated.Value(0);
 
     this.state = {
+      headerHeight: NAVBAR_HEIGHT+1,
       scrollAnim,
       offsetAnim,
       clampedScroll: Animated.diffClamp(
@@ -28,7 +29,7 @@ export default class ContainerHeader extends Component {
           offsetAnim,
         ),
         0,
-        NAVBAR_HEIGHT,// - STATUS_BAR_HEIGHT,
+        NAVBAR_HEIGHT/* - STATUS_BAR_HEIGHT*/,
       ),
     };
   }
@@ -43,7 +44,7 @@ export default class ContainerHeader extends Component {
       this._scrollValue = value;
       this._clampedScrollValue = Math.min(
         Math.max(this._clampedScrollValue + diff, 0),
-        NAVBAR_HEIGHT// - STATUS_BAR_HEIGHT,
+        NAVBAR_HEIGHT/* - STATUS_BAR_HEIGHT*/,
       );
     });
     this.state.offsetAnim.addListener(({ value }) => {
@@ -66,8 +67,8 @@ export default class ContainerHeader extends Component {
 
   _onMomentumScrollEnd = () => {
     const toValue = this._scrollValue > NAVBAR_HEIGHT &&
-      this._clampedScrollValue > (NAVBAR_HEIGHT) / 2
-      ? this._offsetValue + NAVBAR_HEIGHT
+      this._clampedScrollValue > (NAVBAR_HEIGHT - STATUS_BAR_HEIGHT) / 2
+      ? this._offsetValue+ NAVBAR_HEIGHT
       : this._offsetValue - NAVBAR_HEIGHT;
 
     Animated.timing(this.state.offsetAnim, {
@@ -77,26 +78,25 @@ export default class ContainerHeader extends Component {
     }).start();
   };
 
+  _onHeaderLayout = (event) => {
+    const { height } = event.nativeEvent.layout;
+    this.setState({ headerHeight: Math.round(height) });
+  }
 
   render() {
-    const { navigation, backToHome, title, titleColor } = this.props;
+    const { navigation, backToHome, title, titleColor, stickyComponent=null } = this.props;
     const { clampedScroll } = this.state;
 
     const navbarTranslate = clampedScroll.interpolate({
-      inputRange: [0, NAVBAR_HEIGHT],
-      outputRange: [0, -(NAVBAR_HEIGHT)],
-      extrapolate: 'clamp',
-    });
-    const navbarOpacity = clampedScroll.interpolate({
-      inputRange: [0, NAVBAR_HEIGHT],
-      outputRange: [1, 0],
+      inputRange: [0, NAVBAR_HEIGHT/* - STATUS_BAR_HEIGHT*/],
+      outputRange: [0, -(NAVBAR_HEIGHT/* - STATUS_BAR_HEIGHT*/)],
       extrapolate: 'clamp',
     });
 
     return (
       <View style={styles.fill}>
         <Animated.ScrollView
-          contentContainerStyle={styles.contentContainer}
+          contentContainerStyle={{ paddingTop: this.state.headerHeight + STATUS_BAR_HEIGHT }}
           
           scrollEventThrottle={1}
           onMomentumScrollBegin={this._onMomentumScrollBegin}
@@ -110,25 +110,34 @@ export default class ContainerHeader extends Component {
           {this.props.children}
         </Animated.ScrollView>
 
-        <Animated.View style={[styles.navbar, { transform: [{ translateY: navbarTranslate }] }]}>
-          { backToHome ? null : 
-            <HeaderBackButton 
-              pressColorAndroid={Colors.dota_white}
-              tintColor={Colors.dota_white}
-              title={title} onPress={() => navigation.goBack()} 
-            />
-          }
-          <Animated.Text style={[styles.title, { marginLeft: backToHome && 20, color: titleColor || Colors.dota_white }]}>
-            {title}
-          </Animated.Text>
-          <ButtonHamburger />
+        <Animated.View style={[styles.navbar, { transform: [{ translateY: navbarTranslate }] }]}
+            onLayout={this._onHeaderLayout}>
+          <Animated.View style={[ styles.navbarHeader, stickyComponent ? borderBottom : null ]}>
+            { backToHome ? null : 
+              <HeaderBackButton 
+                pressColorAndroid={Colors.dota_white}
+                tintColor={Colors.dota_white}
+                onPress={() => navigation.goBack()} 
+              />
+            }
+            <Animated.Text adjustsFontSizeToFit style={[styles.title, { marginLeft: backToHome && 20, color: titleColor || Colors.dota_white }]}>
+              {title}
+            </Animated.Text>
+            <ButtonHamburger />
+          </Animated.View>
+          { stickyComponent }
         </Animated.View>
         <View style={styles.statusBar}></View>
+
       </View>
     );
   }
 }
 
+const borderBottom = {
+  borderBottomColor: Colors.disabled + '90',
+  borderBottomWidth: 1,
+};
 const styles = StyleSheet.create({
   fill: {
     flex: 1,
@@ -140,23 +149,38 @@ const styles = StyleSheet.create({
     right: 0,
     height: STATUS_BAR_HEIGHT,
     backgroundColor: Colors.dota_ui1,
+    elevation: 11,
+  },
+  navbarHeader: {
+    height: NAVBAR_HEIGHT,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 1,
   },
   navbar: {
     position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
-    alignItems: 'center',
-    flexDirection: 'row',
     backgroundColor: Colors.dota_ui1,
+    marginTop: STATUS_BAR_HEIGHT,
     borderBottomColor: Colors.disabled,
     borderBottomWidth: 1,
-    height: Header.HEIGHT+1,
-    justifyContent: 'center',
-    marginTop: STATUS_BAR_HEIGHT,
+
+    ...Platform.select({
+      ios: {
+        shadowOffset:{  height: 3,  },
+        shadowColor: 'black',
+        shadowOpacity: 0.2,
+      },
+      android: {
+        elevation: 10,
+      }
+    })
   },
   contentContainer: {
-    paddingTop: NAVBAR_HEIGHT+STATUS_BAR_HEIGHT,
+    paddingTop: NAVBAR_HEIGHT + STATUS_BAR_HEIGHT,
   },
   title: {
     flex: 1,
