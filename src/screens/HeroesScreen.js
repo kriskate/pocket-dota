@@ -6,8 +6,7 @@ import { SCREEN_LABELS, SCREEN_LABELS_HIDDEN, ATTRIBUTES } from '../constants/Co
 import { Container } from '../components/ui';
 import { url } from '../constants/Data';
 import Colors from '../constants/Colors';
-import Layout from '../constants/Layout';
-import { headerStyle } from '../utils/screen';
+import { headerStyleHidden } from '../utils/screen';
 import ListScreen from '../components/ListScreen';
 import { model_section } from '../constants/Models';
 
@@ -55,8 +54,7 @@ const _getHeroSections = (heroes) => {
 }))
 export default class HeroesScreen extends React.PureComponent {
   static navigationOptions = () => ({
-    title: SCREEN_LABELS.HEROES,
-    ...headerStyle,
+    ...headerStyleHidden
   });
   constructor(props) {
     super(props);
@@ -74,7 +72,7 @@ export default class HeroesScreen extends React.PureComponent {
     const { heroSections } = this.state;
 
     return (
-      <Container backToHome style={ styles.container }>
+      <Container backToHome scrollable style={ styles.container } header header_title={SCREEN_LABELS.HEROES} >
         <ListScreen
           hasSections
           itemList={heroSections}
@@ -92,6 +90,6 @@ export default class HeroesScreen extends React.PureComponent {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: Layout.padding_small,
+    // paddingHorizontal: Layout.padding_small,
   }
 })

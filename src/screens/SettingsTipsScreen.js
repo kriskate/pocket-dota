@@ -2,7 +2,7 @@ import React from 'react';
 import { Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from '../reducers/profile';
-import { headerStyle } from '../utils/screen';
+import { headerStyleHidden } from '../utils/screen';
 
 import Layout from '../constants/Layout';
 import { SCREEN_LABELS_HIDDEN } from '../constants/Constants';
@@ -19,8 +19,7 @@ import { APP_TIPS } from '../components/AppTips';
 )
 export default class SettingsTipsScreen extends React.Component {
   static navigationOptions = () => ({
-    title: SCREEN_LABELS_HIDDEN.SETTINGS_TIPS,
-    ...headerStyle,
+    ...headerStyleHidden,
   });
 
   state = {
@@ -40,7 +39,7 @@ export default class SettingsTipsScreen extends React.Component {
     const { tipsState, updateSettings } = this.props;
 
     return (
-      <Container scrollable>
+      <Container scrollable header header_title={SCREEN_LABELS_HIDDEN.SETTINGS_TIPS} >
         <Switch label="Turn all tips ON/ OFF"
           style={{ marginBottom: Layout.padding_big + Layout.padding_regular, }}
           value={allTipsOff} onValueChange={this._allTipsOff_handler} />

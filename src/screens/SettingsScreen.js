@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Text, Button, Switch } from '../components/ui';
 
-import { headerStyle } from '../utils/screen';
+import { headerStyleHidden } from '../utils/screen';
 import { SCREEN_LABELS, SCREEN_LABELS_HIDDEN, APP_VERSION, GET_WIKI_VERSION, DOWNLOAD_REASONS, ICONS } from '../constants/Constants';
 import { StyleSheet, View, Alert, Platform } from 'react-native';
 import Colors from '../constants/Colors';
@@ -62,8 +62,7 @@ const TYPES = {
 )
 export default class SettingsScreen extends React.PureComponent {
   static navigationOptions = () => ({
-    title: SCREEN_LABELS.SETTINGS,
-    ...headerStyle,
+    ...headerStyleHidden,
   });
 
   state = {
@@ -148,7 +147,7 @@ export default class SettingsScreen extends React.PureComponent {
 
 
     return (
-      <Container backToHome scrollable >
+      <Container backToHome scrollable style={ styles.container } header header_title={SCREEN_LABELS.SETTINGS} >
 
 
         <Section label="Profile">

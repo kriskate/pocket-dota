@@ -2,7 +2,7 @@ import React from 'react';
 
 import Colors from "../constants/Colors";
 import ButtonHamburger from "../components/ButtonHamburger";
-import { LayoutAnimation } from 'react-native';
+import { LayoutAnimation, View } from 'react-native';
 
 
 export const animation = {
@@ -16,6 +16,10 @@ export const animation = {
       type: LayoutAnimation.Types.easeOut,
     },
   },
+}
+
+export const headerStyleHidden = {
+  header: <View></View>
 }
 
 export const headerStyle = {

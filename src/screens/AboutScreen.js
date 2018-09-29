@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Image, View, Platform } from 'react-native';
 import { Container, Text } from '../components/ui';
 
-import { headerStyle } from '../utils/screen';
+import { headerStyleHidden } from '../utils/screen';
 import { SCREEN_LABELS, URLS } from '../constants/Constants';
 import Layout from '../constants/Layout';
 import Colors from '../constants/Colors';
@@ -19,7 +19,7 @@ const Section = ({ title, children }) => (
 )
 export default class AboutScreen extends React.Component {
   static navigationOptions = () => ({
-    header: <View></View>,
+    ...headerStyleHidden
   });
   
   render() {

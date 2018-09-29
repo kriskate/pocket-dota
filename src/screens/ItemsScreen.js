@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet } from 'react-native';
 
-import { headerStyle } from '../utils/screen';
+import { headerStyleHidden } from '../utils/screen';
 import { SCREEN_LABELS, SCREEN_LABELS_HIDDEN } from '../constants/Constants';
 
 import { Container } from '../components/ui';
@@ -19,9 +19,8 @@ import { parseCategory } from '../utils/utils';
   items: state.wiki.items,
 }))
 export default class Itemscreen extends React.Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: SCREEN_LABELS.ITEMS,
-    ...headerStyle,
+  static navigationOptions = () => ({
+    ...headerStyleHidden
   });
 
   render() {
@@ -44,7 +43,7 @@ export default class Itemscreen extends React.Component {
     });
 
     return (
-      <Container backToHome style={ styles.container }>
+      <Container backToHome scrollable style={ styles.container } header header_title={SCREEN_LABELS.ITEMS} >
         <ListScreen
           overlayed
           hasSections

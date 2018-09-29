@@ -1,18 +1,17 @@
 import React from 'react';
 import { Container, Text } from '../components/ui';
 
-import { headerStyle } from '../utils/screen';
+import { headerStyleHidden } from '../utils/screen';
 import { SCREEN_LABELS } from '../constants/Constants';
 
 export default class TipsScreen extends React.Component {
   static navigationOptions = () => ({
-    title: SCREEN_LABELS.TIPS,
-    ...headerStyle,
+    ...headerStyleHidden,
   });
 
   render() {
     return (
-      <Container backToHome>
+      <Container backToHome scrollable header header_title={SCREEN_LABELS.TIPS} >
         <Text>Tips content</Text>
       </Container>
     );

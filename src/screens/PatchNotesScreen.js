@@ -1,18 +1,18 @@
 import React from 'react';
 import { Container, Text } from '../components/ui';
 
-import { headerStyle } from '../utils/screen';
+import { headerStyleHidden } from '../utils/screen';
 import { SCREEN_LABELS } from '../constants/Constants';
+import { View } from 'react-native';
 
 export default class PatchNotesScreen extends React.Component {
   static navigationOptions = () => ({
-    title: SCREEN_LABELS.PATCH_NOTES,
-    ...headerStyle,
+    ...headerStyleHidden
   });
 
   render() {
     return (
-      <Container backToHome>
+      <Container backToHome scrollable style={ styles.container } header header_title={SCREEN_LABELS.PATCH_NOTES} >
         <Text>Patch content</Text>
       </Container>
     );

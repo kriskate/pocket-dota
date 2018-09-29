@@ -11,13 +11,17 @@ import Attributes from '../components/Hero/Attributes';
 import ItemBuild from '../components/Hero/ItemBuild';
 import { ATTRIBUTES } from '../constants/Constants';
 
-import { headerStyle } from '../utils/screen';
+import { headerStyleHidden } from '../utils/screen';
 import { HTML } from '../components/Hero/AbilityPreview';
 
 
 export default class HeroScreen extends React.PureComponent {
-  static navigationOptions = ({ navigation }) => {
-    const hero = model_hero(navigation.getParam('data'));
+  static navigationOptions = () => ({
+    ...headerStyleHidden
+  });
+
+  getHeaderColor = () => {
+    const hero = model_hero(this.props.navigation.getParam('data'));
 
     let primaryAttColor;
     switch(hero.attributes.AttributePrimary) {
@@ -31,21 +35,15 @@ export default class HeroScreen extends React.PureComponent {
         primaryAttColor = Colors.dota_str;
         break;
     }
-    return {
-      title: hero.name,
-      ...headerStyle,
-      headerTitleStyle: {
-        color: primaryAttColor,
-      },
-    }
-  };
+    return primaryAttColor;
+  }
 
   render() {
     const hero = model_hero(this.props.navigation.getParam('data'));
     const { name, bio, hype, tag, abilities, item_builds } = hero;
 
     return (
-      <Container scrollable style={styles.container} >
+      <Container scrollable style={styles.container} header header_title={name} header_titleColor={this.getHeaderColor()}>
         <Card title='Hype and Stats'>
           <Text style={styles.hype}>{hype}</Text>
 

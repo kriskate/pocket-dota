@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Text, Card } from '../components/ui';
 
-import { headerStyle } from '../utils/screen';
+import { headerStyleHidden } from '../utils/screen';
 import { model_item, model_item_npc, model_item_bonuses } from '../constants/Models';
 import { Image, StyleSheet, View } from 'react-native';
 import RenderHTML from 'react-native-render-html';
@@ -50,22 +50,9 @@ class HTML extends React.PureComponent {
 
 
 export default class ItemScreen extends React.PureComponent {
-  static navigationOptions = ({ navigation }) => {
-    const { category, name } = navigation.getParam('data');
-    const _cat = parseCategory(category);
-    const color = Colors.items[_cat];
-    
-    return {
-      ...headerStyle,
-      headerTitle: (
-        <View style={{ justifyContent: 'center', alignItems: 'center', }}>
-          <Text adjustsFontSizeToFit style={{ fontSize: 17, fontWeight: 'bold', color, textAlign: 'center', }}>
-            {name}
-          </Text>
-        </View>
-      ),
-    }
-  };
+  static navigationOptions = () => ({
+    ...headerStyleHidden
+  })
 
 
   render() {
@@ -83,9 +70,10 @@ export default class ItemScreen extends React.PureComponent {
     const bonuses = model_item_bonuses(item.bonuses);
 
     const _category = parseCategory(category);
+    const color = Colors.items[_category];
 
     return (
-      <Container scrollable>
+      <Container scrollable header header_title={name} header_titleColor={color}>
 
 
         <Card style={{ marginHorizontal: 0 }} viewStyle={styles.loreAndImage}>
