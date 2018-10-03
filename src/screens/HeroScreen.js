@@ -40,7 +40,7 @@ export default class HeroScreen extends React.PureComponent {
 
   render() {
     const hero = model_hero(this.props.navigation.getParam('data'));
-    const { name, bio, hype, tag, abilities, item_builds } = hero;
+    const { name, bio, hype, tag, abilities, abilities_special, abilities_aghs, abilities_hidden, item_builds } = hero;
 
     return (
       <Container scrollable style={styles.container} header header_title={name} header_titleColor={this.getHeaderColor()}>
@@ -50,9 +50,27 @@ export default class HeroScreen extends React.PureComponent {
           <Attributes attributes={attributes} tag={tag} />
         </Card>
 
-        <Card title='Abilities'>
+        <Card title='Abilities' showTitleWhenOpened>
           <Abilities abilities={abilities} />
         </Card>
+
+        { !abilities_special || abilities_special.length == 0 ? null :
+          <Card title='Special Abilities' showTitleWhenOpened>
+            <Abilities abilities={abilities_special} />
+          </Card>  
+        }
+
+        { !abilities_aghs || abilities_aghs.length == 0 ? null :
+          <Card title="Aghanim's enabled Abilities"  showTitleWhenOpened>
+            <Abilities abilities={abilities_aghs} />
+          </Card>  
+        }
+
+        { !abilities_hidden || abilities_hidden.length == 0 ? null :
+          <Card title="Hidden Abilities"  showTitleWhenOpened>
+            <Abilities abilities={abilities_hidden} />
+          </Card>  
+        }
 
         <Card title='Biography' showTitleWhenOpened>
           <HTML htmlContent={bio} style={{ backgroundColor: Colors.dota_ui1 }} />

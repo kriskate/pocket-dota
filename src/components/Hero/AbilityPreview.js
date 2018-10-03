@@ -20,7 +20,7 @@ const alterNode = (node) => {
 export class HTML extends React.PureComponent {
   render() {
     const { htmlContent, style } = this.props;
-    let trimmedHtml = trimAbilities(htmlContent);
+    let trimmedHtml = trimAbilities(htmlContent || "");
 
     return !trimmedHtml ? null : (
       <RenderHTML containerStyle={[styles.html, style]} alterNode={alterNode} html={
