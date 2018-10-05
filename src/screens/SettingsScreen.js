@@ -3,10 +3,10 @@ import { Container, Text, Button, Switch } from '../components/ui';
 
 import { headerStyle } from '../utils/screen';
 import { SCREEN_LABELS, SCREEN_LABELS_HIDDEN, APP_VERSION, GET_WIKI_VERSION, DOWNLOAD_REASONS, ICONS } from '../constants/Constants';
-import { StyleSheet, View, Alert, Platform } from 'react-native';
+import { StyleSheet, View, } from 'react-native';
 import Colors from '../constants/Colors';
 import Layout from '../constants/Layout';
-import { removeWiki } from '../utils/loaders';
+import { test__downgradeWiki, test__removeWiki } from '../utils/loaders';
 import { connect } from 'react-redux';
 import { model_user, model_settings, model_profile } from '../constants/Models';
 import { Actions } from '../reducers/profile';
@@ -120,17 +120,6 @@ export default class SettingsScreen extends React.PureComponent {
     const onYes = () => this.props.setProfile(model_profile({}));
     alertResetSettings(onYes);
   }
-  _removeWikiData = () => {
-    Alert.alert(
-      "to-do: remove this, as it's ment for testing purposes only",
-      "to-do: remove this, as it's ment for testing purposes only",
-      [
-        { text: 'No', style: 'cancel' },
-        { text: 'Yes', onPress: removeWiki },
-      ],
-      { cancelable: true }
-    )
-  }
 
 
   render() {
@@ -192,9 +181,14 @@ export default class SettingsScreen extends React.PureComponent {
             disabled={wikiUpdatingMessage && wikiUpdatingMessage.includes(CHECK_MESSAGES.CHECK)}
             current={GET_WIKI_VERSION()}
           />
-          <Button prestyled warning
-            title="Clear wiki"
-            onPress={this._removeWikiData} />
+          {!__DEV__ ? null : [
+            <Button prestyled warning key={'clear'}
+              title="Clear wiki"
+              onPress={test__removeWiki} />,
+            <Button prestyled warning key={'downgrade'}
+              title="Downgrade wiki"
+              onPress={test__downgradeWiki} />
+          ]}
         </Section>
 
 

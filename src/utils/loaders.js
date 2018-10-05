@@ -5,6 +5,7 @@ import { folder_data } from './downloaders';
 import { getItem } from './storage';
 import { assets } from '../constants/Data';
 import { setWikiVersion } from '../constants/Constants';
+import { Alert } from 'react-native';
 
 
 export const loadInitialAssets = async () => {
@@ -36,12 +37,6 @@ export const loadProfileStateFromStorage = async () => {
   return data;
 }
 
-// used for testing purposes 
-export const removeWiki = async () => {
-  await FileSystem.deleteAsync(folder_data, { idempotent: true });
-
-  Util.reload();
-}
 
 export const loadWiki = async () => {
   Logger.debug('loading wiki data');
@@ -74,4 +69,43 @@ export const loadCurrentWikiInfo = async () => {
   }
 
   return info;
+}
+
+
+
+
+// used for testing purposes 
+export const test__removeWiki = async () => {
+  const remove = async () => {
+    await FileSystem.deleteAsync(folder_data, { idempotent: true });
+
+    Util.reload();
+  }
+
+  Alert.alert(
+    "REMOVE WIKI", "",
+    [ { text: 'No', style: 'cancel' }, { text: 'Yes', onPress: remove }, ],
+    { cancelable: true }
+  )
+}
+
+export const test__downgradeWiki = async () => {
+  const downgrade = async () => {
+    const cInfo = await loadCurrentWikiInfo();
+    const newInfo = {
+      ...cInfo,
+      wikiVersion: 30,
+    };
+    await FileSystem.writeAsStringAsync(`${folder_data}/info.json`, JSON.stringify(newInfo));
+    setWikiVersion(newInfo);
+  
+    console.log('replaced wiki with v30')
+  }
+
+  Alert.alert(
+    "DOWNGRADE WIKI", "",
+    [ { text: 'No', style: 'cancel' }, { text: 'Yes', onPress: downgrade }, ],
+    { cancelable: true }
+  )
+
 }
