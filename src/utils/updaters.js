@@ -2,6 +2,7 @@ import { GET_WIKI_VERSION, APP_VERSION } from "../constants/Constants";
 import { url } from "../constants/Data";
 import { Platform } from "react-native";
 import { Constants } from "expo";
+import { model_wiki_info } from "../constants/Models";
 
 export const ERRORS = {
   NO_REVID: 'No revision id',
@@ -20,12 +21,11 @@ const getJSONwikiInfo = async () => {
   }
 }
 export const wiki_needsUpdate = async () => {
-  const latestVersionInfo = await getJSONwikiInfo();
+  let latestVersionInfo = await getJSONwikiInfo();
   if(latestVersionInfo.error) return { error: ERRORS.NO_WIKI_VERSION + `\r\n${latestVersionInfo.error}`};
 
-
-  const { currentWikiVersion, app_version } = latestVersionInfo;
-  const newVersion = `${app_version}.${currentWikiVersion}`;
+  const { appVersion, wikiVersion, } = model_wiki_info(latestVersionInfo);
+  const newVersion = `${appVersion}.${wikiVersion}`;
 
   if(GET_WIKI_VERSION() === newVersion)
     return false;

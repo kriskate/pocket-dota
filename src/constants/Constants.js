@@ -5,10 +5,10 @@ import { Text } from '../components/ui';
 import { Constants } from 'expo';
 
 let _wikiVersion;
-export const setWikiVersion = ({ app_version, currentWikiVersion }) => {
-  console.log(app_version, currentWikiVersion)
-  _wikiVersion = !app_version ? null :
-    `${app_version}.${currentWikiVersion}`;
+export const setWikiVersion = ({ appVersion, wikiVersion }) => {
+  console.log(appVersion, wikiVersion)
+  _wikiVersion = !appVersion ? null :
+    `${appVersion}.${wikiVersion}`;
 }
 export const GET_WIKI_VERSION = () => _wikiVersion;
 

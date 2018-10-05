@@ -9,6 +9,24 @@ export function model_wiki (data) {
   const { heroes, items, tips, patch_notes, info } = data;
   return { heroes, items, tips, patch_notes, info };
 }
+export function model_wiki_info (data) {
+  const {
+    appVersion, 
+    dotaVersion, 
+    dotaVersionDate, 
+    wikiVersion,
+    wikiVersionDate,
+    wikiVersionFolder,
+  } = data;
+  return {
+    appVersion, 
+    dotaVersion, 
+    dotaVersionDate, 
+    wikiVersion,
+    wikiVersionDate,
+    wikiVersionFolder,
+  }
+}
 
 
 export function model_profile (data) {

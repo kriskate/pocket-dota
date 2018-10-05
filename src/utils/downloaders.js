@@ -3,6 +3,7 @@ import { Image, Platform } from 'react-native';
 import { url, } from '../constants/Data';
 import { loadCurrentWikiInfo, loadWiki, } from './loaders';
 import Logger from './Logger';
+import { model_wiki_info } from '../constants/Models';
 
 export const folder_img = `${FileSystem.cacheDirectory}dota-images/`;
 export const folder_data = `${FileSystem.cacheDirectory}dota-data/`;
@@ -70,9 +71,8 @@ export const downloadWiki = async (wikiInfo, progress_callback) => {
   let info = wikiInfo || await loadCurrentWikiInfo();
   if(!info) info = await downloadWikiInfo();
 
-  const { currentWikiVersion, currentWikiVersionDate } = info;
+  const { wikiVersionFolder } = model_wiki_info(info);
 
-  const cWikiFolder = `v_${currentWikiVersion}_${currentWikiVersionDate}`;
   const keys = Object.keys(url.data);
 
   const progress = overallProgress(keys, progress_callback);
@@ -83,7 +83,7 @@ export const downloadWiki = async (wikiInfo, progress_callback) => {
       Logger.debug(`downloading data for ${key}`);
 
       await download(
-        url.data[key].replace('$WIKI_FOLDER', cWikiFolder),
+        url.data[key].replace('$WIKI_FOLDER', wikiVersionFolder),
         folder_data,
         progress(key)
       );
