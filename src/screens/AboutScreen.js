@@ -51,9 +51,9 @@ export default class AboutScreen extends React.Component {
         </Section>
 
         <Section title="Tech">
-          <Text>The Wiki data is automatically generated from the <Text style={styles.highlight}>Dota2 game files</Text>, and updated when the information in these changes, through a {URLS["NodeJS"]} backend service.</Text>
+          <Text hasUrl URLS={URLS}>The Wiki data is automatically generated from the <Text style={styles.highlight}>Dota2 game files</Text>, and updated when the information in these changes, through a {URLS["NodeJS"]} backend service.</Text>
           <Text hasUrl URLS={URLS} style={styles.text_spaced}>The application is developed in {URLS["React Native"]}, having {URLS["Expo"]} as a React Native management utility.</Text>
-          <Text style={styles.highlight}>Recommended software version: {Platform.OS === 'ios' ? "IOS 9+" : "Android 4.4+"}</Text>
+          <Text style={styles.highlight}>Recommended OS version: {Platform.OS === 'ios' ? "IOS 9+" : "Android 4.4+"}</Text>
         </Section>
 
 
