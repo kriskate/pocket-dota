@@ -40,7 +40,7 @@ export const alertUpdateCheckAvailable = (What, newV, onNo, onYes) =>
     `New ${What} version found! (${newV})`,
 `A new ${What} version has been found.
 Would you like to begin downloading it?
-It is recoomended to be connected to a WI-FI network before downloading new data.`,
+It is recomended to be connected to a WI-FI network before downloading new data.`,
     [
       { text: 'No', style: 'cancel', onPress: onNo },
       { text: 'Yes', onPress: onYes },
