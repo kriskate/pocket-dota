@@ -10,6 +10,7 @@ import { model_odota } from '../constants/Models';
 import { connect } from 'react-redux';
 import { Actions } from '../reducers/profile';
 import { showTip, APP_TIPS } from '../components/AppTips';
+import RequiresConnection from '../utils/RequiresConnection';
 
 
 class ProfileThumb extends React.PureComponent {
@@ -103,6 +104,7 @@ export default class StatsScreen extends React.Component {
 
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <RequiresConnection>
         <Container backToHome >
           <View style={styles.search}>
             <TextInput style={styles.searchBox}
@@ -118,6 +120,7 @@ export default class StatsScreen extends React.Component {
           </View>
           { !lastSearch ? null : <Results navigation={navigation} lastSearch={lastSearch} lastSearchResults={lastSearchResults} /> }
         </Container>
+        </RequiresConnection>
       </TouchableWithoutFeedback>
     );
   }

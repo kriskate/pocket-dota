@@ -10,6 +10,7 @@ import { model_odota } from '../constants/Models';
 
 import StatsWebScreenModal from '../components/modals/StatsWebScreenModal';
 import StatsWebScreenToolbox from '../components/Stats/StatsWebScreenToolbox';
+import RequiresConnection from '../utils/RequiresConnection';
 
 
 const bkC = `background-color:${Colors.dota_ui1}!important;`;
@@ -67,6 +68,7 @@ export default class StatsWebScreen extends React.Component {
     const { isModalVisible } = this.state;
 
     return (
+      <RequiresConnection>
       <Container>
         <StatsWebScreenModal visible={isModalVisible} hide={this._hideModal} />
         { Platform.OS !== 'android' ? null : 
@@ -87,6 +89,7 @@ export default class StatsWebScreen extends React.Component {
             goBack={this._goBack} goForward={this._goForward} showHelp={this._showHelp} />
         }
       </Container>
+      </RequiresConnection>
     );
   }
 }
