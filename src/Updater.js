@@ -111,11 +111,11 @@ export default class Updater extends React.PureComponent {
             onFinish={this._handleFinishDownLoadingWiki}
             onError={Logger.error}
           />
-        { downloadingWiki_reason !== DOWNLOAD_REASONS.UPDATE ? null :
+        {/* { downloadingWiki_reason !== DOWNLOAD_REASONS.UPDATE ? null :
           <Button prestyled style={Styles.modal_downloading_close_button}
             title="RUN IN THE BACKGROUND" titleStyle={{ textAlign: 'center' }}
             onPress={this._hideWikiModal} />
-        }
+        } */}
         </View>
         }
 
@@ -126,9 +126,9 @@ export default class Updater extends React.PureComponent {
             onFinish={this._handleFinishDownLoadingApp}
             onError={Logger.error}
           />
-          <Button prestyled style={Styles.modal_downloading_close_button}
+          {/* <Button prestyled style={Styles.modal_downloading_close_button}
             title="RUN IN THE BACKGROUND" titleStyle={{ textAlign: 'center' }}
-            onPress={this._hideAppModal} />
+            onPress={this._hideAppModal} /> */}
         </View>
         }
         
