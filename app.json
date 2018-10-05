@@ -1,7 +1,7 @@
 {
   "expo": {
-    "version": "1.0.4",
-    "name": "pocket-dota",
+    "version": "1.0.0",
+    "name": "Pocket Dota",
     "description": "Dota 2 refference in you pocket",
     "slug": "pocket-dota",
     "privacy": "public",
@@ -25,6 +25,14 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "package": "kriskate.pocketdota",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/images/app-icon-no-border.png",
+        "backgroundColor": "#1B1E21"
+      }  
     }
   }
 }
