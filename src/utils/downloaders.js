@@ -99,7 +99,7 @@ export const downloadWiki = async (wikiInfo, progress_callback) => {
 }
 
 
-export const downloadWikiInfo = async () => {
+const downloadWikiInfo = async () => {
   await checkFolder(folder_data);
 
   await download(url.currentWiki, folder_data);
