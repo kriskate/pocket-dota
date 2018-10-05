@@ -10,7 +10,7 @@ import { removeWiki } from '../utils/loaders';
 import { connect } from 'react-redux';
 import { model_user, model_settings, model_profile } from '../constants/Models';
 import { Actions } from '../reducers/profile';
-import { Actions as UpdateActions } from '../reducers/update';
+import { Actions as UpdateActions, DOWNLOAD_STATE } from '../reducers/update';
 import { wiki_needsUpdate, app_needsUpdate } from '../utils/updaters';
 import { alertUpdateCheckError, alertUpdateCheckAvailable, alertRemoveProfileData, alertResetSettings } from '../utils/Alerts';
 import { sleep } from '../utils/utils';
@@ -83,7 +83,7 @@ export default class SettingsScreen extends React.PureComponent {
 
     if((What === TYPES.WIKI && updatingWiki) || (What === TYPES.APP && updatingApp)) {
       // if update is already in progress, open modal directly
-      this.props.show(What === TYPES.WIKI ? 'wiki' : 'app');
+      this.props.show(What === TYPES.WIKI ? DOWNLOAD_STATE.WIKI : DOWNLOAD_STATE.APP);
       return;
     }
 
