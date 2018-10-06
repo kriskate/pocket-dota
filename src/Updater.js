@@ -84,6 +84,9 @@ export default class Updater extends React.PureComponent {
     if(!res.error) {
       const onNo = () => {};
       const onYes = () => What == 'App' ? this.props.updateApp(res.newVersion) : this.props.updateWiki(res);
+      // to-do - reenable this for app
+      if(What == 'App') onYes() 
+      else
       alertUpdateCheckAvailable(What, res.newVersion, onNo, onYes);
     }
   }

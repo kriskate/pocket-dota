@@ -198,9 +198,9 @@ export default class SettingsScreen extends React.PureComponent {
             <Text>{SCREEN_LABELS_HIDDEN.SETTINGS_TIPS}</Text>
             <ICONS.FORWARD />
           </Button>
-
-          <Switch label="Automatically check for app updates"
-            value={autoCheckApp} onValueChange={val => this.props.updateSettings({ autoCheckApp: val })} />
+          {/* to-do: re-enable this and the "new version found" dialog */}
+          {/* <Switch label="Automatically check for app updates"
+            value={autoCheckApp} onValueChange={val => this.props.updateSettings({ autoCheckApp: val })} /> */}
 
           <CheckButton label='Check for app update'
             onPress={() => this._checkForUpdate(TYPES.APP)}
