@@ -27,9 +27,10 @@ export default class Card extends React.PureComponent {
 
     return (
       <View {...this.props} style={[styles.card, style]}>
-        { !title ? null :
+        {/* to-do - refactor this to remove all the buttons' functionality */}
+        {/* { !title ? null :
           <Button style={styles.btnCollapse} viewStyle={styles.btnCollapseView} onPress={this._toggleCollapse}><Text>{ collapsed ? '+' : '-' }</Text></Button>
-        }
+        } */}
         { !title || !(showTitleWhenOpened || collapsed) ? null : 
           <Text style={collapsed ? styles.collapsedTitle : styles.title}>{title}</Text>
         }
