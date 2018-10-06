@@ -30,7 +30,7 @@
       "package": "kriskate.pocketdota",
       "versionCode": 1,
       "adaptiveIcon": {
-        "foregroundImage": "./src/assets/images/app-icon-no-border.png",
+        "foregroundImage": "./src/assets/images/app-icon-adaptive.png",
         "backgroundColor": "#1B1E21"
       }  
     }
