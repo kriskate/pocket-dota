@@ -34,6 +34,17 @@ const jsString = `
   main.childNodes[main.childNodes.length-1].remove();
   main.childNodes[1].remove();
   main.childNodes[0].remove();
+  
+  function playerInfo() {
+    var playerInfoDiv = document.getElementsByClassName('playerInfo')[0];
+    if(playerInfoDiv) {
+      playerInfoDiv.childNodes[2].remove();
+      playerInfoDiv.childNodes[0].childNodes[1].remove();
+      clearInterval(playerInfoInterval);
+    }
+  }
+  var playerInfoInterval = setInterval(playerInfo, 200);
+
 `
 
 
