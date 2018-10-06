@@ -23,6 +23,11 @@ const jsString = `
   style.appendChild(document.createTextNode(css));
   head.appendChild(style);
 
+  var meta = document.createElement('meta'); 
+  meta.setAttribute('name', 'viewport'); 
+  meta.setAttribute('content', 'width=device-width, user-scalable=0');
+  head.appendChild(meta);
+
   var main = document.getElementById("root").childNodes[0];
 
   main.childNodes[main.childNodes.length-2].remove();
