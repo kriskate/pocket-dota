@@ -3,7 +3,7 @@ import { StyleSheet, Image, View, Platform } from 'react-native';
 import { Container, Text } from '../components/ui';
 
 import { headerStyle } from '../utils/screen';
-import { SCREEN_LABELS, URLS } from '../constants/Constants';
+import { SCREEN_LABELS, URLS, APP_VERSION } from '../constants/Constants';
 import Layout from '../constants/Layout';
 import Colors from '../constants/Colors';
 import { assets } from '../constants/Data';
@@ -27,7 +27,10 @@ export default class AboutScreen extends React.Component {
     return (
       <Container backToHome scrollable style={styles.container}>
 
-        <Image style={styles.logo} source={assets.app.logoRed} />
+        <View style={styles.logo}>
+          <Image style={[styles.logo, styles.logoImg]} source={assets.app.logoRed} />
+          <Text style={styles.appVersion}>v. {APP_VERSION}</Text>
+        </View>
 
         <View style={{ padding: Layout.padding_small }}>
           <Text>Notes:</Text>
@@ -88,9 +91,18 @@ const styles = StyleSheet.create({
     width: logoWidth,
     height: logoWidth / logoRatio,
     maxHeight: 150,
+  },
+  logoImg: {
     resizeMode: 'contain',
   },
 
+  appVersion: {
+    color: Colors.goldenrod,
+    marginRight: Layout.padding_small,
+    position: 'absolute',
+    bottom: 15,
+    right: 15,
+  },
 
   highlight: {
     fontWeight: 'bold',
