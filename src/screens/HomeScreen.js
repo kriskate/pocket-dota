@@ -56,6 +56,9 @@ export default class HomeScreen extends React.PureComponent {
             profileImage={image} /> 
         }
 
+        <MenuItem onPress={() => navigate(SCREEN_LABELS.SETTINGS)} label={HOME_LABELS.SETTINGS}
+          cardImage={assets.app.menuSettings} />
+
       </Container>
     );
   }

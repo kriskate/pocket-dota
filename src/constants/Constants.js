@@ -37,6 +37,7 @@ export const HOME_LABELS = {
   PATCH_NOTES: 'PATCH NOTES',
 
   STATS: 'PLAYER STATISTICS',
+  SETTINGS: 'SETTINGS',
 }
 export const SCREEN_LABELS = {
   HOME: 'Home',
