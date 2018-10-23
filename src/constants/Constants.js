@@ -33,8 +33,9 @@ export const ITEM_CONSTANTS = {
 export const HOME_LABELS = {
   HEROES: 'HEROES',
   ITEMS: 'ITEMS',
-  TIPS: 'TIPS',
+
   PATCH_NOTES: 'PATCH NOTES',
+  TIPS: 'TIPS',
 
   STATS: 'PLAYER STATISTICS',
   SETTINGS: 'SETTINGS',
@@ -47,8 +48,8 @@ export const SCREEN_LABELS = {
   ITEMS: 'Items',
   
   HEADER_GAME: 'Game info',
-  // TIPS: 'Tips',
   PATCH_NOTES: 'Patch notes',
+  TIPS: 'Tips',
   
   HEADER_STATS: 'User',
   STATS: 'Player Statistics',

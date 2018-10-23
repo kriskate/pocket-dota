@@ -1,9 +1,77 @@
 import React from 'react';
-import { Container, Text } from '../components/ui';
+import { View, StyleSheet, FlatList, LayoutAnimation, Image } from 'react-native';
+import { connect } from 'react-redux';
+import { Container, Text, Button } from '../components/ui';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
-import { headerStyle } from '../utils/screen';
+import { headerStyle, animation } from '../utils/screen';
 import { SCREEN_LABELS } from '../constants/Constants';
+import Layout from '../constants/Layout';
+import { url } from '../constants/Data';
 
+
+class Section extends React.Component {
+  state = { open: false }
+
+  toggleOpen = () => {
+    LayoutAnimation.configureNext(animation.standard);
+
+    this.setState({ open: !this.state.open })
+  }
+  render() {
+    const { data, title, wiki_heroes } = this.props;
+    const { open } = this.state;
+
+    const _data = !wiki_heroes ? data : Object.keys(data);
+
+    return (
+      <View style={styles.section}>
+        <Button prestyled onPress={this.toggleOpen} style={styles.sectionTitle}>
+          <Text>{title}</Text>
+          <Text>
+            {open 
+              ? <FontAwesome name='caret-up' size={17} />
+              : <FontAwesome name='caret-down' size={17} />
+            }
+          </Text>
+        </Button>
+        
+        { !open ? null :
+          <View style={styles.sectionContent}>
+            <FlatList data={_data} keyExtractor={(item, index) => title + index}
+              renderItem={({item}) => {
+
+                if(!wiki_heroes) return <Text style={styles.sectionText}>{item}</Text>
+                
+                const hero = wiki_heroes.find(h => h.tag == item);
+
+                return (
+                  <View style={styles.sectionHero}>
+                    <View style={{ flexDirection: 'row' }}>
+                      <Image style={styles.sectionHeroImage} source={{ uri: url.images.icons(item) }} />
+                      <Text> {hero ? hero.name : item}</Text>
+                    </View>
+
+                    { data[item].map((tip, idx) => (
+                      <Text key={item+idx} style={styles.sectionText}>{tip}</Text>
+                    )) }
+
+                  </View>
+                )
+
+              }}
+            />
+          </View>
+        }
+      </View>
+    )
+  }
+}
+
+@connect(state => ({
+  tips: state.wiki.tips,
+  wiki_heroes: state.wiki.heroes,
+}))
 export default class TipsScreen extends React.Component {
   static navigationOptions = () => ({
     title: SCREEN_LABELS.TIPS,
@@ -11,10 +79,47 @@ export default class TipsScreen extends React.Component {
   });
 
   render() {
+    const { tips, wiki_heroes } = this.props;
+    const { introduction, universal, beginner, intermediate, advanced, hero } = tips;
+
     return (
-      <Container backToHome>
-        <Text>Tips content</Text>
+      <Container scrollable backToHome>
+
+        <Section title="Introduction" data={introduction} />
+        <Section title="Universal" data={universal} />
+        <Section title="Beginner" data={beginner} />
+        <Section title="Intermediate" data={intermediate} />
+        <Section title="Advanced" data={advanced} />
+
+        <Section title="Heroes" data={hero} wiki_heroes={wiki_heroes} />
+
       </Container>
     );
   }
 }
+
+
+const styles = StyleSheet.create({
+  section: {
+    marginTop: Layout.padding_regular,
+  },
+  sectionTitle: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  sectionContent: {
+    padding: Layout.padding_regular,
+    paddingVertical: Layout.padding_small,
+  },
+  sectionText: {
+    paddingVertical: Layout.padding_small,
+  },
+  sectionHero: {
+    paddingVertical: Layout.padding_small,
+  },
+  sectionHeroImage: {
+    width: 20,
+    height: 20,
+  },
+})
