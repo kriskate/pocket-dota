@@ -1,8 +1,15 @@
 import { folder_img, folder_data } from "../utils/downloaders";
 
+// if you want to test with the local running backend, modify this to true
+// also, the ip address of the local server has to be modified accordingly
+const local = false;
+const branch = __DEV__ ? 'develop' : 'master';
+const host = local 
+              ? 'http://192.168.0.134:8080/versioned_data'
+              : `https://raw.githubusercontent.com/kriskate/dota-data/${branch}`
 
-const images_base = 'https://raw.githubusercontent.com/kriskate/dota-data/master/assets/images/';
-const base_data = 'https://raw.githubusercontent.com/kriskate/dota-data/master/$WIKI_FOLDER/';
+const images_base = `${host}/assets/images/`;
+const base_data = `${host}/$WIKI_FOLDER/`;
 
 export const assets = {
   attributes: {
@@ -58,7 +65,7 @@ export const url = {
     items: id => `${images_base}items/${id}.png`,
   },
 
-  currentWiki: 'https://raw.githubusercontent.com/kriskate/dota-data/master/info.json',
+  currentWiki: `${host}/info.json`,
 
   data:{
     heroes: `${base_data}heroes.json`,
