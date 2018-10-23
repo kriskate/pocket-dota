@@ -1,6 +1,6 @@
 import React from 'react';
 import RenderHTML from 'react-native-render-html';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
 import { url } from '../../constants/Data';
 import Layout from '../../constants/Layout';
 import Colors from '../../constants/Colors';
@@ -29,13 +29,15 @@ const HtmlTagStyles = {
 
 export default ({ changes_short }) => (
   <View style={styles.changes_short}>
-    { changes_short.map((change, idx) => (
-      <View key={idx}>
+    <FlatList
+      keyExtractor={(item, index) => index + item.slice(0,3)}
+      data={changes_short}
+      renderItem={({item}) => (
         <RenderHTML alterNode={alterNode} classesStyles={HtmlStyles} tagsStyles={HtmlTagStyles}
-          html={`<div class="main" style="color:${Colors.dota_white};">${change}</div>`} 
+          html={`<div class="main" style="color:${Colors.dota_white};">${item}</div>`} 
         />
-      </View>
-    )) }
+      )}
+    />
   </View>
 )
 
