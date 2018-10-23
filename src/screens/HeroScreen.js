@@ -13,6 +13,7 @@ import { ATTRIBUTES } from '../constants/Constants';
 
 import { headerStyle } from '../utils/screen';
 import { HTML } from '../components/Hero/AbilityPreview';
+import Talents from '../components/Hero/Talents';
 
 
 export default class HeroScreen extends React.PureComponent {
@@ -42,14 +43,18 @@ export default class HeroScreen extends React.PureComponent {
 
   render() {
     const hero = model_hero(this.props.navigation.getParam('data'));
-    const { name, bio, hype, tag, abilities, abilities_special, abilities_aghs, abilities_hidden, item_builds } = hero;
-
+    const { name, bio, hype, tag, talents, abilities, abilities_special, abilities_aghs, abilities_hidden, item_builds } = hero;
+    
     return (
       <Container scrollable style={styles.container} >
         <Card title='Hype and Stats'>
           <Text style={styles.hype}>{hype}</Text>
 
           <Attributes attributes={attributes} tag={tag} />
+        </Card>
+
+        <Card title='Talents' showTitleWhenOpened>
+          <Talents talents={talents} />
         </Card>
 
         <Card title='Abilities' showTitleWhenOpened>
