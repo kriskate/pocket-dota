@@ -217,3 +217,34 @@ export function model_hero (hero) {
     attributes = new model_hero_attributes({}),
   } = hero;
 }
+
+
+export function model_patch_notes (patch_notes) {
+  const {
+    version_date,
+    changes_short,
+    heroes,
+    items,
+    general,
+  } = patch_notes;
+  
+  return {
+    version_date,
+    changes_short,
+    heroes,
+    items,
+    general,
+  }
+}
+export function model_patch_notes_hero (hero) {
+  const { name, stats, abilities, talents, } = hero;
+  return { name, stats, abilities, talents, }
+}
+export function model_patch_notes_item (item) {
+  const { name, description, } = item;
+  return { name, description, }
+}
+export function model_patch_notes_general (general) {
+  const { name, description, } = general;
+  return { name, description, }
+}

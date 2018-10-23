@@ -9,7 +9,7 @@ import StatsScreen from '../screens/StatsScreen';
 import StatsWebScreen from '../screens/StatsWebScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 // import TipsScreen from '../screens/TipsScreen';
-// import PatchNotesScreen from '../screens/PatchNotesScreen';
+import PatchNotesScreen from '../screens/PatchNotesScreen';
 import AboutScreen from '../screens/AboutScreen';
 import SettingsTipsScreen from '../screens/SettingsTipsScreen';
 
@@ -42,7 +42,7 @@ const drawerNav = createDrawerNavigator({
   }),
 
   // [SCREEN_LABELS.TIPS]: createStackNavigator({ TipsScreen }),
-  // [SCREEN_LABELS.PATCH_NOTES]: createStackNavigator({ PatchNotesScreen }),
+  [SCREEN_LABELS.PATCH_NOTES]: createStackNavigator({ PatchNotesScreen }),
 
   [SCREEN_LABELS.ABOUT]: createStackNavigator({ AboutScreen }),
 }, {

@@ -44,9 +44,9 @@ export const SCREEN_LABELS = {
   HEROES: 'Heroes',
   ITEMS: 'Items',
   
-  // HEADER_GAME: 'Game info',
+  HEADER_GAME: 'Game info',
   // TIPS: 'Tips',
-  // PATCH_NOTES: 'Patch notes',
+  PATCH_NOTES: 'Patch notes',
   
   HEADER_STATS: 'User',
   STATS: 'Player Statistics',
