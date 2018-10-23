@@ -7,9 +7,9 @@ import { Actions as UpdateActions, DOWNLOAD_STATE } from './reducers/update';
 import { Actions as WikiActions } from './reducers/wiki';
 
 import WikiDownloading from './components/WikiDownloading';
-import { alertWikiUpdateDone, alertAppUpdateDone, alertUpdateCheckAvailable } from './utils/Alerts';
+import { alertWikiUpdateDone, alertAppUpdateDone, alertUpdateCheckAvailable, alertCannotUpdate } from './utils/Alerts';
 
-import { DOWNLOAD_REASONS } from './constants/Constants';
+import { DOWNLOAD_REASONS, GET_WIKI_VERSION } from './constants/Constants';
 import Layout from './constants/Layout';
 import Colors from './constants/Colors';
 import Styles from './constants/Styles';
@@ -39,6 +39,7 @@ import { app_needsUpdate, wiki_needsUpdate } from './utils/updaters';
 
     updateApp: (version) => dispatch(UpdateActions.updateApp(version)),
     updateWiki: (res) => dispatch(UpdateActions.downloadWiki(DOWNLOAD_REASONS.UPDATE, res)),
+    forceUpdateWiki: (res) => dispatch(UpdateActions.downloadWiki(DOWNLOAD_REASONS.UPDATE_FORCED, res)),
   }))
 )
 export default class Updater extends React.PureComponent {
@@ -67,7 +68,20 @@ export default class Updater extends React.PureComponent {
 
   
 
-  componentDidMount() {
+  async componentDidMount () {
+    /* the wiki modal should me visible if minWikiVersion is not met */
+    const sp_arr = GET_WIKI_VERSION().split('.');
+    const forceShowWiki = sp_arr[sp_arr.length - 1] < require('../app.json').minWikiVersion;
+
+    if(forceShowWiki) {
+      const res = await wiki_needsUpdate();
+
+      if(!res) alertCannotUpdate('Please clear the application files.');
+      else if(res.error) alertCannotUpdate(res.error);
+      else this.props.updateWiki(res);
+
+      return;
+    }
     setTimeout(() => {
       // allows the user to see the app for a bit
       // also allows redux-persist to load its state
