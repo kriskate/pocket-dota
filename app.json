@@ -1,4 +1,5 @@
 {
+  "minWikiVersion": "36",
   "expo": {
     "version": "1.0.0",
     "name": "Pocket Dota",
@@ -45,7 +46,7 @@
         "com.sec.android.provider.badge.permission.READ",
         "com.sec.android.provider.badge.permission.WRITE",
         "com.sonyericsson.home.permission.BROADCAST_BADGE"
-      ],
+      ]
     }
   }
 }

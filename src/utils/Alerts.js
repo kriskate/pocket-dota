@@ -48,6 +48,20 @@ It is recomended to be connected to a WI-FI network before downloading new data.
     { cancelable: true }
   );
 
+export const alertCannotUpdate = (e) =>
+  Alert.alert(
+    `The update cannot start`,
+`There seems to be a problem with your connection; please restart the app and make sure you're connected to the internet.
+
+THIS UPDATE IS REQUIRED - if it's not made, the application will not show the data correctly.
+
+${e}`,
+    [
+      { text: 'OK' },
+    ],
+    { cancelable: true }
+  );
+
 
 export const alertRemoveProfileData = (onYes) =>
   Alert.alert(
