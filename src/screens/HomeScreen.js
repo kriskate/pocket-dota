@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, Text, TouchableOpacity, View, StyleSheet, } from 'react-native';
-import { Thumbnail } from '../components/ui/';
+import { Thumbnail, Container } from '../components/ui/';
 import { connect } from 'react-redux';
 
 import Colors from '../constants/Colors';
@@ -31,13 +31,15 @@ const MenuItem = ({onPress, label, cardImage, profileImage}) => (
   user: state.profile.user,
   showProfileOnHome: state.profile.settings.showProfileOnHome,
 }))
+
 export default class HomeScreen extends React.PureComponent {
   render() {
     const { name, image, account_id } = this.props.user;
     const { navigate } = this.props.navigation;
 
     return (
-      <View style={styles.container}>
+      <Container scrollable>
+
         <MenuItem onPress={() => navigate(SCREEN_LABELS.HEROES)} label={HOME_LABELS.HEROES}
           cardImage={assets.app.menuHeroes} />
         <MenuItem onPress={() => navigate(SCREEN_LABELS.ITEMS)} label={HOME_LABELS.ITEMS}
@@ -53,7 +55,8 @@ export default class HomeScreen extends React.PureComponent {
             cardImage={assets.app.menuProfile}
             profileImage={image} /> 
         }
-      </View>
+
+      </Container>
     );
   }
 }
@@ -70,6 +73,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     borderWidth: 1,
     borderColor: Colors.dota_red_dark,
+    minHeight: 150,
   },
   imageWrapper: {
     flex: 1,
