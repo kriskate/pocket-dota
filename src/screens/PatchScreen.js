@@ -32,10 +32,12 @@ const Changes = ({ changes, images, namesArr, isItem }) => !changes || changes.l
 
       return (
         <View style={styles.change} key={name}>
-          <View style={styles.change_name}>
-            { !images ? null : <Image style={isItem ? styles.img_item : styles.img_ability} source={{ uri: images(name) }} /> }
-            { !isItem ? null : <Text style={styles.change_name_text}>{_name || name}</Text> }
-          </View>
+          { !images && ! isItem ? null :
+            <View style={styles.change_name}>
+              { !images ? null : <Image style={isItem ? styles.img_item : styles.img_ability} source={{ uri: images(name) }} /> }
+              { !isItem ? null : <Text style={styles.change_name_text}>{_name || name}</Text> }
+            </View>
+          }
           <Descriptions descriptions={description} />
         </View>
       )
@@ -97,44 +99,42 @@ const styles = StyleSheet.create({
   hero: {
     marginVertical: Layout.padding_small,
     padding: Layout.padding_small,
+    paddingTop: Layout.padding_regular,
+    paddingBottom: 0,
     backgroundColor: Colors.dota_ui1,
   },
   hero_name: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-
-
+  
+  
   changes: {
-    padding: Layout.padding_small,
-    // marginVertical: Layout.padding_small,
+    marginVertical: Layout.padding_small,
     backgroundColor: Colors.dota_ui1,
   },
   change: {
-    // padding: Layout.padding_small,
     flexDirection: 'row',
     alignItems: 'flex-start',
     justifyContent: 'space-around',
     // backgroundColor: 'green',
   },
   change_name: {
+    maxWidth: 100,
     padding: Layout.padding_regular,
+    // backgroundColor: 'red',
   },
   change_name_text: {
     // backgroundColor: 'blue',
   },
-
+  
   descriptions: {
     flex: 1,
-    paddingHorizontal: Layout.padding_regular,
-    // borderColor: Colors.disabled,
-    // borderWidth: 1,
-    // backgroundColor: 'red',
   },
   description: {
-    backgroundColor: 'blue',
-    marginVertical: Layout.padding_small,
-    // paddingVertical: Layout.padding_small,
+    padding: Layout.padding_regular,
+    paddingVertical: Layout.padding_small,
+    // backgroundColor: 'purple',
   },
   
   img_hero: {
