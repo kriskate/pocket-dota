@@ -58,6 +58,7 @@ export const SCREEN_LABELS = {
 export const SCREEN_LABELS_HIDDEN = {
   HERO: 'HeroScreen',
   ITEM: 'ItemScreen',
+  PATCH: 'PatchScreen',
   STATS_WEB: 'StatsWebScreen',
   SETTINGS_TIPS: 'In-app tips',
 }

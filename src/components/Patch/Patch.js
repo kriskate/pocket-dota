@@ -1,13 +1,13 @@
 import React from 'react';
-import { View, StyleSheet, LayoutAnimation } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { Text, Button } from '../ui';
 
 import { model_patch_notes, } from '../../constants/Models';
 import Colors from '../../constants/Colors';
-import { Text, Button } from '../ui';
 import Layout from '../../constants/Layout';
+
 import PatchShort from './PatchShort';
-import PatchFull from './PatchFull';
-import { animation } from '../../utils/screen';
+import { SCREEN_LABELS_HIDDEN } from '../../constants/Constants';
 
 
 export default class Patch extends React.Component {
@@ -15,15 +15,12 @@ export default class Patch extends React.Component {
     open: false,
   }
 
-  toggleOpen = () => {
-    LayoutAnimation.configureNext(animation.standard);
-
-    this.setState({ open: !this.state.open });
+  openPatch = () => {
+    this.props.navigate(SCREEN_LABELS_HIDDEN.PATCH, { tag: this.props.patch });
   }
   render () {
-    const { patch, patch_content, wiki_heroes, wiki_items } = this.props;
-    const { version_date, changes_short, heroes, items, general } = model_patch_notes(patch_content);
-    const { open } = this.state;
+    const { patch, patch_content, } = this.props;
+    const { version_date, changes_short, } = model_patch_notes(patch_content);
 
     return (
       <View key={patch} style={styles.patch}>
@@ -35,14 +32,7 @@ export default class Patch extends React.Component {
         <PatchShort changes_short={changes_short} />
 
         <Button prestyled titleStyle={styles.button_more_title}
-          title={open ? 'close' : '...more'} onPress={this.toggleOpen} />
-        { !open ? null :
-          <PatchFull 
-            heroes={heroes} wiki_heroes={wiki_heroes}
-            items={items} wiki_items={wiki_items}
-            general={general}
-          />
-        }
+          title={'view game changes'} onPress={this.openPatch} />
       </View>
     )
   }
