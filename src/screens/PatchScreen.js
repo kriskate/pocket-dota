@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet, Image, FlatList } from "react-native";
 import { connect } from 'react-redux';
 import { Text, Container } from '../components/ui';
 import { headerStyle } from '../utils/screen';
@@ -64,24 +64,29 @@ export default class PatchScreen extends React.Component {
 
     return (
       <Container scrollable style={styles.container}>
-        { heroes.map(hero => {
-          const { name, abilities, talents, stats } = model_patch_notes_hero(hero);
-          const wiki_hero = model_hero(wiki_heroes.find(h => h.tag == name));
-
-          return (
-            <View key={name} style={styles.hero}>
-              <View style={styles.hero_name}>
-                <Image style={styles.img_hero} source={{ uri: url.images.small(name) }} />
-                <Text>{wiki_hero.name}</Text>
+        <FlatList
+          initialNumToRender={6}
+          keyExtractor={(item) => item.name}
+          data={heroes}
+          renderItem={({item}) => {
+            const { name, abilities, talents, stats } = model_patch_notes_hero(item);
+            const wiki_hero = model_hero(wiki_heroes.find(h => h.tag == name));
+  
+            return (
+              <View key={name} style={styles.hero}>
+                <View style={styles.hero_name}>
+                  <Image style={styles.img_hero} source={{ uri: url.images.small(name) }} />
+                  <Text>{wiki_hero.name}</Text>
+                </View>
+                
+                <Changes changes={abilities} images={url.images.abilities} namesArr={wiki_hero.abilities} />
+  
+                <Descriptions descriptions={talents} />
+                <Descriptions descriptions={stats} />
               </View>
-              
-              <Changes changes={abilities} images={url.images.abilities} namesArr={wiki_hero.abilities} />
-
-              <Descriptions descriptions={talents} />
-              <Descriptions descriptions={stats} />
-            </View>
-          )
-        }) }
+            )
+          }}
+        />
         
         <Changes changes={items} images={url.images.items} namesArr={wiki_items} isItem />
         <Changes changes={general} />

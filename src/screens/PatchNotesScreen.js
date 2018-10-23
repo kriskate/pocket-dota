@@ -1,4 +1,5 @@
 import React from 'react';
+import { FlatList } from 'react-native';
 import { Container } from '../components/ui';
 
 import { headerStyle } from '../utils/screen';
@@ -22,11 +23,16 @@ export default class PatchNotesScreen extends React.Component {
 
     return (
       <Container scrollable backToHome>
-        { Object.keys(patch_notes).reverse().map(patch => (
-          <Patch key={patch} patch={patch} patch_content={patch_notes[patch]}
-            navigate={navigate}
-          /> 
-        )) }
+        <FlatList
+          initialNumToRender={4}
+          keyExtractor={(item) => item}
+          data={Object.keys(patch_notes).reverse()}
+          renderItem={({item}) => (
+            <Patch patch={item} patch_content={patch_notes[item]}
+              navigate={navigate}
+            />
+          )}
+        />
       </Container>
     );
   }
