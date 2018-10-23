@@ -30,7 +30,8 @@ export default class WikiDownloading extends React.PureComponent {
     Platform.OS === 'ios' && StatusBar.setNetworkActivityIndicatorVisible(true);
 
     const wiki = await downloadWiki(versionInfo, p => this._progress('wiki', p));
-    await downloadImages(wiki, p => this._progress('images', p));
+    if(this.props.reason !== DOWNLOAD_REASONS.UPDATE)
+      await downloadImages(wiki, p => this._progress('images', p));
     
     Platform.OS === 'ios' && StatusBar.setNetworkActivityIndicatorVisible(false);
 
@@ -53,8 +54,10 @@ export default class WikiDownloading extends React.PureComponent {
           <Progress label={`Downloading hero data files`} 
             progress={this.state.progress_wiki} />
 
+          { reason == DOWNLOAD_REASONS.UPDATE ? null : 
           <Progress label={`Caching images`} 
             progress={this.state.progress_images} />
+          }
         </View>
 
         <View style={styles.wrapper}>
