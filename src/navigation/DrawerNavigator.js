@@ -9,7 +9,7 @@ import StatsScreen from '../screens/StatsScreen';
 import StatsWebScreen from '../screens/StatsWebScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 // import TipsScreen from '../screens/TipsScreen';
-// import PatchNotesScreen from '../screens/PatchNotesScreen';
+import PatchNotesScreen from '../screens/PatchNotesScreen';
 import AboutScreen from '../screens/AboutScreen';
 import SettingsTipsScreen from '../screens/SettingsTipsScreen';
 
@@ -17,6 +17,7 @@ import { SCREEN_LABELS, SCREEN_LABELS_HIDDEN } from '../constants/Constants';
 
 import Drawer from '../components/Drawer';
 import Colors from '../constants/Colors';
+import PatchScreen from '../screens/PatchScreen';
 
 const drawerNav = createDrawerNavigator({
   [SCREEN_LABELS.HEROES]: createStackNavigator({
@@ -42,7 +43,10 @@ const drawerNav = createDrawerNavigator({
   }),
 
   // [SCREEN_LABELS.TIPS]: createStackNavigator({ TipsScreen }),
-  // [SCREEN_LABELS.PATCH_NOTES]: createStackNavigator({ PatchNotesScreen }),
+  [SCREEN_LABELS.PATCH_NOTES]: createStackNavigator({ 
+    [SCREEN_LABELS.PATCH_NOTES]: PatchNotesScreen,
+    [SCREEN_LABELS_HIDDEN.PATCH]: PatchScreen,
+  }),
 
   [SCREEN_LABELS.ABOUT]: createStackNavigator({ AboutScreen }),
 }, {

@@ -24,6 +24,7 @@ export const assets = {
     menuHeroes: require('../assets/images/menu-heroes.png'),
     menuItems: require('../assets/images/menu-items.png'),
     menuStats: require('../assets/images/menu-stats.png'),
+    menuPatch: require('../assets/images/menu-patchnotes.png'),
     menuProfile: require("../assets/images/menu-profile.png"),
     logoRed: require('../assets/images/logo-red.png'),
   }  
