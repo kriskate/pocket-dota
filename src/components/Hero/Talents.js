@@ -12,7 +12,7 @@ export default ({ talents }) => (
     { talents.reverse().map((talent, idx) => [
       
       <View key={talent.tag} style={styles.talent}>
-        <Text>{talent.name}</Text>
+        <Text style={styles.talentText}>{talent.name}</Text>
       </View>,
 
       idx % 2 == 1 ? null : (
@@ -55,10 +55,15 @@ const styles = StyleSheet.create({
     color: Colors.goldenrod,
   },
   talent: {
+    width: "43%",
     padding: Layout.padding_small,
     marginVertical: Layout.padding_small,
-    width: "43%",
+    alignItems: 'center',
+    justifyContent: 'center',
     borderColor: Colors.disabled,
     borderWidth: 1,
   },
+  talentText: {
+    textAlign: 'center',
+  }
 })
