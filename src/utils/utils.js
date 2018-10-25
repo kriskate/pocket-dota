@@ -1,5 +1,13 @@
-// to-do - add some kind of error popup to inform about this
-export const connectionIssue = () => console.log('Internet might be down');
+export const noCache = {
+  'Cache-Control': 'no-cache, no-store, must-revalidate',
+  'Pragma': 'no-cache',
+  'Expires': 0,
+}
+export const noCache_headers = {
+  headers: {
+    ...noCache
+  }
+}
 
 export const parseCategory = category => category.split(' ').join('_').toLowerCase();
 

@@ -6,7 +6,7 @@ import Logger from './Logger';
 import { model_wiki_info } from '../constants/Models';
 
 export const folder_img = `${FileSystem.cacheDirectory}dota-images/`;
-export const folder_data = `${FileSystem.cacheDirectory}dota-data/`;
+export const folder_data = `${FileSystem.documentDirectory}dota-data/`;
 
 
 export const downloadImages = async (wiki, progress_callback) => {

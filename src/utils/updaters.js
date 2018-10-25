@@ -3,6 +3,7 @@ import { url } from "../constants/Data";
 import { Platform } from "react-native";
 import { Constants } from "expo";
 import { model_wiki_info } from "../constants/Models";
+import { noCache_headers, noCache } from "./utils";
 
 export const ERRORS = {
   NO_REVID: 'No revision id',
@@ -13,11 +14,12 @@ export const ERRORS = {
 
 const getJSONwikiInfo = async () => {
   try {
-    const info = await (await fetch(url.currentWiki)).json();
+    const info = await fetch(url.currentWiki, noCache_headers);
+    const infoJSON = await info.json();
 
-    return info;
+    return infoJSON;
   } catch (e) {
-    return { error: e };
+    return { error: e.message };
   }
 }
 export const wiki_needsUpdate = async () => {
@@ -46,6 +48,7 @@ export const app_needsUpdate = async () => {
     
         const res = await fetch(`https://expo.io/${id}/index.exp`, {
           headers: {
+            ...noCache,
             'Exponent-SDK-Version': sdkVersion,
             'Exponent-Platform': Platform.OS,
           },
