@@ -1,6 +1,15 @@
 import { Alert } from "react-native";
 
 
+export const alertGeneral = (title, content) => 
+  Alert.alert(
+    title, content,
+    [
+      {text: 'Dismiss'}
+    ],
+    { cancelable: true }
+  );
+
 export const alertAppUpdateDone = (version, onYes) =>
   Alert.alert(
     'Success!',
@@ -48,18 +57,19 @@ It is recomended to be connected to a WI-FI network before downloading new data.
     { cancelable: true }
   );
 
-export const alertCannotUpdate = (e) =>
+export const alertCannotUpdate = (v, e) =>
   Alert.alert(
     `The update cannot start`,
-`There seems to be a problem with your connection; please restart the app and make sure you're connected to the internet.
+`Pocket Dota is trying to update it's Wiki to a version higher than ${v}, but has encountered an error.
+There might be a problem with your connection; please restart the app and make sure you're connected to the internet.
 
-THIS UPDATE IS REQUIRED - if it's not made, the application will not show the data correctly.
+THIS UPDATE IS HIGHLY RECOMMENDED - if the update is not made, the application will not show the data correctly; it might even crash due to lack of correct data.
 
 ${e}`,
     [
       { text: 'OK' },
     ],
-    { cancelable: true }
+    { cancelable: false }
   );
 
 

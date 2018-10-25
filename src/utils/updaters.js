@@ -22,10 +22,12 @@ const getJSONwikiInfo = async () => {
 }
 export const wiki_needsUpdate = async () => {
   let latestVersionInfo = await getJSONwikiInfo();
-  if(latestVersionInfo.error) return { error: ERRORS.NO_WIKI_VERSION + `\r\n${latestVersionInfo.error}`};
+
+  if(latestVersionInfo.error)
+    return { error: ERRORS.NO_WIKI_VERSION + `\r\n${latestVersionInfo.error}`};
 
   const { appVersion, wikiVersion, } = model_wiki_info(latestVersionInfo);
-  const newVersion = `${appVersion}.${wikiVersion}`;
+  const newVersion = `${appVersion}-${wikiVersion}`;
 
   if(GET_WIKI_VERSION() === newVersion)
     return false;

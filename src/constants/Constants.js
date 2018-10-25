@@ -8,7 +8,7 @@ let _wikiVersion;
 export const setWikiVersion = ({ appVersion, wikiVersion }) => {
   console.log(appVersion, wikiVersion)
   _wikiVersion = !appVersion ? null :
-    `${appVersion}.${wikiVersion}`;
+    `${appVersion}-${wikiVersion}`;
 }
 export const GET_WIKI_VERSION = () => _wikiVersion;
 

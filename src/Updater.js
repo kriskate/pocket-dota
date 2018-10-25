@@ -17,6 +17,7 @@ import AppDownloading from './components/AppDownloading';
 import { Updates } from 'expo';
 import { app_needsUpdate, wiki_needsUpdate } from './utils/updaters';
 
+
 @connect(
   (state => ({
     showWiki: state.update.showWiki,
@@ -69,25 +70,35 @@ export default class Updater extends React.PureComponent {
   
 
   async componentDidMount () {
-    /* the wiki modal should me visible if minWikiVersion is not met */
-    const sp_arr = GET_WIKI_VERSION().split('.');
-    const forceShowWiki = sp_arr[sp_arr.length - 1] < require('../app.json').minWikiVersion;
-
-    if(forceShowWiki) {
-      const res = await wiki_needsUpdate();
-
-      if(!res) alertCannotUpdate('Please clear the application files.');
-      else if(res.error) alertCannotUpdate(res.error);
-      else this.props.updateWiki(res);
-
-      return;
-    }
     setTimeout(() => {
-      // allows the user to see the app for a bit
-      // also allows redux-persist to load its state
       this.props.checkUpdateApp && this._checkUpdate('App');
+    }, 5000);
+
+    /* the wiki modal should be visible if minWikiVersion is not met */
+    const cWiki = GET_WIKI_VERSION();
+    if(cWiki) {
+      const currentWikiVersion = parseInt(cWiki.split('-')[1]);
+      const minWikiVersion = parseInt(require('../app.json').minWikiVersion);
+      const forceShowWiki = currentWikiVersion < minWikiVersion;
+      
+      if(forceShowWiki) {
+        const res = await wiki_needsUpdate();
+
+        // the app has a version of /info.json in cache and will show that
+        if(res == false) alertCannotUpdate(minWikiVersion, 'If the problem persists, please clear the application files.');
+        // if the app does not have /info.json in cache or the file is missing form the server
+        else if(res.error) alertCannotUpdate(minWikiVersion, res.error);
+        // if everything goes well, update the wiki
+        else this.props.updateWiki(res);
+
+        return;
+      }
+    }
+    // allows the user to see the app for a bit
+    // also allows redux-persist to load its state
+    setTimeout(() => {
       this.props.checkUpdateWiki && this._checkUpdate('Wiki');
-    }, 10000)
+    }, 10000);
   }
 
   _checkUpdate = async (What) => {
