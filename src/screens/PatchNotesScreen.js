@@ -24,7 +24,7 @@ export default class PatchNotesScreen extends React.Component {
     return (
       <Container scrollable backToHome>
         <FlatList
-          initialNumToRender={4}
+          initialNumToRender={5}
           keyExtractor={(item) => item}
           data={Object.keys(patch_notes).reverse()}
           renderItem={({item}) => (
