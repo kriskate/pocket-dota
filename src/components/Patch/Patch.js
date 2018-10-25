@@ -7,7 +7,7 @@ import Colors from '../../constants/Colors';
 import Layout from '../../constants/Layout';
 
 import PatchShort from './PatchShort';
-import { SCREEN_LABELS_HIDDEN } from '../../constants/Constants';
+import { SCREEN_LABELS_HIDDEN, ICONS } from '../../constants/Constants';
 
 
 export default class Patch extends React.Component {
@@ -31,8 +31,11 @@ export default class Patch extends React.Component {
 
         <PatchShort changes_short={changes_short} />
 
-        <Button prestyled titleStyle={styles.button_more_title}
-          title={'view game changes'} onPress={this.openPatch} />
+        <Button prestyled style={styles.button_more_title}
+            onPress={this.openPatch} >
+          <Text>view game changes</Text>
+          <ICONS.FORWARD />
+        </Button>
       </View>
     )
   }
@@ -54,6 +57,8 @@ const styles = StyleSheet.create({
     borderBottomColor: Colors.disabled,
   },
   button_more_title: {
-    textAlign: 'center',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
   }
 })

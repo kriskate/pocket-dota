@@ -2,10 +2,9 @@ import React from 'react';
 import { View, StyleSheet, FlatList, LayoutAnimation, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { Container, Text, Button } from '../components/ui';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 import { headerStyle, animation } from '../utils/screen';
-import { SCREEN_LABELS } from '../constants/Constants';
+import { SCREEN_LABELS, ICONS } from '../constants/Constants';
 import Layout from '../constants/Layout';
 import { url } from '../constants/Data';
 
@@ -30,8 +29,8 @@ class Section extends React.Component {
           <Text>{title}</Text>
           <Text>
             {open 
-              ? <FontAwesome name='caret-up' size={17} />
-              : <FontAwesome name='caret-down' size={17} />
+              ? <ICONS.DROPUP />
+              : <ICONS.DROPDOWN />
             }
           </Text>
         </Button>

@@ -90,6 +90,8 @@ export const URL_ODOTA = {
 
 
 export const ICONS = {
+  DROPUP: () => <Ionicons name="ios-arrow-dropup" size={17} color={Colors.dota_white} />,
+  DROPDOWN: () => <Ionicons name="ios-arrow-dropdown" size={17} color={Colors.dota_white} />,
   BACK: () => <Ionicons name="ios-arrow-back" size={17} color={Colors.dota_white} />,
   FORWARD: () => <Ionicons name="ios-arrow-forward" size={17} color={Colors.dota_white} />,
   USER: ({color}) => <FontAwesome name="user" size={17} color={color || Colors.dota_white} />,
