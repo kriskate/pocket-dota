@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, WebView, ActivityIndicator, StyleSheet, Platform } from 'react-native';
+import { connect } from 'react-redux';
 import { Container } from '../components/ui';
 
 import { headerStyle } from '../utils/screen';
@@ -48,6 +49,15 @@ const jsString = `
 `
 
 
+@connect(
+  (state => ({
+    c_account_id: state.profile.user.account_id,
+    user: state.profile.user,
+  })),
+  (dispatch => ({
+    setProfile: (user) => dispatch(Actions.setUser(user)),
+  }))
+)
 export default class StatsWebScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     ...headerStyle,
@@ -83,13 +93,21 @@ export default class StatsWebScreen extends React.Component {
     const source = { uri: URL_ODOTA.PROFILE_WEB + player.account_id + '/overview' };
     const { isModalVisible } = this.state;
 
+    const ConnectedToolBox = () => (
+      <StatsWebScreenToolbox player={player}
+        goBack={this._goBack} goForward={this._goForward} showHelp={this._showHelp}
+        setProfile={this.props.setProfile}
+        c_account_id={this.props.c_account_id}
+        user={this.props.user}
+      />
+    )
+
     return (
       <RequiresConnection>
       <Container>
         <StatsWebScreenModal visible={isModalVisible} hide={this._hideModal} />
         { Platform.OS !== 'android' ? null : 
-          <StatsWebScreenToolbox player={player}
-            goBack={this._goBack} goForward={this._goForward} showHelp={this._showHelp} />
+          <ConnectedToolBox />
         }
         <WebView
           style={styles.webView}
@@ -101,8 +119,7 @@ export default class StatsWebScreen extends React.Component {
           source={source}
         />
         { Platform.OS !== 'ios' ? null : 
-          <StatsWebScreenToolbox player={player}
-            goBack={this._goBack} goForward={this._goForward} showHelp={this._showHelp} />
+          <ConnectedToolBox />
         }
       </Container>
       </RequiresConnection>

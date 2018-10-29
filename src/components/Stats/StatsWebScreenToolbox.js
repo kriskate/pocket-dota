@@ -11,15 +11,6 @@ import Colors from '../../constants/Colors';
 import Layout from '../../constants/Layout';
 
 
-@connect(
-  (state => ({
-    c_account_id: state.profile.user.account_id,
-    user: state.profile.user,
-  })),
-  (dispatch => ({
-    setProfile: (user) => dispatch(Actions.setUser(user)),
-  }))
-)
 export default class StatsWebScreenToolbox extends React.PureComponent {
   _setProfile = () => {
     const { player, setProfile, c_account_id } = this.props;
