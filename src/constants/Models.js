@@ -212,14 +212,14 @@ export function model_hero_attributes (attributes) {
 export function model_hero (hero) {
   const {
     tag, name, bio, hype,
-    popular_items,
+    popular_items, item_builds,
     abilities = [], abilities_special = [], abilities_aghs = [], abilities_hidden = [], talents = [],
     attributes = model_hero_attributes({}),
   } = hero;
 
   return {
     tag, name, bio, hype,
-    popular_items,
+    popular_items, item_builds,
     abilities, abilities_special, abilities_aghs, abilities_hidden, talents,
     attributes,
   };
