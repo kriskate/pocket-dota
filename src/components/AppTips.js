@@ -57,7 +57,7 @@ export const showTip = (tip, duration=10) => {
         tip: '',
       })
     }
-    tipTimeout = setTimeout(() => singletonInstance.setState({
+    tipTimeout = setTimeout(() => singletonInstance && singletonInstance.setState({
       show: false,
       tip: '',
     }), duration*1000);
