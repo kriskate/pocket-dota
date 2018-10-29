@@ -21,7 +21,7 @@ class ProfileThumb extends React.PureComponent {
 
     return (
       <Button style={styles.thumb_button} viewStyle={styles.thumb_buttonView}
-          onPress={() => navigation.navigate(SCREEN_LABELS_HIDDEN.STATS_WEB, { player: {...result} })} >
+          onPress={() => navigation.navigate(SCREEN_LABELS_HIDDEN.STATS_WEB, { data: {...result} })} >
         <Image source={src} style={styles.thumb_img} />
         <View style={styles.thumb_texts}>
           <Text style={styles.thumb_name}>{personaname}</Text>

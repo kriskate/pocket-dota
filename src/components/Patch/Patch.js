@@ -16,7 +16,7 @@ export default class Patch extends React.Component {
   }
 
   openPatch = () => {
-    this.props.navigate(SCREEN_LABELS_HIDDEN.PATCH, { tag: this.props.patch });
+    this.props.navigate(SCREEN_LABELS_HIDDEN.PATCH, { data: this.props.patch });
   }
   render () {
     const { patch, patch_content, } = this.props;

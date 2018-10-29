@@ -54,7 +54,7 @@ export default class HomeScreen extends React.PureComponent {
         <MenuItem onPress={() => navigate(SCREEN_LABELS.STATS)} label={HOME_LABELS.STATS}
           cardImage={assets.app.menuStats} />
         { !image || !this.props.showProfileOnHome ? null :
-          <MenuItem onPress={() => navigate(SCREEN_LABELS_HIDDEN.STATS_WEB, { player: { account_id, personaname: name } })} label={name}
+          <MenuItem onPress={() => navigate(SCREEN_LABELS_HIDDEN.STATS_WEB, { data: { account_id, personaname: name } })} label={name}
             cardImage={assets.app.menuProfile}
             profileImage={image} /> 
         }

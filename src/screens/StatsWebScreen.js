@@ -51,7 +51,7 @@ const jsString = `
 export default class StatsWebScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     ...headerStyle,
-    title: navigation.state.params.player.personaname,
+    title: navigation.getParam('data').personaname,
     headerTruncatedBackTitle: 'Stats',
   });
 
@@ -79,7 +79,7 @@ export default class StatsWebScreen extends React.Component {
   _showHelp = () => this.setState({ isModalVisible: true });
 
   render() {
-    const player = model_odota(this.props.navigation.state.params.player);
+    const player = model_odota(this.props.navigation.getParam('data'));
     const source = { uri: URL_ODOTA.PROFILE_WEB + player.account_id + '/overview' };
     const { isModalVisible } = this.state;
 

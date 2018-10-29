@@ -53,13 +53,13 @@ const Changes = ({ changes, images, namesArr, isItem }) => !changes || changes.l
 }))
 export default class PatchScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: navigation.getParam('tag'),
+    title: navigation.getParam('data'),
     ...headerStyle,
   });
 
   render() {
     const { patch_notes, wiki_heroes, wiki_items } = this.props;
-    const patch = patch_notes[this.props.navigation.getParam('tag')];
+    const patch = patch_notes[this.props.navigation.getParam('data')];
     const { heroes, items, general } = patch;
 
     return (
