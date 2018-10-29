@@ -34,7 +34,7 @@ const _getHeroSections = (heroes) => {
     }
     let section = heroSections.find(({ title }) => title == att);
     if(!section) {
-      section = new model_section({ 
+      section = model_section({ 
         title: att,
         color,
       });

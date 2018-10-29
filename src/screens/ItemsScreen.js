@@ -33,7 +33,7 @@ export default class Itemscreen extends React.Component {
       const { category } = item;
       let section = itemSections.find(({ title }) => title == category);
       if(!section) {
-        section = new model_section({ 
+        section = model_section({ 
           title: category,
           color: Colors.items[parseCategory(category)],
         });

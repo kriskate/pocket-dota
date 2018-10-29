@@ -1,3 +1,5 @@
+import { model_update } from "../constants/Models";
+
 const ActionTypes = {
   DOWNLOAD_WIKI: 'DOWNLOAD_WIKI',
   DONE_WIKI: 'DONE_WIKI',
@@ -23,15 +25,7 @@ export const DOWNLOAD_STATE = {
   WIKI: 'showWiki',
   APP: 'showApp',
 }
-export const initialState = {
-  showApp: false,
-  downloadingApp_version: '',
-  
-  showWiki: false,
-  downloadingWiki_reason: '',
-  downloadingWiki_version: '',
-  downloadingWiki_versionInfo: '',
-};
+export const initialState = model_update({});
 
 export default function reducer(state=initialState, action) {
   switch(action.type) {

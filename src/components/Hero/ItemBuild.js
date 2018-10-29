@@ -60,7 +60,7 @@ export default class ItemBuild extends React.Component {
     Object.keys(item_builds).forEach(moment => {
       if(!item_builds[moment] || item_builds[moment].length == 0) return;
 
-      const section = new model_section({ title: ITEM_CONSTANTS.BUILDS[moment], });
+      const section = model_section({ title: ITEM_CONSTANTS.BUILDS[moment], });
       itemSections.push(section);
       
       //!data-point - add try catch

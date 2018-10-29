@@ -1,12 +1,12 @@
-export const model_section = ({ title, color='#d6d6d6', data=[] }) => ({
-  title,
-  color,
-  data,
-});
+export function model_section (section) {
+  const { title, color='#d6d6d6', data=[] } = section;
+
+  return { title, color, data, }
+};
 
 
 export function model_wiki (data) {
-  const { heroes, items, tips, patch_notes, info } = data;
+  const { heroes=[], items=[], tips={}, patch_notes={}, info={} } = data;
   return { heroes, items, tips, patch_notes, info };
 }
 export function model_wiki_info (data) {
@@ -210,12 +210,19 @@ export function model_hero_attributes (attributes) {
   };
 }
 export function model_hero (hero) {
+  const {
+    tag, name, bio, hype,
+    popular_items,
+    abilities = [], abilities_special = [], abilities_aghs = [], abilities_hidden = [], talents = [],
+    attributes = model_hero_attributes({}),
+  } = hero;
+
   return {
     tag, name, bio, hype,
     popular_items,
-    abilities: [], abilities_special: [], abilities_aghs: [], abilities_hidden: [], talents: [],
-    attributes = new model_hero_attributes({}),
-  } = hero;
+    abilities, abilities_special, abilities_aghs, abilities_hidden, talents,
+    attributes,
+  };
 }
 
 
@@ -247,4 +254,25 @@ export function model_patch_notes_item (item) {
 export function model_patch_notes_general (general) {
   const { name, description, } = general;
   return { name, description, }
+}
+
+export function model_update (update) {
+  const {
+    showApp = false,
+    downloadingApp_version = '',
+    
+    showWiki = false,
+    downloadingWiki_reason = '',
+    downloadingWiki_version =  '',
+    downloadingWiki_versionInfo = '',
+  } = update;
+  return {
+    showApp,
+    downloadingApp_version,
+    
+    showWiki,
+    downloadingWiki_reason,
+    downloadingWiki_version,
+    downloadingWiki_versionInfo,
+  };
 }
