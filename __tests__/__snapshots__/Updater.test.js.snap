@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders the component 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "height": 1334,
+        "position": "absolute",
+        "width": 750,
+      },
+      Object {
+        "right": 760,
+      },
+    ]
+  }
+/>
+`;

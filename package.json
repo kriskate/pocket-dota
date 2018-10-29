@@ -3,10 +3,18 @@
   "private": true,
   "scripts": {
     "test": "node ./node_modules/jest/bin/jest.js --watchAll",
+    "test-coverage": "node ./node_modules/jest/bin/jest.js --watchAll --coverage",
     "releasev1": "expo build:android --release-channel prod-v1"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "testRegex": "\\.test\\.js$",
+    "setupFiles": [
+      "./__tests__/__setup__/jest-setup.js"
+    ],
+    "testPathIgnorePatterns": [
+      "node_modules/"
+    ]
   },
   "dependencies": {
     "expo": "^30.0.0",
@@ -30,6 +38,7 @@
     "@types/react-navigation": "^2.0.17",
     "@types/react-redux": "^6.0.6",
     "@types/redux": "^3.6.0",
-    "jest-expo": "^30.0.0"
+    "jest-expo": "^30.0.0",
+    "redux-mock-store": "^1.5.3"
   }
 }

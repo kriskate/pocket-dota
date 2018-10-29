@@ -1,0 +1,1094 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders screen AboutScreen 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#2F363D",
+      "flex": 1,
+    }
+  }
+/>
+`;
+
+exports[`renders screen HeroScreen 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#2F363D",
+      "flex": 1,
+    }
+  }
+/>
+`;
+
+exports[`renders screen HeroesScreen 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#2F363D",
+        "flex": 1,
+      },
+      Object {
+        "padding": undefined,
+        "paddingTop": undefined,
+      },
+      Object {
+        "paddingHorizontal": 5,
+      },
+    ]
+  }
+/>
+`;
+
+exports[`renders screen HomeScreen 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#2F363D",
+      "flex": 1,
+    }
+  }
+/>
+`;
+
+exports[`renders screen ItemScreen 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#2F363D",
+      "flex": 1,
+    }
+  }
+/>
+`;
+
+exports[`renders screen Itemscreen 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#2F363D",
+        "flex": 1,
+      },
+      Object {
+        "padding": undefined,
+        "paddingTop": undefined,
+      },
+      Object {
+        "paddingHorizontal": 5,
+      },
+    ]
+  }
+/>
+`;
+
+exports[`renders screen PatchNotesScreen 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#2F363D",
+      "flex": 1,
+    }
+  }
+/>
+`;
+
+exports[`renders screen PatchScreen 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#2F363D",
+      "flex": 1,
+    }
+  }
+/>
+`;
+
+exports[`renders screen SettingsScreen 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#2F363D",
+      "flex": 1,
+    }
+  }
+/>
+`;
+
+exports[`renders screen SettingsTipsScreen 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#2F363D",
+      "flex": 1,
+    }
+  }
+/>
+`;
+
+exports[`renders screen StatsScreen 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "#2F363D",
+          "flex": 1,
+        },
+        Object {
+          "padding": undefined,
+          "paddingTop": undefined,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "marginVertical": 10,
+          "padding": 10,
+        }
+      }
+    >
+      <TextInput
+        allowFontScaling={true}
+        enablesReturnKeyAutomatically={true}
+        onChangeText={[Function]}
+        onSubmitEditing={[Function]}
+        placeholder="Type in profile name to look up"
+        returnKeyType="search"
+        selectTextOnFocus={true}
+        style={
+          Object {
+            "backgroundColor": "#d6d6d6",
+            "borderRadius": 5,
+            "flex": 1,
+            "height": 38,
+            "marginRight": 10,
+            "padding": 10,
+          }
+        }
+        value=""
+      />
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#1B1E21",
+            "borderRadius": 3,
+            "height": 38,
+            "justifyContent": "center",
+            "opacity": 1,
+            "padding": 10,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              Object {
+                "color": "#d6d6d6",
+              },
+              Object {},
+              undefined,
+            ]
+          }
+        >
+          Search
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders screen StatsWebScreen 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "#2F363D",
+          "flex": 1,
+        },
+        Object {
+          "padding": undefined,
+          "paddingTop": undefined,
+        },
+        undefined,
+      ]
+    }
+  >
+    <Modal
+      animationType="none"
+      hardwareAccelerated={false}
+      hideModalContentWhileAnimating={false}
+      onModalHide={[Function]}
+      onRequestClose={[Function]}
+      onSwipe={[Function]}
+      scrollOffset={0}
+      scrollOffsetMax={0}
+      scrollTo={null}
+      supportedOrientations={
+        Array [
+          "portrait",
+          "landscape",
+        ]
+      }
+      swipeDirection="down"
+      swipeThreshold={100}
+      transparent={true}
+      visible={false}
+    >
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "backgroundColor": "black",
+            "bottom": 0,
+            "height": 1334,
+            "left": 0,
+            "opacity": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+            "width": 750,
+          }
+        }
+        testID={undefined}
+      />
+      <View
+        collapsable={undefined}
+        hideModalContentWhileAnimating={false}
+        onModalHide={[Function]}
+        onMoveShouldSetResponder={[Function]}
+        onMoveShouldSetResponderCapture={[Function]}
+        onResponderEnd={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderReject={[Function]}
+        onResponderRelease={[Function]}
+        onResponderStart={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        onStartShouldSetResponderCapture={[Function]}
+        onSwipe={[Function]}
+        pointerEvents="box-none"
+        scrollOffset={0}
+        scrollOffsetMax={0}
+        scrollTo={null}
+        style={
+          Object {
+            "flex": 1,
+            "justifyContent": "center",
+            "left": 0,
+            "margin": 37.5,
+            "top": 0,
+            "transform": Array [
+              Object {
+                "translateY": 0,
+              },
+            ],
+          }
+        }
+        supportedOrientations={
+          Array [
+            "portrait",
+            "landscape",
+          ]
+        }
+        swipeDirection="down"
+        swipeThreshold={100}
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "backgroundColor": "#2F363D",
+                "flex": 1,
+              },
+              Object {
+                "padding": undefined,
+                "paddingTop": undefined,
+              },
+              Object {
+                "backgroundColor": "#1B1E21",
+                "borderRadius": 3,
+                "flex": 1,
+                "padding": 10,
+              },
+            ]
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                Object {
+                  "color": "#d6d6d6",
+                },
+                Object {},
+                Object {
+                  "color": "#B44335",
+                  "fontSize": 15,
+                  "marginBottom": 15,
+                  "marginTop": 5,
+                  "textAlign": "center",
+                },
+              ]
+            }
+          >
+            The Dota 2 player statistics screen
+          </Text>
+          <View
+            linkText={[Function]}
+            style={undefined}
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#d6d6d6",
+                  },
+                  Object {},
+                  Object {
+                    "flexDirection": "row",
+                    "marginBottom": 15,
+                  },
+                ]
+              }
+            >
+              <Text
+                URLS={
+                  Object {
+                    "Dota buff": "https://github.com/dotabuff/d2vpkr",
+                    "Elo": "https://elo.io/",
+                    "Expo": "https://expo.io/",
+                    "Feature Requests": "https://discord.gg/mwP3FRM",
+                    "General": "https://discord.gg/WXjby2w",
+                    "Issues": "https://discord.gg/BMCrMbw",
+                    "NodeJS": "https://nodejs.org/en/",
+                    "Open Dota": "https://www.opendota.com",
+                    "React Native": "https://facebook.github.io/react-native/",
+                    "Valve corporation": "https://www.valvesoftware.com",
+                  }
+                }
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                hasUrl={true}
+                style={
+                  Object {
+                    "flexDirection": "row",
+                    "marginBottom": 15,
+                  }
+                }
+              >
+                The Dota 2 player profiles are a collection of statistics gathered and parsed by the 
+                <Text
+                  URLS={
+                    Object {
+                      "Dota buff": "https://github.com/dotabuff/d2vpkr",
+                      "Elo": "https://elo.io/",
+                      "Expo": "https://expo.io/",
+                      "Feature Requests": "https://discord.gg/mwP3FRM",
+                      "General": "https://discord.gg/WXjby2w",
+                      "Issues": "https://discord.gg/BMCrMbw",
+                      "NodeJS": "https://nodejs.org/en/",
+                      "Open Dota": "https://www.opendota.com",
+                      "React Native": "https://facebook.github.io/react-native/",
+                      "Valve corporation": "https://www.valvesoftware.com",
+                    }
+                  }
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  hasUrl={true}
+                  onLongPress={undefined}
+                  onPress={[Function]}
+                  style={
+                    Array [
+                      Object {
+                        "flexDirection": "row",
+                        "marginBottom": 15,
+                      },
+                      Object {
+                        "color": "#257DAE",
+                        "textDecorationLine": "underline",
+                      },
+                    ]
+                  }
+                >
+                  Open Dota
+                </Text>
+                 platform.
+These statistics show an in-depth analysis of the player's activity in the Dota 2 game.
+
+Because the statistics screen is a preview of the Open Dota website, you will need the following buttons in order to navigate the Dota 2 player profiles:
+              </Text>
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+                "marginBottom": 15,
+              }
+            }
+          >
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              collapsable={undefined}
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#1B1E21",
+                  "borderBottomColor": "#2F363D",
+                  "borderColor": "#2F363D",
+                  "borderTopColor": "#2F363D",
+                  "borderWidth": 0,
+                  "flex": undefined,
+                  "height": 32,
+                  "justifyContent": "center",
+                  "marginHorizontal": 15,
+                  "opacity": 1,
+                  "padding": 5,
+                  "paddingHorizontal": 10,
+                  "width": 37,
+                }
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+              />
+            </View>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#d6d6d6",
+                  },
+                  Object {},
+                  Object {
+                    "flex": 1,
+                  },
+                ]
+              }
+            >
+              Use the BACK button to navigate back in the current (statistics) screen.
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+                "marginBottom": 15,
+              }
+            }
+          >
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              collapsable={undefined}
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#1B1E21",
+                  "borderBottomColor": "#2F363D",
+                  "borderColor": "#2F363D",
+                  "borderTopColor": "#2F363D",
+                  "borderWidth": 0,
+                  "flex": undefined,
+                  "height": 32,
+                  "justifyContent": "center",
+                  "marginHorizontal": 15,
+                  "opacity": 1,
+                  "padding": 5,
+                  "paddingHorizontal": 10,
+                  "width": 37,
+                }
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+              />
+            </View>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#d6d6d6",
+                  },
+                  Object {},
+                  Object {
+                    "flex": 1,
+                  },
+                ]
+              }
+            >
+              Use the FORWARD button to navigate back in the current (statistics) screen.
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+                "marginBottom": 15,
+              }
+            }
+          >
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              collapsable={undefined}
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#1B1E21",
+                  "borderBottomColor": "#2F363D",
+                  "borderColor": "#2F363D",
+                  "borderTopColor": "#2F363D",
+                  "borderWidth": 0,
+                  "flex": undefined,
+                  "height": 32,
+                  "justifyContent": "center",
+                  "marginHorizontal": 15,
+                  "opacity": 1,
+                  "padding": 5,
+                  "paddingHorizontal": 10,
+                  "width": 37,
+                }
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+              />
+            </View>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#d6d6d6",
+                  },
+                  Object {},
+                  Object {
+                    "flex": 1,
+                  },
+                ]
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#d6d6d6",
+                    },
+                    Object {},
+                    undefined,
+                  ]
+                }
+              >
+                When the PROFILE button is pressed, it will be 
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#d6d6d6",
+                      },
+                      Object {},
+                      Object {
+                        "color": "#DAA520",
+                      },
+                    ]
+                  }
+                >
+                  highlighted
+                </Text>
+                , indicating that the current Dota 2 profile is the one that will appear on the app's home screen.
+              </Text>
+            </Text>
+          </View>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                Object {
+                  "color": "#d6d6d6",
+                },
+                Object {},
+                undefined,
+              ]
+            }
+          >
+            To set another player profile, simply navigate to another Dota 2 profile (from the Stats screen) and press the PROFILE button.
+          </Text>
+          <View
+            style={
+              Object {
+                "alignSelf": "center",
+                "bottom": 5,
+                "position": "absolute",
+              }
+            }
+          >
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              collapsable={undefined}
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "backgroundColor": "#1B1E21",
+                  "borderBottomColor": "#2F363D",
+                  "borderColor": "#2F363D",
+                  "borderTopColor": "#2F363D",
+                  "borderWidth": 1,
+                  "opacity": 1,
+                  "padding": 10,
+                }
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#d6d6d6",
+                    },
+                    Array [
+                      undefined,
+                      Object {
+                        "color": "#d6d6d6",
+                      },
+                    ],
+                    undefined,
+                  ]
+                }
+              >
+                DONE
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    </Modal>
+    <View
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    >
+      <RCTWebView
+        allowsInlineMediaPlayback={undefined}
+        automaticallyAdjustContentInsets={undefined}
+        bounces={undefined}
+        contentInset={undefined}
+        dataDetectorTypes={undefined}
+        decelerationRate={undefined}
+        injectedJavaScript="
+  var css = \\"body { background-color:#2F363D!important; } #root { background-color:#2F363D!important; background-image:none; } ul { background-color:#1B1E21!important; } .gauge-container { background-color:#1B1E21!important; } thead { background-color:#1b1e21b5!important; }\\";
+  var head = document.getElementsByTagName(\\"head\\")[0];
+  var style = document.createElement(\\"style\\");
+  style.appendChild(document.createTextNode(css));
+  head.appendChild(style);
+
+  var meta = document.createElement('meta'); 
+  meta.setAttribute('name', 'viewport'); 
+  meta.setAttribute('content', 'width=device-width, user-scalable=0');
+  head.appendChild(meta);
+
+  var main = document.getElementById(\\"root\\").childNodes[0];
+
+  main.childNodes[main.childNodes.length-2].remove();
+  main.childNodes[main.childNodes.length-1].remove();
+  main.childNodes[1].remove();
+  main.childNodes[0].remove();
+  
+  function playerInfo() {
+    var playerInfoDiv = document.getElementsByClassName('playerInfo')[0];
+    if(playerInfoDiv) {
+      playerInfoDiv.childNodes[2].remove();
+      playerInfoDiv.childNodes[0].childNodes[1].remove();
+      clearInterval(playerInfoInterval);
+    }
+  }
+  var playerInfoInterval = setInterval(playerInfo, 200);
+
+"
+        mediaPlaybackRequiresUserAction={undefined}
+        messagingEnabled={false}
+        onLoadingError={[Function]}
+        onLoadingFinish={[Function]}
+        onLoadingStart={[Function]}
+        onMessage={[Function]}
+        onShouldStartLoadWithRequest={undefined}
+        scalesPageToFit={true}
+        scrollEnabled={undefined}
+        source={
+          Object {
+            "uri": "https://www.opendota.com/players/undefined/overview",
+          }
+        }
+        style={
+          Array [
+            Object {
+              "flex": 1,
+            },
+            Object {
+              "backgroundColor": "#ffffff",
+            },
+            Object {
+              "backgroundColor": "#2F363D",
+            },
+            Object {
+              "flex": 0,
+              "height": 0,
+            },
+          ]
+        }
+      />
+      <View
+        style={
+          Object {
+            "flex": 1,
+            "justifyContent": "center",
+          }
+        }
+      >
+        <ActivityIndicator
+          animating={true}
+          color="#DAA520"
+          hidesWhenStopped={true}
+          size="large"
+        />
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "backgroundColor": "#1B1E21",
+          "borderTopColor": "#777777",
+          "borderTopWidth": 1,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+        }
+      }
+    >
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#1B1E21",
+            "borderBottomColor": "#2F363D",
+            "borderTopColor": "#2F363D",
+            "borderWidth": 0,
+            "height": 32,
+            "justifyContent": "center",
+            "opacity": 1,
+            "padding": 5,
+            "width": 172.5,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#1B1E21",
+            "borderBottomColor": "#2F363D",
+            "borderTopColor": "#2F363D",
+            "borderWidth": 0,
+            "height": 32,
+            "justifyContent": "center",
+            "opacity": 1,
+            "padding": 5,
+            "width": 172.5,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#1B1E21",
+            "borderBottomColor": "#2F363D",
+            "borderTopColor": "#2F363D",
+            "borderWidth": 0,
+            "height": 32,
+            "justifyContent": "center",
+            "opacity": 1,
+            "padding": 5,
+            "width": 172.5,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#1B1E21",
+            "borderBottomColor": "#2F363D",
+            "borderTopColor": "#2F363D",
+            "borderWidth": 0,
+            "height": 32,
+            "justifyContent": "center",
+            "opacity": 1,
+            "padding": 5,
+            "width": 172.5,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        />
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders screen TipsScreen 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#2F363D",
+      "flex": 1,
+    }
+  }
+/>
+`;
