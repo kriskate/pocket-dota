@@ -43,7 +43,7 @@ export default class HeroScreen extends React.PureComponent {
 
   render() {
     const hero = model_hero(this.props.navigation.getParam('data'));
-    const { name, bio, hype, tag, talents, abilities, abilities_special, abilities_aghs, abilities_hidden, item_builds } = hero;
+    const { name, bio, hype, tag, talents, attributes, abilities, abilities_special, abilities_aghs, abilities_hidden, item_builds } = hero;
     
     return (
       <Container scrollable style={styles.container} >
