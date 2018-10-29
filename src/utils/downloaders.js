@@ -10,7 +10,7 @@ export const folder_data = `${FileSystem.documentDirectory}dota-data/`;
 
 
 export const downloadImages = async (wiki, progress_callback) => {
-  Logger.debug('downloading images');
+  // Logger.debug('downloading images');
 
   const { heroes, items, } = wiki;
   const images = { icons: [], small: [], vert: [], abilities: [], items: [] };
@@ -33,7 +33,7 @@ export const downloadImages = async (wiki, progress_callback) => {
 
   return Promise.all(
     keys.map(async key => {
-      Logger.debug(`downloading images for -${key}-`)
+      // Logger.debug(`downloading images for -${key}-`)
 
       await Promise.all(
         images[key].map(async image => {
@@ -42,7 +42,7 @@ export const downloadImages = async (wiki, progress_callback) => {
         })
       )
 
-      Logger.silly(`downloaded -${key}-`)
+      // Logger.silly(`downloaded -${key}-`)
     })
   )
 
@@ -66,7 +66,7 @@ export const downloadImages = async (wiki, progress_callback) => {
 
 
 export const downloadWiki = async (wikiInfo, progress_callback) => {
-  Logger.debug('downloading new wiki');
+  // Logger.debug('downloading new wiki');
   // wikiInfo is passed in through the update reducer, to the WikiDownloading Component
   let info = wikiInfo || await loadCurrentWikiInfo();
   if(!info) info = await downloadWikiInfo();
@@ -80,7 +80,7 @@ export const downloadWiki = async (wikiInfo, progress_callback) => {
 
   await Promise.all(
     keys.map(async key => {
-      Logger.debug(`downloading data for ${key}`);
+      // Logger.debug(`downloading data for ${key}`);
 
       await download(
         url.data[key].replace('$WIKI_FOLDER', wikiVersionFolder),
@@ -91,7 +91,7 @@ export const downloadWiki = async (wikiInfo, progress_callback) => {
         iosProgress += 1/keys.length;
         progress_callback(iosProgress);
       }
-      Logger.silly(`- downloaded ${key}`);
+      // Logger.silly(`- downloaded ${key}`);
     })
   );
 

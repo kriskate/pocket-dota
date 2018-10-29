@@ -30,7 +30,7 @@ export const loadProfileStateFromStorage = async () => {
       const local_data = await getItem(key);
       if(local_data) data[key] = local_data;
 
-      Logger.silly(`loaded local data: profile : ${key} : ${!!data[key]}`);
+      // Logger.silly(`loaded local data: profile : ${key} : ${!!data[key]}`);
     })
   );
   
@@ -39,7 +39,7 @@ export const loadProfileStateFromStorage = async () => {
 
 
 export const loadWiki = async () => {
-  Logger.debug('loading wiki data');
+  // Logger.debug('loading wiki data');
   const data = model_wiki({});
   let badData = false;
   
@@ -51,7 +51,7 @@ export const loadWiki = async () => {
         // if the file for one of the assets does not exist, re-download all of them
         badData = true;
       }
-      Logger.silly(`- loaded local data: wiki : ${key} : ${!!data[key]}`);
+      // Logger.silly(`- loaded local data: wiki : ${key} : ${!!data[key]}`);
     })
   )
   if(!badData) setWikiVersion(data.info);
