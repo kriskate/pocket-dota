@@ -12,6 +12,7 @@ export const loadInitialAssets = async () => {
   const imageAssets = [
     ...assets.attributes,
     ...assets.game,
+    ...assets.roles,
     ...assets.app,
   ].map(image => Asset.fromModule(image).downloadAsync())
 

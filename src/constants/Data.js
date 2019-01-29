@@ -25,6 +25,19 @@ export const assets = {
     mana: require('../assets/images/game/mana.png'),
     gold: require('../assets/images/game/gold.png'),
   },
+  
+  roles: {
+    Support: require('../assets/images/game/roles/pip_baby.png'),
+    Carry: require('../assets/images/game/roles/pip_cary.png'),
+    Disabler: require('../assets/images/game/roles/pip_disa.png'),
+    Escape: require('../assets/images/game/roles/pip_escape.png'),
+    Nuker: require('../assets/images/game/roles/pip_gank.png'),
+    Initiator: require('../assets/images/game/roles/pip_init.png'),
+    Jungler: require('../assets/images/game/roles/pip_jung.png'),
+    Pusher: require('../assets/images/game/roles/pip_push.png'),
+    Jungler: require('../assets/images/game/roles/pip_init.png'),
+    Durable: require('../assets/images/game/roles/pip_tank.png'),
+  },
 
   app: {
     icon: require('../assets/images/app-icon.png'),
