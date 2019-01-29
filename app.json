@@ -27,6 +27,26 @@
     "ios": {
       "supportsTablet": true
     },
+    "ios": {
+      "bundleIdentifier": "kriskate.pocket-dota",
+      "buildNumber": "1.0.0",
+      "icon": "./src/assets/images/app-icon.png",
+  
+      "merchantId": "kriskate",
+  
+      "supportsTablet": false,
+      "isTabletOnly": false,
+      
+      "usesIcloudStorage": false,
+  
+      "splash": {
+        "backgroundColor": "#1B1E21",
+        "resizeMode": "contain",
+  
+        "image": "./src/assets/images/splash.png",
+        "tabletImage": "./src/assets/images/splash.png"
+      }
+    },
     "android": {
       "package": "kriskate.pocketdota",
       "versionCode": 2,
