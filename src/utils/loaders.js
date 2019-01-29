@@ -18,6 +18,7 @@ export const loadInitialAssets = async () => {
 
   const fontAssets = Font.loadAsync({
     ...Icon.Ionicons.font,
+    ...Icon.FontAwesome.font,
   })
 
   await Promise.all([...imageAssets, fontAssets])
