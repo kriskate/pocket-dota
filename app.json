@@ -1,7 +1,11 @@
 {
   "minWikiVersion": "36",
+  "changelog": {
+    "1.1.0": "Hero talent tree; Scrollable Homescreen with new items (Tip, Patch Notes, Settings); Dota 2 game tips; Patch notes; No images recache at wiki update",
+    "1.1.1": "Hero roles; Hero complexity; Hero changelog (from Patch notes); Item changelog (from Patch notes)"
+  },
   "expo": {
-    "version": "1.1.0",
+    "version": "1.1.1",
     "name": "Pocket Dota",
     "description": "Dota 2 refference in you pocket",
     "slug": "pocket-dota",
