@@ -97,8 +97,8 @@ export const ICONS = {
   USER: ({color}) => <FontAwesome name="user" size={17} color={color || Colors.dota_white} />,
   INFO: () => <FontAwesome name="info" size={17} color={Colors.dota_white} />,
 
-  CIRCLE: () => <FontAwesome name="circle" size={17} color={Colors.dota_white} />,
-  CIRCLE_O: () => <FontAwesome name="circle-o" size={17} color={Colors.dota_white} />,
+  CIRCLE: () => <FontAwesome name="circle" size={15} color={Colors.dota_white} />,
+  CIRCLE_O: () => <FontAwesome name="circle-o" size={15} color={Colors.dota_white} />,
 }
 
 
