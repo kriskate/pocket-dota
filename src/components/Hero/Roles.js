@@ -22,17 +22,20 @@ export default class Roles extends React.Component {
 
     return (
       <View style={styles.container}>
+        <Text>Roles: </Text>
+        <View style={styles.roles}>
         { r_split.map((role, idx) => (
           <View style={styles.role} key={role}>
             <View style={styles.roleImgWrapper}>
-              <Image style={styles.roleImg} source={assets.game.roles[role]} />
-              <Text>{role}</Text>
+              <Image style={styles.roleImg} source={assets.roles[role]} />
+              <Text>{role} </Text>
             </View>
             <View style={styles.roleLevels}>
               { this._renderRoleLevel(rl_split[idx]) }
             </View>
           </View>
         )) }
+        </View>
       </View>
     )
   }
@@ -40,16 +43,22 @@ export default class Roles extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
+    width: '100%',
+    paddingTop: Layout.padding_small,
+    paddingBottom: Layout.padding_small,
+  },
+  roles: {
     width: "100%",
     flexDirection: "row",
     flexWrap: 'wrap',
-    paddingBottom: Layout.padding_small,
     justifyContent: "space-around",
+    
   },
   role: {
-    paddingTop: Layout.padding_small,
+    flexDirection: "row",
+    alignItems: "center",
+    paddingBottom: Layout.padding_small,
     paddingRight: Layout.padding_small,
-    alignItems: 'center',
   },
   roleImgWrapper: {
     flexDirection: "row",
