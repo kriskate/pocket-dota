@@ -14,6 +14,7 @@ import { calculateAttributes, parseAsNumbers } from '../../utils/CalculateAttrib
 import Layout from '../../constants/Layout';
 import { showTip, APP_TIPS } from '../AppTips';
 import Roles from './Roles';
+import Complexity from './Complexity';
 
 
 export default class extends React.Component {
@@ -31,7 +32,7 @@ export default class extends React.Component {
   render() {
     const { level } = this.state;
 
-    const { Role, Rolelevels } = this.props.attributes;
+    const { Role, Rolelevels, Complexity: _complexity } = this.props.attributes;
 
     const { 
       agility, intelligence, strength, agiGain, intGain, strGain,
@@ -43,6 +44,8 @@ export default class extends React.Component {
       <View style={styles.container}>
 
         <View style={styles.mainAttributes}>
+          <Complexity level={parseInt(_complexity)} />
+
           <Roles roles={Role} roleLevels={Rolelevels} />
 
           <Image style={styles.imgHero} source={{ uri: url.images.vert(this.props.tag) }} />
@@ -95,6 +98,7 @@ const styles = StyleSheet.create({
     borderColor: Colors.dota_ui2,
 
     paddingLeft: Layout.padding_small,
+    paddingRight: Layout.padding_small,
 
     justifyContent: 'space-around',
     alignContent: 'flex-end',
