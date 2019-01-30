@@ -14,6 +14,7 @@ import { ATTRIBUTES } from '../constants/Constants';
 import { headerStyle } from '../utils/screen';
 import { HTML } from '../components/Hero/AbilityPreview';
 import Talents from '../components/Hero/Talents';
+import Changelog from '../components/Hero/Changelog';
 
 
 export default class HeroScreen extends React.PureComponent {
@@ -85,6 +86,10 @@ export default class HeroScreen extends React.PureComponent {
 
         <Card title='Recommended item build' showTitleWhenOpened>
           <ItemBuild item_builds={item_builds} />
+        </Card>
+
+        <Card title='Hero changelog' showTitleWhenOpened>
+          <Changelog hero_tag={tag} />
         </Card>
       </Container>
     )

@@ -26,7 +26,7 @@ export default class Patch extends React.Component {
       <View key={patch} style={styles.patch}>
         <View style={styles.title}>
           <Text>{patch}</Text> 
-          <Text>Release date: {new Date(version_date).toLocaleDateString() || version_date})</Text>
+          <Text>Release date: {new Date(version_date).toLocaleDateString() || version_date}</Text>
         </View>
 
         <PatchShort changes_short={changes_short} />
