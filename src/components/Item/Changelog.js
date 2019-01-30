@@ -11,7 +11,7 @@ import Colors from '../../constants/Colors';
   patch_notes: state.wiki.patch_notes
 }))
 export default class Changelog extends React.Component {
-  // delayed render so the changelog computation does not affect initial hero render
+  // delayed render so the changelog computation does not affect initial item render
   state = {
     delayed: false,
   }
@@ -19,14 +19,12 @@ export default class Changelog extends React.Component {
     this.setState({ delayed: true })
   }
   _renderPatch = ({ item }) => {
-    const { abilities, stats, talents } = item.changes;
+    const { patch, changes } = item;
 
     return (
       <View style={styles.patch}>
-        <Text style={styles.patch_name} >{item.patch}</Text>
-        { abilities.map(ability => <Text style={styles.abilities} key={ability.name}>{ability.description}</Text>) }
-        { stats.map(stat => <Text style={styles.stats} key={stat}>{stat}</Text>) }
-        { talents.map(talent => <Text style={styles.talents} key={talent}>{talent}</Text>) }
+        <Text style={styles.patch_name} >{patch}</Text>
+        { changes.description.map(change => change == " " ? null : <Text style={styles.item} key={change}>{change}</Text>) }
       </View>
     )
   }
@@ -34,13 +32,13 @@ export default class Changelog extends React.Component {
   render() {
     if(!this.state.delayed) return null;
 
-    const { hero_tag, patch_notes } = this.props;
+    const { item_tag, patch_notes } = this.props;
     const notes = [];
 
     Object.keys(patch_notes).reverse().forEach(patch => {
-      if(!patch_notes[patch].heroes || patch_notes[patch].heroes.length == 0) return;
+      if(!patch_notes[patch].items || patch_notes[patch].items.length == 0) return;
 
-      const changes = patch_notes[patch].heroes.find(hero => hero.name == hero_tag);
+      const changes = patch_notes[patch].items.find(item => item.name == 'item_' + item_tag);
       if(!changes) return;
 
       notes.push({
@@ -69,16 +67,8 @@ const styles = StyleSheet.create({
   patch_name: {
     fontWeight: "bold",
   },
-  abilities: {
-    color: Colors.items.consumables,
-    paddingTop: Layout.padding_small,
-  },
-  stats: {
-    color: Colors.items.attributes,
-    paddingTop: Layout.padding_small,
-  },
-  talents: {
-    color: Colors.items.artifacts,
+  item: {
+    color: Colors.items.caster,
     paddingTop: Layout.padding_small,
   },
 })

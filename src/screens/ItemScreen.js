@@ -12,6 +12,7 @@ import Colors from '../constants/Colors';
 import { trimAbilities, parseCategory } from '../utils/utils';
 import { ITEM_CONSTANTS } from '../constants/Constants';
 import ItemComponents from '../components/Item/ItemComponents';
+import Changelog from '../components/Item/Changelog';
 
 const removeSpace = (str) => str.replace(/\+ \<span/g, '+<span')
 const removeH1 = (str) => str.replace(/\<h1/g, `<br/><span style="color:${Colors.dota_radiant};font-weight:bold;"`)
@@ -152,6 +153,10 @@ export default class ItemScreen extends React.PureComponent {
             <ItemComponents current_item={item} />
           </View>
         }
+
+        <Card title="Item changelog" showTitleWhenOpened>
+          <Changelog item_tag={tag} />
+        </Card>
 
       </Container>
     );
