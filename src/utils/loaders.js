@@ -1,9 +1,8 @@
 import { Asset, Font, Icon, FileSystem, Util } from 'expo';
 import Logger from './Logger';
 import { model_profile, model_wiki } from '../constants/Models';
-import { folder_data } from './downloaders';
 import { getItem } from './storage';
-import { assets } from '../constants/Data';
+import { assets, folder_data } from '../constants/Data';
 import { setWikiVersion } from '../constants/Constants';
 import { Alert } from 'react-native';
 

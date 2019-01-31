@@ -1,4 +1,8 @@
-import { folder_img, folder_data } from "../utils/downloaders";
+// import { folder_img, folder_data } from "../utils/downloaders";
+import { FileSystem } from 'expo';
+
+export const folder_img = `${FileSystem.cacheDirectory}dota-images/`;
+export const folder_data = `${FileSystem.documentDirectory}dota-data/`;
 
 // if you want to test with the local running backend, modify this to true
 // also, the ip address of the local server has to be modified accordingly
