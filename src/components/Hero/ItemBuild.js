@@ -79,6 +79,7 @@ export default class ItemBuild extends React.Component {
       <ListScreen layoutWidth={Layout.window.width - 3*Layout.padding_regular - 4}
         overlayed
         hasSections
+        noBorder
         itemList={itemSections}
         imageAspectRatio={88/64}
         navTo={SCREEN_LABELS_HIDDEN.ITEM}

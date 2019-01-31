@@ -19,12 +19,22 @@ let columns, thumbWidth;
 
 class List extends React.PureComponent {
   render() {
-    const { section, renderItem, keyExtractor } = this.props;
+    const { section, renderItem, keyExtractor, noBorder } = this.props;
     const { data, color, title } = section;
 
+    const sectionBorder = noBorder ? null : {
+      borderColor: color + '60',
+      borderWidth: 1,
+    }
+    const sectionTitleBorder = noBorder ? null : {
+      borderColor: color + '60',
+      // borderColor: Colors.dota_ui3,
+      borderWidth: 1,
+    }
+
     return (
-      <View key={title} style={[ styles.section, { borderColor: color + '60' } ]}>
-        <Text style={[styles.sectionTitle, color ? { color, borderColor: color + '60', } : null ]}>{title}</Text>
+      <View key={title} style={[ styles.section, sectionBorder ]}>
+        <Text style={[styles.sectionTitle, color, sectionTitleBorder ]}>{title}</Text>
         <FlatList
           data={data}
           renderItem={renderItem}
@@ -35,6 +45,7 @@ class List extends React.PureComponent {
     )
   }
 }
+
 @withNavigation
 export default class ListScreen extends React.PureComponent {
   constructor(props) {
@@ -63,10 +74,10 @@ export default class ListScreen extends React.PureComponent {
   }
 
   _renderList = ({ item }) => {
-    const { keyExtractor } = this.props;
+    const { keyExtractor, noBorder } = this.props;
 
     return (
-      <List section={item} renderItem={this._renderItem} keyExtractor={keyExtractor} />
+      <List section={item} renderItem={this._renderItem} keyExtractor={keyExtractor} noBorder={noBorder} />
     )
   }
 
@@ -87,12 +98,14 @@ export default class ListScreen extends React.PureComponent {
       return this._renderList({ section: { data: itemList }, index: 0 })
   }
 }
+ListScreen.defaultProps = {
+  noBorder: false,
+}
 
 
 const styles = StyleSheet.create({
   section: {
     marginVertical: Layout.padding_small,
-    borderWidth: 1,
   },
   sectionTitle: {
     width: '100%',
@@ -102,8 +115,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     padding: Layout.padding_regular,
     backgroundColor: Colors.dota_ui1,
-    borderColor: Colors.dota_ui3,
-    borderWidth: 1,
     color: Colors.dota_white,
   },
 });
