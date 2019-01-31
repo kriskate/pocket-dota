@@ -1,7 +1,6 @@
 import React from 'react';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import Colors from './Colors';
-import { Text } from '../components/ui';
 import { Constants } from 'expo';
 
 let _wikiVersion;
@@ -128,7 +127,5 @@ Because the statistics screen is a preview of the Open Dota website, you will ne
   HELP_DOTA_PROFILE: 'To set another player profile, simply navigate to another Dota 2 profile (from the Stats screen) and press the PROFILE button.',
   BACK: 'Use the BACK button to navigate back in the current (statistics) screen.',
   FORWARD: 'Use the FORWARD button to navigate back in the current (statistics) screen.',
-  USER: () => (
-    <Text>When the PROFILE button is pressed, it will be <Text style={{color: Colors.goldenrod}}>highlighted</Text>, indicating that the current Dota 2 profile is the one that will appear on the app's home screen.</Text>
-  ),
+  USER: "When the PROFILE button is pressed, it will be highlighted, indicating that the current Dota 2 profile is the one that will appear on the app's home screen.",
 }

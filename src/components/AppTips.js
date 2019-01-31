@@ -5,7 +5,7 @@ import SnackBar from 'react-native-snackbar-component';
 import { Actions as ProfileActions } from '../reducers/profile';
 import Colors from '../constants/Colors';
 import { Platform } from 'react-native';
-import { Button } from './ui';
+import Button from './ui/Button';
 import Layout from '../constants/Layout';
 
 // we will only have one instance of this class, and only use this for setState
