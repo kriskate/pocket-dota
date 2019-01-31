@@ -17,9 +17,9 @@
     ]
   },
   "dependencies": {
-    "expo": "^30.0.0",
-    "react": "16.3.1",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz",
+    "expo": "^32.0.0",
+    "react": "16.5.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-native-hyperlink": "^0.0.14",
     "react-native-modal": "^6.5.0",
     "react-native-render-html": "^3.10.0",
@@ -38,7 +38,7 @@
     "@types/react-navigation": "^2.0.17",
     "@types/react-redux": "^6.0.6",
     "@types/redux": "^3.6.0",
-    "jest-expo": "^30.0.0",
+    "jest-expo": "^32.0.0",
     "redux-mock-store": "^1.5.3"
   }
 }
