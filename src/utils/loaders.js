@@ -9,12 +9,12 @@ import { Alert } from 'react-native';
 
 
 export const loadInitialAssets = async () => {
-  const imageAssets = [
-    ...assets.attributes,
-    ...assets.game,
-    ...assets.roles,
-    ...assets.app,
-  ].map(image => Asset.fromModule(image).downloadAsync())
+  const imageAssets = Object.keys(assets).reduce((final, asset) =>
+    final.concat(Object.keys(assets[asset]).map(
+      asset_key => assets[asset][asset_key]
+    ))
+  , [])
+  .map(image => Asset.fromModule(image).downloadAsync());
 
   const fontAssets = Font.loadAsync({
     ...Icon.Ionicons.font,
