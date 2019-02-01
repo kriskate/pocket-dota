@@ -75,7 +75,7 @@ export default class extends React.Component {
           <Attribute val={attackSpeed} title='Attack Speed' />
           <Attribute val={spellDamage} title='Spell Amplification' />
           <Attribute val={magicResistance} title='Magic Resistance' />
-          <Attribute val={ATTRIBUTES[this.state.attributes.AttackCapabilities]} title='Attack type' />
+          <Attribute val={ATTRIBUTES[this.state.attributes.AttackCapabilities]} title='Attack Type' />
         </View>
 
         <View style={styles.slider}>
