@@ -19,7 +19,7 @@ export default class Complexity extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Text>Complexity: </Text>
+        <Text style={styles.title}>Complexity: </Text>
         <View style={styles.complexityLevels}>
           { this._renderComplexity(level) }
         </View>
@@ -33,6 +33,9 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     paddingTop: Layout.padding_small,
+  },
+  title: {
+    fontWeight: 'bold',
   },
   complexityLevels: {
     flexDirection: "row",

@@ -22,7 +22,7 @@ export default class Roles extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Text>Roles: </Text>
+        <Text style={styles.title}>Roles: </Text>
         <View style={styles.roles}>
         { r_split.map((role, idx) => (
           <View style={styles.role} key={role}>
@@ -46,6 +46,9 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingTop: Layout.padding_small,
     paddingBottom: Layout.padding_small,
+  },
+  title: {
+    fontWeight: 'bold',
   },
   roles: {
     width: "100%",

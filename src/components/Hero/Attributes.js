@@ -40,6 +40,8 @@ export default class extends React.Component {
       health, healthRegen, mana, manaRegen,
     } = calculateAttributes(this.state.attributes, level);
 
+    const { MovementTurnRate, AttackRate, AttackAnimationPoint, AttackAcquisitionRange, AttackRange, ProjectileSpeed } = this.props.attributes;
+
     return (
       <View style={styles.container}>
 
@@ -85,6 +87,16 @@ export default class extends React.Component {
             { level === 0 ? 'Base stats' : `Level: ${level}` }
           </Text>
         </View>
+
+        <View style={styles.misc}>
+          <Text style={styles.fixed}>Fixed values:</Text>
+          <Attribute val={parseFloat(MovementTurnRate)} title='Movement Turn Rate' />
+          <Attribute val={parseFloat(AttackRate)} title='Base Attack Rate' />
+          <Attribute val={parseFloat(AttackAnimationPoint)} title='Attack Animation Point' />
+          <Attribute val={parseFloat(AttackAcquisitionRange)} title='Attack Acquisition Range' />
+          <Attribute val={parseFloat(AttackRange)} title='Attack Range' />
+          <Attribute val={parseFloat(ProjectileSpeed)} title='Projectile Speed' />
+        </View>
       </View>
     )
   }
@@ -126,7 +138,16 @@ const styles = StyleSheet.create({
   healthAndMana: { paddingHorizontal: Layout.padding_small, },
 
   secondaryAttributes: {
+    paddingTop: Layout.padding_small,
     width: '100%',
+  },
+  fixed: {
+    fontWeight: 'bold',
+    color: Colors.dota_red,
+  },
+  misc: {
+    width: '90%',
+    paddingBottom: Layout.padding_regular,
   },
 
   slider: {
