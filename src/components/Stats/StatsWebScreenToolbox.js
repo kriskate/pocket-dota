@@ -1,7 +1,5 @@
 import React from 'react';
 import { View, StyleSheet, Platform } from 'react-native';
-import { connect } from 'react-redux';
-import { Actions } from '../../reducers/profile';
 
 import { showTip, APP_TIPS } from '../AppTips';
 import { ICONS } from "../../constants/Constants";

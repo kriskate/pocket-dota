@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Button, Text } from './components/ui';
 
 import { connect } from 'react-redux';
 import { Actions as UpdateActions, DOWNLOAD_STATE } from './reducers/update';
@@ -12,7 +11,6 @@ import { alertWikiUpdateDone, alertAppUpdateDone, alertUpdateCheckAvailable, ale
 import { DOWNLOAD_REASONS, GET_WIKI_VERSION } from './constants/Constants';
 import Layout from './constants/Layout';
 import Colors from './constants/Colors';
-import Styles from './constants/Styles';
 import AppDownloading from './components/AppDownloading';
 import { Updates } from 'expo';
 import { app_needsUpdate, wiki_needsUpdate } from './utils/updaters';

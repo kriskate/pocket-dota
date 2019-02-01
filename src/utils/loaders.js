@@ -1,5 +1,4 @@
 import { Asset, Font, Icon, FileSystem, Util } from 'expo';
-import Logger from './Logger';
 import { model_profile, model_wiki } from '../constants/Models';
 import { getItem } from './storage';
 import { assets, folder_data } from '../constants/Data';

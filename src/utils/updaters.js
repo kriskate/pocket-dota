@@ -1,4 +1,4 @@
-import { GET_WIKI_VERSION, APP_VERSION } from "../constants/Constants";
+import { GET_WIKI_VERSION } from "../constants/Constants";
 import { url } from "../constants/Data";
 import { Platform } from "react-native";
 import { Constants } from "expo";

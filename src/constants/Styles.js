@@ -1,4 +1,4 @@
-import { StyleSheet, Platform } from "react-native";
+import { StyleSheet } from "react-native";
 import Layout from "./Layout";
 import Colors from "./Colors";
 

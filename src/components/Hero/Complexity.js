@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Text } from '../ui';
 import { ICONS } from '../../constants/Constants';
 import Layout from '../../constants/Layout';

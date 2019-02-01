@@ -1,8 +1,7 @@
 import { FileSystem } from 'expo';
 import { Image, Platform } from 'react-native';
-import { url, folder_img, folder_data } from '../constants/Data';
+import { url, folder_data } from '../constants/Data';
 import { loadCurrentWikiInfo, loadWiki, } from './loaders';
-import Logger from './Logger';
 import { model_wiki_info } from '../constants/Models';
 
 

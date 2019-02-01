@@ -6,7 +6,6 @@ import Layout from '../../constants/Layout';
 import Styles from '../../constants/Styles';
 import { HELP_TEXTS, ICONS, URLS } from '../../constants/Constants';
 import { Button, Text, Container } from '../ui';
-import Colors from '../../constants/Colors';
 
 
 export default ({ visible, hide }) => (
