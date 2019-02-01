@@ -40,7 +40,11 @@ export default class extends React.Component {
       health, healthRegen, mana, manaRegen,
     } = calculateAttributes(this.state.attributes, level);
 
-    const { MovementTurnRate, AttackRate, AttackAnimationPoint, AttackAcquisitionRange, AttackRange, ProjectileSpeed } = this.props.attributes;
+    const { 
+      MovementTurnRate, 
+      AttackRate, AttackAnimationPoint, AttackAcquisitionRange, AttackRange, ProjectileSpeed,
+      VisionDaytimeRange, VisionNighttimeRange,
+    } = this.props.attributes;
 
     return (
       <View style={styles.container}>
@@ -95,7 +99,9 @@ export default class extends React.Component {
           <Attribute val={parseFloat(AttackAnimationPoint)} title='Attack Animation Point' />
           <Attribute val={parseFloat(AttackAcquisitionRange)} title='Attack Acquisition Range' />
           <Attribute val={parseFloat(AttackRange)} title='Attack Range' />
-          <Attribute val={parseFloat(ProjectileSpeed)} title='Projectile Speed' />
+          <Attribute val={this.state.attributes.AttackCapabilities == "DOTA_UNIT_CAP_MELEE_ATTACK" || ProjectileSpeed == "0" ? "Instant" : parseFloat(ProjectileSpeed)} title='Projectile Speed' />
+          <Attribute val={parseFloat(VisionDaytimeRange)} title="Vision Range (Day)" />
+          <Attribute val={parseFloat(VisionNighttimeRange)} title="Vision Range (Night)" />
         </View>
       </View>
     )
