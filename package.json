@@ -4,7 +4,8 @@
   "scripts": {
     "test": "node ./node_modules/jest/bin/jest.js --watchAll",
     "test-coverage": "node ./node_modules/jest/bin/jest.js --watchAll --coverage",
-    "releasev1": "expo build:android --release-channel prod-v1"
+    "releasev1": "expo build:android --release-channel prod-v1",
+    "release": "expo build:android --release-channel prod-v2 && expo build:ios --release-channel prod-v2"
   },
   "jest": {
     "preset": "jest-expo",
