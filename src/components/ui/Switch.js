@@ -12,7 +12,7 @@ export default ({ label, description, value, onValueChange, disabled, style }) =
       { !description ? null : <Text style={styles.switchDescription}>{description}</Text> }
     </View>
 
-    <RNSwitch style={styles.switch} disabled={disabled} trackColor={Colors.dota_agi + '70'} thumbTintColor={Platform.OS ==='android' ? Colors.dota_agi : null}
+    <RNSwitch style={styles.switch} disabled={disabled} trackColor={Colors.dota_agi + '70'} _thumbColor={Platform.OS ==='android' ? Colors.dota_agi : null}
       value={value} onValueChange={onValueChange} />
   </Button>
 )

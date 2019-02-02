@@ -102,7 +102,7 @@ export default class Slider extends PureComponent {
     /**
      * The color used for the thumb.
      */
-    thumbTintColor: PropTypes.string,
+    _thumbColor: PropTypes.string,
 
     /**
      * The size of the touch area that allows moving the thumb.
@@ -186,7 +186,7 @@ export default class Slider extends PureComponent {
     step: 0,
     minimumTrackTintColor: '#3f3f3f',
     maximumTrackTintColor: '#b3b3b3',
-    thumbTintColor: '#343434',
+    _thumbColor: '#343434',
     thumbTouchSize: { width: 40, height: 40 },
     debugTouchArea: false,
     animationType: 'timing',
@@ -231,7 +231,7 @@ export default class Slider extends PureComponent {
       maximumValue,
       minimumTrackTintColor,
       maximumTrackTintColor,
-      thumbTintColor,
+      _thumbColor,
       thumbImage,
       styles,
       style,

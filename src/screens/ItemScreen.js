@@ -149,14 +149,15 @@ export default class ItemScreen extends React.PureComponent {
 
         { !components ? null : 
           <View style={styles.components}>
-            <Text style={styles.componentsText}>Components</Text>
+            <Text style={styles.componentsText}>Components:</Text>
             <ItemComponents current_item={item} />
           </View>
         }
 
-        <Card title="Item changelog" showTitleWhenOpened>
+        <View style={styles.components}>
+          <Text style={styles.componentsText}>Item changelog:</Text>
           <Changelog item_tag={tag} />
-        </Card>
+        </View>
 
       </Container>
     );
