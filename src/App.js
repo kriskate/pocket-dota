@@ -8,15 +8,17 @@ import storage from 'redux-persist/lib/storage';
 
 import { StatusBar, Platform, UIManager, View } from 'react-native';
 
+import { withNamespaces } from 'react-i18next';
+
 import { AppLoading } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 import Updater from './Updater';
 
 import { loadInitialAssets, loadCurrentWikiInfo, loadWiki, } from './utils/loaders';
 import Logger from './utils/Logger';
-import { DOWNLOAD_REASONS } from './constants/Constants';
 import AppTips from './components/AppTips';
 import { initialState } from './reducers/update';
+import localization from './localization';
 
 
 /* SETUP */
@@ -28,6 +30,7 @@ let store, persistor;
 
 // handles splash screen, via AppLoading
 // implements redux at top-level
+@withNamespaces("Components")
 export default class App extends React.Component {
   state = {
     loaded: false,
@@ -51,9 +54,10 @@ export default class App extends React.Component {
     
     let downloadingWiki_reason = '';
     if(!wiki) {
+      const { t } = this.props;
       const wikiInfo = await loadCurrentWikiInfo();
       // if we do have wikiInfo it means wiki was downloaded before, so we have some missing wiki data
-      downloadingWiki_reason = wikiInfo ? DOWNLOAD_REASONS.MISSING : DOWNLOAD_REASONS.FRESH;
+      downloadingWiki_reason = wikiInfo ? t('DOWNLOAD_REASONS.MISSING') : t('DOWNLOAD_REASONS.FRESH');
     }
     
     const persistConfig = {

@@ -39,7 +39,7 @@ i18n
   .use(languageDetector)
   .use(reactI18nextModule)
   .init({
-    debug: true,
+    // debug: true,
   
     fallbackLng: 'en-US',
 

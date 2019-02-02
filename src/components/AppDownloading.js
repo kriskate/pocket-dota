@@ -8,7 +8,9 @@ import Layout from '../constants/Layout';
 import Colors from '../constants/Colors';
 import { assets } from '../constants/Data';
 import { Updates } from 'expo';
+import { withNamespaces } from 'react-i18next';
 
+@withNamespaces('Components')
 export default class AppDownloading extends React.PureComponent {
   async componentDidMount() {
     await Updates.fetchUpdateAsync();
@@ -16,7 +18,7 @@ export default class AppDownloading extends React.PureComponent {
     this.props.onFinish();
   }
   render() {
-    const { downloadingApp_version } = this.props;
+    const { downloadingApp_version, t } = this.props;
 
     return (
       <View style={Styles.modal_downloading_body}>
@@ -33,11 +35,11 @@ export default class AppDownloading extends React.PureComponent {
         </View>
         
         <View style={styles.wrapper}>
-          <Text style={styles.dld}>Downloading new app version: 
+          <Text style={styles.dld}>{t("AppDownloading.downloading")}
             <Text style={Styles.text_highlight_gold}> {downloadingApp_version}</Text>
           </Text>
 
-          <Text>When the update is done, the application will restart.</Text>
+          <Text>{t("AppDownloading.downloading_done")}</Text>
         </View>
       </View>
     )

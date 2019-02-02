@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Text, Button, Switch } from '../components/ui';
 
 import { headerStyle } from '../utils/screen';
-import { SCREEN_LABELS, SCREEN_LABELS_HIDDEN, APP_VERSION, GET_WIKI_VERSION, DOWNLOAD_REASONS, ICONS } from '../constants/Constants';
+import { SCREEN_LABELS, SCREEN_LABELS_HIDDEN, APP_VERSION, GET_WIKI_VERSION, ICONS } from '../constants/Constants';
 import { StyleSheet, View, } from 'react-native';
 import Colors from '../constants/Colors';
 import Layout from '../constants/Layout';
@@ -14,6 +14,7 @@ import { Actions as UpdateActions, DOWNLOAD_STATE } from '../reducers/update';
 import { wiki_needsUpdate, app_needsUpdate } from '../utils/updaters';
 import { alertUpdateCheckError, alertUpdateCheckAvailable, alertRemoveProfileData, alertResetSettings } from '../utils/Alerts';
 import { sleep } from '../utils/utils';
+import { withNamespaces } from 'react-i18next';
 
 
 const Section = ({ label, children }) => (
@@ -41,7 +42,7 @@ const TYPES = {
   APP: 'App',
 }
 
-
+@withNamespaces("Components")
 @connect(
   (state => ({
     profile: state.profile,
@@ -54,7 +55,7 @@ const TYPES = {
     setProfile: val => dispatch(Actions.setProfile(val)),
     setUser: val => dispatch(Actions.setUser(val)),
 
-    updateWiki: (res) => dispatch(UpdateActions.downloadWiki(DOWNLOAD_REASONS.UPDATE, res)),
+    updateWiki: (res, reason) => dispatch(UpdateActions.downloadWiki(reason, res)),
     updateApp: (version) => dispatch(UpdateActions.updateApp(version)),
 
     show: (what) => dispatch(UpdateActions.show(what)),
@@ -79,7 +80,7 @@ export default class SettingsScreen extends React.PureComponent {
     // this._updateToV(What, {newVersion:'3'})
     // return
     const stater = What == TYPES.WIKI ? 'checkingWiki' : 'checkingApp';
-    const { updatingWiki, updatingApp } = this.props;
+    const { updatingWiki, updatingApp, t } = this.props;
 
     if((What === TYPES.WIKI && updatingWiki) || (What === TYPES.APP && updatingApp)) {
       // if update is already in progress, open modal directly
@@ -104,7 +105,7 @@ export default class SettingsScreen extends React.PureComponent {
       alertUpdateCheckError(What, res.error, onDismiss);
     } else {
       const onNo = () => this._updateCanceled(What);
-      const onYes = () => What == TYPES.WIKI ? this.props.updateWiki(res) : this.props.updateApp(res.newVersion);
+      const onYes = () => What == TYPES.WIKI ? this.props.updateWiki(res, t("DOWNLOAD_REASONS.UPDATE")) : this.props.updateApp(res.newVersion);
       alertUpdateCheckAvailable(What, res.newVersion, onNo, onYes);
     }
 

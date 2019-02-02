@@ -5,10 +5,11 @@ import { Text, Progress } from '../components/ui';
 import { downloadImages, downloadWiki } from '../utils/downloaders';
 import Colors from '../constants/Colors';
 import { assets } from '../constants/Data';
-import { DOWNLOAD_REASONS } from '../constants/Constants';
 import Styles from '../constants/Styles';
 import Layout from '../constants/Layout';
+import { withNamespaces } from 'react-i18next';
 
+@withNamespaces("Components")
 export default class WikiDownloading extends React.PureComponent {
   state = {
     progress_wiki: 0,
@@ -26,11 +27,11 @@ export default class WikiDownloading extends React.PureComponent {
     this.setState({ [`progress_${key}`]: value });
   }
   async componentDidMount() {
-    const { versionInfo, onFinish } = this.props;
+    const { versionInfo, onFinish, t } = this.props;
     Platform.OS === 'ios' && StatusBar.setNetworkActivityIndicatorVisible(true);
 
     const wiki = await downloadWiki(versionInfo, p => this._progress('wiki', p));
-    if(this.props.reason !== DOWNLOAD_REASONS.UPDATE)
+    if(this.props.reason !== t("DOWNLOAD_REASONS.UPDATE"))
       await downloadImages(wiki, p => this._progress('images', p));
     
     Platform.OS === 'ios' && StatusBar.setNetworkActivityIndicatorVisible(false);
@@ -39,7 +40,7 @@ export default class WikiDownloading extends React.PureComponent {
   }
   
   render() {
-    const { reason, version } = this.props;
+    const { reason, version, t } = this.props;
 
     return (
       <View style={Styles.modal_downloading_body}>
@@ -51,18 +52,18 @@ export default class WikiDownloading extends React.PureComponent {
         </View>
 
         <View style={styles.wrapper}>
-          <Progress label={`Downloading hero data files`} 
+          <Progress label={t("WikiDownloading.PROGRESS_DATA")} 
             progress={this.state.progress_wiki} />
 
-          { reason == DOWNLOAD_REASONS.UPDATE ? null : 
-          <Progress label={`Caching images`} 
+          { reason == t("DOWNLOAD_REASONS.UPDATE") ? null : 
+          <Progress label={t("WikiDownloading.PROGRESS_IMAGES")} 
             progress={this.state.progress_images} />
           }
         </View>
 
         <View style={styles.wrapper}>
-          { reason == DOWNLOAD_REASONS.UPDATE && 
-            <Text style={styles.reason}>Updating to version:
+          { reason == t("DOWNLOAD_REASONS.UPDATE") && 
+            <Text style={styles.reason}>{t("WikiDownloading.PROGRESS_UPDATE_VERSION")}
               <Text style={Styles.text_highlight_gold}> {version}</Text>
             </Text>
           }

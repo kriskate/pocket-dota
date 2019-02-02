@@ -2,12 +2,10 @@ import React from 'react';
 import { NetInfo, StyleSheet, Text, View } from 'react-native';
 import Colors from '../constants/Colors';
 import { Button } from '../components/ui';
+import { withNamespaces } from 'react-i18next';
 
-const offlineText = `There seems to be a problem with your internet connection. 
-This section is only available when connected to the internet.
 
-You may still hide this message and display the content, but navigating through this section would lead to nowhere.`;
-
+@withNamespaces("Components")
 export default class RequiresConnection extends React.Component {
   state = {
     isConnected: true,
@@ -27,12 +25,14 @@ export default class RequiresConnection extends React.Component {
 
   render () {
     const { isConnected, forceDismiss } = this.state;
+    const { t } = this.props;
+
     return (
       <View style={styles.wrapper}>
         {this.props.children}
         {isConnected || forceDismiss ? null :
           <View style={styles.container}>
-            <Text style={styles.connectionProblemMessage}>{offlineText}</Text>
+            <Text style={styles.connectionProblemMessage}>{t("RequiresConnection_OfflineText")}</Text>
             <Button prestyled title='dismiss' onPress={() => this.setState({ forceDismiss: true })} />
           </View>
         }

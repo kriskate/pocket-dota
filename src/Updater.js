@@ -8,14 +8,16 @@ import { Actions as WikiActions } from './reducers/wiki';
 import WikiDownloading from './components/WikiDownloading';
 import { alertWikiUpdateDone, alertAppUpdateDone, alertUpdateCheckAvailable, alertCannotUpdate } from './utils/Alerts';
 
-import { DOWNLOAD_REASONS, GET_WIKI_VERSION } from './constants/Constants';
+import { GET_WIKI_VERSION } from './constants/Constants';
 import Layout from './constants/Layout';
 import Colors from './constants/Colors';
 import AppDownloading from './components/AppDownloading';
 import { Updates } from 'expo';
 import { app_needsUpdate, wiki_needsUpdate } from './utils/updaters';
+import { withNamespaces } from 'react-i18next';
 
 
+@withNamespaces("Components")
 @connect(
   (state => ({
     showWiki: state.update.showWiki,
@@ -37,8 +39,8 @@ import { app_needsUpdate, wiki_needsUpdate } from './utils/updaters';
     doneApp: () => dispatch(UpdateActions.doneApp()),
 
     updateApp: (version) => dispatch(UpdateActions.updateApp(version)),
-    updateWiki: (res) => dispatch(UpdateActions.downloadWiki(DOWNLOAD_REASONS.UPDATE, res)),
-    forceUpdateWiki: (res) => dispatch(UpdateActions.downloadWiki(DOWNLOAD_REASONS.UPDATE_FORCED, res)),
+    updateWiki: (res, reason) => dispatch(UpdateActions.downloadWiki(reason, res)),
+    forceUpdateWiki: (res, reason) => dispatch(UpdateActions.downloadWiki(reason, res)),
   }))
 )
 export default class Updater extends React.PureComponent {
@@ -80,14 +82,15 @@ export default class Updater extends React.PureComponent {
       const forceShowWiki = currentWikiVersion < minWikiVersion;
       
       if(forceShowWiki) {
+        const { t, updateWiki } = this.props;
         const res = await wiki_needsUpdate();
 
         // the app has a version of /info.json in cache and will show that
-        if(res == false) alertCannotUpdate(minWikiVersion, 'If the problem persists, please clear the application files.');
+        if(res == false) alertCannotUpdate(minWikiVersion, t("Updater_persistingProblem"));
         // if the app does not have /info.json in cache or the file is missing form the server
         else if(res.error) alertCannotUpdate(minWikiVersion, res.error);
         // if everything goes well, update the wiki
-        else this.props.updateWiki(res);
+        else updateWiki(res, t("DOWNLOAD_REASONS.UPDATE"));
 
         return;
       }
@@ -105,8 +108,10 @@ export default class Updater extends React.PureComponent {
     if(!res) return;
 
     if(!res.error) {
+      const { t, updateApp, updateWiki } = this.props;
+
       const onNo = () => {};
-      const onYes = () => What == 'App' ? this.props.updateApp(res.newVersion) : this.props.updateWiki(res);
+      const onYes = () => What == 'App' ? updateApp(res.newVersion) : updateWiki(res, t("DOWNLOAD_REASONS.UPDATE"));
       // to-do - reenable this for app
       if(What == 'App') onYes() 
       else

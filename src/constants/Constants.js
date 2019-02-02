@@ -73,13 +73,6 @@ export const ATTRIBUTES = {
   DOTA_UNIT_CAP_RANGED_ATTACK: 'Ranged',
 }
 
-export const DOWNLOAD_REASONS = {
-  FRESH: 'Because this is the first time you open the app, additional files need to be downloaded (eg: hero/ item descriptions, images).',
-  MISSING: 'Some wiki data on your device seems to be missing. Please wait while the app re-downloads the data.',
-  UPDATE: 'Downloading new wiki database (heroes, items and game info).',
-  UPDATE_FORCED: 'Downloading new wiki database (heroes, items and game info). \r\nThe new database is needed for the new app version.',
-}
-
 
 export const URL_ODOTA = {
   SEARCH: 'https://api.opendota.com/api/search?q=',
