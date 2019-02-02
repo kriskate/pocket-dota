@@ -7,6 +7,7 @@ import { headerStyle, animation } from '../utils/screen';
 import { SCREEN_LABELS, ICONS } from '../constants/Constants';
 import Layout from '../constants/Layout';
 import { url } from '../constants/Data';
+import { withNamespaces } from 'react-i18next';
 
 
 class Section extends React.Component {
@@ -67,6 +68,7 @@ class Section extends React.Component {
   }
 }
 
+@withNamespaces("Screen_Tips")
 @connect(state => ({
   tips: state.wiki.tips,
   wiki_heroes: state.wiki.heroes,
@@ -78,19 +80,19 @@ export default class TipsScreen extends React.Component {
   });
 
   render() {
-    const { tips, wiki_heroes } = this.props;
+    const { tips, wiki_heroes, t } = this.props;
     const { introduction, universal, beginner, intermediate, advanced, hero } = tips;
 
     return (
       <Container scrollable backToHome>
 
-        <Section title="Introduction" data={introduction} />
-        <Section title="Universal" data={universal} />
-        <Section title="Beginner" data={beginner} />
-        <Section title="Intermediate" data={intermediate} />
-        <Section title="Advanced" data={advanced} />
+        <Section title={t("Introduction")} data={introduction} />
+        <Section title={t("Universal")} data={universal} />
+        <Section title={t("Beginner")} data={beginner} />
+        <Section title={t("Intermediate")} data={intermediate} />
+        <Section title={t("Advanced")} data={advanced} />
 
-        <Section title="Heroes" data={hero} wiki_heroes={wiki_heroes} />
+        <Section title={t("Heroes")} data={hero} wiki_heroes={wiki_heroes} />
 
       </Container>
     );
