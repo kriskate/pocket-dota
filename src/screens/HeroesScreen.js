@@ -10,37 +10,32 @@ import Layout from '../constants/Layout';
 import { headerStyle } from '../utils/screen';
 import ListScreen from '../components/ListScreen';
 import { model_section } from '../constants/Models';
+import { withNamespaces } from 'react-i18next';
 
 
-const _getHeroSections = (heroes) => {    
-  const heroSections = [];
+const _getHeroSections = (heroes, t) => {    
+  const heroSections = [
+    new model_section({ title: t("Agility"), color: Colors.dota_agi }),
+    new model_section({ title: t("Intelligence"), color: Colors.dota_int }),
+    new model_section({ title: t("Strength"), color: Colors.dota_str }),
+  ];
 
   heroes.forEach(hero => {
-    let att, color;
+    let att;
 
     switch(hero.attributes.AttributePrimary) {
       case ATTRIBUTES.agility:
-        color = Colors.dota_agi;
-        att = 'Agility';
+        att = t("Agility");
         break;
       case ATTRIBUTES.intelligence:
-        color = Colors.dota_int;
-        att = 'Intelligence';
+        att = t("Intelligence");
         break;
       case ATTRIBUTES.strength:
-        color = Colors.dota_str;
-        att = 'Strength';
+        att = t("Strength");
         break;
     }
-    let section = heroSections.find(({ title }) => title == att);
-    if(!section) {
-      section = model_section({ 
-        title: att,
-        color,
-      });
-      heroSections.push(section);
-    }
 
+    let section = heroSections.find(({ title }) => title == att);
     section.data.push(hero);
   });
   heroSections.forEach(section => section.data.sort((a, b) => 
@@ -50,6 +45,7 @@ const _getHeroSections = (heroes) => {
   return heroSections;
 }
 
+@withNamespaces("Screen_Heroes")
 @connect(state => ({ 
   heroes: state.wiki.heroes,
 }))
@@ -66,7 +62,7 @@ export default class HeroesScreen extends React.PureComponent {
 
 
   static getDerivedStateFromProps(newProps) {
-    return { heroSections: _getHeroSections(newProps.heroes) };
+    return { heroSections: _getHeroSections(newProps.heroes, newProps.t) };
   }
 
 
