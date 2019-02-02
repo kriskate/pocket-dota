@@ -197,7 +197,7 @@ export default class SettingsScreen extends React.PureComponent {
           <Button prestyled style={styles.versionButton}
               onPress={() => navigate(SCREEN_LABELS_HIDDEN.SETTINGS_TIPS)} >
             <Text>{SCREEN_LABELS_HIDDEN.SETTINGS_TIPS}</Text>
-            <ICONS.FORWARD />
+            <ICONS.BUTTON_FORWARD />
           </Button>
           {/* to-do: re-enable this and the "new version found" dialog */}
           {/* <Switch label="Automatically check for app updates"

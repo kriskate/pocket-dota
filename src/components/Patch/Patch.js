@@ -34,7 +34,7 @@ export default class Patch extends React.Component {
         <Button prestyled style={styles.button_more_title}
             onPress={this.openPatch} >
           <Text>view game changes</Text>
-          <ICONS.FORWARD />
+          <ICONS.BUTTON_FORWARD />
         </Button>
       </View>
     )

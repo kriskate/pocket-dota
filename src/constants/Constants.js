@@ -84,10 +84,10 @@ export const URL_ODOTA = {
 export const ICONS = {
   DROPUP: () => <Ionicons name="ios-arrow-dropup" size={17} color={Colors.dota_white} />,
   DROPDOWN: () => <Ionicons name="ios-arrow-dropdown" size={17} color={Colors.dota_white} />,
-  BACK: () => <Ionicons name="ios-arrow-back" size={17} color={Colors.dota_white} />,
-  FORWARD: () => <Ionicons name="ios-arrow-forward" size={17} color={Colors.dota_white} />,
-  USER: ({color}) => <FontAwesome name="user" size={17} color={color || Colors.dota_white} />,
-  INFO: () => <FontAwesome name="info" size={17} color={Colors.dota_white} />,
+  BUTTON_BACK: () => <Ionicons name="ios-arrow-back" size={17} color={Colors.dota_white} />,
+  BUTTON_FORWARD: () => <Ionicons name="ios-arrow-forward" size={17} color={Colors.dota_white} />,
+  BUTTON_USER: ({color}) => <FontAwesome name="user" size={17} color={color || Colors.dota_white} />,
+  BUTTON_INFO: () => <FontAwesome name="info" size={17} color={Colors.dota_white} />,
 
   CIRCLE: () => <FontAwesome name="circle" size={15} color={Colors.dota_white} />,
   CIRCLE_O: () => <FontAwesome name="circle-o" size={15} color={Colors.dota_white} />,
@@ -109,16 +109,4 @@ export const URLS = {
   'Feature Requests': 'https://discord.gg/mwP3FRM',
   'Issues': 'https://discord.gg/BMCrMbw',
   'General': 'https://discord.gg/WXjby2w',
-}
-
-export const HELP_TEXTS = {
-  HELP_HEADER: 'The Dota 2 player statistics screen',
-  HELP_CONTENT: `The Dota 2 player profiles are a collection of statistics gathered and parsed by the ${URLS["Open Dota"]} platform.
-These statistics show an in-depth analysis of the player's activity in the Dota 2 game.
-
-Because the statistics screen is a preview of the Open Dota website, you will need the following buttons in order to navigate the Dota 2 player profiles:`,
-  HELP_DOTA_PROFILE: 'To set another player profile, simply navigate to another Dota 2 profile (from the Stats screen) and press the PROFILE button.',
-  BACK: 'Use the BACK button to navigate back in the current (statistics) screen.',
-  FORWARD: 'Use the FORWARD button to navigate back in the current (statistics) screen.',
-  USER: "When the PROFILE button is pressed, it will be highlighted, indicating that the current Dota 2 profile is the one that will appear on the app's home screen.",
 }

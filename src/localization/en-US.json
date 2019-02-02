@@ -272,15 +272,15 @@
   "Screen_StatsWeb": {
     "HEADER": "The Dota 2 player statistics screen",
     
-    "CONTENT": "The Dota 2 player profiles are a collection of statistics gathered and parsed by the {{Open Dota}} platform \r\nThese statistics show an in-depth analysis of the player's activity in the Dota 2 game. \r\nBecause the statistics screen is a preview of the Open Dota website, you will need the following buttons in order to navigate the Dota 2 player profiles:",
+    "CONTENT": "The Dota 2 player profiles are a collection of statistics gathered and parsed by the {{open_dota}} platform \r\nThese statistics show an in-depth analysis of the player's activity in the Dota 2 game. \r\nBecause the statistics screen is a preview of the Open Dota website, you will need the following buttons in order to navigate the Dota 2 player profiles:",
     
-    "BACK": "Use the BACK button to navigate back in the current (statistics) screen.",
-    "FORWARD": "Use the FORWARD button to navigate back in the current (statistics) screen.",
-    "USER": "When the PROFILE button is pressed, it will be highlighted, indicating that the current Dota 2 profile is the one that will appear on the app's home screen.",
+    "BUTTON_BACK": "Use the BACK button to navigate back in the current (statistics) screen.",
+    "BUTTON_FORWARD": "Use the FORWARD button to navigate back in the current (statistics) screen.",
+    "BUTTON_USER": "When the PROFILE button is pressed, it will be highlighted, indicating that the current Dota 2 profile is the one that will appear on the app's home screen.",
 
     "DOTA_PROFILE": "To set another player profile, simply navigate to another Dota 2 profile (from the Stats screen) and press the PROFILE button.",
 
-    "ButtonDone": "Done"
+    "BUTTON_Done": "Done"
   },
 
   "Screen_Tips": {

@@ -28,19 +28,19 @@ export default class StatsWebScreenToolbox extends React.PureComponent {
       <View style={styles.navigation_controls}>
         <Button prestyled style={[ Styles.toolbox_button, {width} ]}
             onPress={goBack}>
-          <ICONS.BACK />
+          <ICONS.BUTTON_BACK />
         </Button>
         <Button prestyled style={[ Styles.toolbox_button, {width} ]}
             onPress={goForward} >
-          <ICONS.FORWARD />
+          <ICONS.BUTTON_FORWARD />
         </Button>
         <Button prestyled style={[ Styles.toolbox_button, {width} ]}
             onPress={this._setProfile}>
-          <ICONS.USER color={c_account_id == account_id ? Colors.goldenrod : Colors.dota_white}/>
+          <ICONS.BUTTON_USER color={c_account_id == account_id ? Colors.goldenrod : Colors.dota_white}/>
         </Button>
         <Button prestyled style={[ Styles.toolbox_button, {width} ]}
           onPress={showHelp}>
-          <ICONS.INFO />
+          <ICONS.BUTTON_INFO />
         </Button>
       </View>
     )
