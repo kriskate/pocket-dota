@@ -12,7 +12,7 @@ import { Text } from '../ui';
 import Attribute from './Attribute';
 import { calculateAttributes, parseAsNumbers } from '../../utils/CalculateAttributes';
 import Layout from '../../constants/Layout';
-import { showTip, APP_TIPS } from '../AppTips';
+import { showTip } from '../AppTips';
 import Roles from './Roles';
 import Complexity from './Complexity';
 
@@ -21,7 +21,7 @@ export default class extends React.Component {
   constructor(props) {
     super(props);
 
-    showTip(APP_TIPS.ATTRIBUTES_SLIDER);
+    showTip("attributesSlider");
 
     this.state = {
       level: 1,

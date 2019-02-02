@@ -8,14 +8,14 @@ import { Button, Container, Text } from './ui';
 import Colors from '../constants/Colors';
 import { assets } from '../constants/Data';
 import Layout from '../constants/Layout';
-import { showTip, APP_TIPS } from './AppTips';
+import { showTip } from './AppTips';
 
 const ListItem = ({ label, navigation, selected }) => (
   <Button viewStyle={[styles.item, selected && styles.selectedItem]} 
       onPress={() => {
         if(selected) navigation.closeDrawer()
         else {
-          showTip(APP_TIPS.DRAWER_SLIDE);
+          showTip("drawerSlide");
 
           const navigateAction = NavigationActions.navigate({
             routeName: label,

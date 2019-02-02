@@ -6,45 +6,11 @@ import { Actions as ProfileActions } from '../reducers/profile';
 import Colors from '../constants/Colors';
 import { Platform } from 'react-native';
 import Layout from '../constants/Layout';
+import { withNamespaces } from 'react-i18next';
 
 // we will only have one instance of this class, and only use this for setState
 let singletonInstance;
 
-
-
-export const APP_TIPS = {
-  IOS_SLIDE_BACK: {
-    stateLink: 'IOS_slideBack',
-    short: "Swipe to go back",
-    description: "You can swipe from the left side of the screen to go to back.",
-  },
-  DRAWER_SLIDE: {
-    stateLink: 'drawerSlide',
-    short: "Swipe for drawer",
-    description: "You can swipe from the right side of the screen to open the drawer.",
-  },
-  ATTRIBUTES_SLIDER: {
-    stateLink: 'attributesSlider',
-    short: "Attribute slider",
-    description: "You can use the slider below the hero image to see how the attributes change at different hero levels.",
-  },
-
-  PROFILE_ADD_REQUIREMENTS: {
-    stateLink: 'profileAddRequirements',
-    short: "Profile exposure",
-    description: "In order for your Dota 2 profile to be parsed by Valve, you need to check the in-game setting of \"Expose Public Match Data\" (settings/options/advanced options).",
-  },
-  PROFILE_ADD: {
-    stateLink: 'profileAdd',
-    short: "Add profile to home screen",
-    description: "You can add a Dota 2 profile to the app's Home screen by clicking the profile icon at the top of this screen. \r\nThis way, you can quickly acces your Dota 2 stats when opening the app.",
-  },
-  PROFILE_ADDED: {
-    stateLink: 'profileAdded',
-    short: "Dota 2 profile added",
-    description: "This Dota 2 profile has been added to the app. The profile will be available on the app's Home screen, unless this option is disabled under \"Settings\"."
-  },
-}
 
 let tipTimeout;
 export const showTip = (tip, duration=10) => {
@@ -67,7 +33,7 @@ export const showTip = (tip, duration=10) => {
   }), 750);
 }
 
-
+@withNamespaces("Screen_SettingsAppTips")
 @connect(
   (state => ({ tipsState: state.profile.settings.tipsState })),
   (dispatch => ({
@@ -90,12 +56,12 @@ export default class AppTips extends React.PureComponent {
 
   render() {
     const { tip, show } = this.state;
-    const { hideTip, tipsState, } = this.props;
+    const { hideTip, tipsState, t } = this.props;
 
     let visible = true, stateLink, description;
     if(show && tip) {
-      stateLink = tip.stateLink;
-      description = tip.description;
+      stateLink = tip;
+      description = t(tip + "_description");
 
       const platformOk_ios = stateLink.split('_')[0] === 'IOS' ? Platform.OS === 'ios' : true;
       const platformOk_android = stateLink.split('_')[0] === 'ANDROID' ? Platform.OS === 'android' : true;
@@ -110,7 +76,7 @@ export default class AppTips extends React.PureComponent {
       <SnackBar
         visible={visible}
         textMessage={description}
-        actionText={"DON'T SHOW AGAIN"}
+        actionText={t("DONT_SHOW_AGAIN")}
         actionHandler={() => {
           this._hide();
           hideTip(stateLink);

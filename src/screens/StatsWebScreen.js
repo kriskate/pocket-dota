@@ -6,7 +6,7 @@ import { Container } from '../components/ui';
 import { headerStyle } from '../utils/screen';
 import { URL_ODOTA } from '../constants/Constants';
 import Colors from '../constants/Colors';
-import { showTip, APP_TIPS } from '../components/AppTips';
+import { showTip } from '../components/AppTips';
 import { model_odota } from '../constants/Models';
 
 import StatsWebScreenModal from '../components/modals/StatsWebScreenModal';
@@ -68,7 +68,7 @@ export default class StatsWebScreen extends React.Component {
   constructor(props) {
     super(props);
 
-    showTip(APP_TIPS.PROFILE_ADD, 15);
+    showTip("profileAdd", 15);
 
     this.view = React.createRef();
     this.state = {

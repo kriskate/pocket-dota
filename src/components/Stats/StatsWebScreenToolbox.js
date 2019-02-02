@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Platform } from 'react-native';
 
-import { showTip, APP_TIPS } from '../AppTips';
+import { showTip } from '../AppTips';
 import { ICONS } from "../../constants/Constants";
 import Styles from '../../constants/Styles';
 import { Button } from '../ui';
@@ -16,7 +16,7 @@ export default class StatsWebScreenToolbox extends React.PureComponent {
 
     if(c_account_id !== account_id) {
       setProfile({ name: personaname, image: avatarfull, account_id, last_match_time });
-      showTip(APP_TIPS.PROFILE_ADDED);
+      showTip("profileAdded");
     }
   }
   render() {

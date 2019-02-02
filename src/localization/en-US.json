@@ -238,25 +238,25 @@
   "Screen_SettingsAppTips": {
     "Tips_Title": "In-app tips",
 
-    "SettingsTips_ToggleAll": "Turn all tips ON/ OFF",
+    "ToggleAll": "Turn all tips ON/ OFF",
 
-    "IOS_SLIDE_BACK_short": "Swipe to go back",
-    "IOS_SLIDE_BACK_description": "You can swipe from the left side of the screen to go to back.",
+    "IOS_slideBack_short": "Swipe to go back",
+    "IOS_slideBack_description": "You can swipe from the left side of the screen to go to back.",
 
-    "DRAWER_SLIDE_short": "Swipe for drawer",
-    "DRAWER_SLIDE_description": "You can swipe from the right side of the screen to open the drawer.",
+    "drawerSlide_short": "Swipe for drawer",
+    "drawerSlide_description": "You can swipe from the right side of the screen to open the drawer.",
 
-    "ATTRIBUTES_SLIDER_short": "Attribute slider",
-    "ATTRIBUTES_SLIDER_description": "You can use the slider below the hero image to see how the attributes change at different hero levels.",
+    "attributesSlider_short": "Attribute slider",
+    "attributesSlider_description": "You can use the slider below the hero image to see how the attributes change at different hero levels.",
 
-    "PROFILE_ADD_REQUIREMENTS_short": "Profile exposure",
-    "PROFILE_ADD_REQUIREMENTS_description": "In order for your Dota 2 profile to be parsed by Valve, you need to check the in-game setting of \"Expose Public Match Data\" (settings/options/advanced options).",
+    "profileAddRequirements_short": "Profile exposure",
+    "profileAddRequirements_description": "In order for your Dota 2 profile to be parsed by Valve, you need to check the in-game setting of \"Expose Public Match Data\" (settings/options/advanced options).",
 
-    "PROFILE_ADD_short": "Add profile to home screen",
-    "PROFILE_ADD_description": "You can add a Dota 2 profile to the app's Home screen by clicking the profile icon at the top of this screen. \r\nThis way, you can quickly acces your Dota 2 stats when opening the app.",
+    "profileAdd_short": "Add profile to home screen",
+    "profileAdd_description": "You can add a Dota 2 profile to the app's Home screen by clicking the profile icon at the top of this screen. \r\nThis way, you can quickly acces your Dota 2 stats when opening the app.",
 
-    "PROFILE_ADDED_short": "Dota 2 profile added",
-    "PROFILE_ADDED_description": "This Dota 2 profile has been added to the app. The profile will be available on the app's Home screen, unless this option is disabled under \"Settings\".",
+    "profileAdded_short": "Dota 2 profile added",
+    "profileAdded_description": "This Dota 2 profile has been added to the app. The profile will be available on the app's Home screen, unless this option is disabled under \"Settings\".",
 
     "DONT_SHOW_AGAIN": "DON'T SHOW AGAIN"
   },

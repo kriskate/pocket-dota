@@ -9,7 +9,7 @@ import Layout from '../constants/Layout';
 import { model_odota } from '../constants/Models';
 import { connect } from 'react-redux';
 import { Actions } from '../reducers/profile';
-import { showTip, APP_TIPS } from '../components/AppTips';
+import { showTip } from '../components/AppTips';
 import RequiresConnection from '../utils/RequiresConnection';
 import { withNamespaces } from 'react-i18next';
 
@@ -40,7 +40,7 @@ class Results extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    showTip(APP_TIPS.PROFILE_ADD_REQUIREMENTS, 15);
+    showTip("profileAddRequirements", 15);
   }
   _renderItem = ({item}) => <ProfileThumb result={item} navigation={this.props.navigation} />
 
