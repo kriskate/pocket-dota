@@ -1,7 +1,7 @@
 import React from 'react';
 import { ActivityIndicator, View, StyleSheet, ProgressBarAndroid, ProgressViewIOS, Platform, } from 'react-native';
 
-import { Text } from './Text';
+import Text from './Text';
 
 import Colors from '../../constants/Colors';
 
