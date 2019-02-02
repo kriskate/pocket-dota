@@ -19,7 +19,9 @@
   },
   "dependencies": {
     "expo": "^32.0.0",
+    "i18next": "^14.0.1",
     "react": "16.5.0",
+    "react-i18next": "^9.0.10",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-native-hyperlink": "^0.0.14",
     "react-native-modal": "^6.5.0",

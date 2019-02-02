@@ -1,0 +1,295 @@
+{
+  "Alerts": {
+
+    "BUTTON_Dismiss": "Dismiss",
+    "BUTTON_Ok": "OK",
+    "BUTTON_DontRestart": "Don't restart",
+    "BUTTON_Yes": "Yes",
+    "BUTTON_No": "No",
+
+    "MESSAGE_Success": "Success!",
+    "MESSAGE_Error": "Error!",
+    
+    "AppUpdateDone": "Downloading new app version {{version}} has finished successfully. \r\nThe app will now restart, in order for the new version to be applied.",
+    "WikiUpdateDone": "Downloading new wiki files for version {{version}} has finished succesfully.",
+    "CannotUpdate_Title": "The update cannot start",
+    "CannotUpdate": "Pocket Dota is trying to update it's Wiki to a version higher than {{version}}, but has encountered an error. \r\nThere might be a problem with your connection; please restart the app and make sure you're connected to the internet. \r\n\r\nTHIS UPDATE IS HIGHLY RECOMMENDED - if the update is not made, the application might not show the data correctly; this might lead to a crash due to lack of correct data",
+
+    "UpdateCheckAvailable_Title": "New {{What}} version found! ({{newVersion}})",
+    "UpdateCheckAvailable": "A new {{What}} version has been found. \r\nWould you like to begin downloading it? \r\nIt is recomended to be connected to a WI-FI network before downloading new data.",
+    "UpdateCheckError": "There was an error while trying to retrieve new {{What}} version \r\n{{error}} \r\nPlease try again later.",
+    
+    "RemoveProfileData_Title": "Are you sure you want to remove your profile data?",
+    "RemoveProfileData": "This will remove the Dota 2 profile data store on this device.",
+    "ResetTitle": "Are you sure you want to reset settings to default?",
+    "ResetSettings": "This will reset the settings to default, including the removal of the Dota 2 profile data."
+
+  },
+  
+  "Components": {
+
+    "AppDownloading": {
+      "downloading": "Downloading new app version",
+      "downloading_done": "When the update is done, the application will restart."
+    },
+    
+    "WikiDownloading": {
+      "PROGRESS_DATA": "Downloading hero data files",
+      "PROGRESS_IMAGES": "Caching images",
+      "PROGRESS_UPDATE_VERSION": "Updating to version:"
+    },
+    
+    "DOWNLOAD_REASONS": {
+      "FRESH": "Because this is the first time you open the app, additional files need to be downloaded (eg: hero/ item descriptions, images).",
+      "MISSING": "Some wiki data on your device seems to be missing. Please wait while the app re-downloads the data.",
+      "UPDATE": "Downloading new wiki database (heroes, items and game info).",
+      "FORCED": "Downloading new wiki database (heroes, items and game info). \r\nThe new database is needed for the new app version."
+    },
+
+    "RequiresConnection_OfflineText": "There seems to be a problem with your internet connection. \r\nThis section is only available when connected to the internet. \r\n\r\nYou may still hide this message and display the content, but navigating through this section would lead to nowhere.",
+
+    "Updater_persistingProblem": "If the problem persists, please clear the application files."
+
+  },
+
+  "Constants": {
+    "HOME_LABELS": {
+      "HEROES": "HEROES",
+      "ITEMS": "ITEMS",
+    
+      "PATCH_NOTES": "PATCH NOTES",
+      "TIPS": "TIPS",
+    
+      "STATS": "PLAYER STATISTICS",
+      "SETTINGS": "SETTINGS"
+    },
+
+    "SCREEN_LABELS": {
+      "HOME": "Home",
+    
+      "HEADER_WIKI": "Wiki",
+      "HEROES": "Heroes",
+      "ITEMS": "Items",
+      
+      "HEADER_GAME": "Game info",
+      "PATCH_NOTES": "Patch notes",
+      "TIPS": "Tips",
+      
+      "HEADER_STATS": "User",
+      "STATS": "Player Statistics",
+      "SETTINGS": "Settings",
+      
+      "HEADER_ABOUT": "About and legal",
+      "ABOUT": "About"
+    }
+    
+  },
+
+  "Screen_About": {
+
+    "Notes": "Notes:",
+    "WikiData": "Wiki data",
+    "WikiDataDescription": "refers to all of the information displayed about the Dota 2 heroes, items and patch notes throughout the app.",
+    "PlayerStatistics": "Player statistics",
+    "PlayerStatisticsDescription": "refers to all of the information displayed within the Player statistics screens.",
+  
+    "App": "App",
+    "PocketDota": "Pocket Dota",
+    "FreeApp": "is a free app that aims to give players an insight from within the game, when they're unable to access the actual game. It can also be used while playing the game, in order to keep track of the heroes and items of the opposing teams.",
+    "NotEndorsed": "is hereby not created, sponsored or endorsed by any of the companies mentioned on this page. It only uses open source data.",
+  
+    "Copyrightinformation": "Copyright information",
+    "CopyrightWikiData": "Wiki data",
+    "CopyrightTheGame": "The Dota 2 game, logo, the contents of game files (heroes, abilities, items, patch notes, tips), as well as their artwork/ names/ descriptions are © {{Valve corporation}}.",
+    "CopyrightGameFiles": "Dota2 game files and images provided by {{Elo}}, through {{Dota buff}} and parsed by Pocket Dota's own data generator service.",
+    "CopyrightPlayerStatistics": "Player statistics",
+    "CopyrightOpenDotaData": "The data presented through the Player statistics screen are information collected, parsed, displayed and owned by {{Open Dota}}.",
+    "CopyrightOpenDotaCheckOut": "For an even more in-depth analysis of your player profile, it is recommended to open their website on a desktop/ laptop computer and create an Open Dota account.",
+    
+    "Tech": "Tech",
+    "Tech_TheWiki": "The Wiki data is automatically generated from the $t(tech_GameFIles), and updated when the information in these changes, through a {{NodeJS}} backend service.",
+    "Tech_GameFiles": "Dota2 game files",
+    "Tech_Frameworks": "The application is developed in {{React Native}}, having {{Expo}} as a React Native management utility.",
+    "Tech_OS": "Recommended OS version:",
+  
+    "Contact": "Contact (Discord)",
+    "Contact_Issues": "If you experience any issues with the usage of this app, please use the {{Issues}} channel.",
+    "Contact_Features": "If you would like to see more functionality brought into the app, use the {{Feature Requests}} channel.",
+    "Contact_General": "If you just wanna have a chat with the app's developer, use the {{General}} channel.",
+  },
+  
+  "Screen_Heroes": {
+    "Agility": "Agility",
+    "Intelligence": "Intelligence",
+    "Strength": "Strength"
+  },
+
+  "Screen_Hero": {
+    "HypeandStats": "Hype and Stats",
+
+    "Complexity": "Complexity:",
+    "Roles": "Roles:",
+
+    "Agility": "Agility",
+    "Intelligence": "Intelligence",
+    "Strength": "Strength",
+
+    "AttackSpeed": "Attack Speed",
+    "SpellAmplification": "Spell Amplification",
+    "MagicResistance": "Magic Resistance",
+    "AttackType": "Attack Type",
+  
+    "ATTRIBUTES_DOTA_UNIT_CAP_MELEE_ATTACK": "Melee",
+    "ATTRIBUTES_DOTA_UNIT_CAP_RANGED_ATTACK": "Ranged",
+
+    "Level": "Level",
+
+    "BaseStats": "Base stats",
+    "MovementTurnRate": "Movement Turn Rate",
+    "BaseAttackRate": "Base Attack Rate",
+    "AttackAnimationPoint": "Attack Animation Point",
+    "AttackAcquisitionRange": "Attack Acquisition Range",
+    "AttackRange": "Attack Range",
+    "ProjectileSpeed_Instant": "Instant",
+    "VisionRangeDay": "Vision Range (Day)",
+    "VisionRangeNight": "Vision Range (Night)",
+
+    "Talents": "Talents",
+
+    "Abilities": "Abilities",
+    "SpecialAbilities": "Special Abilities",
+    "AghanimAbilities": "Aghanim's enabled Abilities",
+    "HiddenAbilities": "HiddenAbilities",
+
+    "Biography": "Biography",
+
+    "RecommendedItemBuild": "Recommended item build",
+    
+    "DOTA_Build_Starting_Items": "Starting items",
+    "DOTA_Build_Starting_Items_Secondary": "Starting items (bear)",
+    "DOTA_Build_Early_Game": "Early-game items",
+    "DOTA_Build_Early_Game_Secondary": "Early-game items (bear)",
+    "DOTA_Build_Core_Items": "Core items",
+    "DOTA_Build_Core_Items_Secondary": "Core items (bear)",
+    "DOTA_Build_Mid_Items": "Mid-game items",
+    "DOTA_Build_Late_Items": "Late-game items",
+    "DOTA_Build_Other_Items": "Other/ Luxury items",
+    "DOTA_Build_Luxury": "Other/ Luxury items",
+    
+    "HeroChangelog": "Hero changelog"
+  },
+
+  "Screen_Items": {
+    "consumables": "Consumables",
+    "attributes": "Attributes",
+    "armaments": "Armaments",
+    "arcane": "Arcane",
+    "common": "Common",
+    "support": "Support",
+    "caster": "Caster",
+    "weapons": "Weapons",
+    "armor": "Armor",
+    "artifacts": "Artifacts",
+    "secret_shop": "Secret Shop"
+  },
+  
+  "Screen_Item": {
+    "Cost": "Cost:",
+    "DissasembleAvailable": "Can be dissasembled:",
+    "DissasembleYes": "Yes",
+    "DissasembleNo": "No",
+    "ItemCategory": "Item category:",
+    "Components": "Components:",
+    "Notes": "Notes:",
+    "ItemChangelog": "Item changelog:"
+  },
+  
+  "Screen_Patch": {
+    "ReleaseDate": "Release date:",
+    "ViewGameChanges": "view game changes"
+  },
+
+  "Screen_Settings": {
+    "Profile": "Profile",
+    "Profile_EnableThirdParty": "In order to enable the functions below, you have to add a Dota 2 profile",
+    "Profile_YourProfile": "Your profile",
+    "Profile_LastSearch": "Last profile search:",
+    "Profile_ShowOnHomeScreen": "Show profile on Home screen",
+    "Profile_RemoveProfileData": "Remove profile data",
+    "Profile_Replace": "Replace the Dota 2 user profile",
+    "Profile_AddA": "Add a Dota 2 user profile",
+
+    "Database": "Heroes & Items database:",
+    "DatabaseAutoCheck": "Automatically check for Wiki Updates",
+    "Database_ClearWiki": "Clear wiki",
+    "Database_DowngradeWiki": "Downgrade wiki",
+
+    "App": "App settings:",
+    "AppTips": "In-app tips",
+    "AppCheckForUpdate": "Check for app update",
+    "AppResetToDefault": "Reset to default settings",
+
+    "currentVersion": "current:",
+    "checkingForUpdate": "(checking for update)",
+    "isUpToDate": "is up to date",
+    "updating": "(updating)"
+  },
+  
+  "Screen_SettingsAppTips": {
+    "Tips_Title": "In-app tips",
+
+    "SettingsTips_ToggleAll": "Turn all tips ON/ OFF",
+
+    "IOS_SLIDE_BACK_short": "Swipe to go back",
+    "IOS_SLIDE_BACK_description": "You can swipe from the left side of the screen to go to back.",
+
+    "DRAWER_SLIDE_short": "Swipe for drawer",
+    "DRAWER_SLIDE_description": "You can swipe from the right side of the screen to open the drawer.",
+
+    "ATTRIBUTES_SLIDER_short": "Attribute slider",
+    "ATTRIBUTES_SLIDER_description": "You can use the slider below the hero image to see how the attributes change at different hero levels.",
+
+    "PROFILE_ADD_REQUIREMENTS_short": "Profile exposure",
+    "PROFILE_ADD_REQUIREMENTS_description": "In order for your Dota 2 profile to be parsed by Valve, you need to check the in-game setting of \"Expose Public Match Data\" (settings/options/advanced options).",
+
+    "PROFILE_ADD_short": "Add profile to home screen",
+    "PROFILE_ADD_description": "You can add a Dota 2 profile to the app's Home screen by clicking the profile icon at the top of this screen. \r\nThis way, you can quickly acces your Dota 2 stats when opening the app.",
+
+    "PROFILE_ADDED_short": "Dota 2 profile added",
+    "PROFILE_ADDED_description": "This Dota 2 profile has been added to the app. The profile will be available on the app's Home screen, unless this option is disabled under \"Settings\".",
+
+    "DONT_SHOW_AGAIN": "DON'T SHOW AGAIN"
+  },
+
+  "Screen_Stats": {
+    "TypeProfileName": "Type in profile name to look up",
+    "Search": "Search",
+
+    "LastMatch": "Last match:",
+    "CouldNotFind": "Could not find any results for"
+  },
+
+  "Screen_StatsWeb": {
+    "HEADER": "The Dota 2 player statistics screen",
+    
+    "CONTENT": "The Dota 2 player profiles are a collection of statistics gathered and parsed by the {{Open Dota}} platform \r\nThese statistics show an in-depth analysis of the player's activity in the Dota 2 game. \r\nBecause the statistics screen is a preview of the Open Dota website, you will need the following buttons in order to navigate the Dota 2 player profiles:",
+    
+    "BACK": "Use the BACK button to navigate back in the current (statistics) screen.",
+    "FORWARD": "Use the FORWARD button to navigate back in the current (statistics) screen.",
+    "USER": "When the PROFILE button is pressed, it will be highlighted, indicating that the current Dota 2 profile is the one that will appear on the app's home screen.",
+
+    "DOTA_PROFILE": "To set another player profile, simply navigate to another Dota 2 profile (from the Stats screen) and press the PROFILE button.",
+
+    "ButtonDone": "Done"
+  },
+
+  "Screen_Tips": {
+    "Introduction": "Introduction",
+    "Universal": "Universal",
+    "Beginner": "Beginner",
+    "Intermediate": "Intermediate",
+    "Advanced": "Advanced",
+    "Heroes": "Heroes"
+  }
+
+}
