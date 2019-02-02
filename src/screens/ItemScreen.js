@@ -13,6 +13,7 @@ import { trimAbilities, parseCategory } from '../utils/utils';
 import { ITEM_CONSTANTS } from '../constants/Constants';
 import ItemComponents from '../components/Item/ItemComponents';
 import Changelog from '../components/Item/Changelog';
+import { withNamespaces } from 'react-i18next';
 
 const removeSpace = (str) => str.replace(/\+ \<span/g, '+<span')
 const removeH1 = (str) => str.replace(/\<h1/g, `<br/><span style="color:${Colors.dota_radiant};font-weight:bold;"`)
@@ -50,6 +51,7 @@ class HTML extends React.PureComponent {
 }
 
 
+@withNamespaces("Screen_Item")
 export default class ItemScreen extends React.PureComponent {
   static navigationOptions = ({ navigation }) => {
     const { category, name } = navigation.getParam('data');
@@ -70,6 +72,8 @@ export default class ItemScreen extends React.PureComponent {
 
 
   render() {
+    const { t } = this.props;
+
     const item = model_item(this.props.navigation.getParam('data'));
 
     const { 
@@ -80,10 +84,11 @@ export default class ItemScreen extends React.PureComponent {
     } = item;
     const npc = model_item_npc(item.npc);
     const { ItemDisassembleRule } = npc;
-    const dissasemble = ItemDisassembleRule == ITEM_CONSTANTS.DISSASEMBLE ? "Yes" : "No";
+    const dissasemble = ItemDisassembleRule == ITEM_CONSTANTS.DISSASEMBLE ? t("DissasembleYes") : t("DissasembleNo");
     const bonuses = model_item_bonuses(item.bonuses);
 
     const _category = parseCategory(category);
+
 
     return (
       <Container scrollable>
@@ -98,22 +103,22 @@ export default class ItemScreen extends React.PureComponent {
         <Card style={styles.stats}>
 
           <View style={styles.stat}>
-            <Text style={styles.costText}>Cost: </Text>
+            <Text style={styles.costText}>{t("Cost")} </Text>
             <Image source={assets.game.gold} />
             <Text style={styles.costText}> {cost}</Text>
           </View>
 
           <View style={styles.stat}>
-            <Text>Can be dissasembled: </Text>
+            <Text>{t("DissasembleAvailable")} </Text>
             <Text style={{
-                  fontWeight: 'bold', color: dissasemble == "Yes" ? Colors.dota_radiant : Colors.dota_dire, 
+                  fontWeight: 'bold', color: dissasemble == t("DissasembleYes") ? Colors.dota_radiant : Colors.dota_dire, 
                 }}>
               {dissasemble}
             </Text>
           </View>
 
           <View style={styles.stat}>
-            <Text>Item category: </Text>
+            <Text>{t("ItemCategory")} </Text>
             <Text style={[styles.textHighlight, {color: Colors.items[_category]} ]}>
               {category}
             </Text>
@@ -141,7 +146,7 @@ export default class ItemScreen extends React.PureComponent {
 
         { !notes ? null :
           <Card>
-            <Text style={styles.notesText}>Notes:</Text>
+            <Text style={styles.notesText}>{t("Notes")}</Text>
             <HTML htmlContent={notes.trim()} style={styles.notesHTML} />
           </Card>
         }
@@ -149,13 +154,13 @@ export default class ItemScreen extends React.PureComponent {
 
         { !components ? null : 
           <View style={styles.components}>
-            <Text style={styles.componentsText}>Components:</Text>
+            <Text style={styles.componentsText}>{t("Components")}</Text>
             <ItemComponents current_item={item} />
           </View>
         }
 
         <View style={styles.components}>
-          <Text style={styles.componentsText}>Item changelog:</Text>
+          <Text style={styles.componentsText}>{t("ItemChangelog")}</Text>
           <Changelog item_tag={tag} />
         </View>
 
