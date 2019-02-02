@@ -13,7 +13,7 @@
     "AppUpdateDone": "Downloading new app version {{version}} has finished successfully. \r\nThe app will now restart, in order for the new version to be applied.",
     "WikiUpdateDone": "Downloading new wiki files for version {{version}} has finished succesfully.",
     "CannotUpdate_Title": "The update cannot start",
-    "CannotUpdate": "Pocket Dota is trying to update it's Wiki to a version higher than {{version}}, but has encountered an error. \r\nThere might be a problem with your connection; please restart the app and make sure you're connected to the internet. \r\n\r\nTHIS UPDATE IS HIGHLY RECOMMENDED - if the update is not made, the application might not show the data correctly; this might lead to a crash due to lack of correct data",
+    "CannotUpdate": "Pocket Dota is trying to update it's Wiki to a version higher than {{version}}, but has encountered an error. \r\nThere might be a problem with your connection; please restart the app and make sure you're connected to the internet. \r\n\r\nTHIS UPDATE IS HIGHLY RECOMMENDED - if the update is not made, the application might not show the data correctly; this might lead to a crash due to lack of correct data.",
 
     "UpdateCheckAvailable_Title": "New {{What}} version found! ({{newVersion}})",
     "UpdateCheckAvailable": "A new {{What}} version has been found. \r\nWould you like to begin downloading it? \r\nIt is recomended to be connected to a WI-FI network before downloading new data.",
@@ -21,7 +21,8 @@
     
     "RemoveProfileData_Title": "Are you sure you want to remove your profile data?",
     "RemoveProfileData": "This will remove the Dota 2 profile data store on this device.",
-    "ResetTitle": "Are you sure you want to reset settings to default?",
+
+    "ResetSettingsTitle": "Are you sure you want to reset settings to default?",
     "ResetSettings": "This will reset the settings to default, including the removal of the Dota 2 profile data."
 
   },
