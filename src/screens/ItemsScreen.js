@@ -12,9 +12,10 @@ import { url } from '../constants/Data';
 import { model_section } from '../constants/Models';
 import Colors from '../constants/Colors';
 import { parseCategory } from '../utils/utils';
+import { withNamespaces } from 'react-i18next';
 
 
-
+@withNamespaces("Screen_Items")
 @connect(state => ({
   items: state.wiki.items,
 }))
@@ -24,24 +25,46 @@ export default class Itemscreen extends React.Component {
     ...headerStyle,
   });
 
-  render() {
-    const { items } = this.props;
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      itemSections: [],
+    };
+  }
+
+  static getDerivedStateFromProps(newProps) {
+    console.log('props', newProps)
+
+    const { items, t } = newProps;
     
     const itemSections = [];
 
     items.forEach(item => {
       const { category } = item;
-      let section = itemSections.find(({ title }) => title == category);
+      const parsed = parseCategory(category);
+      const translated_category = t(parsed);
+      let section = itemSections.find(({ title }) => title == translated_category);
+
       if(!section) {
         section = model_section({ 
-          title: category,
-          color: Colors.items[parseCategory(category)],
+          title: translated_category,
+          color: Colors.items[parsed],
         });
         itemSections.push(section);
       }
 
       section.data.push(item);
     });
+
+    return {
+      itemSections,
+    }
+  }
+
+  render() {
+    console.log('render')
+    const { itemSections } = this.state;
 
     return (
       <Container backToHome style={ styles.container }>
