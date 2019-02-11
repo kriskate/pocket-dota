@@ -301,7 +301,7 @@ export default class Slider extends PureComponent {
           onLayout={this._measureThumb}
           renderToHardwareTextureAndroid
           style={[
-            { backgroundColor: thumbTintColor },
+            { backgroundColor: _thumbColor },
             mainStyles.thumb,
             thumbStyle,
             {
