@@ -3,8 +3,10 @@ import { View, StyleSheet } from 'react-native';
 import { Text } from '../ui';
 import { ICONS } from '../../constants/Constants';
 import Layout from '../../constants/Layout';
+import { withNamespaces } from 'react-i18next';
 
 
+@withNamespaces("Screen_Hero")
 export default class Complexity extends React.Component {
   _renderComplexity = (level) => {
     const arr = [];
@@ -15,11 +17,11 @@ export default class Complexity extends React.Component {
     return arr;
   }
   render() {
-    const { level } = this.props;
+    const { level, t } = this.props;
 
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Complexity: </Text>
+        <Text style={styles.title}>{t("Complexity")} </Text>
         <View style={styles.complexityLevels}>
           { this._renderComplexity(level) }
         </View>

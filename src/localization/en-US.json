@@ -130,17 +130,13 @@
     "Complexity": "Complexity:",
     "Roles": "Roles:",
 
-    "Agility": "Agility",
-    "Intelligence": "Intelligence",
-    "Strength": "Strength",
-
     "AttackSpeed": "Attack Speed",
     "SpellAmplification": "Spell Amplification",
     "MagicResistance": "Magic Resistance",
     "AttackType": "Attack Type",
   
-    "ATTRIBUTES_DOTA_UNIT_CAP_MELEE_ATTACK": "Melee",
-    "ATTRIBUTES_DOTA_UNIT_CAP_RANGED_ATTACK": "Ranged",
+    "DOTA_UNIT_CAP_MELEE_ATTACK": "Melee",
+    "DOTA_UNIT_CAP_RANGED_ATTACK": "Ranged",
 
     "Level": "Level",
 
@@ -150,6 +146,7 @@
     "AttackAnimationPoint": "Attack Animation Point",
     "AttackAcquisitionRange": "Attack Acquisition Range",
     "AttackRange": "Attack Range",
+    "ProjectileSpeed": "Projectile Speed",
     "ProjectileSpeed_Instant": "Instant",
     "VisionRangeDay": "Vision Range (Day)",
     "VisionRangeNight": "Vision Range (Night)",
