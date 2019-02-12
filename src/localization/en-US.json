@@ -219,18 +219,19 @@
     "Profile_AddA": "Add a Dota 2 user profile",
 
     "Database": "Heroes & Items database:",
-    "DatabaseAutoCheck": "Automatically check for Wiki Updates",
+    "Database_AutoCheck": "Automatically check for Wiki updates",
+    "Database_CheckWiki": "Check for Wiki updates",
     "Database_ClearWiki": "Clear wiki",
     "Database_DowngradeWiki": "Downgrade wiki",
 
     "App": "App settings:",
-    "AppTips": "In-app tips",
-    "AppCheckForUpdate": "Check for app update",
-    "AppResetToDefault": "Reset to default settings",
+    "App_Tips": "In-app tips",
+    "App_CheckUpdate": "Check for App updates",
+    "App_ResetToDefault": "Reset to default settings",
 
     "currentVersion": "current:",
     "checkingForUpdate": "(checking for update)",
-    "isUpToDate": "is up to date",
+    "isUpToDate": "up to date",
     "updating": "(updating)"
   },
   

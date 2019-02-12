@@ -29,21 +29,17 @@ const CheckButton = ({ label, message, current, onPress, disabled }) => (
   <Button prestyled style={styles.versionButton} disabled={!!disabled}
       onPress={onPress} >
     <Text>{ message ? message : label }</Text>
-    <Text style={{ color: Colors.goldenrod }}>current: {current}</Text>
+    <Text style={{ color: Colors.goldenrod }}>{i18next.t("Screen_Settings:currentVersion")} {current}</Text>
   </Button>
 )
 
-const CHECK_MESSAGES = {
-  CHECK: '(checking for update)',
-  LATEST: 'is up to date',
-  UPDATING: '(updating)',
-}
+
 const TYPES = {
   WIKI: 'Wiki',
   APP: 'App',
 }
 
-@withNamespaces("Components")
+@withNamespaces(["Screen_Settings", "Components"])
 @connect(
   (state => ({
     profile: state.profile,
@@ -80,8 +76,9 @@ export default class SettingsScreen extends React.PureComponent {
   _checkForUpdate = async (What) => {
     // this._updateToV(What, {newVersion:'3'})
     // return
-    const stater = What == TYPES.WIKI ? 'checkingWiki' : 'checkingApp';
     const { updatingWiki, updatingApp, t } = this.props;
+
+    const stater = What == TYPES.WIKI ? 'checkingWiki' : 'checkingApp';
 
     if((What === TYPES.WIKI && updatingWiki) || (What === TYPES.APP && updatingApp)) {
       // if update is already in progress, open modal directly
@@ -89,7 +86,7 @@ export default class SettingsScreen extends React.PureComponent {
       return;
     }
 
-    this.setState({ [stater]: CHECK_MESSAGES.CHECK });
+    this.setState({ [stater]: t("checkingForUpdate") });
 
     const maybeTooFast = new Date();
 
@@ -98,7 +95,7 @@ export default class SettingsScreen extends React.PureComponent {
     if(new Date() - maybeTooFast < 1500) await sleep(1500);
 
     if(!res) {
-      this.setState({ [stater]: `${What} ${CHECK_MESSAGES.LATEST}` });
+      this.setState({ [stater]: t("isUpToDate") });
       return;
     }
     if(res.error) {
@@ -106,7 +103,7 @@ export default class SettingsScreen extends React.PureComponent {
       alertUpdateCheckError(What, res.error, onDismiss);
     } else {
       const onNo = () => this._updateCanceled(What);
-      const onYes = () => What == TYPES.WIKI ? this.props.updateWiki(res, t("DOWNLOAD_REASONS.UPDATE")) : this.props.updateApp(res.newVersion);
+      const onYes = () => What == TYPES.WIKI ? this.props.updateWiki(res, t("Components:DOWNLOAD_REASONS.UPDATE")) : this.props.updateApp(res.newVersion);
       alertUpdateCheckAvailable(What, res.newVersion, onNo, onYes);
     }
 
@@ -132,87 +129,87 @@ export default class SettingsScreen extends React.PureComponent {
     const { navigate } = this.props.navigation;
 
     const { checkingApp, checkingWiki } = this.state;
-    const { updatingApp, updatingWiki } = this.props;
+    const { updatingApp, updatingWiki, t } = this.props;
 
-    const wikiUpdatingMessage = checkingWiki || (updatingWiki && CHECK_MESSAGES.UPDATING);
-    const appUpdatingMessage = checkingApp || (updatingApp && CHECK_MESSAGES.UPDATING);
+    const wikiUpdatingMessage = checkingWiki || (updatingWiki && t("updating"));
+    const appUpdatingMessage = checkingApp || (updatingApp && t("updating"));
 
 
     return (
       <Container backToHome scrollable >
 
 
-        <Section label="Profile">
+        <Section label={t("Profile")}>
           { !lastSearch || !name ? null :
             <Button prestyled style={styles.versionButton} onPress={() => navigate(SCREEN_LABELS.STATS)}>
-              <Text>{"Last profile search: "}</Text>
+              <Text>{t("Profile_LastSearch")}</Text>
               <Text style={{ color: Colors.goldenrod }}>{lastSearch}</Text>
             </Button>
           }
 
           { name ? null : (
             <Button prestyled
-              title={`${name ? 'Replace the' : "Add a"} Dota 2 user profile`}
+              title={name ? t("Profile_Replace") : t("Profile_AddA")}
               onPress={() => navigate(SCREEN_LABELS.STATS)} />
           )}
-          { name ? null : <Text style={styles.noprofile}>{"In order to enable the functions below, you have to add a Dota 2 profile"}</Text> }
+          { name ? null : <Text style={styles.noprofile}>{t("Profile_EnableThirdParty")}</Text> }
 
           <Button disabled={!name} prestyled style={styles.versionButton}
               onPress={() => navigate(SCREEN_LABELS_HIDDEN.STATS_WEB, { player: {...user, personaname: name} })}>
-            <Text>Your profile</Text>
+            <Text>{t("Profile_YourProfile")}</Text>
             <Text style={{ color: Colors.goldenrod}}>{name ? name : ''}</Text>
           </Button>
 
           <Switch disabled={!name}
-            label="Show profile on Home screen"
+            label={t("Profile_ShowOnHomeScreen")}
             value={showProfileOnHome} onValueChange={val => this.props.updateSettings({ showProfileOnHome: val })} />
 
           <Button prestyled warning disabled={!name}
-            title="Remove profile data"
+            title={t("Profile_RemoveProfileData")}
             onPress={this._removeProfileData} />
         </Section>
 
 
-        <Section label="Heroes & Items database:">
-          <Switch label="Automatically check for Wiki updates"
+        <Section label={t("Database")}>
+          <Switch label={t("Database_AutoCheck")}
             value={autoCheckDB} onValueChange={val => this.props.updateSettings({ autoCheckDB: val })} />
 
-          <CheckButton label='Check for wiki update'
+          <CheckButton label={t("Database_CheckWiki")}
             onPress={() => this._checkForUpdate(TYPES.WIKI)}
             message={wikiUpdatingMessage && wikiUpdatingMessage}
-            disabled={wikiUpdatingMessage && wikiUpdatingMessage.includes(CHECK_MESSAGES.CHECK)}
+            disabled={wikiUpdatingMessage && wikiUpdatingMessage.includes("checkingForUpdate")}
             current={GET_WIKI_VERSION()}
           />
           {!__DEV__ ? null : [
             <Button prestyled warning key={'clear'}
-              title="Clear wiki"
+              title={t("Database_ClearWiki")}
               onPress={test__removeWiki} />,
             <Button prestyled warning key={'downgrade'}
-              title="Downgrade wiki"
+              title={t("Database_DowngradeWiki")}
               onPress={test__downgradeWiki} />
           ]}
         </Section>
 
 
-        <Section label="App settings:">
+        <Section label={t("App")}>
           <Button prestyled style={styles.versionButton}
               onPress={() => navigate(SCREEN_LABELS_HIDDEN.SETTINGS_TIPS)} >
-            <Text>{SCREEN_LABELS_HIDDEN.SETTINGS_TIPS}</Text>
+            <Text>{t("App_Tips")}</Text>
             <ICONS.BUTTON_FORWARD />
           </Button>
           {/* to-do: re-enable this and the "new version found" dialog */}
           {/* <Switch label="Automatically check for app updates"
             value={autoCheckApp} onValueChange={val => this.props.updateSettings({ autoCheckApp: val })} /> */}
 
-          <CheckButton label='Check for app update'
+          <CheckButton label={t("App_CheckUpdate")}
             onPress={() => this._checkForUpdate(TYPES.APP)}
             message={appUpdatingMessage && appUpdatingMessage}
-            disabled={appUpdatingMessage && appUpdatingMessage.includes(CHECK_MESSAGES.CHECK)}
+            disabled={appUpdatingMessage && appUpdatingMessage.includes(t("checkingForUpdate"))}
             current={APP_VERSION}
           />
 
           <Button prestyled warning
-            title="Reset to default settings"
+            title={t("App_ResetoDefault")}
             onPress={this._resetSettings} />
         </Section>
 
