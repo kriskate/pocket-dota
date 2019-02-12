@@ -16,9 +16,9 @@ import i18next from 'i18next';
 
 const _getHeroSections = (heroes, t) => {    
   const heroSections = [
-    new model_section({ title: t("Agility"), color: Colors.dota_agi }),
-    new model_section({ title: t("Intelligence"), color: Colors.dota_int }),
-    new model_section({ title: t("Strength"), color: Colors.dota_str }),
+    new model_section({ title: t("MainAttribute_Agility"), color: Colors.dota_agi }),
+    new model_section({ title: t("MainAttribute_Intelligence"), color: Colors.dota_int }),
+    new model_section({ title: t("MainAttribute_Strength"), color: Colors.dota_str }),
   ];
 
   heroes.forEach(hero => {
@@ -26,13 +26,13 @@ const _getHeroSections = (heroes, t) => {
 
     switch(hero.attributes.AttributePrimary) {
       case ATTRIBUTES.agility:
-        att = t("Agility");
+        att = t("MainAttribute_Agility");
         break;
       case ATTRIBUTES.intelligence:
-        att = t("Intelligence");
+        att = t("MainAttribute_Intelligence");
         break;
       case ATTRIBUTES.strength:
-        att = t("Strength");
+        att = t("MainAttribute_Strength");
         break;
     }
 

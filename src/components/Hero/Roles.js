@@ -24,7 +24,7 @@ export default class Roles extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>{t("Roles")} </Text>
+        <Text style={styles.title}>{t("Label_Roles")} </Text>
         <View style={styles.roles}>
         { r_split.map((role, idx) => (
           <View style={styles.role} key={role}>

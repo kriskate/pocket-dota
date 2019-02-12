@@ -87,13 +87,13 @@ export default class TipsScreen extends React.Component {
     return (
       <Container scrollable backToHome>
 
-        <Section title={t("Introduction")} data={introduction} />
-        <Section title={t("Universal")} data={universal} />
-        <Section title={t("Beginner")} data={beginner} />
-        <Section title={t("Intermediate")} data={intermediate} />
-        <Section title={t("Advanced")} data={advanced} />
+        <Section title={t("Label_Introduction")} data={introduction} />
+        <Section title={t("Label_Universal")} data={universal} />
+        <Section title={t("Label_Beginner")} data={beginner} />
+        <Section title={t("Label_Intermediate")} data={intermediate} />
+        <Section title={t("Label_Advanced")} data={advanced} />
 
-        <Section title={t("Heroes")} data={hero} wiki_heroes={wiki_heroes} />
+        <Section title={t("Label_Heroes")} data={hero} wiki_heroes={wiki_heroes} />
 
       </Container>
     );

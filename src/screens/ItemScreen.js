@@ -103,13 +103,13 @@ export default class ItemScreen extends React.PureComponent {
         <Card style={styles.stats}>
 
           <View style={styles.stat}>
-            <Text style={styles.costText}>{t("Cost")} </Text>
+            <Text style={styles.costText}>{t("Label_Cost")} </Text>
             <Image source={assets.game.gold} />
             <Text style={styles.costText}> {cost}</Text>
           </View>
 
           <View style={styles.stat}>
-            <Text>{t("DissasembleAvailable")} </Text>
+            <Text>{t("Label_DissasembleAvailable")} </Text>
             <Text style={{
                   fontWeight: 'bold', color: dissasemble == t("DissasembleYes") ? Colors.dota_radiant : Colors.dota_dire, 
                 }}>
@@ -118,7 +118,7 @@ export default class ItemScreen extends React.PureComponent {
           </View>
 
           <View style={styles.stat}>
-            <Text>{t("ItemCategory")} </Text>
+            <Text>{t("Label_ItemCategory")} </Text>
             <Text style={[styles.textHighlight, {color: Colors.items[_category]} ]}>
               {category}
             </Text>
@@ -146,7 +146,7 @@ export default class ItemScreen extends React.PureComponent {
 
         { !notes ? null :
           <Card>
-            <Text style={styles.notesText}>{t("Notes")}</Text>
+            <Text style={styles.notesText}>{t("Label_Notes")}</Text>
             <HTML htmlContent={notes.trim()} style={styles.notesHTML} />
           </Card>
         }
@@ -154,13 +154,13 @@ export default class ItemScreen extends React.PureComponent {
 
         { !components ? null : 
           <View style={styles.components}>
-            <Text style={styles.componentsText}>{t("Components")}</Text>
+            <Text style={styles.componentsText}>{t("Label_Components")}</Text>
             <ItemComponents current_item={item} />
           </View>
         }
 
         <View style={styles.components}>
-          <Text style={styles.componentsText}>{t("ItemChangelog")}</Text>
+          <Text style={styles.componentsText}>{t("Label_ItemChangelog")}</Text>
           <Changelog item_tag={tag} />
         </View>
 

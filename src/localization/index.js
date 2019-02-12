@@ -30,6 +30,7 @@ const languageDetector = {
   init: () => {},
   cacheUserLanguage: () => {}
 }
+
 i18n
   .use(languageDetector)
   .use(reactI18nextModule)

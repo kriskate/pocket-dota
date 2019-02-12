@@ -43,18 +43,18 @@ export default class HomeScreen extends React.PureComponent {
     return (
       <Container scrollable>
 
-        <MenuItem onPress={() => navigate(SCREEN_LABELS.HEROES)} label={t("HOME_LABELS.HEROES")}
+        <MenuItem onPress={() => navigate(SCREEN_LABELS.HEROES)} label={t("HOME_LABELS.LABEL_HEROES")}
           cardImage={assets.app.menuHeroes} />
-        <MenuItem onPress={() => navigate(SCREEN_LABELS.ITEMS)} label={t("HOME_LABELS.ITEMS")}
+        <MenuItem onPress={() => navigate(SCREEN_LABELS.ITEMS)} label={t("HOME_LABELS.LABEL_ITEMS")}
           cardImage={assets.app.menuItems} />
 
-        <MenuItem onPress={() => navigate(SCREEN_LABELS.PATCH_NOTES)} label={t("HOME_LABELS.PATCH_NOTES")}
+        <MenuItem onPress={() => navigate(SCREEN_LABELS.PATCH_NOTES)} label={t("HOME_LABELS.LABEL_PATCH_NOTES")}
           cardImage={assets.app.menuPatch} />
 
-        <MenuItem onPress={() => navigate(SCREEN_LABELS.TIPS)} label={t("HOME_LABELS.TIPS")}
+        <MenuItem onPress={() => navigate(SCREEN_LABELS.TIPS)} label={t("HOME_LABELS.LABEL_TIPS")}
           cardImage={assets.app.menuTips} />
 
-        <MenuItem onPress={() => navigate(SCREEN_LABELS.STATS)} label={t("HOME_LABELS.STATS")}
+        <MenuItem onPress={() => navigate(SCREEN_LABELS.STATS)} label={t("HOME_LABELS.LABEL_STATS")}
           cardImage={assets.app.menuStats} />
         { !image || !this.props.showProfileOnHome ? null :
           <MenuItem onPress={() => navigate(SCREEN_LABELS_HIDDEN.STATS_WEB, { data: { account_id, personaname: name } })} label={name}
@@ -62,7 +62,7 @@ export default class HomeScreen extends React.PureComponent {
             profileImage={image} /> 
         }
 
-        <MenuItem onPress={() => navigate(SCREEN_LABELS.SETTINGS)} label={t("HOME_LABELS.SETTINGS")}
+        <MenuItem onPress={() => navigate(SCREEN_LABELS.SETTINGS)} label={t("HOME_LABELS.LABEL_SETTINGS")}
           cardImage={assets.app.menuSettings} />
 
       </Container>

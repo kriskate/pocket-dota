@@ -39,17 +39,17 @@ export default class AboutScreen extends React.Component {
         </View>
 
         <View style={{ padding: Layout.padding_small }}>
-          <Text>{t("Notes")}</Text>
+          <Text>{t("Notes_Title")}</Text>
           <Text><Text style={styles.highlight}>{t("WikiData")}</Text> - {t("WikiData_description")}</Text>
           <Text><Text style={styles.highlight}>{t("PlayerStatistics")}</Text> - {t("PlayerStatistics_description")}</Text>
         </View>
 
-        <Section title={t("App")}>
+        <Section title={t("App_Title")}>
           <Text><Text style={styles.highlight}>Pocket Dota</Text> {t("FreeApp")}</Text>
           <Text><Text style={styles.highlight}>Pocket Dota</Text> {t("NotEndorsed")}</Text>
         </Section>
 
-        <Section title={t("Copyright_Information")}>
+        <Section title={t("Copyright_Information_Title")}>
           <Text style={styles.header2}>{t("Copyright_WikiData")}</Text>
           <Text hasUrl URLS={URLS}>{ t("Copyright_TheGame", { valve_corporation: URLS["Valve corporation"] }) }</Text>
           <Text hasUrl URLS={URLS}>{ t("Copyright_GameFiles", { elo: URLS["Elo"], dota_buff: URLS["Dota buff"] }) }</Text>
@@ -59,14 +59,14 @@ export default class AboutScreen extends React.Component {
           <Text>{t("Copyright_OpenDotaShoutout")}</Text>
         </Section>
 
-        <Section title={t("Tech")}>
+        <Section title={t("Tech_Title")}>
           <Text hasUrl URLS={URLS}>{t("Tech_TheWiki", { nodejs: URLS["NodeJS"] })}</Text>
           <Text hasUrl URLS={URLS} style={styles.text_spaced}>{t("Tech_Frameworks", { react_native: URLS["React Native"], expo: URLS["Expo"] })}</Text>
           <Text style={styles.highlight}>{t("Tech_OS")} {Platform.OS === 'ios' ? "IOS 9+" : "Android 4.4+"}</Text>
         </Section>
 
 
-        <Section title={t("Contact")}>
+        <Section title={t("Contact_Title")}>
           <Text hasUrl URLS={URLS} style={styles.text_spaced}>{t("Contact_Issues", { issues: URLS["Issues"] })}</Text>
           <Text hasUrl URLS={URLS} style={styles.text_spaced}>{t("Contact_Features", { feature_requests: URLS["Feature Requests"] })}</Text>
           <Text hasUrl URLS={URLS} style={styles.text_spaced}>{t("Contact_General", { general: URLS["General"] })}</Text>

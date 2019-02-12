@@ -91,12 +91,12 @@ export default class extends React.Component {
             thumbStyle={{ backgroundColor: Colors.goldenrod }}
           />
           <Text style={styles.levelText}>
-            { level === 0 ? t("BaseStats") : t("Level") + level }
+            { level === 0 ? t("Label_BaseStats") : t("Label_Level") + level }
           </Text>
         </View>
 
         <View style={styles.misc}>
-          <Text style={styles.fixed}>Fixed values:</Text>
+          <Text style={styles.fixed}>{t("Label_FixedValues")}</Text>
           <Attribute val={parseFloat(MovementTurnRate)} title={t("MovementTurnRate")} />
           <Attribute val={parseFloat(AttackRate)} title={t("BaseAttackRate")} />
           <Attribute val={parseFloat(AttackAnimationPoint)} title={t("AttackAnimationPoint")} />

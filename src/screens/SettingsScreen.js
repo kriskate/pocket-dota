@@ -139,7 +139,7 @@ export default class SettingsScreen extends React.PureComponent {
       <Container backToHome scrollable >
 
 
-        <Section label={t("Profile")}>
+        <Section label={t("Section_Profile")}>
           { !lastSearch || !name ? null :
             <Button prestyled style={styles.versionButton} onPress={() => navigate(SCREEN_LABELS.STATS)}>
               <Text>{t("Profile_LastSearch")}</Text>
@@ -170,7 +170,7 @@ export default class SettingsScreen extends React.PureComponent {
         </Section>
 
 
-        <Section label={t("Database")}>
+        <Section label={t("Section_Database")}>
           <Switch label={t("Database_AutoCheck")}
             value={autoCheckDB} onValueChange={val => this.props.updateSettings({ autoCheckDB: val })} />
 
@@ -191,7 +191,7 @@ export default class SettingsScreen extends React.PureComponent {
         </Section>
 
 
-        <Section label={t("App")}>
+        <Section label={t("Section_App")}>
           <Button prestyled style={styles.versionButton}
               onPress={() => navigate(SCREEN_LABELS_HIDDEN.SETTINGS_TIPS)} >
             <Text>{t("App_Tips")}</Text>

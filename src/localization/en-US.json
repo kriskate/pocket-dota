@@ -55,14 +55,14 @@
 
   "Constants": {
     "HOME_LABELS": {
-      "HEROES": "HEROES",
-      "ITEMS": "ITEMS",
+      "LABEL_HEROES": "HEROES",
+      "LABEL_ITEMS": "ITEMS",
     
-      "PATCH_NOTES": "PATCH NOTES",
-      "TIPS": "TIPS",
+      "LABEL_PATCH_NOTES": "PATCH NOTES",
+      "LABEL_TIPS": "TIPS",
     
-      "STATS": "PLAYER STATISTICS",
-      "SETTINGS": "SETTINGS"
+      "LABEL_STATS": "PLAYER STATISTICS",
+      "LABEL_SETTINGS": "SETTINGS"
     },
 
     "SCREEN_LABELS": {
@@ -90,17 +90,17 @@
 
   "Screen_About": {
 
-    "Notes": "Notes:",
+    "Notes_Title": "Notes:",
     "WikiData": "Wiki data",
     "WikiData_description": "refers to all of the information displayed about the Dota 2 heroes, items and patch notes throughout the app.",
     "PlayerStatistics": "Player statistics",
     "PlayerStatistics_description": "refers to all of the information displayed within the Player statistics screens.",
   
-    "App": "App",
+    "App_Title": "App",
     "FreeApp": "is a free app that aims to give players an insight from within the game, when they're unable to access the actual game. It can also be used while playing the game, in order to keep track of the heroes and items of the opposing teams.",
     "NotEndorsed": "is hereby not created, sponsored or endorsed by any of the companies mentioned on this page. It only uses open source data.",
   
-    "Copyright_Information": "Copyright information",
+    "Copyright_Information_Title": "Copyright information",
     "Copyright_WikiData": "Wiki data",
     "Copyright_TheGame": "The Dota 2 game, logo, the contents of game files (heroes, abilities, items, patch notes, tips), as well as their artwork/ names/ descriptions are © {{valve_corporation}}.",
     "Copyright_GameFiles": "Dota2 game files and images provided by {{elo}}, through {{dota_buff}} and parsed by Pocket Dota's own data generator service.",
@@ -108,29 +108,29 @@
     "Copyright_OpenDotaData": "The data presented through the Player statistics screen are information collected, parsed, displayed and owned by {{open_dota}}.",
     "Copyright_OpenDotaShoutout": "For an even more in-depth analysis of your player profile, it is recommended to open their website on a desktop/ laptop computer and create an Open Dota account.",
     
-    "Tech": "Tech",
+    "Tech_Title": "Tech",
     "Tech_TheWiki": "The Wiki data is automatically generated from the Dota 2 game files, and updated when the information in these changes, through a {{nodejs}} backend service.",
     "Tech_GameFiles": "Dota2 game files",
     "Tech_Frameworks": "The application is developed in {{react_native}}, having {{expo}} as a React Native management utility.",
     "Tech_OS": "Recommended OS version:",
   
-    "Contact": "Contact (Discord)",
+    "Contact_Title": "Contact (Discord)",
     "Contact_Issues": "If you experience any issues with the usage of this app, please use the {{issues}} channel.",
     "Contact_Features": "If you would like to see more functionality brought into the app, use the {{feature_requests}} channel.",
     "Contact_General": "If you just wanna have a chat with the app's developer, use the {{general}} channel."
   },
   
   "Screen_Heroes": {
-    "Agility": "Agility",
-    "Intelligence": "Intelligence",
-    "Strength": "Strength"
+    "MainAttribute_Agility": "Agility",
+    "MainAttribute_Intelligence": "Intelligence",
+    "MainAttribute_Strength": "Strength"
   },
 
   "Screen_Hero": {
-    "HypeandStats": "Hype and Stats",
+    "Section_HypeandStats": "Hype and Stats",
 
-    "Complexity": "Complexity:",
-    "Roles": "Roles:",
+    "Label_Complexity": "Complexity:",
+    "Label_Roles": "Roles:",
 
     "AttackSpeed": "Attack Speed",
     "SpellAmplification": "Spell Amplification",
@@ -140,9 +140,11 @@
     "DOTA_UNIT_CAP_MELEE_ATTACK": "Melee",
     "DOTA_UNIT_CAP_RANGED_ATTACK": "Ranged",
 
-    "Level": "Level",
+    "Label_Level": "Level",
+    "Label_BaseStats": "Base stats",
 
-    "BaseStats": "Base stats",
+    "Label_FixedValues": "Fixed Values:",
+
     "MovementTurnRate": "Movement Turn Rate",
     "BaseAttackRate": "Base Attack Rate",
     "AttackAnimationPoint": "Attack Animation Point",
@@ -153,16 +155,16 @@
     "VisionRangeDay": "Vision Range (Day)",
     "VisionRangeNight": "Vision Range (Night)",
 
-    "Talents": "Talents",
+    "Section_Talents": "Talents",
 
-    "Abilities": "Abilities",
-    "SpecialAbilities": "Special Abilities",
-    "AghanimAbilities": "Aghanim's enabled Abilities",
-    "HiddenAbilities": "HiddenAbilities",
+    "Section_Abilities": "Abilities",
+    "Section_SpecialAbilities": "Special Abilities",
+    "Section_AghanimAbilities": "Aghanim's enabled Abilities",
+    "Section_HiddenAbilities": "HiddenAbilities",
 
-    "Biography": "Biography",
+    "Section_Biography": "Biography",
 
-    "RecommendedItemBuild": "Recommended item build",
+    "Section_RecommendedItemBuild": "Recommended item build",
     
     "DOTA_Item_Build_Starting_Items": "Starting items",
     "DOTA_Item_Build_Starting_Items_Secondary": "Starting items (bear)",
@@ -175,32 +177,32 @@
     "DOTA_Item_Build_Other_Items": "Other/ Luxury items",
     "DOTA_Item_Build_Luxury": "Other/ Luxury items",
     
-    "HeroChangelog": "Hero changelog"
+    "Section_HeroChangelog": "Hero changelog"
   },
 
   "Screen_Items": {
-    "consumables": "Consumables",
-    "attributes": "Attributes",
-    "armaments": "Armaments",
-    "arcane": "Arcane",
-    "common": "Common",
-    "support": "Support",
-    "caster": "Caster",
-    "weapons": "Weapons",
-    "armor": "Armor",
-    "artifacts": "Artifacts",
-    "secret_shop": "Secret Shop"
+    "ItemType_consumables": "Consumables",
+    "ItemType_attributes": "Attributes",
+    "ItemType_armaments": "Armaments",
+    "ItemType_arcane": "Arcane",
+    "ItemType_common": "Common",
+    "ItemType_support": "Support",
+    "ItemType_caster": "Caster",
+    "ItemType_weapons": "Weapons",
+    "ItemType_armor": "Armor",
+    "ItemType_artifacts": "Artifacts",
+    "ItemType_secret_shop": "Secret Shop"
   },
   
   "Screen_Item": {
-    "Cost": "Cost:",
-    "DissasembleAvailable": "Can be dissasembled:",
+    "Label_Cost": "Cost:",
+    "Label_DissasembleAvailable": "Can be dissasembled:",
     "DissasembleYes": "Yes",
     "DissasembleNo": "No",
-    "ItemCategory": "Item category:",
-    "Components": "Components:",
-    "Notes": "Notes:",
-    "ItemChangelog": "Item changelog:"
+    "Label_ItemCategory": "Item category:",
+    "Label_Components": "Components:",
+    "Label_Notes": "Notes:",
+    "Label_ItemChangelog": "Item changelog:"
   },
   
   "Screen_Patch": {
@@ -209,7 +211,7 @@
   },
 
   "Screen_Settings": {
-    "Profile": "Profile",
+    "Section_Profile": "Profile",
     "Profile_EnableThirdParty": "In order to enable the functions below, you have to add a Dota 2 profile",
     "Profile_YourProfile": "Your profile",
     "Profile_LastSearch": "Last profile search:",
@@ -218,13 +220,13 @@
     "Profile_Replace": "Replace the Dota 2 user profile",
     "Profile_AddA": "Add a Dota 2 user profile",
 
-    "Database": "Heroes & Items database:",
+    "Section_Database": "Heroes & Items database:",
     "Database_AutoCheck": "Automatically check for Wiki updates",
     "Database_CheckWiki": "Check for Wiki updates",
     "Database_ClearWiki": "Clear wiki",
     "Database_DowngradeWiki": "Downgrade wiki",
 
-    "App": "App settings:",
+    "Section_App": "App settings:",
     "App_Tips": "In-app tips",
     "App_CheckUpdate": "Check for App updates",
     "App_ResetToDefault": "Reset to default settings",
@@ -263,7 +265,7 @@
 
   "Screen_Stats": {
     "TypeProfileName": "Type in profile name to look up",
-    "Search": "Search",
+    "Label_Search": "Search",
 
     "LastMatch": "Last match:",
     "CouldNotFind": "Could not find any results for"
@@ -284,12 +286,12 @@
   },
 
   "Screen_Tips": {
-    "Introduction": "Introduction",
-    "Universal": "Universal",
-    "Beginner": "Beginner",
-    "Intermediate": "Intermediate",
-    "Advanced": "Advanced",
-    "Heroes": "Heroes"
+    "Label_Introduction": "Introduction",
+    "Label_Universal": "Universal",
+    "Label_Beginner": "Beginner",
+    "Label_Intermediate": "Intermediate",
+    "Label_Advanced": "Advanced",
+    "Label_Heroes": "Heroes"
   }
 
 }

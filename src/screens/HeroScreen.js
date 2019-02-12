@@ -52,47 +52,47 @@ export default class HeroScreen extends React.PureComponent {
     
     return (
       <Container scrollable style={styles.container} >
-        <Card title={t("HypeandStats")}>
+        <Card title={t("Section_HypeandStats")}>
           <Text style={styles.hype}>{hype}</Text>
 
           <Attributes attributes={attributes} tag={tag} />
         </Card>
 
-        <Card title={t("Talents")} showTitleWhenOpened>
+        <Card title={t("Section_Talents")} showTitleWhenOpened>
           <Talents talents={talents} />
         </Card>
 
-        <Card title={t("Abilities")} showTitleWhenOpened>
+        <Card title={t("Section_Abilities")} showTitleWhenOpened>
           <Abilities abilities={abilities} />
         </Card>
 
         { !abilities_special || abilities_special.length == 0 ? null :
-          <Card title={t("SpecialAbilities")} showTitleWhenOpened>
+          <Card title={t("Section_SpecialAbilities")} showTitleWhenOpened>
             <Abilities abilities={abilities_special} />
           </Card>  
         }
 
         { !abilities_aghs || abilities_aghs.length == 0 ? null :
-          <Card title={t("AghanimAbilities")}  showTitleWhenOpened>
+          <Card title={t("Section_AghanimAbilities")}  showTitleWhenOpened>
             <Abilities abilities={abilities_aghs} />
           </Card>  
         }
 
         { !abilities_hidden || abilities_hidden.length == 0 ? null :
-          <Card title={t("HiddenAbilities")}  showTitleWhenOpened>
+          <Card title={t("Section_HiddenAbilities")}  showTitleWhenOpened>
             <Abilities abilities={abilities_hidden} />
           </Card>  
         }
 
-        <Card title={t("Biography")} showTitleWhenOpened>
+        <Card title={t("Section_Biography")} showTitleWhenOpened>
           <HTML htmlContent={bio} style={{ backgroundColor: Colors.dota_ui1 }} />
         </Card>
 
-        <Card title={t("RecommendedItemBuild")} showTitleWhenOpened>
+        <Card title={t("Section_RecommendedItemBuild")} showTitleWhenOpened>
           <ItemBuild item_builds={item_builds} />
         </Card>
 
-        <Card title={t("HeroChangelog")} showTitleWhenOpened>
+        <Card title={t("Section_HeroChangelog")} showTitleWhenOpened>
           <Changelog hero_tag={tag} />
         </Card>
       </Container>

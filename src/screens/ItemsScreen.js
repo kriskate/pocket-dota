@@ -42,7 +42,7 @@ export default class Itemscreen extends React.Component {
     items.forEach(item => {
       const { category } = item;
       const parsed = parseCategory(category);
-      const translated_category = t(parsed);
+      const translated_category = t("ItemType_" + parsed);
       let section = itemSections.find(({ title }) => title == translated_category);
 
       if(!section) {

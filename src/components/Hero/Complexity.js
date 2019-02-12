@@ -21,7 +21,7 @@ export default class Complexity extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>{t("Complexity")} </Text>
+        <Text style={styles.title}>{t("Label_Complexity")} </Text>
         <View style={styles.complexityLevels}>
           { this._renderComplexity(level) }
         </View>

@@ -123,7 +123,7 @@ export default class StatsScreen extends React.Component {
               onChangeText={this._handleChange}
               value={search_text}
             />
-            <Button style={styles.searchButton} onPress={this._handleSubmit}><Text>{t("Search")}</Text></Button>
+            <Button style={styles.searchButton} onPress={this._handleSubmit}><Text>{t("Label_Search")}</Text></Button>
           </View>
           { !lastSearch ? null : <Results navigation={navigation} lastSearch={lastSearch} lastSearchResults={lastSearchResults} /> }
         </Container>
