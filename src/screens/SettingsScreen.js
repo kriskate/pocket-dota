@@ -156,7 +156,7 @@ export default class SettingsScreen extends React.PureComponent {
           { name ? null : <Text style={styles.noprofile}>{"In order to enable the functions below, you have to add a Dota 2 profile"}</Text> }
 
           <Button disabled={!name} prestyled style={styles.versionButton}
-              onPress={() => navigate(SCREEN_LABELS_HIDDEN.STATS_WEB, { player: {...user, personaname: name} })}>
+              onPress={() => navigate(SCREEN_LABELS_HIDDEN.STATS_WEB, { data: {...user, personaname: name} })}>
             <Text>Your profile</Text>
             <Text style={{ color: Colors.goldenrod}}>{name ? name : ''}</Text>
           </Button>
