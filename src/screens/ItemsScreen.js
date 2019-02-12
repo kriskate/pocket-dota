@@ -34,8 +34,6 @@ export default class Itemscreen extends React.Component {
   }
 
   static getDerivedStateFromProps(newProps) {
-    console.log('props', newProps)
-
     const { items, t } = newProps;
     
     const itemSections = [];
@@ -63,7 +61,6 @@ export default class Itemscreen extends React.Component {
   }
 
   render() {
-    console.log('render')
     const { itemSections } = this.state;
 
     return (

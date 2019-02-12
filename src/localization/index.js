@@ -19,11 +19,6 @@ export const dota2com_languages = {
   "ru-RU": 'russian',
 }
 
-console.log("locale", Localization.locale)
-Localization.getLocalizationAsync().then(({ locale }) => {
-  console.log("locale async", locale);
-});
-
 const languageDetector = {
   type: 'languageDetector',
   async: true,
