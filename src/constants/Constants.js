@@ -29,16 +29,6 @@ export const ITEM_CONSTANTS = {
   }
 }
 
-export const HOME_LABELS = {
-  HEROES: 'HEROES',
-  ITEMS: 'ITEMS',
-
-  PATCH_NOTES: 'PATCH NOTES',
-  TIPS: 'TIPS',
-
-  STATS: 'PLAYER STATISTICS',
-  SETTINGS: 'SETTINGS',
-}
 export const SCREEN_LABELS = {
   HOME: 'Home',
 

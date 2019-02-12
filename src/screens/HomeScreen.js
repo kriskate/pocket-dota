@@ -4,9 +4,10 @@ import { Thumbnail, Container } from '../components/ui/';
 import { connect } from 'react-redux';
 
 import Colors from '../constants/Colors';
-import { HOME_LABELS, SCREEN_LABELS, SCREEN_LABELS_HIDDEN } from '../constants/Constants';
+import { SCREEN_LABELS, SCREEN_LABELS_HIDDEN } from '../constants/Constants';
 import { assets } from '../constants/Data';
 import Layout from '../constants/Layout';
+import { withNamespaces } from 'react-i18next';
 
 
 const MenuItem = ({onPress, label, cardImage, profileImage}) => (
@@ -27,6 +28,7 @@ const MenuItem = ({onPress, label, cardImage, profileImage}) => (
   </View>
 );
 
+@withNamespaces("Constants")
 @connect(state => ({
   user: state.profile.user,
   showProfileOnHome: state.profile.settings.showProfileOnHome,
@@ -36,22 +38,23 @@ export default class HomeScreen extends React.PureComponent {
   render() {
     const { name, image, account_id } = this.props.user;
     const { navigate } = this.props.navigation;
+    const { t } = this.props;
 
     return (
       <Container scrollable>
 
-        <MenuItem onPress={() => navigate(SCREEN_LABELS.HEROES)} label={HOME_LABELS.HEROES}
+        <MenuItem onPress={() => navigate(SCREEN_LABELS.HEROES)} label={t("HOME_LABELS.HEROES")}
           cardImage={assets.app.menuHeroes} />
-        <MenuItem onPress={() => navigate(SCREEN_LABELS.ITEMS)} label={HOME_LABELS.ITEMS}
+        <MenuItem onPress={() => navigate(SCREEN_LABELS.ITEMS)} label={t("HOME_LABELS.ITEMS")}
           cardImage={assets.app.menuItems} />
 
-        <MenuItem onPress={() => navigate(SCREEN_LABELS.PATCH_NOTES)} label={HOME_LABELS.PATCH_NOTES}
+        <MenuItem onPress={() => navigate(SCREEN_LABELS.PATCH_NOTES)} label={t("HOME_LABELS.PATCH_NOTES")}
           cardImage={assets.app.menuPatch} />
 
-        <MenuItem onPress={() => navigate(SCREEN_LABELS.TIPS)} label={HOME_LABELS.TIPS}
+        <MenuItem onPress={() => navigate(SCREEN_LABELS.TIPS)} label={t("HOME_LABELS.TIPS")}
           cardImage={assets.app.menuTips} />
 
-        <MenuItem onPress={() => navigate(SCREEN_LABELS.STATS)} label={HOME_LABELS.STATS}
+        <MenuItem onPress={() => navigate(SCREEN_LABELS.STATS)} label={t("HOME_LABELS.STATS")}
           cardImage={assets.app.menuStats} />
         { !image || !this.props.showProfileOnHome ? null :
           <MenuItem onPress={() => navigate(SCREEN_LABELS_HIDDEN.STATS_WEB, { data: { account_id, personaname: name } })} label={name}
@@ -59,7 +62,7 @@ export default class HomeScreen extends React.PureComponent {
             profileImage={image} /> 
         }
 
-        <MenuItem onPress={() => navigate(SCREEN_LABELS.SETTINGS)} label={HOME_LABELS.SETTINGS}
+        <MenuItem onPress={() => navigate(SCREEN_LABELS.SETTINGS)} label={t("HOME_LABELS.SETTINGS")}
           cardImage={assets.app.menuSettings} />
 
       </Container>
