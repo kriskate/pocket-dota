@@ -5,9 +5,9 @@ import { Actions } from '../reducers/profile';
 import { headerStyle } from '../utils/screen';
 
 import Layout from '../constants/Layout';
-import { SCREEN_LABELS_HIDDEN } from '../constants/Constants';
 import { Container, Switch } from '../components/ui';
 import { withNamespaces } from 'react-i18next';
+import i18next from 'i18next';
 
 
 @withNamespaces("Screen_SettingsAppTips")
@@ -21,7 +21,7 @@ import { withNamespaces } from 'react-i18next';
 )
 export default class SettingsTipsScreen extends React.Component {
   static navigationOptions = () => ({
-    title: SCREEN_LABELS_HIDDEN.SETTINGS_TIPS,
+    title: i18next.t("Constants:SCREEN_LABELS.SETTINGS_TIPS"),
     ...headerStyle,
   });
 

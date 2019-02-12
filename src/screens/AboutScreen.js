@@ -3,11 +3,12 @@ import { StyleSheet, Image, View, Platform } from 'react-native';
 import { Container, Text } from '../components/ui';
 
 import { headerStyle } from '../utils/screen';
-import { SCREEN_LABELS, URLS, APP_VERSION } from '../constants/Constants';
+import { URLS, APP_VERSION } from '../constants/Constants';
 import Layout from '../constants/Layout';
 import Colors from '../constants/Colors';
 import { assets } from '../constants/Data';
 import { withNamespaces } from 'react-i18next';
+import i18next from 'i18next';
 
 
 const Section = ({ title, children }) => (
@@ -22,7 +23,7 @@ const Section = ({ title, children }) => (
 @withNamespaces("Screen_About")
 export default class AboutScreen extends React.Component {
   static navigationOptions = () => ({
-    title: SCREEN_LABELS.ABOUT,
+    title: i18next.t("Constants:SCREEN_LABELS.ABOUT"),
     ...headerStyle,
   });
   

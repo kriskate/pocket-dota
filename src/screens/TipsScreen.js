@@ -4,10 +4,11 @@ import { connect } from 'react-redux';
 import { Container, Text, Button } from '../components/ui';
 
 import { headerStyle, animation } from '../utils/screen';
-import { SCREEN_LABELS, ICONS } from '../constants/Constants';
+import { ICONS } from '../constants/Constants';
 import Layout from '../constants/Layout';
 import { url } from '../constants/Data';
 import { withNamespaces } from 'react-i18next';
+import i18next from 'i18next';
 
 
 class Section extends React.Component {
@@ -75,7 +76,7 @@ class Section extends React.Component {
 }))
 export default class TipsScreen extends React.Component {
   static navigationOptions = () => ({
-    title: SCREEN_LABELS.TIPS,
+    title: i18next.t("Constants:SCREEN_LABELS.TIPS"),
     ...headerStyle,
   });
 

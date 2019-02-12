@@ -15,6 +15,7 @@ import { wiki_needsUpdate, app_needsUpdate } from '../utils/updaters';
 import { alertUpdateCheckError, alertUpdateCheckAvailable, alertRemoveProfileData, alertResetSettings } from '../utils/Alerts';
 import { sleep } from '../utils/utils';
 import { withNamespaces } from 'react-i18next';
+import i18next from 'i18next';
 
 
 const Section = ({ label, children }) => (
@@ -63,7 +64,7 @@ const TYPES = {
 )
 export default class SettingsScreen extends React.PureComponent {
   static navigationOptions = () => ({
-    title: SCREEN_LABELS.SETTINGS,
+    title: i18next.t("Constants:SCREEN_LABELS.SETTINGS"),
     ...headerStyle,
   });
 

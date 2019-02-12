@@ -3,7 +3,7 @@ import { View, ActivityIndicator, StyleSheet, TextInput, Keyboard, TouchableWith
 import { Container, Text, Button } from '../components/ui';
 
 import { headerStyle } from '../utils/screen';
-import { SCREEN_LABELS, URL_ODOTA, SCREEN_LABELS_HIDDEN } from '../constants/Constants';
+import { URL_ODOTA, SCREEN_LABELS_HIDDEN } from '../constants/Constants';
 import Colors from '../constants/Colors';
 import Layout from '../constants/Layout';
 import { model_odota } from '../constants/Models';
@@ -12,6 +12,7 @@ import { Actions } from '../reducers/profile';
 import { showTip } from '../components/AppTips';
 import RequiresConnection from '../utils/RequiresConnection';
 import { withNamespaces } from 'react-i18next';
+import i18next from 'i18next';
 
 
 @withNamespaces("Screen_Stats")
@@ -88,7 +89,7 @@ export default class StatsScreen extends React.Component {
     }
   }
   static navigationOptions = ({ navigation }) => ({
-    title: SCREEN_LABELS.STATS,
+    title: i18next.t("Constants:SCREEN_LABELS.STATS"),
     ...headerStyle,
   });
 

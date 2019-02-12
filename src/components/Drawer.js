@@ -9,8 +9,9 @@ import Colors from '../constants/Colors';
 import { assets } from '../constants/Data';
 import Layout from '../constants/Layout';
 import { showTip } from './AppTips';
+import { withNamespaces } from 'react-i18next';
 
-const ListItem = ({ label, navigation, selected }) => (
+const ListItem = ({ label, navigation, selected, t }) => (
   <Button viewStyle={[styles.item, selected && styles.selectedItem]} 
       onPress={() => {
         if(selected) navigation.closeDrawer()
@@ -18,18 +19,19 @@ const ListItem = ({ label, navigation, selected }) => (
           showTip("drawerSlide");
 
           const navigateAction = NavigationActions.navigate({
-            routeName: label,
-            action: NavigationActions.navigate({ routeName: label }),
+            routeName: SCREEN_LABELS[label],
+            action: NavigationActions.navigate({ routeName: SCREEN_LABELS[label] }),
           });
 
           navigation.dispatch(navigateAction);
         }
       } }>
-    <Text style={styles.label}>{ label }</Text>
+    <Text style={styles.label}>{ t(`SCREEN_LABELS.${label}`) }</Text>
   </Button>
 )
 const ListHeader = ({ label }) => <View style={styles.labelHeader}><Text style={styles.labelHeaderText}>{label}</Text></View>
 
+@withNamespaces("Constants")
 export default class Drawer extends React.Component {  
   // if home, there is no key, as Home is not in the drawer by default
   _selected = (label) => {
@@ -39,7 +41,7 @@ export default class Drawer extends React.Component {
   }
   
   render() {
-    const { navigation } = this.props;
+    const { navigation, t } = this.props;
 
     return (
       <Container scrollable>
@@ -52,9 +54,9 @@ export default class Drawer extends React.Component {
 
         { Object.keys(SCREEN_LABELS).map(label =>
           label.substr(0, 6) == 'HEADER'
-            ? <ListHeader key={label} label={SCREEN_LABELS[label]} />
-            : <ListItem key={label} label={SCREEN_LABELS[label]} navigation={navigation} 
-                selected={this._selected(SCREEN_LABELS[label])} />
+            ? <ListHeader key={label} label={t(`SCREEN_LABELS.${label}`)} />
+            : <ListItem key={label} label={label} navigation={navigation} 
+                selected={this._selected(SCREEN_LABELS[label])} t={t} />
         ) }
       </Container>
     );

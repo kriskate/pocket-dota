@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { StyleSheet } from 'react-native';
 
 import { headerStyle } from '../utils/screen';
-import { SCREEN_LABELS, SCREEN_LABELS_HIDDEN } from '../constants/Constants';
+import { SCREEN_LABELS_HIDDEN } from '../constants/Constants';
 
 import { Container } from '../components/ui';
 import ListScreen from '../components/ListScreen';
@@ -13,6 +13,7 @@ import { model_section } from '../constants/Models';
 import Colors from '../constants/Colors';
 import { parseCategory } from '../utils/utils';
 import { withNamespaces } from 'react-i18next';
+import i18next from 'i18next';
 
 
 @withNamespaces("Screen_Items")
@@ -21,7 +22,7 @@ import { withNamespaces } from 'react-i18next';
 }))
 export default class Itemscreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: SCREEN_LABELS.ITEMS,
+    title: i18next.t("Constants:SCREEN_LABELS.ITEMS"),
     ...headerStyle,
   });
 

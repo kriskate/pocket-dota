@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, } from 'react-native';
 import { connect } from 'react-redux';
 
-import { SCREEN_LABELS, SCREEN_LABELS_HIDDEN, ATTRIBUTES } from '../constants/Constants';
+import { SCREEN_LABELS_HIDDEN, ATTRIBUTES } from '../constants/Constants';
 import { Container } from '../components/ui';
 import { url } from '../constants/Data';
 import Colors from '../constants/Colors';
@@ -11,6 +11,7 @@ import { headerStyle } from '../utils/screen';
 import ListScreen from '../components/ListScreen';
 import { model_section } from '../constants/Models';
 import { withNamespaces } from 'react-i18next';
+import i18next from 'i18next';
 
 
 const _getHeroSections = (heroes, t) => {    
@@ -51,7 +52,7 @@ const _getHeroSections = (heroes, t) => {
 }))
 export default class HeroesScreen extends React.PureComponent {
   static navigationOptions = () => ({
-    title: SCREEN_LABELS.HEROES,
+    title: i18next.t("Constants:SCREEN_LABELS.HEROES"),
     ...headerStyle,
   });
   constructor(props) {
