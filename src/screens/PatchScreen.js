@@ -8,6 +8,7 @@ import { url } from "../constants/Data";
 import { model_patch_notes_hero, model_patch_notes_general, model_hero } from '../constants/Models';
 import Layout from '../constants/Layout';
 import Colors from '../constants/Colors';
+import InfiniteScollFlatList from '../components/InfiniteScrollFlatList';
 
 
 const Descriptions = ({ descriptions }) => !descriptions.length || descriptions.length == 0 ? null
@@ -64,8 +65,10 @@ export default class PatchScreen extends React.Component {
 
     return (
       <Container scrollable style={styles.container}>
-        <FlatList
+        <InfiniteScollFlatList
           initialNumToRender={6}
+          // maxToRenderPerBatch={1}
+          // updateCellsBatchingPeriod={100}
           keyExtractor={(item) => item.name}
           data={heroes}
           renderItem={({item}) => {

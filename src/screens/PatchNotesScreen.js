@@ -6,6 +6,7 @@ import { headerStyle } from '../utils/screen';
 import { SCREEN_LABELS } from '../constants/Constants';
 import { connect } from 'react-redux';
 import Patch from '../components/Patch/Patch';
+import InfiniteScollFlatList from '../components/InfiniteScrollFlatList';
 
 
 @connect(state => ({
@@ -22,9 +23,11 @@ export default class PatchNotesScreen extends React.Component {
     const { navigate } = this.props.navigation;
 
     return (
-      <Container scrollable backToHome>
-        <FlatList
+      <Container backToHome>
+        <InfiniteScollFlatList
           initialNumToRender={5}
+          maxToRenderPerBatch={5}
+          updateCellsBatchingPeriod={100}
           keyExtractor={(item) => item}
           data={Object.keys(patch_notes).reverse()}
           renderItem={({item}) => (
