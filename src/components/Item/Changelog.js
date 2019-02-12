@@ -47,14 +47,20 @@ export default class Changelog extends React.Component {
       });
     });
     
-    return (
+    if(notes.length == 0) return null
+    return [
+      <Text style={{
+        color: Colors.dota_radiant,
+        fontWeight: 'bold',
+        textAlign: 'center',
+      }}>Item changelog:</Text>,
       <FlatList
         data={notes}
         renderItem={this._renderPatch}
         keyExtractor={(item) => item.patch}
         numColumns={1}
       />
-    )
+    ]
   }
 }
 
