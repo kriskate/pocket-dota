@@ -38,7 +38,7 @@ export default class HomeScreen extends React.PureComponent {
     const { navigate } = this.props.navigation;
 
     return (
-      <Container scrollable>
+      <Container scrollable bounces={false}>
 
         <MenuItem onPress={() => navigate(SCREEN_LABELS.HEROES)} label={HOME_LABELS.HEROES}
           cardImage={assets.app.menuHeroes} />
