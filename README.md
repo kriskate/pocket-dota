@@ -18,13 +18,16 @@ You will also be featured in a dedicated **Contributors** page within the app, a
 > *Note: the app has no translations integrated at the moment, but the logic for the translations is written. They will be available soon.*
 
 If you'd like to contribute to the app's translations, check out [Pocket Dota's crowdin page](https://crowdin.com/project/pocket-dota).
-Currently, the supported languages are: ( :white_check_mark: means it's already done) 
+The sign-up process and hands-on translation process are really straightforward.
+
+Currently, the supported languages are: ( :white_check_mark: means it's already done)
+
 | Language                 | Done                         |
 | -----------------------: | :-----------------------: |
 | "de-DE": "Deutsch"       |  |
 | "en-US": "English"       | :white_check_mark: |
 | "es-ES": "Español"       |  |
-| 'fr-FR": "French"        |  |
+| 'fr-FR": "Français"      |  |
 | "ja-JP": "日本語"         |  |
 | "ro-RO": "Română"        | :white_check_mark: |
 | "ru-RU": "Русский"        |  |
