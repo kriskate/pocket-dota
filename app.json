@@ -29,7 +29,7 @@
       "./src/assets/images/*"
     ],
     "ios": {
-      "bundleIdentifier": "kriskate.pocket-dota",
+      "bundleIdentifier": "kriskate.pocketdota",
       "buildNumber": "1.0.0",
       "icon": "./src/assets/images/app-icon.png",
   
