@@ -42,7 +42,7 @@ export default class Drawer extends React.Component {
     const { navigation } = this.props;
 
     return (
-      <Container scrollable>
+      <Container scrollable bounces={false}>
         <Image style={styles.imgBackground} source={assets.app.menuProfile} />
         <View style={styles.imgIconWrapper}>
           <Image style={styles.imgIcon} source={assets.app.logoRed} />
