@@ -209,7 +209,7 @@ export default class SettingsScreen extends React.PureComponent {
           />
 
           <Button prestyled warning
-            title={t("App_ResetoDefault")}
+            title={t("App_ResetToDefault")}
             onPress={this._resetSettings} />
         </Section>
 

@@ -51,7 +51,7 @@ class HTML extends React.PureComponent {
 }
 
 
-@withNamespaces("Screen_Item")
+@withNamespaces(["Screen_Item", "Screen_Items"])
 export default class ItemScreen extends React.PureComponent {
   static navigationOptions = ({ navigation }) => {
     const { category, name } = navigation.getParam('data');
@@ -120,7 +120,7 @@ export default class ItemScreen extends React.PureComponent {
           <View style={styles.stat}>
             <Text>{t("Label_ItemCategory")} </Text>
             <Text style={[styles.textHighlight, {color: Colors.items[_category]} ]}>
-              {t("ItemType_" + _category)}
+              {t("Screen_Items:ItemType_" + _category)}
             </Text>
           </View>
           <HTML htmlContent={attrib} style={styles.attrib} />

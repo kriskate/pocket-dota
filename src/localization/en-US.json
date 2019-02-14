@@ -16,7 +16,7 @@
     "CannotUpdate": "Pocket Dota is trying to update it's Wiki to a version higher than {{version}}, but has encountered an error. \r\nThere might be a problem with your connection; please restart the app and make sure you're connected to the internet. \r\n\r\nTHIS UPDATE IS HIGHLY RECOMMENDED - if the update is not made, the application might not show the data correctly; this might lead to a crash due to lack of correct data.",
 
     "UpdateCheckAvailable_Title": "New {{What}} version found! ({{newVersion}})",
-    "UpdateCheckAvailable": "A new {{What}} version has been found. \r\nWould you like to begin downloading it? \r\nIt is recomended to be connected to a WI-FI network before downloading new data.",
+    "UpdateCheckAvailable": "A new {{What}} version has been found. ({{newVersion}}) \r\nWould you like to begin downloading it? \r\nIt is recomended to be connected to a WI-FI network before downloading new data.",
     "UpdateCheckError": "There was an error while trying to retrieve new {{What}} version \r\n{{error}} \r\nPlease try again later.",
     
     "RemoveProfileData_Title": "Are you sure you want to remove your profile data?",
