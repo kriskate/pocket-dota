@@ -160,7 +160,6 @@ export default class ItemScreen extends React.PureComponent {
         }
 
         <View style={styles.components}>
-          <Text style={styles.componentsText}>{t("Label_ItemChangelog")}</Text>
           <Changelog item_tag={tag} />
         </View>
 

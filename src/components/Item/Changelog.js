@@ -5,8 +5,10 @@ import { FlatList, StyleSheet, View } from 'react-native';
 import Layout from '../../constants/Layout';
 import { Text } from '../ui';
 import Colors from '../../constants/Colors';
+import { withNamespaces } from 'react-i18next';
 
 
+@withNamespaces("Screen_Item")
 @connect(state => ({
   patch_notes: state.wiki.patch_notes
 }))
@@ -53,7 +55,7 @@ export default class Changelog extends React.Component {
         color: Colors.dota_radiant,
         fontWeight: 'bold',
         textAlign: 'center',
-      }}>Item changelog:</Text>,
+      }}>{t("Label_ItemChangelog")}</Text>,
       <FlatList key="patch-list"
         data={notes}
         renderItem={this._renderPatch}
