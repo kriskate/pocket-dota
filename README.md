@@ -17,6 +17,8 @@ You will also be featured in a dedicated **Contributors** page within the app, a
 
 > *Note: the app has no translations integrated at the moment, but the logic for the translations is written. They will be available soon.*
 
+> *As a general rule, please don't make the text lengths much longer than the original English ones, as this might affect Pocket Dota's appearance.*
+
 If you'd like to contribute to the app's translations, check out [Pocket Dota's crowdin page](https://crowdin.com/project/pocket-dota).
 The sign-up process and hands-on translation process are really straightforward.
 
