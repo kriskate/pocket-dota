@@ -2,7 +2,8 @@
   "minWikiVersion": "36",
   "changelog": {
     "1.1.0": "Hero talent tree; Scrollable Homescreen with new items (Tip, Patch Notes, Settings); Dota 2 game tips; Patch notes; No images recache at wiki update",
-    "1.2.0": "Hero roles; Hero complexity; Hero advanced attributes; Hero changelog (from Patch notes); Item changelog (from Patch notes); Expo SDK upgrade; Various performance enhancements;"
+    "1.2.0": "Hero roles; Hero complexity; Hero advanced attributes; Hero changelog (from Patch notes); Item changelog (from Patch notes); Expo SDK upgrade; Various performance enhancements;",
+    "2.0.0": "Added translations engine; Various UI tweaks (eg: disable menu bounce on IOS);"
   },
   "expo": {
     "version": "1.2.0",
