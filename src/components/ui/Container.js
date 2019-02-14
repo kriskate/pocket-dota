@@ -26,7 +26,7 @@ export default class Container extends React.Component {
   }
 
   render() {
-    const { style, children, padTop, padInner, scrollable, bounces } = this.props;
+    const { style, children, padTop, padInner, scrollable, bounces, snapToInterval } = this.props;
     
     const paddingTop = padTop ? getStatusBarHeight() : undefined;
     const padding = padInner ? Layout.padding_regular : undefined;
@@ -34,7 +34,7 @@ export default class Container extends React.Component {
 
     return scrollable 
       ? <View style={styles.container}>
-          <ScrollView bounces={bounces !== false}>
+          <ScrollView bounces={bounces !== false} snapToInterval={snapToInterval}>
             <View style={_style}>
               {children}
             </View>

@@ -49,7 +49,7 @@ export default class HomeScreen extends React.PureComponent {
     
 
     return (
-      <Container scrollable bounces={false}>
+      <Container scrollable bounces={false} snapToInterval={rowHeight}>
 
         <MenuItem onPress={() => navigate(SCREEN_LABELS.HEROES)} label={HOME_LABELS.HEROES} height={rowHeight}
           cardImage={assets.app.menuHeroes} />
