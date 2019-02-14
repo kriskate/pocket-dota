@@ -34,7 +34,7 @@ export default class Changelog extends React.Component {
   render() {
     if(!this.state.delayed) return null;
 
-    const { item_tag, patch_notes } = this.props;
+    const { item_tag, patch_notes, t } = this.props;
     const notes = [];
 
     Object.keys(patch_notes).reverse().forEach(patch => {
