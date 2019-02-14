@@ -45,9 +45,10 @@ import { withNamespaces } from 'react-i18next';
 )
 export default class Updater extends React.PureComponent {
   _handleFinishDownLoadingWiki = async (wiki) => {
+    const { t } = this.props;
     this.props.newWiki(wiki);
 
-    if(this.props.downloadingWiki_reason === DOWNLOAD_REASONS.UPDATE) {
+    if(this.props.downloadingWiki_reason === t("DOWNLOAD_REASONS.UPDATE")) {
       alertWikiUpdateDone(this.props.downloadingWiki_version);
     }
 
