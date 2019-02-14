@@ -120,7 +120,7 @@ export default class ItemScreen extends React.PureComponent {
           <View style={styles.stat}>
             <Text>{t("Label_ItemCategory")} </Text>
             <Text style={[styles.textHighlight, {color: Colors.items[_category]} ]}>
-              {category}
+              {t("ItemType_" + _category)}
             </Text>
           </View>
           <HTML htmlContent={attrib} style={styles.attrib} />
