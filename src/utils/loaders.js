@@ -1,4 +1,4 @@
-import { Asset, Font, Icon, FileSystem, Util } from 'expo';
+import { Asset, Font, Icon, FileSystem, Updates } from 'expo';
 import { model_profile, model_wiki } from '../constants/Models';
 import { getItem } from './storage';
 import { assets, folder_data } from '../constants/Data';
@@ -79,7 +79,7 @@ export const test__removeWiki = async () => {
   const remove = async () => {
     await FileSystem.deleteAsync(folder_data, { idempotent: true });
 
-    Util.reload();
+    Updates.reload();
   }
 
   Alert.alert(
