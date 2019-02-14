@@ -91,7 +91,7 @@ export default class extends React.Component {
             thumbStyle={{ backgroundColor: Colors.goldenrod }}
           />
           <Text style={styles.levelText}>
-            { level === 0 ? t("Label_BaseStats") : t("Label_Level") + level }
+            { level === 0 ? t("Label_BaseStats") : t("Label_Level") + " " + level }
           </Text>
         </View>
 
