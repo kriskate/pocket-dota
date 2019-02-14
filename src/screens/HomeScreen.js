@@ -10,8 +10,8 @@ import Layout from '../constants/Layout';
 import { withNamespaces } from 'react-i18next';
 
 
-const MenuItem = ({onPress, label, cardImage, profileImage}) => (
-  <View style={styles.menuRow}>
+const MenuItem = ({height, onPress, label, cardImage, profileImage}) => (
+  <View style={[styles.menuRow, { minHeight: height }]}>
     <TouchableOpacity style={styles.imageWrapper} onPress={onPress}>
       <Image style={styles.image} source={cardImage} />
     </TouchableOpacity>
@@ -36,40 +36,50 @@ const MenuItem = ({onPress, label, cardImage, profileImage}) => (
 
 export default class HomeScreen extends React.PureComponent {
   render() {
+    const { showProfileOnHome } = this.props;
     const { name, image, account_id } = this.props.user;
     const { navigate } = this.props.navigation;
     const { t } = this.props;
 
-    return (
-      <Container scrollable>
+    let rowHeight = 140;
+    const numRows = 6 + (!image || !showProfileOnHome ? 0 : 1);
+    if(Layout.window.height > numRows * rowHeight) {
+      rowHeight = Layout.window.height / numRows;
+    } else {
+      const delta = Math.floor(Layout.window.height / rowHeight);
+      rowHeight = Layout.window.height / delta;
+    }
+    
 
-        <MenuItem onPress={() => navigate(SCREEN_LABELS.HEROES)} label={t("HOME_LABELS.LABEL_HEROES")}
+    return (
+      <Container scrollable bounces={false}>
+
+        <MenuItem onPress={() => navigate(SCREEN_LABELS.HEROES)} label={t("HOME_LABELS.LABEL_HEROES")} height={rowHeight}
           cardImage={assets.app.menuHeroes} />
-        <MenuItem onPress={() => navigate(SCREEN_LABELS.ITEMS)} label={t("HOME_LABELS.LABEL_ITEMS")}
+        <MenuItem onPress={() => navigate(SCREEN_LABELS.ITEMS)} label={t("HOME_LABELS.LABEL_ITEMS")} height={rowHeight}
           cardImage={assets.app.menuItems} />
 
-        <MenuItem onPress={() => navigate(SCREEN_LABELS.PATCH_NOTES)} label={t("HOME_LABELS.LABEL_PATCH_NOTES")}
+        <MenuItem onPress={() => navigate(SCREEN_LABELS.PATCH_NOTES)} label={t("HOME_LABELS.LABEL_PATCH_NOTES")} height={rowHeight}
           cardImage={assets.app.menuPatch} />
 
-        <MenuItem onPress={() => navigate(SCREEN_LABELS.TIPS)} label={t("HOME_LABELS.LABEL_TIPS")}
+        <MenuItem onPress={() => navigate(SCREEN_LABELS.TIPS)} label={t("HOME_LABELS.LABEL_TIPS")} height={rowHeight}
           cardImage={assets.app.menuTips} />
 
-        <MenuItem onPress={() => navigate(SCREEN_LABELS.STATS)} label={t("HOME_LABELS.LABEL_STATS")}
+        <MenuItem onPress={() => navigate(SCREEN_LABELS.STATS)} label={t("HOME_LABELS.LABEL_STATS")} height={rowHeight}
           cardImage={assets.app.menuStats} />
-        { !image || !this.props.showProfileOnHome ? null :
-          <MenuItem onPress={() => navigate(SCREEN_LABELS_HIDDEN.STATS_WEB, { data: { account_id, personaname: name } })} label={name}
+        { !image || !showProfileOnHome ? null :
+          <MenuItem onPress={() => navigate(SCREEN_LABELS_HIDDEN.STATS_WEB, { data: { account_id, personaname: name } })} label={name} height={rowHeight}
             cardImage={assets.app.menuProfile}
             profileImage={image} /> 
         }
 
-        <MenuItem onPress={() => navigate(SCREEN_LABELS.SETTINGS)} label={t("HOME_LABELS.LABEL_SETTINGS")}
+        <MenuItem onPress={() => navigate(SCREEN_LABELS.SETTINGS)} label={t("HOME_LABELS.LABEL_SETTINGS")} height={rowHeight}
           cardImage={assets.app.menuSettings} />
 
       </Container>
     );
   }
 }
-
 
 const styles = StyleSheet.create({
   container: {
@@ -82,7 +92,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     borderWidth: 1,
     borderColor: Colors.dota_red_dark,
-    minHeight: 150,
+    // minHeight: 150,
   },
   imageWrapper: {
     flex: 1,

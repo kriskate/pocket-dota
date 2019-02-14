@@ -218,6 +218,7 @@ const styles = StyleSheet.create({
   },
   mcd: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     justifyContent: 'flex-end',
     borderColor: Colors.dota_ui2,
     borderBottomWidth: 1,

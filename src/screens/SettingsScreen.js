@@ -155,7 +155,7 @@ export default class SettingsScreen extends React.PureComponent {
           { name ? null : <Text style={styles.noprofile}>{t("Profile_EnableThirdParty")}</Text> }
 
           <Button disabled={!name} prestyled style={styles.versionButton}
-              onPress={() => navigate(SCREEN_LABELS_HIDDEN.STATS_WEB, { player: {...user, personaname: name} })}>
+              onPress={() => navigate(SCREEN_LABELS_HIDDEN.STATS_WEB, { data: {...user, personaname: name} })}>
             <Text>{t("Profile_YourProfile")}</Text>
             <Text style={{ color: Colors.goldenrod}}>{name ? name : ''}</Text>
           </Button>

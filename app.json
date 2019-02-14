@@ -2,12 +2,12 @@
   "minWikiVersion": "36",
   "changelog": {
     "1.1.0": "Hero talent tree; Scrollable Homescreen with new items (Tip, Patch Notes, Settings); Dota 2 game tips; Patch notes; No images recache at wiki update",
-    "1.2.0": "Hero roles; Hero complexity; Hero advanced attributes; Hero changelog (from Patch notes); Item changelog (from Patch notes); Expo SDK upgrade"
+    "1.2.0": "Hero roles; Hero complexity; Hero advanced attributes; Hero changelog (from Patch notes); Item changelog (from Patch notes); Expo SDK upgrade; Various performance enhancements;"
   },
   "expo": {
     "version": "1.2.0",
     "name": "Pocket Dota",
-    "description": "Dota 2 refference in you pocket",
+    "description": "Dota 2 reference in you pocket",
     "slug": "pocket-dota",
     "privacy": "public",
     "sdkVersion": "32.0.0",
@@ -29,11 +29,8 @@
       "./src/assets/images/*"
     ],
     "ios": {
-      "supportsTablet": true
-    },
-    "ios": {
-      "bundleIdentifier": "kriskate.pocket-dota",
-      "buildNumber": "1.0.0",
+      "bundleIdentifier": "kriskate.pocketdota",
+      "buildNumber": "1.0.3",
       "icon": "./src/assets/images/app-icon.png",
   
       "merchantId": "kriskate",

@@ -2,6 +2,7 @@ import React from 'react';
 import { View, WebView, ActivityIndicator, StyleSheet, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { Container } from '../components/ui';
+import { Actions } from '../reducers/profile';
 
 import { headerStyle } from '../utils/screen';
 import { URL_ODOTA } from '../constants/Constants';

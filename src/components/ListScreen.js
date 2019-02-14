@@ -36,6 +36,9 @@ class List extends React.PureComponent {
       <View key={title} style={[ styles.section, sectionBorder ]}>
         <Text style={[styles.sectionTitle, color, sectionTitleBorder ]}>{title}</Text>
         <FlatList
+          initialNumToRender={10}
+          maxToRenderPerBatch={1}
+          updateCellsBatchingPeriod={50}
           data={data}
           renderItem={renderItem}
           keyExtractor={keyExtractor}
@@ -88,6 +91,8 @@ export default class ListScreen extends React.PureComponent {
       return (
         <FlatList
           initialNumToRender={initialNumToRender || 1}
+          maxToRenderPerBatch={1}
+          updateCellsBatchingPeriod={100}
           data={itemList}
           renderItem={this._renderList}
           keyExtractor={({title}) => title}
