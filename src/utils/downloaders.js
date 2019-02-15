@@ -62,8 +62,10 @@ export const downloadImages = async (wiki, progress_callback) => {
 
 
 export const downloadWiki = async (wikiInfo, progress_callback) => {
+  await checkFolder(folder_data);
+
   // Logger.debug('downloading new wiki');
-  // wikiInfo is passed in through the update reducer, to the WikiDownloading Component
+  
   let info = wikiInfo || await loadCurrentWikiInfo();
   if(!info) info = await downloadWikiInfo();
 
@@ -77,7 +79,6 @@ export const downloadWiki = async (wikiInfo, progress_callback) => {
   await Promise.all(
     keys.map(async key => {
       // Logger.debug(`downloading data for ${key}`);
-
       await download(
         url.data[key].replace('$WIKI_FOLDER', wikiVersionFolder),
         folder_data,
@@ -91,6 +92,7 @@ export const downloadWiki = async (wikiInfo, progress_callback) => {
     })
   );
 
+  // wikiInfo is passed in through the update reducer, to the WikiDownloading Component
   return await loadWiki();
 }
 
