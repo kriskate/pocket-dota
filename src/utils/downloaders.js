@@ -3,9 +3,10 @@ import { Platform } from 'react-native';
 import { url, folder_data } from '../constants/Data';
 import { loadCurrentWikiInfo, loadWiki, } from './loaders';
 import { model_wiki_info } from '../constants/Models';
+import { CacheManager } from 'react-native-expo-image-cache';
 
-
-export const downloadImages = async (wiki, progress_callback) => {
+// to-do cleanup image downloading
+export const downloadImages = async (wiki, progress_callback, cancel) => {
   // Logger.debug('downloading images');
 
   const { heroes, items, } = wiki;
@@ -27,37 +28,21 @@ export const downloadImages = async (wiki, progress_callback) => {
   const imagesTotal = keys.reduce((res, arr) => res += images[arr].length, 0);
   const step = 1 / imagesTotal;
 
+  let _images = [];
+  keys.forEach(key => {
+    _images = _images.concat(images[key])
+  });
+  // console.log(_images)
+
   return Promise.all(
-    keys.map(async key => {
-      // Logger.debug(`downloading images for -${key}-`)
+    _images.map(async image => {
+      // if(cancel()) return;
 
-      await Promise.all(
-        images[key].map(async image => {
-          await Image.prefetch(image);
-          progress_callback(cProgress += step);
-        })
-      )
-
-      // Logger.silly(`downloaded -${key}-`)
-    })
-  )
-
-  // the caching version is much faster than launching download promises
-  // return Promise.all(
-  //   keys.map(async key => {
-  //     const cFolder = folder_img + `${key}/`;
-  //     await checkFolder(cFolder);
-  //     Logger.silly(`downloading images for -${key}-`);
-      
-  //     await Promise.all(
-  //       images[key].map(async image => {
-  //         await download(image, cFolder);
-  //         progress_callback(cProgress += step);
-  //       })
-  //     );
-  //     Logger.silly(`downloaded images for -${key}-`)
-  //   })
-  // );
+      await CacheManager.get(image).getPath();
+      progress_callback(cProgress += step);
+      // Logger.silly(`downloaded -${image}-`)
+    }
+  ));
 }
 
 
