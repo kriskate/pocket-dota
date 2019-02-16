@@ -1,16 +1,19 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 
-import { Text, Progress } from '../components/ui';
+import { Image, Button, Progress, Text } from '../components/ui';
 import { downloadImages, downloadWiki } from '../utils/downloaders';
 import Colors from '../constants/Colors';
 import { assets } from '../constants/Data';
-import { DOWNLOAD_REASONS } from '../constants/Constants';
+
 import Styles from '../constants/Styles';
 import Layout from '../constants/Layout';
 
+let cancel = false;
+
 export default class WikiDownloading extends React.PureComponent {
   state = {
+    show_cancel: false,
     progress_wiki: 0,
     progress_images: 0,
   }
@@ -30,12 +33,15 @@ export default class WikiDownloading extends React.PureComponent {
     Platform.OS === 'ios' && StatusBar.setNetworkActivityIndicatorVisible(true);
 
     const wiki = await downloadWiki(versionInfo, p => this._progress('wiki', p));
-    if(this.props.reason !== DOWNLOAD_REASONS.UPDATE)
-      await downloadImages(wiki, p => this._progress('images', p));
+    this.setState({ show_cancel: true });
+    await downloadImages(wiki, p => this._progress('images', p), () => cancel);
     
     Platform.OS === 'ios' && StatusBar.setNetworkActivityIndicatorVisible(false);
 
-    onFinish(wiki);
+    if(!cancel) onFinish(wiki);
+  }
+  _cancelDownload = () => {
+    cancel = true;
   }
   
   render() {
@@ -54,21 +60,22 @@ export default class WikiDownloading extends React.PureComponent {
           <Progress label={`Downloading hero data files`} 
             progress={this.state.progress_wiki} />
 
-          { reason == DOWNLOAD_REASONS.UPDATE ? null : 
           <Progress label={`Caching images`} 
             progress={this.state.progress_images} />
-          }
         </View>
 
         <View style={styles.wrapper}>
-          { reason == DOWNLOAD_REASONS.UPDATE && 
-            <Text style={styles.reason}>Updating to version:
-              <Text style={Styles.text_highlight_gold}> {version}</Text>
-            </Text>
-          }
+          <Text style={styles.reason}>Updating to version:
+            <Text style={Styles.text_highlight_gold}> {version}</Text>
+          </Text>
           <Text>{reason}</Text>
         </View>
 
+        {/* { !this.state.show_cancel ? null :
+          <Button prestyled style={Styles.modal_downloading_close_button}
+            title="CANCEL" titleStyle={{ textAlign: 'center' }}
+            onPress={this._cancelDownload} />
+        } */}
       </View>
     )
   }
