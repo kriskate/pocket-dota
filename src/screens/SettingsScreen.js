@@ -14,6 +14,7 @@ import { Actions as UpdateActions, DOWNLOAD_STATE } from '../reducers/update';
 import { wiki_needsUpdate, app_needsUpdate } from '../utils/updaters';
 import { alertUpdateCheckError, alertUpdateCheckAvailable, alertRemoveProfileData, alertResetSettings } from '../utils/Alerts';
 import { sleep } from '../utils/utils';
+import CacheManager from 'react-native-expo-image-cache/dist/src/CacheManager';
 
 
 const Section = ({ label, children }) => (
@@ -69,6 +70,19 @@ export default class SettingsScreen extends React.PureComponent {
   state = {
     checkingWiki: '',
     checkingApp: '',
+    cacheSize: null,
+  }
+
+  async componentDidMount() {
+    const cacheSize = await CacheManager.getCacheSize();
+    this.setState({ cacheSize });
+  }
+  _getCacheSize = () => {
+    const { cacheSize } = this.state;
+    return cacheSize ? Math.round(cacheSize/100)/10 + "MB" : "...";
+  }
+  _clearCache = async () => {
+    await CacheManager.clearCache();
   }
 
   _updateCanceled = (What) => {
@@ -208,6 +222,20 @@ export default class SettingsScreen extends React.PureComponent {
             disabled={appUpdatingMessage && appUpdatingMessage.includes(CHECK_MESSAGES.CHECK)}
             current={APP_VERSION}
           />
+
+          <Button prestyled style={styles.versionButton} >
+            <Text>{"Images cache size"}</Text>
+            <Text style={{ color: Colors.goldenrod }}>{this._getCacheSize()}</Text>
+          </Button>
+
+
+          {/* to-do: add clearingMessage and clear cache
+          <CheckButton label='Clear Image Cache'
+            onPress={this._clearCache}
+            message={this.state.clearingMessage}
+            disabled={wikiUpdatingMessage && wikiUpdatingMessage.includes(CHECK_MESSAGES.CHECK)}
+            current={GET_WIKI_VERSION()}
+          /> */}
 
           <Button prestyled warning
             title="Reset to default settings"
