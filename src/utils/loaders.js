@@ -4,6 +4,7 @@ import { getItem } from './storage';
 import { assets, folder_data, localData } from '../constants/Data';
 import { setWikiVersion } from '../constants/Constants';
 import { Alert } from 'react-native';
+import { CacheManager } from 'react-native-expo-image-cache';
 
 
 export const loadInitialAssets = async () => {
@@ -88,6 +89,11 @@ export const loadCurrentWikiInfo = async () => {
 export const test__removeWiki = async () => {
   const remove = async () => {
     await FileSystem.deleteAsync(folder_data, { idempotent: true });
+    try {
+      await CacheManager.clearCache();
+    } catch(e) {
+      // no folder
+    }
 
     Updates.reload();
   }
