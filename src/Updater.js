@@ -16,6 +16,11 @@ import { Updates } from 'expo';
 import { app_needsUpdate, wiki_needsUpdate } from './utils/updaters';
 
 
+const checkDelay = {
+  wiki: 5000,
+  app: 5000,
+}
+
 @connect(
   (state => ({
     showWiki: state.update.showWiki,
@@ -43,6 +48,11 @@ import { app_needsUpdate, wiki_needsUpdate } from './utils/updaters';
 )
 export default class Updater extends React.PureComponent {
   _handleFinishDownLoadingWiki = async (wiki) => {
+    if(!wiki) {
+      this.props.doneWiki();
+      return;
+    }
+
     this.props.newWiki(wiki);
 
     if(this.props.downloadingWiki_reason === DOWNLOAD_REASONS.UPDATE) {
@@ -70,7 +80,7 @@ export default class Updater extends React.PureComponent {
   async componentDidMount () {
     setTimeout(() => {
       this.props.checkUpdateApp && this._checkUpdate('App');
-    }, 5000);
+    }, checkDelay.app);
 
     /* the wiki modal should be visible if minWikiVersion is not met */
     const cWiki = GET_WIKI_VERSION();
@@ -96,7 +106,7 @@ export default class Updater extends React.PureComponent {
     // also allows redux-persist to load its state
     setTimeout(() => {
       this.props.checkUpdateWiki && this._checkUpdate('Wiki');
-    }, 10000);
+    }, checkDelay.wiki);
   }
 
   _checkUpdate = async (What) => {
