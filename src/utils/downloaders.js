@@ -1,5 +1,5 @@
 import { FileSystem } from 'expo';
-import { Image, Platform } from 'react-native';
+import { Platform } from 'react-native';
 import { url, folder_data } from '../constants/Data';
 import { loadCurrentWikiInfo, loadWiki, } from './loaders';
 import { model_wiki_info } from '../constants/Models';

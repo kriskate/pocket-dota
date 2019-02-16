@@ -1,6 +1,6 @@
 import React from 'react';
-import { Image, Text, TouchableOpacity, View, StyleSheet, } from 'react-native';
-import { Thumbnail, Container } from '../components/ui/';
+import { Text, TouchableOpacity, View, StyleSheet, } from 'react-native';
+import { Container, Image, Thumbnail } from '../components/ui/';
 import { connect } from 'react-redux';
 
 import Colors from '../constants/Colors';

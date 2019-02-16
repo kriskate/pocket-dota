@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { View, Image, StyleSheet } from 'react-native';
-import {  assets } from '../../constants/Data';
-import { Text } from '../ui';
+import { View, StyleSheet, } from 'react-native';
+import { assets } from '../../constants/Data';
+import { Image, Text } from '../ui';
 import { model_ability } from '../../constants/Models';
 import RenderHTML from 'react-native-render-html';
 import Colors from '../../constants/Colors';

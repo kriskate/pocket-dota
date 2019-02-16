@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 
 import { Text, Progress } from '../components/ui';
 import { downloadImages, downloadWiki } from '../utils/downloaders';

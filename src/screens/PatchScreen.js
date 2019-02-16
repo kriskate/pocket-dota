@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, StyleSheet, Image, FlatList } from "react-native";
+import { View, StyleSheet, } from "react-native";
 import { connect } from 'react-redux';
-import { Text, Container } from '../components/ui';
+import { Container, Image, Text } from '../components/ui';
 import { headerStyle } from '../utils/screen';
 
 import { url } from "../constants/Data";

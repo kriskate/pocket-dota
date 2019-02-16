@@ -1,6 +1,7 @@
 import React from 'react';
-import { Image, View, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import Button from './Button';
+import Image from './Image';
 import Text from './Text';
 import Layout from '../../constants/Layout';
 import Colors from '../../constants/Colors';

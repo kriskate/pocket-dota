@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, Image, View, Platform } from 'react-native';
-import { Container, Text } from '../components/ui';
+import { StyleSheet, View, Platform } from 'react-native';
+import { Container, Image, Text } from '../components/ui';
 
 import { headerStyle } from '../utils/screen';
 import { SCREEN_LABELS, URLS, APP_VERSION } from '../constants/Constants';

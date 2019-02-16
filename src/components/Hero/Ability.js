@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { View, Image, StyleSheet, } from 'react-native';
+import { View, StyleSheet, } from 'react-native';
 import { url } from '../../constants/Data';
-import { Text, Button } from '../ui';
+import { Button, Image, Text } from '../ui';
 import Colors from '../../constants/Colors';
 import Layout from '../../constants/Layout';
 
