@@ -5,7 +5,6 @@ import { Constants } from 'expo';
 
 let _wikiVersion;
 export const setWikiVersion = ({ appVersion, wikiVersion }) => {
-  console.log(appVersion, wikiVersion)
   _wikiVersion = !appVersion ? null :
     `${appVersion}-${wikiVersion}`;
 }

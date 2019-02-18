@@ -16,11 +16,9 @@ export const downloadImages = async (wiki, progress_callback, cancel) => {
   const imagesTotal = images.length;
   let cProgress = 0;
   const step = 1 / imagesTotal;
-console.log(imagesTotal)
 
   const promiseProducer = () => {
     if (_processedImages < imagesTotal) {
-      console.log(_processedImages,imagesTotal)
       _processedImages++;
       // return CacheManager.get(flatImages[_processedImages-1]).getPath()
       return Image.prefetch(images[_processedImages - 1])
