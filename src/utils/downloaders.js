@@ -4,8 +4,9 @@ import { url, folder_data } from '../constants/Data';
 import { loadCurrentWikiInfo, loadWiki, } from './loaders';
 import { model_wiki_info } from '../constants/Models';
 import { CacheManager } from 'react-native-expo-image-cache';
+import PromisePool from 'es6-promise-pool';
 
-// to-do cleanup image downloading
+
 export const downloadImages = async (wiki, progress_callback, cancel) => {
   // Logger.debug('downloading images');
 
@@ -22,27 +23,29 @@ export const downloadImages = async (wiki, progress_callback, cancel) => {
   });
   images.items.push(url.images.items('recipe'));
 
-  
-  let cProgress = 0;
   const keys = Object.keys(images);
-  const imagesTotal = keys.reduce((res, arr) => res += images[arr].length, 0);
+  
+  let flatImages = [];
+  keys.forEach(key => {
+    flatImages = flatImages.concat(images[key])
+  });
+
+  let _processedImages = 0;
+  const imagesTotal = flatImages.length;
+  let cProgress = 0;
   const step = 1 / imagesTotal;
 
-  let _images = [];
-  keys.forEach(key => {
-    _images = _images.concat(images[key])
-  });
-  // console.log(_images)
-
-  return Promise.all(
-    _images.map(async image => {
-      // if(cancel()) return;
-
-      await CacheManager.get(image).getPath();
-      progress_callback(cProgress += step);
-      // Logger.silly(`downloaded -${image}-`)
+  const promiseProducer = () => {
+    if (_processedImages < imagesTotal) {
+      _processedImages++;
+      return CacheManager.get(flatImages[_processedImages-1]).getPath()
+        .then(progress_callback(cProgress += step));
+    } else {
+      return null;
     }
-  ));
+  }
+
+  return new PromisePool(promiseProducer, 5).start();
 }
 
 
