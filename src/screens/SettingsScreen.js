@@ -14,6 +14,8 @@ import { Actions as UpdateActions, DOWNLOAD_STATE } from '../reducers/update';
 import { wiki_needsUpdate, app_needsUpdate } from '../utils/updaters';
 import { alertUpdateCheckError, alertUpdateCheckAvailable, alertRemoveProfileData, alertResetSettings } from '../utils/Alerts';
 import { sleep } from '../utils/utils';
+import { FileSystem, Updates } from 'expo';
+import { folder_data } from '../constants/Data';
 
 
 const Section = ({ label, children }) => (
@@ -134,7 +136,12 @@ export default class SettingsScreen extends React.PureComponent {
     alertRemoveProfileData(onYes);
   }
   _resetSettings = () => {
-    const onYes = () => this.props.setProfile(model_profile({}));
+    const onYes = async () => {
+      this.props.setProfile(model_profile({}));
+    
+      await FileSystem.deleteAsync(folder_data, { idempotent: true });
+      Updates.reload();
+    }
     alertResetSettings(onYes);
   }
 
