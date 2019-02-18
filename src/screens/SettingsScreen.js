@@ -77,6 +77,10 @@ export default class SettingsScreen extends React.PureComponent {
     const cacheSize = await CacheManager.getCacheSize();
     this.setState({ cacheSize });
   }
+  async componentDidUpdate() {
+    const cacheSize = await CacheManager.getCacheSize();
+    this.setState({ cacheSize });
+  }
   _getCacheSize = () => {
     const { cacheSize } = this.state;
     return cacheSize ? Math.round(cacheSize/100)/10 + "MB" : "...";
