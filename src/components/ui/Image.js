@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { Image as RNImage, View } from 'react-native';
-import { CacheManager } from 'react-native-expo-image-cache';
+// import { CacheManager } from 'react-native-expo-image-cache';
 import Colors from '../../constants/Colors';
 
 
@@ -13,7 +13,6 @@ export default class Image extends React.Component {
     super(props);
 
     this.state = {
-      stopCache: false,
       source: props.source.uri ? null : props.source,
     }
   }
@@ -24,11 +23,9 @@ export default class Image extends React.Component {
     // if source.uri is present, check the cache for it
     const { source } = this.props;
     
-    const path = await CacheManager.get(source.uri).getPath();
-    if(!this.state.stopCache) this.setState({ source: { uri: path }} );
-  }
-  componentWillUnmount() {
-    this.setState({ stopCache: true })
+    // const path = await CacheManager.get(source.uri).getPath();
+    // this.setState({ source: { uri: path }} );
+    this.setState({ source });
   }
   render() {
     const { source } = this.state;

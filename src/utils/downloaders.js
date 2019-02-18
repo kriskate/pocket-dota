@@ -1,44 +1,29 @@
 import { FileSystem } from 'expo';
-import { Platform } from 'react-native';
+import { Platform, Image } from 'react-native';
 import { url, folder_data } from '../constants/Data';
 import { loadCurrentWikiInfo, loadWiki, } from './loaders';
 import { model_wiki_info } from '../constants/Models';
-import { CacheManager } from 'react-native-expo-image-cache';
 import PromisePool from 'es6-promise-pool';
+import { getWikiImages } from './Images';
 
 
 export const downloadImages = async (wiki, progress_callback, cancel) => {
   // Logger.debug('downloading images');
 
-  const { heroes, items, } = wiki;
-  const images = { icons: [], small: [], vert: [], abilities: [], items: [] };
-
-  heroes.forEach(({ tag, abilities }) => {
-    ['small', 'vert', 'icons'].forEach(type => images[type].push(url.images[type](tag)));
-
-    abilities.forEach(ability => images.abilities.push(url.images.abilities(ability.tag)));
-  });
-  items.forEach(({ tag }) => {
-    images.items.push(url.images.items(tag));
-  });
-  images.items.push(url.images.items('recipe'));
-
-  const keys = Object.keys(images);
+  const images = getWikiImages(wiki);
   
-  let flatImages = [];
-  keys.forEach(key => {
-    flatImages = flatImages.concat(images[key])
-  });
-
   let _processedImages = 0;
-  const imagesTotal = flatImages.length;
+  const imagesTotal = images.length;
   let cProgress = 0;
   const step = 1 / imagesTotal;
+console.log(imagesTotal)
 
   const promiseProducer = () => {
     if (_processedImages < imagesTotal) {
+      console.log(_processedImages,imagesTotal)
       _processedImages++;
-      return CacheManager.get(flatImages[_processedImages-1]).getPath()
+      // return CacheManager.get(flatImages[_processedImages-1]).getPath()
+      return Image.prefetch(images[_processedImages - 1])
         .then(progress_callback(cProgress += step));
     } else {
       return null;

@@ -50,7 +50,7 @@ export const alertUpdateCheckAvailable = (What, newV, onNo, onYes) =>
 `A new ${What} version has been found.
 Would you like to download it?
 It is recomended to be connected to a WI-FI network before downloading new data.
-( download size ~40 MB )`,
+( download size: ~1.4 MB )`,
     [
       { text: 'No', style: 'cancel', onPress: onNo },
       { text: 'Yes', onPress: onYes },

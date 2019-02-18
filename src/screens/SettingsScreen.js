@@ -14,7 +14,6 @@ import { Actions as UpdateActions, DOWNLOAD_STATE } from '../reducers/update';
 import { wiki_needsUpdate, app_needsUpdate } from '../utils/updaters';
 import { alertUpdateCheckError, alertUpdateCheckAvailable, alertRemoveProfileData, alertResetSettings } from '../utils/Alerts';
 import { sleep } from '../utils/utils';
-import CacheManager from 'react-native-expo-image-cache/dist/src/CacheManager';
 
 
 const Section = ({ label, children }) => (
@@ -70,24 +69,24 @@ export default class SettingsScreen extends React.PureComponent {
   state = {
     checkingWiki: '',
     checkingApp: '',
-    cacheSize: null,
+    // cacheSize: null,
   }
 
-  async componentDidMount() {
-    const cacheSize = await CacheManager.getCacheSize();
-    this.setState({ cacheSize });
-  }
-  async componentDidUpdate() {
-    const cacheSize = await CacheManager.getCacheSize();
-    this.setState({ cacheSize });
-  }
-  _getCacheSize = () => {
-    const { cacheSize } = this.state;
-    return cacheSize ? Math.round(cacheSize/100)/10 + "MB" : "...";
-  }
-  _clearCache = async () => {
-    await CacheManager.clearCache();
-  }
+  // async componentDidMount() {
+  //   const cacheSize = await CacheManager.getCacheSize();
+  //   this.setState({ cacheSize });
+  // }
+  // async componentDidUpdate() {
+  //   const cacheSize = await CacheManager.getCacheSize();
+  //   this.setState({ cacheSize });
+  // }
+  // _getCacheSize = () => {
+  //   const { cacheSize } = this.state;
+  //   return cacheSize ? Math.round(cacheSize/100)/10 + "MB" : "...";
+  // }
+  // _clearCache = async () => {
+  //   await CacheManager.clearCache();
+  // }
 
   _updateCanceled = (What) => {
     // is already handled in _checkForUpdate
@@ -227,10 +226,10 @@ export default class SettingsScreen extends React.PureComponent {
             current={APP_VERSION}
           />
 
-          <Button prestyled style={styles.versionButton} >
+          {/* <Button prestyled style={styles.versionButton} >
             <Text>{"Images cache size"}</Text>
             <Text style={{ color: Colors.goldenrod }}>{this._getCacheSize()}</Text>
-          </Button>
+          </Button> */}
 
 
           {/* to-do: add clearingMessage and clear cache
