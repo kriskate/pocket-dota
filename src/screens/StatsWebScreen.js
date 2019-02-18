@@ -36,6 +36,9 @@ const jsString = `
   main.childNodes[main.childNodes.length-1].remove();
   main.childNodes[1].remove();
   main.childNodes[0].remove();
+
+  var showForm = document.getElementsByClassName('showForm')[0];
+  showForm.remove();
   
   function playerInfo() {
     var playerInfoDiv = document.getElementsByClassName('playerInfo')[0];
