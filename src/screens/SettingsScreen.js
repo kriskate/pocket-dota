@@ -16,6 +16,8 @@ import { alertUpdateCheckError, alertUpdateCheckAvailable, alertRemoveProfileDat
 import { sleep } from '../utils/utils';
 import { withNamespaces } from 'react-i18next';
 import i18next from 'i18next';
+import { FileSystem, Updates } from 'expo';
+import { folder_data } from '../constants/Data';
 
 
 const Section = ({ label, children }) => (
@@ -74,8 +76,6 @@ export default class SettingsScreen extends React.PureComponent {
   }
 
   _checkForUpdate = async (What) => {
-    // this._updateToV(What, {newVersion:'3'})
-    // return
     const { updatingWiki, updatingApp, t } = this.props;
 
     const stater = What == TYPES.WIKI ? 'checkingWiki' : 'checkingApp';
@@ -116,7 +116,12 @@ export default class SettingsScreen extends React.PureComponent {
     alertRemoveProfileData(onYes);
   }
   _resetSettings = () => {
-    const onYes = () => this.props.setProfile(model_profile({}));
+    const onYes = async () => {
+      this.props.setProfile(model_profile({}));
+    
+      await FileSystem.deleteAsync(folder_data, { idempotent: true });
+      Updates.reload();
+    }
     alertResetSettings(onYes);
   }
 

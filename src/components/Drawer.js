@@ -1,10 +1,10 @@
 import React from 'react';
 import { NavigationActions } from 'react-navigation';
-import { StyleSheet, View, Image } from 'react-native';
+import { StyleSheet, View, } from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 import { SCREEN_LABELS, APP_VERSION } from '../constants/Constants';
-import { Button, Container, Text } from './ui';
+import { Button, Container, Image, Text } from './ui';
 import Colors from '../constants/Colors';
 import { assets } from '../constants/Data';
 import Layout from '../constants/Layout';

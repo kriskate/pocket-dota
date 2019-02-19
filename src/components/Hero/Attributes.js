@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Image, Animated, Platform } from "react-native";
+import { StyleSheet, View, } from "react-native";
 // todo - when pull request https://github.com/jeanregisser/react-native-slider/pull/137 , change import to regular 'react-native-slider'
 // import Slider from 'react-native-slider';
 import Slider from '../../utils/RNSlider_fork';
@@ -7,7 +7,7 @@ import Slider from '../../utils/RNSlider_fork';
 import { url } from "../../constants/Data";
 import Colors from '../../constants/Colors';
 import { ATTRIBUTES } from '../../constants/Constants';
-import { Text } from '../ui';
+import { Image, Text } from '../ui';
 
 import Attribute from './Attribute';
 import { calculateAttributes, parseAsNumbers } from '../../utils/CalculateAttributes';

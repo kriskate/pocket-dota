@@ -1,7 +1,7 @@
 import { Asset, Font, Icon, FileSystem, Updates } from 'expo';
 import { model_profile, model_wiki } from '../constants/Models';
 import { getItem } from './storage';
-import { assets, folder_data } from '../constants/Data';
+import { assets, folder_data, localData } from '../constants/Data';
 import { setWikiVersion } from '../constants/Constants';
 import { Alert } from 'react-native';
 
@@ -41,10 +41,11 @@ export const loadProfileStateFromStorage = async () => {
 export const loadWiki = async () => {
   // Logger.debug('loading wiki data');
   const data = model_wiki({});
+  const dataFileNames = Object.keys(data);
   let badData = false;
   
   await Promise.all(
-    Object.keys(data).map(async key => {
+    dataFileNames.map(async key => {
       try {
         data[key] = JSON.parse(await FileSystem.readAsStringAsync(folder_data + `${key}.json`));
       } catch(e) {
@@ -54,9 +55,18 @@ export const loadWiki = async () => {
       // Logger.silly(`- loaded local data: wiki : ${key} : ${!!data[key]}`);
     })
   )
-  if(!badData) setWikiVersion(data.info);
   
-  return badData ? null : data;
+  if(badData) {
+    await Promise.all(
+      dataFileNames.map(async dataFile => {
+        data[dataFile] = await localData[dataFile];
+      })
+    )
+  }
+  setWikiVersion(data.info);
+      
+  return data;
+  // return badData ? null : data;
 }
 
 
@@ -78,6 +88,11 @@ export const loadCurrentWikiInfo = async () => {
 export const test__removeWiki = async () => {
   const remove = async () => {
     await FileSystem.deleteAsync(folder_data, { idempotent: true });
+    try {
+      // await CacheManager.clearCache();
+    } catch(e) {
+      // no folder
+    }
 
     Updates.reload();
   }

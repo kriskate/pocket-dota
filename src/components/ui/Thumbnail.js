@@ -1,5 +1,6 @@
 import React from 'react'
-import { Image, StyleSheet } from 'react-native';
+import Image from './Image';
+import { StyleSheet } from 'react-native';
 
 export default class Thumbnail extends React.Component {
   render() {

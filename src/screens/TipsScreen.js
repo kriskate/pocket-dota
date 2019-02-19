@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, StyleSheet, FlatList, LayoutAnimation, Image } from 'react-native';
+import { View, StyleSheet, FlatList, LayoutAnimation } from 'react-native';
 import { connect } from 'react-redux';
-import { Container, Text, Button } from '../components/ui';
+import { Button, Container, Image, Text } from '../components/ui';
 
 import { headerStyle, animation } from '../utils/screen';
 import { ICONS } from '../constants/Constants';

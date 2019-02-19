@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, ActivityIndicator, StyleSheet, TextInput, Keyboard, TouchableWithoutFeedback, Image, FlatList } from 'react-native';
-import { Container, Text, Button } from '../components/ui';
+import { View, ActivityIndicator, StyleSheet, TextInput, Keyboard, TouchableWithoutFeedback, FlatList } from 'react-native';
+import { Button, Container, Image, Text } from '../components/ui';
 
 import { headerStyle } from '../utils/screen';
 import { URL_ODOTA, SCREEN_LABELS_HIDDEN } from '../constants/Constants';

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Image, View, ActivityIndicator, StyleSheet } from 'react-native';
-import { Text, } from './ui';
+import { View, ActivityIndicator, StyleSheet } from 'react-native';
+import { Image, Text, } from './ui';
 
 import Styles from '../constants/Styles';
 import Layout from '../constants/Layout';

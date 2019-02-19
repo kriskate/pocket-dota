@@ -1,69 +1,41 @@
 import { FileSystem } from 'expo';
-import { Image, Platform } from 'react-native';
+import { Platform, Image } from 'react-native';
 import { url, folder_data } from '../constants/Data';
 import { loadCurrentWikiInfo, loadWiki, } from './loaders';
 import { model_wiki_info } from '../constants/Models';
+import PromisePool from 'es6-promise-pool';
+import { getWikiImages } from './Images';
 
 
 export const downloadImages = async (wiki, progress_callback) => {
   // Logger.debug('downloading images');
 
-  const { heroes, items, } = wiki;
-  const images = { icons: [], small: [], vert: [], abilities: [], items: [] };
-
-  heroes.forEach(({ tag, abilities }) => {
-    ['small', 'vert', 'icons'].forEach(type => images[type].push(url.images[type](tag)));
-
-    abilities.forEach(ability => images.abilities.push(url.images.abilities(ability.tag)));
-  });
-  items.forEach(({ tag }) => {
-    images.items.push(url.images.items(tag));
-  });
-  images.items.push(url.images.items('recipe'));
-
+  const images = getWikiImages(wiki);
   
+  let _processedImages = 0;
+  const imagesTotal = images.length;
   let cProgress = 0;
-  const keys = Object.keys(images);
-  const imagesTotal = keys.reduce((res, arr) => res += images[arr].length, 0);
   const step = 1 / imagesTotal;
 
-  return Promise.all(
-    keys.map(async key => {
-      // Logger.debug(`downloading images for -${key}-`)
+  const promiseProducer = () => {
+    if (_processedImages < imagesTotal) {
+      _processedImages++;
+      return Image.prefetch(images[_processedImages - 1])
+        .then(progress_callback(cProgress += step));
+    } else {
+      return null;
+    }
+  }
 
-      await Promise.all(
-        images[key].map(async image => {
-          await Image.prefetch(image);
-          progress_callback(cProgress += step);
-        })
-      )
-
-      // Logger.silly(`downloaded -${key}-`)
-    })
-  )
-
-  // the caching version is much faster than launching download promises
-  // return Promise.all(
-  //   keys.map(async key => {
-  //     const cFolder = folder_img + `${key}/`;
-  //     await checkFolder(cFolder);
-  //     Logger.silly(`downloading images for -${key}-`);
-      
-  //     await Promise.all(
-  //       images[key].map(async image => {
-  //         await download(image, cFolder);
-  //         progress_callback(cProgress += step);
-  //       })
-  //     );
-  //     Logger.silly(`downloaded images for -${key}-`)
-  //   })
-  // );
+  return new PromisePool(promiseProducer, 5).start();
 }
 
 
 export const downloadWiki = async (wikiInfo, progress_callback) => {
+  await checkFolder(folder_data);
+
   // Logger.debug('downloading new wiki');
-  // wikiInfo is passed in through the update reducer, to the WikiDownloading Component
+  
   let info = wikiInfo || await loadCurrentWikiInfo();
   if(!info) info = await downloadWikiInfo();
 
@@ -77,7 +49,6 @@ export const downloadWiki = async (wikiInfo, progress_callback) => {
   await Promise.all(
     keys.map(async key => {
       // Logger.debug(`downloading data for ${key}`);
-
       await download(
         url.data[key].replace('$WIKI_FOLDER', wikiVersionFolder),
         folder_data,
@@ -91,6 +62,7 @@ export const downloadWiki = async (wikiInfo, progress_callback) => {
     })
   );
 
+  // wikiInfo is passed in through the update reducer, to the WikiDownloading Component
   return await loadWiki();
 }
 

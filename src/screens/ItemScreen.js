@@ -1,9 +1,9 @@
 import React from 'react';
-import { Container, Text, Card } from '../components/ui';
+import { Card, Container, Image, Text } from '../components/ui';
 
 import { headerStyle } from '../utils/screen';
 import { model_item, model_item_npc, model_item_bonuses } from '../constants/Models';
-import { Image, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import RenderHTML from 'react-native-render-html';
 
 import { assets, url } from '../constants/Data';

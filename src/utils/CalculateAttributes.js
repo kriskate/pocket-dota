@@ -10,20 +10,20 @@ const bonusesPerPoint = {
   },
   int: {
     mana: 12, // Increases maximum mana by 12.
-    manaRegen: 0.018, // Amplifies mana regeneration by 1.8%.
+    manaRegen: 0.005, // Amplifies mana regeneration by 0.5%.
     spellDamage: 0.0007, // Amplifies spell damage by 0.07%.
   },
   str: {
-    health: 18, // Increases maximum health by 18.
-    healthRegen: 0.0055, // Amplifies health regeneration by 0.55%.
+    health: 20, // Increases maximum health by 20.
+    healthRegen: 0.001, // Amplifies health regeneration by 0.1%.
     magicResistance: 0.0008, // Increases magic resistance by 0.08%.
   }
 }
 
 const multipliers = {
-  agility: (AttributePrimary) => AttributePrimary === ATTRIBUTES.agility ? 1.25 : 1,
-  intelligence: (AttributePrimary) => AttributePrimary === ATTRIBUTES.intelligence ? 1.25 : 1,
-  strength: (AttributePrimary) => AttributePrimary === ATTRIBUTES.strength ? 1.25 : 1,
+  agility: (AttributePrimary) => AttributePrimary === ATTRIBUTES.agility ? 1 : 1,
+  intelligence: (AttributePrimary) => AttributePrimary === ATTRIBUTES.intelligence ? 1 : 1,
+  strength: (AttributePrimary) => AttributePrimary === ATTRIBUTES.strength ? 1 : 1,
 }
 const round = (nr, to=10) => Math.round(nr*to)/to;
 

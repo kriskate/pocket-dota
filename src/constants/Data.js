@@ -94,3 +94,12 @@ export const url = {
     info: `${base_data}info.json`,
   },
 }
+
+
+export const localData = {
+  heroes: require('../data/default-wiki/heroes.json'),
+  items: require('../data/default-wiki/items.json'),
+  patch_notes: require('../data/default-wiki/patch_notes.json'),
+  tips: require('../data/default-wiki/tips.json'),
+  info: require('../data/default-wiki/info.json'),
+}
