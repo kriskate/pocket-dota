@@ -69,15 +69,18 @@ export default class WikiDownloading extends React.PureComponent {
 
     return (
       <View style={styles.container}>
-      <View style={Styles.modal_downloading_body}>
+        <View style={Styles.modal_downloading_body}>
         
-        <View style={styles.wrapper}>
-          <Image resizeMode='contain' style={styles.logo}
-            source={ assets.app.logoRed } 
-          />
-        </View>
+          <View style={styles.wrapper}>
+            <Image resizeMode='contain' style={styles.logo}
+              source={ assets.app.logoRed } 
+            />
+          </View>
 
-        { !wiki ?
+          { !wiki ? null : 
+            <Text style={styles.reason}>Done updating wiki to version <Text style={Styles.text_highlight_gold}>{version}</Text></Text>
+          }
+          { !wiki ?
 
           <View style={styles.wrapper}>
             <Progress label={`Downloading hero data files`} 
@@ -92,24 +95,20 @@ export default class WikiDownloading extends React.PureComponent {
           </View>
           
           :
-          
-          images_consent ?
 
           <View style={styles.wrapper}>
-          <Text style={styles.reason}>Done updating wiki to version <Text style={Styles.text_highlight_gold}>{version}</Text></Text>
+            { images_consent ? 
+          
             <Progress label={`Caching images`} 
               progress={progress_images} />
-          </View>
-
-          :
-
-          <View style={styles.wrapper}>
-            <Text style={styles.reason}>Done updating wiki to version <Text style={Styles.text_highlight_gold}>{version}</Text></Text>
-            <Text>
-{`Would you like to pre-cache the heroes and items images?
-This will ensure that you get the best experience while using Pocket Dota, by not having to wait for the images to load later on.`}
-            </Text>
-            <Text style={styles.mb}>(~8MB)</Text>
+            :
+            <View>
+              <Text>
+                {'Would you like to pre-cache the heroes and items images?\r\nThis will ensure that you get the best experience while using Pocket Dota, by not having to wait for the images to load later on.'}
+              </Text>
+              <Text style={styles.mb}>(~8MB)</Text>
+            </View>
+          }
           </View>
         }
 
@@ -119,11 +118,11 @@ This will ensure that you get the best experience while using Pocket Dota, by no
           wiki && !images_consent ?
           <View style={styles.footer}>
             <Button prestyled style={Styles.modal_downloading_close_button}
-              title="No (close this dialog)" titleStyle={{ textAlign: 'center' }}
-              onPress={() => onFinish(wiki)} />
-            <Button prestyled style={Styles.modal_downloading_close_button}
-              title="Ok" titleStyle={{ textAlign: 'center' }}
+              title="Yes" titleStyle={{ textAlign: 'center' }}
               onPress={this._consentImages} />
+            <Button prestyled style={Styles.modal_downloading_close_button}
+              title="No" titleStyle={{ textAlign: 'center' }}
+              onPress={() => onFinish(wiki)} />
           </View>
           : null
         }
@@ -133,22 +132,22 @@ This will ensure that you get the best experience while using Pocket Dota, by no
 }
 
 const styles = StyleSheet.create({
+
   container: {
     flex: 1,
-    // padding: 25,
-    // paddingVertical: 50,
     justifyContent: 'center',
     backgroundColor: Colors.dota_ui2,
   },
-  textDone: {
-    fontWeight: 'bold',
-    color: Colors.dota_agi,
-    marginBottom: Layout.padding_big * 3,
+  wrapper: {
+    flex: 1,
+    justifyContent: 'center',
   },
-  mb: {
-    textAlign: 'center',
-    color: Colors.disabled,
+  footer: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
   },
+
   logo: {
     flex: 1,
     alignSelf: 'stretch',
@@ -156,15 +155,11 @@ const styles = StyleSheet.create({
     height: undefined
   },
 
-  wrapper: {
-    flex: 1,
-    justifyContent: 'center',
-    // borderColor: 'blue',
-    // borderWidth: 1,
+  mb: {
+    textAlign: 'center',
+    color: Colors.disabled,
   },
-  footer: {
-    justifyContent: 'flex-end',
-  },
+  
   
   reason: {
     color: Colors.dota_agi,
