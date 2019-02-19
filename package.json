@@ -25,7 +25,7 @@
     "react-native-expo-image-cache": "^3.2.0",
     "react-native-hyperlink": "^0.0.14",
     "react-native-modal": "^6.5.0",
-    "react-native-render-html": "^3.10.0",
+    "react-native-render-html": "^4.1.1",
     "react-native-slider": "^0.11.0",
     "react-native-snackbar-component": "kriskate/React-Native-SnackBar-Component#master",
     "react-native-status-bar-height": "2.0.0",
