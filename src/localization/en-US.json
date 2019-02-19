@@ -38,7 +38,9 @@
     "WikiDownloading": {
       "PROGRESS_DATA": "Downloading hero data files",
       "PROGRESS_IMAGES": "Caching images",
-      "PROGRESS_UPDATE_VERSION": "Updating to version:"
+      "PROGRESS_UPDATE_VERSION": "Updating to version:",
+      "UPDATE_DONE": "Done updating wiki to version:",
+      "CONSENT_PRECACHE_IMAGES": "Would you like to pre-cache the images for heroes and items?\r\nThis will ensure that you get the best experience while using Pocket Dota, by not having to wait for the images to load later on."
     },
     
     "DOWNLOAD_REASONS": {

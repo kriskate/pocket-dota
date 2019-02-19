@@ -1,5 +1,6 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { withNamespaces } from 'react-i18next';
 
 import { Image, Button, Progress, Text } from '../components/ui';
 import { downloadImages, downloadWiki } from '../utils/downloaders';
@@ -9,7 +10,7 @@ import { assets } from '../constants/Data';
 import Styles from '../constants/Styles';
 import Layout from '../constants/Layout';
 
-
+@withNamespaces(["Components", "Alerts"])
 export default class WikiDownloading extends React.PureComponent {
   state = {
     progress_wiki: 0,
@@ -64,7 +65,7 @@ export default class WikiDownloading extends React.PureComponent {
   }
   
   render() {
-    const { reason, version, onFinish } = this.props;
+    const { reason, version, onFinish, t } = this.props;
     const { progress_wiki, progress_images, images_consent, wiki } = this.state;
 
     return (
@@ -78,16 +79,18 @@ export default class WikiDownloading extends React.PureComponent {
           </View>
 
           { !wiki ? null : 
-            <Text style={styles.reason}>Done updating wiki to version <Text style={Styles.text_highlight_gold}>{version}</Text></Text>
+            <Text style={styles.reason}>{t("WikiDownloading.UPDATE_DONE")}
+              <Text style={Styles.text_highlight_gold}> {version}</Text>
+            </Text>
           }
           { !wiki ?
 
           <View style={styles.wrapper}>
-            <Progress label={`Downloading hero data files`} 
+            <Progress label={t("WikiDownloading.PROGRESS_DATA")} 
               progress={progress_wiki} />
           
             <View style={styles.wrapper}>
-              <Text style={styles.reason}>Updating to version:
+              <Text style={styles.reason}>{t("WikiDownloading.PROGRESS_UPDATE_VERSION")}
                 <Text style={Styles.text_highlight_gold}> {version}</Text>
               </Text>
               <Text>{reason}</Text>
@@ -99,13 +102,11 @@ export default class WikiDownloading extends React.PureComponent {
           <View style={styles.wrapper}>
             { images_consent ? 
           
-            <Progress label={`Caching images`} 
+            <Progress label={t("WikiDownloading.PROGRESS_IMAGES")} 
               progress={progress_images} />
             :
             <View>
-              <Text>
-                {'Would you like to pre-cache the heroes and items images?\r\nThis will ensure that you get the best experience while using Pocket Dota, by not having to wait for the images to load later on.'}
-              </Text>
+              <Text>{t("WikiDownloading.CONSENT_PRECACHE_IMAGES")}</Text>
               <Text style={styles.mb}>(~8MB)</Text>
             </View>
           }
@@ -118,10 +119,10 @@ export default class WikiDownloading extends React.PureComponent {
           wiki && !images_consent ?
           <View style={styles.footer}>
             <Button prestyled style={Styles.modal_downloading_close_button}
-              title="Yes" titleStyle={{ textAlign: 'center' }}
+              title={t("Alerts:BUTTON_Yes")} titleStyle={{ textAlign: 'center' }}
               onPress={this._consentImages} />
             <Button prestyled style={Styles.modal_downloading_close_button}
-              title="No" titleStyle={{ textAlign: 'center' }}
+              title={t("Alerts:BUTTON_No")} titleStyle={{ textAlign: 'center' }}
               onPress={() => onFinish(wiki)} />
           </View>
           : null
