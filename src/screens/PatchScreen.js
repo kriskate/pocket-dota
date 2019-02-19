@@ -10,7 +10,7 @@ import Layout from '../constants/Layout';
 import Colors from '../constants/Colors';
 import InfiniteScollFlatList from '../components/InfiniteScrollFlatList';
 
-
+// to-do: unify item generation and append all changes to InfiniteScrollList
 const Descriptions = ({ descriptions }) => !descriptions.length || descriptions.length == 0 ? null
 : (
   <View style={styles.descriptions}>
@@ -58,6 +58,25 @@ export default class PatchScreen extends React.Component {
     ...headerStyle,
   });
 
+  _renderHero = (item, wiki_heroes) => {
+    const { name, abilities, talents, stats } = model_patch_notes_hero(item);
+    const wiki_hero = model_hero(wiki_heroes.find(h => h.tag == name));
+
+    return (
+      <View key={name} style={styles.hero}>
+        <View style={styles.hero_name}>
+          <Image style={styles.img_hero} source={{ uri: url.images.small(name) }} />
+          <Text>{wiki_hero.name}</Text>
+        </View>
+        
+        <Changes changes={abilities} images={url.images.abilities} namesArr={wiki_hero.abilities} />
+
+        <Descriptions descriptions={talents} />
+        <Descriptions descriptions={stats} />
+      </View>
+    )
+  }
+
   render() {
     const { patch_notes, wiki_heroes, wiki_items } = this.props;
     const patch = patch_notes[this.props.navigation.getParam('data')];
@@ -65,34 +84,18 @@ export default class PatchScreen extends React.Component {
 
     return (
       <Container scrollable style={styles.container}>
+        
+        <Changes changes={general} />
+
         <InfiniteScollFlatList
           initialNumToRender={6}
-          // maxToRenderPerBatch={1}
-          // updateCellsBatchingPeriod={100}
           keyExtractor={(item) => item.name}
           data={heroes}
-          renderItem={({item}) => {
-            const { name, abilities, talents, stats } = model_patch_notes_hero(item);
-            const wiki_hero = model_hero(wiki_heroes.find(h => h.tag == name));
-  
-            return (
-              <View key={name} style={styles.hero}>
-                <View style={styles.hero_name}>
-                  <Image style={styles.img_hero} source={{ uri: url.images.small(name) }} />
-                  <Text>{wiki_hero.name}</Text>
-                </View>
-                
-                <Changes changes={abilities} images={url.images.abilities} namesArr={wiki_hero.abilities} />
-  
-                <Descriptions descriptions={talents} />
-                <Descriptions descriptions={stats} />
-              </View>
-            )
-          }}
+          renderItem={({ item }) => this._renderHero(item, wiki_heroes)}
         />
         
         <Changes changes={items} images={url.images.items} namesArr={wiki_items} isItem />
-        <Changes changes={general} />
+
       </Container>
     )
   }
