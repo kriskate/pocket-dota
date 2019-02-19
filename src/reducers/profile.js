@@ -9,6 +9,8 @@ const ActionTypes = {
 
   SEARCH_PROFILE: 'SEARCH_PROFILE',
   SEARCH_PROFILE_RESULTS: 'SEARCH_PROFILE_RESULTS',
+
+  SET_LANGUAGE: 'SET_LANGUAGE',
 }
 export const Actions = {
   setUser: user => ({ type: ActionTypes.SET_USER, user}),
@@ -18,12 +20,14 @@ export const Actions = {
 
   searchFor: lastSearch => ({ type: ActionTypes.SEARCH_PROFILE, lastSearch }),
   searchForResults: lastSearchResults => ({ type: ActionTypes.SEARCH_PROFILE_RESULTS, lastSearchResults }),
+
+  setLanguage: language => ({ type: ActionTypes.SET_LANGUAGE, language }),
 }
 
 export const initialState = model_profile({});
 
 export default function reducer(state=initialState, action) {
-  const { user, settings, lastSearch, lastSearchResults, profile, tip } = action;
+  const { user, settings, lastSearch, lastSearchResults, profile, tip, language } = action;
 
   switch(action.type) {
     case ActionTypes.SEARCH_PROFILE:
@@ -45,6 +49,14 @@ export default function reducer(state=initialState, action) {
           },
         },
       };
+    case ActionTypes.SET_LANGUAGE:
+    console.log('setting', language)
+      return { ...state, 
+        settings: {
+          ...state.settings,
+          language,
+        }
+      }
     default:
       return state;
   }

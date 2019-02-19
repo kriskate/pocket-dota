@@ -19,6 +19,7 @@ import Logger from './utils/Logger';
 import AppTips from './components/AppTips';
 import { initialState } from './reducers/update';
 import localization from './localization';
+import InitialLanguageSelector from './components/Settings/InitialLanguageSelector';
 
 
 /* SETUP */
@@ -33,7 +34,8 @@ let store, persistor;
 @withNamespaces("Components")
 export default class App extends React.Component {
   state = {
-    loaded: false,
+    loadedAssets: false,
+    loadingStore: true,
   };
 
 
@@ -43,7 +45,7 @@ export default class App extends React.Component {
   _handleFinishLoading = async () => {
     await this._loadLocalStore();
 
-    this.setState({ loaded: true });
+    this.setState({ loadedAssets: true });
   };
 
   _loadLocalStore = async () => {
@@ -76,11 +78,15 @@ export default class App extends React.Component {
       },
     });
 
-    persistor = persistStore(store);
+    persistor = persistStore(store, {}, async () => {
+      await localization.changeLanguage(store.getState().profile.settings.language);
+      this.setState({ loadingStore: false });
+    });
+    
   }
-
+  
   render() {
-    if (!this.state.loaded) {
+    if (!this.state.loadedAssets || this.state.loadingStore) {
       return (
         <AppLoading
           startAsync={this._loadAssets}
@@ -94,7 +100,11 @@ export default class App extends React.Component {
           <View style={{ flex: 1}}>
             <AppNavigator />
             <AppTips />
+            { store.getState().profile.settings.language ?
             <Updater />
+            :
+            <InitialLanguageSelector />
+            }
           </View>
         </Provider>
       )

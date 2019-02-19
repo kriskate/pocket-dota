@@ -59,12 +59,14 @@ export function model_user (user) {
 }
 export function model_settings (settings) {
   const {
+    language=null,
     showProfileOnHome=true,
     autoCheckApp=true,
     autoCheckDB=true,
     tipsState=model_tips({}),
   } = settings;
   return {
+    language,
     showProfileOnHome,
     autoCheckApp,
     autoCheckDB,

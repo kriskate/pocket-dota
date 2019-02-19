@@ -75,6 +75,15 @@ export default class SettingsScreen extends React.PureComponent {
     // is already handled in _checkForUpdate
   }
 
+  componentDidUpdate(prevProps) {
+    // this changes in the stack child "SettingsLanguageScreen"
+    // if we have the same navigation, dispatch the setParams so that the navigation changes 
+    // and an update to the static method is sent
+    if(prevProps.navigation == this.props.navigation) {
+      this.props.navigation.setParams({});
+    }
+  }
+
   _checkForUpdate = async (What) => {
     const { updatingWiki, updatingApp, t } = this.props;
 
