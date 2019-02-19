@@ -7,7 +7,7 @@ import PromisePool from 'es6-promise-pool';
 import { getWikiImages } from './Images';
 
 
-export const downloadImages = async (wiki, progress_callback, cancel) => {
+export const downloadImages = async (wiki, progress_callback) => {
   // Logger.debug('downloading images');
 
   const images = getWikiImages(wiki);
@@ -20,7 +20,6 @@ export const downloadImages = async (wiki, progress_callback, cancel) => {
   const promiseProducer = () => {
     if (_processedImages < imagesTotal) {
       _processedImages++;
-      // return CacheManager.get(flatImages[_processedImages-1]).getPath()
       return Image.prefetch(images[_processedImages - 1])
         .then(progress_callback(cProgress += step));
     } else {

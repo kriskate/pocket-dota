@@ -9,11 +9,9 @@ import { assets } from '../constants/Data';
 import Styles from '../constants/Styles';
 import Layout from '../constants/Layout';
 
-let cancel = false;
 
 export default class WikiDownloading extends React.PureComponent {
   state = {
-    show_cancel: false,
     progress_wiki: 0,
     progress_images: 0,
 
@@ -40,7 +38,6 @@ export default class WikiDownloading extends React.PureComponent {
     Platform.OS === 'ios' && StatusBar.setNetworkActivityIndicatorVisible(true);
 
     const wiki = await downloadWiki(versionInfo, p => this._progress('wiki', p));
-    this.setState({ show_images: false });
     
     Platform.OS === 'ios' && StatusBar.setNetworkActivityIndicatorVisible(false);
 
@@ -58,7 +55,7 @@ export default class WikiDownloading extends React.PureComponent {
     Platform.OS === 'ios' && StatusBar.setNetworkActivityIndicatorVisible(true);
 
     try {
-      await downloadImages(wiki, p => this._progress('images', p), () => cancel);
+      await downloadImages(wiki, p => this._progress('images', p));
     } catch(e) {}
 
     Platform.OS === 'ios' && StatusBar.setNetworkActivityIndicatorVisible(false);

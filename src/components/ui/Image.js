@@ -4,7 +4,6 @@
 
 import React from 'react';
 import { Image as RNImage, View } from 'react-native';
-// import { CacheManager } from 'react-native-expo-image-cache';
 import Colors from '../../constants/Colors';
 
 
