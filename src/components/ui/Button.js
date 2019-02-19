@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
     borderBottomColor: Colors.dota_ui2,
     backgroundColor: Colors.dota_ui1,
     padding: Layout.padding_regular,
+    alignItems: 'center',
   },
 
   title: {

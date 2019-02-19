@@ -3,10 +3,11 @@ import { StyleSheet } from 'react-native';
 import { headerStyle } from '../utils/screen';
 
 
-import { Button, Container, Text } from '../components/ui';
+import { Button, Container, Text, Image } from '../components/ui';
 import { withNamespaces } from 'react-i18next';
 
 import i18next, { languages, defaultLanguage } from '../localization';
+import { assets } from '../constants/Data';
 
 
 
@@ -34,7 +35,7 @@ export default class SettingsLanguageScreen extends React.Component {
               disabled={lang == cLang}
               onPress={() => this._changeLanguage(lang)}>
             <Text>{languages[lang]}</Text>
-            <Text>#</Text>
+            <Image style={{ width: 40, height: 30 }} source={assets.locales[lang]} />
           </Button>
         ))
       }

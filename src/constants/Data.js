@@ -53,7 +53,16 @@ export const assets = {
     menuProfile: require("../assets/images/menu-profile.png"),
     menuSettings: require("../assets/images/menu-settings.png"),
     logoRed: require('../assets/images/logo-red.png'),
-  }  
+  },
+
+  locales: {
+    'de-DE': require('../assets/images/locales/de.png'),
+    'en-US': require('../assets/images/locales/us.png'),
+    'es-ES': require('../assets/images/locales/es.png'),
+    'ja-JP': require('../assets/images/locales/jp.png'),
+    'ro-RO': require('../assets/images/locales/ro.png'),
+    'ru-RU': require('../assets/images/locales/ru.png'),
+  },
 }
 export const local_uri = { 
   images: {
