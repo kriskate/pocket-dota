@@ -197,6 +197,13 @@ export default class SettingsScreen extends React.PureComponent {
 
 
         <Section label={t("Section_App")}>
+
+          <Button prestyled style={styles.versionButton}
+              onPress={() => navigate(SCREEN_LABELS_HIDDEN.SETTINGS_LANGUAGE)} >
+            <Text>{t("App_Language")}</Text>
+            <ICONS.BUTTON_FORWARD />
+          </Button>
+
           <Button prestyled style={styles.versionButton}
               onPress={() => navigate(SCREEN_LABELS_HIDDEN.SETTINGS_TIPS)} >
             <Text>{t("App_Tips")}</Text>

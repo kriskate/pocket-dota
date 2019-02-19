@@ -83,6 +83,7 @@
       "STATS": "Player Statistics",
       "STATS_SHORT": "Stats",
       "SETTINGS": "Settings",
+      "SETTINGS_LANGUAGE": "Language",
       "SETTINGS_TIPS": "In-app Tips",
       
       "HEADER_ABOUT": "About and legal",
@@ -163,7 +164,7 @@
     "Section_Abilities": "Abilities",
     "Section_SpecialAbilities": "Special Abilities",
     "Section_AghanimAbilities": "Aghanim's enabled Abilities",
-    "Section_HiddenAbilities": "HiddenAbilities",
+    "Section_HiddenAbilities": "Hidden Abilities",
 
     "Section_Biography": "Biography",
 
@@ -230,6 +231,7 @@
     "Database_DowngradeWiki": "Downgrade wiki",
 
     "Section_App": "App settings:",
+    "App_Language": "Language",
     "App_Tips": "In-app tips",
     "App_CheckUpdate": "Check for App updates",
     "App_ResetToDefault": "Reset to default settings",

@@ -39,6 +39,7 @@ export const SCREEN_LABELS_HIDDEN = {
   ITEM: 'ItemScreen',
   PATCH: 'PatchScreen',
   STATS_WEB: 'StatsWebScreen',
+  SETTINGS_LANGUAGE: 'Language',
   SETTINGS_TIPS: 'In-app tips',
 }
 

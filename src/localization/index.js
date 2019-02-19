@@ -2,6 +2,8 @@ import i18n from 'i18next';
 import { reactI18nextModule } from 'react-i18next';
 import { Localization } from 'expo';
 
+
+export const defaultLanguage = "en-US";
 export const languages = {
   "de-DE": "Deutsch",
   "en-US": "English",
@@ -21,12 +23,7 @@ export const dota2com_languages = {
 
 const languageDetector = {
   type: 'languageDetector',
-  async: true,
-  detect: callback => {
-    return /*'en'; */ Localization.getLocalizationAsync().then(({ locale }) => {
-      callback(locale);
-    });
-  },
+  detect: () => Localization.locale.replace('_', '-'),
   init: () => {},
   cacheUserLanguage: () => {}
 }
@@ -36,8 +33,7 @@ i18n
   .use(reactI18nextModule)
   .init({
     // debug: true,
-  
-    fallbackLng: 'en-US',
+    fallbackLng: defaultLanguage,
 
     resources: {
       "de-DE": require('./de-DE.json'),
