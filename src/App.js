@@ -79,7 +79,9 @@ export default class App extends React.Component {
     });
 
     persistor = persistStore(store, {}, async () => {
-      await localization.changeLanguage(store.getState().profile.settings.language);
+      const storeLanguage = store.getState().profile.settings.language;
+      storeLanguage && await localization.changeLanguage(storeLanguage);
+      
       this.setState({ loadingStore: false });
     });
     

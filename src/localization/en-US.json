@@ -29,7 +29,8 @@
   },
   
   "Components": {
-
+    "LANGUAGE_DOWNLOAD": "In order to use the selected language, aditional files need to be downloaded. Would you like to continue?",
+    
     "AppDownloading": {
       "downloading": "Downloading new app version",
       "downloading_done": "When the update is done, the application will restart."

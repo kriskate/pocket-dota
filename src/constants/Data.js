@@ -59,6 +59,7 @@ export const assets = {
     'de-DE': require('../assets/images/locales/de.png'),
     'en-US': require('../assets/images/locales/us.png'),
     'es-ES': require('../assets/images/locales/es.png'),
+    'fr-FR': require('../assets/images/locales/fr.png'),
     'ja-JP': require('../assets/images/locales/jp.png'),
     'ro-RO': require('../assets/images/locales/ro.png'),
     'ru-RU': require('../assets/images/locales/ru.png'),

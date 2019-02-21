@@ -5,9 +5,10 @@ import { Localization } from 'expo';
 
 export const defaultLanguage = "en-US";
 export const languages = {
-  "de-DE": "Deutsch",
-  "en-US": "English",
+  "de-DE": "Deutsche",
+  "en-US": "English (US)",
   "es-ES": "Español",
+  "fr-FR": "Français",
   "ja-JP": "日本語",
   "ro-RO": "Română",
   "ru-RU": "Русский",
@@ -16,6 +17,7 @@ export const dota2com_languages = {
   "de-DE": 'german',
   "en-US": 'english',
   "es-ES": 'spanish',
+  "fr-FR": 'french',
   "ja-JP": 'japanese',
   "ro-RO": 'romanian',
   "ru-RU": 'russian',
@@ -23,7 +25,13 @@ export const dota2com_languages = {
 
 const languageDetector = {
   type: 'languageDetector',
-  detect: () => Localization.locale.replace('_', '-'),
+  detect: () => {
+    const locale = Localization.locale.replace('_', '-');
+    const transformedLocale = Object.keys(languages).find(language => language.split('-')[0] == locale.split('-')[0]);
+    console.log('locale', transformedLocale);
+
+    return transformedLocale;
+  },
   init: () => {},
   cacheUserLanguage: () => {}
 }

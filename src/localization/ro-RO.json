@@ -20,6 +20,7 @@
     "ResetSettings": "Se vor reseta toate setările la valorile implicite, inclusiv ștergerea datelor de profil Dota 2."
   },
   "Components": {
+    "LANGUAGE_DOWNLOAD": "Pentru a folosi limba selectată, trebuie descărcate fișiere adiționale. Doriți să continuați?",
     "AppDownloading": {
       "downloading": "Se descarcă",
       "downloading_done": "Atunci când se termină actualizarea, aplicația va reporni."
