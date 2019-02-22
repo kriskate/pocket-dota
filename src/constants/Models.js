@@ -258,18 +258,24 @@ export function model_patch_notes_general (general) {
 
 export function model_update (update) {
   const {
+    updateInProgress = false,
+
     showApp = false,
     downloadingApp_version = '',
     
+    wikiChecking = false,
     showWiki = false,
     downloadingWiki_reason = '',
     downloadingWiki_version =  '',
     downloadingWiki_versionInfo = '',
   } = update;
   return {
+    updateInProgress,
+
     showApp,
     downloadingApp_version,
     
+    wikiChecking,
     showWiki,
     downloadingWiki_reason,
     downloadingWiki_version,
