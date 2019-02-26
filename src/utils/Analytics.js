@@ -1,7 +1,6 @@
 import { Amplitude } from 'expo';
 // import { normalizeTrackingOptions } from './AnalyticsUtils';
 import { AMPLITUDE_API_KEY } from 'react-native-dotenv';
-import { ActionTypes } from '../reducers/profile';
 
 const events = {
   HERO: {
