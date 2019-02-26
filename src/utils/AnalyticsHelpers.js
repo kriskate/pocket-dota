@@ -20,10 +20,5 @@ export const onNavigationStateChange = (prevState, currentState) => {
   }
 }
 
-export const tips = ({
-  dismiss: (tip) => Analytics.track(Analytics.events.TIP.DISMISSED, { name: tip }),
-  never_show: (tip) => Analytics.track(Analytics.events.TIP.NEVER_SHOW, { name: tip }),
-});
-
 export const navigationPersistenceKey = __DEV__ ? "NavigationStateDEV" : null;
 
