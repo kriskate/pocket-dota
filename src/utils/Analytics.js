@@ -4,7 +4,7 @@ import { AMPLITUDE_API_KEY } from 'react-native-dotenv';
 
 const events = {
   HERO: {
-    CHANGED_LEVEL: "CHANGED_LEVEL",
+    CHANGED_LEVEL: "CHANGED_HERO_LEVEL",
   },
 
   navigation: (to: ?string) => `Navigation: ${to}`,
