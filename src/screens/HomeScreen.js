@@ -7,6 +7,7 @@ import Colors from '../constants/Colors';
 import { HOME_LABELS, SCREEN_LABELS, SCREEN_LABELS_HIDDEN } from '../constants/Constants';
 import { assets } from '../constants/Data';
 import Layout from '../constants/Layout';
+import Analytics from '../utils/Analytics';
 
 
 const MenuItem = ({height, onPress, label, cardImage, profileImage}) => (
@@ -33,6 +34,9 @@ const MenuItem = ({height, onPress, label, cardImage, profileImage}) => (
 }))
 
 export default class HomeScreen extends React.PureComponent {
+  componentDidMount() {
+    Analytics.track(Analytics.events.navigation("Home"));
+  }
   render() {
     const { showProfileOnHome } = this.props;
     const { name, image, account_id } = this.props.user;

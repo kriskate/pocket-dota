@@ -16,6 +16,8 @@ import { showTip, APP_TIPS } from '../AppTips';
 import Roles from './Roles';
 import Complexity from './Complexity';
 
+import Analytics from '../../utils/Analytics';
+
 
 export default class extends React.Component {
   constructor(props) {
@@ -81,7 +83,10 @@ export default class extends React.Component {
         <View style={styles.slider}>
           <Slider
             value={level}
-            onValueChange={level => this.setState({ level })}
+            onValueChange={level => {
+              this.setState({ level });
+              Analytics.track(Analytics.events.HERO.CHANGED_LEVEL, { level });
+            }}
             step={1} maximumValue={25} minimumValue={1}
             
             trackPressable={true}

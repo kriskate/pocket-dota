@@ -7,6 +7,8 @@ import Colors from '../constants/Colors';
 import { Platform } from 'react-native';
 import Layout from '../constants/Layout';
 
+import Analytics from '../utils/Analytics';
+
 // we will only have one instance of this class, and only use this for setState
 let singletonInstance;
 
@@ -112,10 +114,14 @@ export default class AppTips extends React.PureComponent {
         textMessage={description}
         actionText={"DON'T SHOW AGAIN"}
         actionHandler={() => {
+          Analytics.track(Analytics.events.TIP.NEVER_SHOW, { name: stateLink });
           this._hide();
           hideTip(stateLink);
         }}
-        onPress={this._hide}
+        onPress={() => {
+          Analytics.track(Analytics.events.TIP.DISMISSED, { name: stateLink });
+          this._hide();
+        }}
         actionTextWrapperStyle={{ maxWidth: 80, marginLeft: Layout.padding_regular }}
         backgroundColor={Colors.dota_ui3}
         accentColor={Colors.goldenrod}

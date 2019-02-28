@@ -25,6 +25,7 @@
     "expo": "^32.0.0",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
+    "react-native-dotenv": "^0.2.0",
     "react-native-hyperlink": "^0.0.14",
     "react-native-modal": "^6.5.0",
     "react-native-render-html": "^4.1.1",

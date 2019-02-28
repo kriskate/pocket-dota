@@ -1,6 +1,6 @@
 import { model_profile } from "../constants/Models";
 
-const ActionTypes = {
+export const ActionTypes = {
   SEARCH: 'SEARCH',
   SET_TIPS: 'SET_TIPS',
   SETTINGS: 'SETTINGS',
@@ -30,12 +30,12 @@ export default function reducer(state=initialState, action) {
       return { ...state, lastSearch };
     case ActionTypes.SEARCH_PROFILE_RESULTS:
       return { ...state, lastSearchResults };
-    case ActionTypes.SETTINGS:
-      return { ...state, settings: {...state.settings, ...settings} };
     case ActionTypes.SET_USER:
       return { ...state, user };
     case ActionTypes.SET_PROFILE: 
       return { ...profile };
+    case ActionTypes.SETTINGS:
+      return { ...state, settings: {...state.settings, ...settings} };
     case ActionTypes.SET_TIPS:
       return { ...state, settings: {
           ...state.settings, 

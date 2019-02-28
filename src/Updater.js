@@ -112,7 +112,6 @@ export default class Updater extends React.PureComponent {
       if(!this.props.updateInProgress) {
         clearInterval(checkInterval);
         checkInterval = null;
-        console.log('checking wiki');
         this.props.autoCheckDB && this._checkUpdate('Wiki');
       }
     }, checkDelay.wiki);
