@@ -28,7 +28,6 @@ const languageDetector = {
   detect: () => {
     const locale = Localization.locale.replace('_', '-');
     const transformedLocale = Object.keys(languages).find(language => language.split('-')[0] == locale.split('-')[0]);
-    console.log('locale', transformedLocale);
 
     return transformedLocale;
   },

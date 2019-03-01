@@ -50,7 +50,6 @@ export default function reducer(state=initialState, action) {
         },
       };
     case ActionTypes.SET_LANGUAGE:
-    console.log('setting', language)
       return { ...state, 
         settings: {
           ...state.settings,
