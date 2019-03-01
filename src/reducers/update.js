@@ -1,6 +1,8 @@
 import { model_update } from "../constants/Models";
 
 const ActionTypes = {
+  UPDATE_CHECK: 'UPDATE_CHECK',
+  
   DOWNLOAD_WIKI: 'DOWNLOAD_WIKI',
   DONE_WIKI: 'DONE_WIKI',
 
@@ -11,6 +13,8 @@ const ActionTypes = {
   SHOW: 'SHOW',
 }
 export const Actions = {
+  updateCheck: (updateInProgress) => ({ type: ActionTypes.UPDATE_CHECK, updateInProgress }),
+
   downloadWiki: (reason, res) => ({ type: ActionTypes.DOWNLOAD_WIKI, reason, res }),
   doneWiki: () => ({ type: ActionTypes.DONE_WIKI }),
   
@@ -29,6 +33,12 @@ export const initialState = model_update({});
 
 export default function reducer(state=initialState, action) {
   switch(action.type) {
+
+    case ActionTypes.UPDATE_CHECK:
+      const { updateInProgress } = action;
+      return { ...state,
+        updateInProgress,
+      }
     
     case ActionTypes.DOWNLOAD_WIKI:
       const { newVersion, latestVersionInfo } = action.res;
@@ -40,6 +50,7 @@ export default function reducer(state=initialState, action) {
       };
     case ActionTypes.DONE_WIKI:
       return { ...state,
+        updateInProgress: false,
         showWiki: false,
         downloadingWiki_reason: '',
         downloadingWiki_version: '',
@@ -53,8 +64,9 @@ export default function reducer(state=initialState, action) {
       };
     case ActionTypes.DONE_UPDATE_APP:
       return { ...state,
-       showApp: false,
-       downloadingApp_version: '', 
+        updateInProgress: false,
+        showApp: false,
+        downloadingApp_version: '', 
       };
 
     case ActionTypes.HIDE:

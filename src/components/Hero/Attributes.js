@@ -17,6 +17,8 @@ import Roles from './Roles';
 import Complexity from './Complexity';
 import { withNamespaces } from 'react-i18next';
 
+import Analytics from '../../utils/Analytics';
+
 
 @withNamespaces("Screen_Hero")
 export default class extends React.Component {
@@ -84,7 +86,10 @@ export default class extends React.Component {
         <View style={styles.slider}>
           <Slider
             value={level}
-            onValueChange={level => this.setState({ level })}
+            onValueChange={level => {
+              this.setState({ level });
+              Analytics.track(Analytics.events.HERO.CHANGED_LEVEL, { level });
+            }}
             step={1} maximumValue={25} minimumValue={1}
             
             trackPressable={true}

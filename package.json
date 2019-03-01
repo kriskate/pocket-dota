@@ -5,7 +5,10 @@
     "test": "node ./node_modules/jest/bin/jest.js --watchAll",
     "test-coverage": "node ./node_modules/jest/bin/jest.js --watchAll --coverage",
     "releasev1": "expo build:android --release-channel prod-v1",
-    "release": "expo build:android --release-channel prod-v2 && expo build:ios --release-channel prod-v2"
+    "release-android": "expo publish --release-channel android-build-2",
+    "release-ios": "expo publish --release-channel ios-build-1",
+    "build-android": "expo build:android --release-channel android-build-2",
+    "build-ios": "expo build:android --release-channel ios-build-1"
   },
   "jest": {
     "preset": "jest-expo",
@@ -24,6 +27,7 @@
     "react": "16.5.0",
     "react-i18next": "^9.0.10",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
+    "react-native-dotenv": "^0.2.0",
     "react-native-hyperlink": "^0.0.14",
     "react-native-modal": "^6.5.0",
     "react-native-render-html": "^4.1.1",

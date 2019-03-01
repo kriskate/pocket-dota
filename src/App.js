@@ -20,6 +20,8 @@ import AppTips from './components/AppTips';
 import { initialState } from './reducers/update';
 import localization from './localization';
 import InitialLanguageSelector from './components/Settings/InitialLanguageSelector';
+import Colors from './constants/Colors';
+import { navigationPersistenceKey, onNavigationStateChange } from './utils/AnalyticsHelpers';
 
 
 /* SETUP */
@@ -100,7 +102,12 @@ export default class App extends React.Component {
       return (
         <Provider store={store}>
           <View style={{ flex: 1}}>
-            <AppNavigator />
+            <AppNavigator 
+              persistenceKey={navigationPersistenceKey}
+              renderLoadingExperimental={() => <View style={{ flex: 1, backgroundColor: Colors.dota_ui1 }} />}
+
+              onNavigationStateChange={onNavigationStateChange}
+            />
             <AppTips />
             { store.getState().profile.settings.language ?
             <Updater />

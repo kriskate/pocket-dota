@@ -19,13 +19,15 @@ import { withNamespaces } from 'react-i18next';
 
 const checkDelay = {
   wiki: 5000,
-  app: 5000,
+  app: 500,
 }
 
 @withNamespaces("Components")
 
 @connect(
   (state => ({
+    updateInProgress: state.update.updateInProgress,
+
     showWiki: state.update.showWiki,
     downloadingWiki_reason: state.update.downloadingWiki_reason,
     downloadingWiki_version: state.update.downloadingWiki_version,
@@ -34,10 +36,12 @@ const checkDelay = {
     showApp: state.update.showApp,
     downloadingApp_version: state.update.downloadingApp_version,
 
-    checkUpdateWiki: state.profile.settings.autoCheckDB,
-    checkUpdateApp: state.profile.settings.autoCheckApp,
+    autoCheckDB: state.profile.settings.autoCheckDB,
+    autoCheckApp: state.profile.settings.autoCheckApp,
   })),
   (dispatch => ({
+    updateCheck: (updateInProgress) => dispatch(UpdateActions.updateCheck(updateInProgress)),
+
     newWiki: (wiki) => dispatch(WikiActions.newWiki(wiki)),
 
     hide: (what) => dispatch(UpdateActions.hide(what)),
@@ -84,7 +88,7 @@ export default class Updater extends React.PureComponent {
 
   async componentDidMount () {
     setTimeout(() => {
-      this.props.checkUpdateApp && this._checkUpdate('App');
+      this.props.autoCheckApp && this._checkUpdate('App');
     }, checkDelay.app);
 
     /* the wiki modal should be visible if minWikiVersion is not met */
@@ -110,25 +114,37 @@ export default class Updater extends React.PureComponent {
     }
     // allows the user to see the app for a bit
     // also allows redux-persist to load its state
-    setTimeout(() => {
-      this.props.checkUpdateWiki && this._checkUpdate('Wiki');
+    let checkInterval = setInterval(() => {
+      if(!this.props.updateInProgress) {
+        clearInterval(checkInterval);
+        checkInterval = null;
+        this.props.autoCheckDB && this._checkUpdate('Wiki');
+      }
     }, checkDelay.wiki);
   }
 
   _checkUpdate = async (What) => {
+    this.props.updateCheck(true);
+
     const res = What == 'App' ? await app_needsUpdate() : await wiki_needsUpdate();
 
-    if(!res) return;
+    if(!res) {
+      this.props.updateCheck(false);
+      return;
+    }
 
     if(!res.error) {
       const { t, updateApp, updateWiki } = this.props;
 
-      const onNo = () => {};
+      const onNo = () => {
+        this.props.updateCheck(false);
+      };
       const onYes = () => What == 'App' ? updateApp(res.newVersion) : updateWiki(res, t("DOWNLOAD_REASONS.UPDATE"));
       // to-do - reenable this for app
-      if(What == 'App') onYes() 
-      else
-      alertUpdateCheckAvailable(What, res.newVersion, onNo, onYes);
+      if(What == 'App') onYes();
+      else alertUpdateCheckAvailable(What, res.newVersion, onNo, onYes);
+    } else {
+      this.props.updateCheck(false);
     }
   }
 
