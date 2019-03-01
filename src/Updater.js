@@ -72,9 +72,10 @@ export default class Updater extends React.PureComponent {
   }
   _handleFinishDownLoadingApp = () => {
     const onYes = () => Updates.reloadFromCache();
+    const onNo = () => this.props.updateCheck(false);
     this.props.doneApp();
 
-    alertAppUpdateDone(this.props.downloadingApp_version, onYes);
+    alertAppUpdateDone(this.props.downloadingApp_version, onYes, onNo);
   }
 
   _hideWikiModal = () => {

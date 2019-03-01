@@ -10,12 +10,12 @@ export const alertGeneral = (title, content) =>
     { cancelable: true }
   );
 
-export const alertAppUpdateDone = (version, onYes) =>
+export const alertAppUpdateDone = (version, onYes, onNo) =>
   Alert.alert(
     i18n.t("Alerts:MESSAGE_Success"),
     i18n.t("Alerts:AppUpdateDone", { "version": version }),
     [
-      { text: i18n.t("Alerts:BUTTON_DontRestart"), style: 'cancel' },
+      { text: i18n.t("Alerts:BUTTON_DontRestart"), onPress: onNo, style: 'cancel' },
       { text: i18n.t("Alerts:BUTTON_Yes"), onPress: onYes },
     ]
   )
