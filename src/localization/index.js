@@ -5,13 +5,13 @@ import { Localization } from 'expo';
 
 export const defaultLanguage = "en-US";
 export const languages = {
-  "de-DE": "Deutsche",
+  // "de-DE": "Deutsche",
   "en-US": "English (US)",
-  "es-ES": "Español",
+  // "es-ES": "Español",
   "fr-FR": "Français",
-  "ja-JP": "日本語",
+  // "ja-JP": "日本語",
   "ro-RO": "Română",
-  "ru-RU": "Русский",
+  // "ru-RU": "Русский",
 }
 export const dota2com_languages = {
   "de-DE": 'german',
