@@ -73,7 +73,7 @@ export default class ItemBuild extends React.Component {
 
         const item = game_items.find(({ tag }) => tag == npc_tag.replace('item_', ''));
         if(!item) Logger.debug(`could not find item ${hero_tag}: ${npc_tag}`);
-        section.data.push(item);
+        else section.data.push(item);
       });
     });
     
