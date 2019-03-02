@@ -201,7 +201,7 @@
   
   "Screen_Item": {
     "Label_Cost": "Cost:",
-    "Label_DissasembleAvailable": "Can be dissasembled:",
+    "Label_DissasembleAvailable": "Can be disassembled:",
     "DissasembleYes": "Yes",
     "DissasembleNo": "No",
     "Label_ItemCategory": "Item category:",
@@ -212,7 +212,16 @@
   
   "Screen_Patch": {
     "ReleaseDate": "Release date:",
-    "ViewGameChanges": "view game changes"
+    "ViewGameChanges": "view game changes",
+    
+    "Nerfed": "Nerfed",
+    "Buffed": "Buffed",
+    "Buffed most heroes": "Buffed most heroes",
+    "Rebalanced most heroes": "Rebalanced most heroes",
+    "Rebalanced": "Rebalanced",
+    "Reworked": "Reworked",
+    "Added new items": "Added new items",
+    "Removed items": "Removed items"
   },
 
   "Screen_Settings": {
