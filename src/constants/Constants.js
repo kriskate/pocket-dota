@@ -2,6 +2,7 @@ import React from 'react';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import Colors from './Colors';
 import { Constants } from 'expo';
+import { Platform } from 'react-native';
 
 let _wikiVersion;
 export const setWikiVersion = ({ appVersion, wikiVersion }) => {
@@ -64,6 +65,13 @@ export const ICONS = {
   BUTTON_FORWARD: () => <Ionicons name="ios-arrow-forward" size={17} color={Colors.dota_white} />,
   BUTTON_USER: ({color}) => <FontAwesome name="user" size={17} color={color || Colors.dota_white} />,
   BUTTON_INFO: () => <FontAwesome name="info" size={17} color={Colors.dota_white} />,
+
+  ICON_DOWNLOAD: () => <Ionicons size={17} color={Colors.dota_white}
+    name={Platform.OS == "ios" ? "ios-cloud-download" : "md-cloud-download"} />,
+  ICON_UPDATE: () => <Ionicons size={17} color={Colors.dota_white}
+    name={Platform.OS == "ios" ? "ios-refresh" : "md-refresh"} />,
+  ICON_GOOD: () => <Ionicons size={17} color={Colors.dota_white}
+    name={Platform.OS == "ios" ? "ios-checkmark" : "md-checkmark"} />,
 
   CIRCLE: () => <FontAwesome name="circle" size={15} color={Colors.dota_white} />,
   CIRCLE_O: () => <FontAwesome name="circle-o" size={15} color={Colors.dota_white} />,

@@ -6,8 +6,20 @@ export function model_section (section) {
 
 
 export function model_wiki (data) {
-  const { heroes=[], items=[], tips={}, patch_notes={}, info={} } = data;
-  return { heroes, items, tips, patch_notes, info };
+  const { 
+    heroes=[], 
+    items=[], 
+    tips={}, 
+    patch_notes={}, 
+    info={}, // model_wiki_info
+  } = data;
+  return { 
+    heroes,
+    items,
+    tips,
+    patch_notes,
+    info,
+  };
 }
 export function model_wiki_info (data) {
   const {
@@ -16,7 +28,6 @@ export function model_wiki_info (data) {
     dotaVersionDate, 
     wikiVersion,
     wikiVersionDate,
-    wikiVersionFolder,
   } = data;
   return {
     appVersion, 
@@ -24,7 +35,6 @@ export function model_wiki_info (data) {
     dotaVersionDate, 
     wikiVersion,
     wikiVersionDate,
-    wikiVersionFolder,
   }
 }
 
@@ -87,6 +97,15 @@ export const model_tips = ({
   profileAddRequirements,
   profileAdd,
   profileAdded,
+})
+
+
+export const model_language = ({
+  name="english",
+  wikiData={}, // model_wiki
+}) => ({
+  name,
+  wikiData,
 })
 
 

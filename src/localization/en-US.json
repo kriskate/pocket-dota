@@ -29,7 +29,11 @@
   },
   
   "Components": {
-    "LANGUAGE_DOWNLOAD": "In order to use the selected language, aditional files need to be downloaded. Would you like to continue?",
+    "LANGUAGE": {
+      "UPDATE": "The language files need to be updated. Continue?",
+      "DOWNLOAD_ASK": "In order to use the selected language, aditional files need to be downloaded. Continue?",
+      "DOWNLOADING": "Downloading language files"
+    },
     
     "AppDownloading": {
       "downloading": "Downloading new app version",
@@ -276,6 +280,10 @@
     "profileAdded_description": "This Dota 2 profile has been added to the app. The profile will be available on the app's Home screen, unless this option is disabled under \"Settings\".",
 
     "DONT_SHOW_AGAIN": "DON'T SHOW AGAIN"
+  },
+
+  "Screen_SettingsLanguage": {
+
   },
 
   "Screen_Stats": {

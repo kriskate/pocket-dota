@@ -15,6 +15,7 @@ import AppDownloading from './components/AppDownloading';
 import { Updates } from 'expo';
 import { app_needsUpdate, wiki_needsUpdate } from './utils/updaters';
 import { withNamespaces } from 'react-i18next';
+import LanguageDownloading from './components/Updaters/LanguageDownloading';
 
 
 const checkDelay = {
@@ -27,6 +28,8 @@ const checkDelay = {
 @connect(
   (state => ({
     updateInProgress: state.update.updateInProgress,
+
+    downloadingLanguage: state.language.downloadingLanguage,
 
     showWiki: state.update.showWiki,
     downloadingWiki_reason: state.update.downloadingWiki_reason,
@@ -154,6 +157,8 @@ export default class Updater extends React.PureComponent {
     const {
       showWiki, downloadingWiki_reason, downloadingWiki_version, downloadingWiki_versionInfo,
       showApp, downloadingApp_version,
+
+      downloadingLanguage,
     } = this.props;
 
 
@@ -163,34 +168,33 @@ export default class Updater extends React.PureComponent {
       */
     return (
       <View style={[styles.modalsWrapper, !showWiki && !showApp && styles.modalsWrapper_hidden]}>
+
         { !downloadingWiki_reason ? null :
-        <View style={[styles.modal, !showWiki && styles.modal_hidden]}>
-          <WikiDownloading
-            version={downloadingWiki_version}
-            versionInfo={downloadingWiki_versionInfo}
-            reason={downloadingWiki_reason}
-            onFinish={this._handleFinishDownLoadingWiki}
-            onError={Logger.error}
-          />
-        {/* { downloadingWiki_reason !== DOWNLOAD_REASONS.UPDATE ? null :
-          <Button prestyled style={Styles.modal_downloading_close_button}
-            title="RUN IN THE BACKGROUND" titleStyle={{ textAlign: 'center' }}
-            onPress={this._hideWikiModal} />
-        } */}
-        </View>
+          <View style={styles.modal}>
+            <WikiDownloading
+              version={downloadingWiki_version}
+              versionInfo={downloadingWiki_versionInfo}
+              reason={downloadingWiki_reason}
+              onFinish={this._handleFinishDownLoadingWiki}
+              onError={Logger.error}
+            />
+          </View>
         }
 
         { !downloadingApp_version ? null :
-        <View style={[styles.modal, !showApp && styles.modal_hidden]}>
-          <AppDownloading 
-            downloadingApp_version={downloadingApp_version}
-            onFinish={this._handleFinishDownLoadingApp}
-            onError={Logger.error}
-          />
-          {/* <Button prestyled style={Styles.modal_downloading_close_button}
-            title="RUN IN THE BACKGROUND" titleStyle={{ textAlign: 'center' }}
-            onPress={this._hideAppModal} /> */}
-        </View>
+          <View style={styles.modal}>
+            <AppDownloading 
+              downloadingApp_version={downloadingApp_version}
+              onFinish={this._handleFinishDownLoadingApp}
+              onError={Logger.error}
+            />
+          </View>
+        }
+
+        { !downloadingLanguage ? null :
+          <View style={styles.modal}>
+            <LanguageDownloading />
+          </View> 
         }
         
         

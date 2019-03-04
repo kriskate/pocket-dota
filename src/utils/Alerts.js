@@ -1,6 +1,34 @@
 import { Alert } from "react-native";
 import i18n from 'i18next';
 
+
+const wikiSize = () => `\r\n( ${i18n.t("Alerts:download_size")} ~1.4 MB )`
+
+
+export const alertLanguageUpdate = (lang, onYes, onNo) => 
+  Alert.alert(
+    lang,
+    i18n.t("Components:LANGUAGE.UPDATE") + wikiSize(),
+    [
+      { text: i18n.t("Alerts:BUTTON_No"), style: 'cancel', onPress: onNo },
+      { text: i18n.t("Alerts:BUTTON_Yes"), onPress: onYes },
+    ],
+    { cancelable: true }
+  );
+export const alertLanguageDownload = (lang, onYes, onNo) => 
+  Alert.alert(
+    lang,
+    i18n.t("Components:LANGUAGE.DOWNLOAD_ASK") + wikiSize(),
+    [
+      { text: i18n.t("Alerts:BUTTON_No"), style: 'cancel', onPress: onNo },
+      { text: i18n.t("Alerts:BUTTON_Yes"), onPress: onYes },
+    ],
+    { cancelable: true }
+  );
+
+
+
+
 export const alertGeneral = (title, content) => 
   Alert.alert(
     title, content,
@@ -44,7 +72,7 @@ export const alertUpdateCheckError = (What, error, onDismiss) =>
 export const alertUpdateCheckAvailable = (What, newVersion, onNo, onYes) =>
   Alert.alert(
     i18n.t("Alerts:UpdateCheckAvailable_Title", { What, newVersion }),
-    i18n.t("Alerts:UpdateCheckAvailable", { What }) + `\r\n( ${i18n.t("Alerts:download_size")} ~1.4 MB )`,
+    i18n.t("Alerts:UpdateCheckAvailable", { What }) + wikiSize(),
     [
       { text: i18n.t("Alerts:BUTTON_No"), style: 'cancel', onPress: onNo },
       { text: i18n.t("Alerts:BUTTON_Yes"), onPress: onYes },
