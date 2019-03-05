@@ -8,7 +8,7 @@ const wikiSize = () => `\r\n( ${i18n.t("Alerts:download_size")} ~1.4 MB )`
 export const alertLanguageUpdate = (lang, onYes, onNo) => 
   Alert.alert(
     lang,
-    i18n.t("Components:LANGUAGE.UPDATE") + wikiSize(),
+    i18n.t("Screen_SettingsLanguage:UPDATE") + wikiSize(),
     [
       { text: i18n.t("Alerts:BUTTON_No"), style: 'cancel', onPress: onNo },
       { text: i18n.t("Alerts:BUTTON_Yes"), onPress: onYes },
@@ -18,7 +18,7 @@ export const alertLanguageUpdate = (lang, onYes, onNo) =>
 export const alertLanguageDownload = (lang, onYes, onNo) => 
   Alert.alert(
     lang,
-    i18n.t("Components:LANGUAGE.DOWNLOAD_ASK") + wikiSize(),
+    i18n.t("Screen_SettingsLanguage:DOWNLOAD_ASK") + wikiSize(),
     [
       { text: i18n.t("Alerts:BUTTON_No"), style: 'cancel', onPress: onNo },
       { text: i18n.t("Alerts:BUTTON_Yes"), onPress: onYes },

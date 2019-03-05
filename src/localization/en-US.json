@@ -29,11 +29,6 @@
   },
   
   "Components": {
-    "LANGUAGE": {
-      "UPDATE": "The language files need to be updated. Continue?",
-      "DOWNLOAD_ASK": "In order to use the selected language, aditional files need to be downloaded. Continue?",
-      "DOWNLOADING": "Downloading language files"
-    },
     
     "AppDownloading": {
       "downloading": "Downloading new app version",
@@ -283,7 +278,9 @@
   },
 
   "Screen_SettingsLanguage": {
-
+    "UPDATE": "The language files are out of date. Would you like to update them?",
+    "DOWNLOAD_ASK": "In order to use the selected language, aditional files need to be downloaded. Would you like to continue",
+    "DOWNLOADING": "Downloading language files"
   },
 
   "Screen_Stats": {

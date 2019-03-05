@@ -13,7 +13,7 @@ import Colors from '../../constants/Colors';
 import Styles from '../../constants/Styles';
 import Logo from './Logo';
 
-@withNamespaces(["Components"])
+@withNamespaces(["Screen_SettingsLanguage"])
 @connect(
   (state => ({
     downloadingLanguage: state.language.downloadingLanguage,
@@ -57,7 +57,7 @@ export default class LanguageDownloading extends React.PureComponent {
         </View>
 
         <View style={styles.wrapper}>
-          <Progress label={`${t("LANGUAGE.DOWNLOADING")} (${downloadingLanguage})`} 
+          <Progress label={`${t("DOWNLOADING")} (${downloadingLanguage})`} 
             progress={progress} />
         </View>
 
