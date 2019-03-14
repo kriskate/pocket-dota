@@ -161,11 +161,6 @@ export default class Updater extends React.PureComponent {
       currentLanguage, downloadingLanguage,
     } = this.props;
 
-
-    /* the wiki modal should not be able to be hidden if:
-      * there is no wiki data (DOWNLOAD_REASONS.FRESH)
-      * the wiki data is corrupted (DOWNLOAD_REASONS.MISSING)
-      */
     return (
       <View style={[styles.modalsWrapper, !downloadingWiki_reason && !downloadingApp_version && !downloadingLanguage && styles.modalsWrapper_hidden]}>
 

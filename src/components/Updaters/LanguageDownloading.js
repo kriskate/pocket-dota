@@ -13,12 +13,11 @@ import Colors from '../../constants/Colors';
 
 import Styles from '../../constants/Styles';
 import Logo from '../Settings/Logo';
-import i18n, { languages } from '../../localization';
+import { languages } from '../../localization';
 
 @withNamespaces(["Screen_SettingsLanguage"])
 @connect(
   (state => ({
-    currentLanguage: state.language.currentLanguage,
     downloadingLanguage: state.language.downloadingLanguage,
   })),
   ( dispatch => ({
@@ -41,10 +40,12 @@ export default class LanguageDownloading extends React.PureComponent {
 
   async componentDidMount() {
 
-    const { currentLanguage, downloadingLanguage, 
+    const { 
+      downloadingLanguage, 
       setLanguage, downloadLanguage_done,
       updateCheck,
       newWiki,
+      i18n,
     } = this.props;
     
     updateCheck(true);
