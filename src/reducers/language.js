@@ -1,5 +1,5 @@
 import { model_language, model_wiki_info } from "../constants/Models";
-import i18n, { defaultLanguage } from "../localization";
+import { defaultLanguage } from "../localization";
 import { alertLanguageDownload_Failed } from "../utils/Alerts";
 import { setWikiVersion_latest } from "../constants/Constants";
 

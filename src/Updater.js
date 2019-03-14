@@ -61,8 +61,6 @@ const checkDelay = {
 )
 export default class Updater extends React.PureComponent {
   _handleFinishDownLoadingWiki = async (wiki) => {
-    const { t } = this.props;
-
     if(!wiki) {
       this.props.doneWiki();
       return;
