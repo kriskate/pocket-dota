@@ -4,6 +4,7 @@ import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions as UpdateActions, DOWNLOAD_STATE } from './reducers/update';
 import { Actions as WikiActions } from './reducers/wiki';
+import { Actions as LanguageActions } from './reducers/language';
 
 import WikiDownloading from './components/WikiDownloading';
 import { alertWikiUpdateDone, alertAppUpdateDone, alertUpdateCheckAvailable, alertCannotUpdate } from './utils/Alerts';
@@ -54,6 +55,8 @@ const checkDelay = {
 
     updateApp: (version) => dispatch(UpdateActions.updateApp(version)),
     updateWiki: (res, reason) => dispatch(UpdateActions.downloadWiki(reason, res)),
+
+    downloadLanguage_done: (language, wikiInfo) => dispatch(LanguageActions.downloadLanguage_done(language, wikiInfo)),
   }))
 )
 export default class Updater extends React.PureComponent {
@@ -66,12 +69,10 @@ export default class Updater extends React.PureComponent {
     }
 
     this.props.newWiki(wiki);
-
-    if(this.props.downloadingWiki_reason === t("DOWNLOAD_REASONS.UPDATE")) {
-      alertWikiUpdateDone(this.props.downloadingWiki_version);
-    }
-
+    this.props.downloadLanguage_done(this.props.currentLanguage, wiki.info);
     this.props.doneWiki();
+
+    alertWikiUpdateDone(this.props.downloadingWiki_version);
   }
   _handleFinishDownLoadingApp = () => {
     const onYes = () => Updates.reloadFromCache();
