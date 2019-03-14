@@ -9,7 +9,7 @@ import { Actions as LanguageActions } from './reducers/language';
 import WikiDownloading from './components/WikiDownloading';
 import { alertWikiUpdateDone, alertAppUpdateDone, alertUpdateCheckAvailable, alertCannotUpdate } from './utils/Alerts';
 
-import { GET_WIKI_VERSION } from './constants/Constants';
+import { GET_WIKI_VERSION, setWikiVersion_latest } from './constants/Constants';
 import Layout from './constants/Layout';
 import Colors from './constants/Colors';
 import AppDownloading from './components/AppDownloading';
@@ -147,7 +147,10 @@ export default class Updater extends React.PureComponent {
       const onYes = () => What == 'App' ? updateApp(res.newVersion) : updateWiki(res, t("DOWNLOAD_REASONS.UPDATE"));
       // to-do - reenable this for app
       if(What == 'App') onYes();
-      else alertUpdateCheckAvailable(What, res.newVersion, onNo, onYes);
+      else {
+        setWikiVersion_latest(res.latestVersionInfo);
+        alertUpdateCheckAvailable(What, res.newVersion, onNo, onYes);
+      }
     } else {
       this.props.updateCheck(false);
     }
