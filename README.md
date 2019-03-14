@@ -37,6 +37,14 @@ Currently, the supported languages are: ( :white_check_mark: means it's already 
 ### ... not managed by Pocket Dota
 Please take note that the ***Dota 2***'s **heroes/ items/ patch notes** descriptions and **other in-game texts** are translated by [Valve](https://www.valvesoftware.com/en/), and that the **Stats** screen is [Open Dota](https://www.opendota.com/)'s. As such, Pocket Dota cannot be responsible for any missing/ wrong translations in the above mentioned places.
 
+#### Patch notes
+
+Several language don't have the full Patch notes in Dota 2's game files.
+
+For instance, at the time of this writing, the Japanese language does not have Patch Notes.
+
+Missing patch notes are imported from English.
+
 ## App development
 
 Pocket Dota is developed using [React Native](https://facebook.github.io/react-native/), via [Expo](http://expo.io).
