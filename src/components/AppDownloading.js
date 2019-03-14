@@ -10,6 +10,7 @@ import { assets } from '../constants/Data';
 import { Updates } from 'expo';
 import { withNamespaces } from 'react-i18next';
 
+
 @withNamespaces('Components')
 export default class AppDownloading extends React.PureComponent {
   async componentDidMount() {

@@ -1,5 +1,6 @@
 import { Alert } from "react-native";
 import i18n from 'i18next';
+import { languages } from "../localization";
 
 
 const wikiSize = () => `\r\n( ${i18n.t("Alerts:download_size")} ~1.4 MB )`
@@ -7,7 +8,7 @@ const wikiSize = () => `\r\n( ${i18n.t("Alerts:download_size")} ~1.4 MB )`
 
 export const alertLanguageUpdate = (lang, onYes, onNo) => 
   Alert.alert(
-    lang,
+    languages[lang],
     i18n.t("Screen_SettingsLanguage:UPDATE") + wikiSize(),
     [
       { text: i18n.t("Alerts:BUTTON_No"), style: 'cancel', onPress: onNo },
@@ -17,7 +18,7 @@ export const alertLanguageUpdate = (lang, onYes, onNo) =>
   );
 export const alertLanguageDownload = (lang, onYes, onNo) => 
   Alert.alert(
-    lang,
+    languages[lang],
     i18n.t("Screen_SettingsLanguage:DOWNLOAD_ASK") + wikiSize(),
     [
       { text: i18n.t("Alerts:BUTTON_No"), style: 'cancel', onPress: onNo },
@@ -25,7 +26,15 @@ export const alertLanguageDownload = (lang, onYes, onNo) =>
     ],
     { cancelable: true }
   );
-
+export const alertLanguageDownload_Failed = (lang) =>
+  Alert.alert(
+    languages[lang],
+    i18n.t("Screen_SettingsLanguage:DOWNLOAD_FAIL"),
+    [
+      { text: i18n.t("Alerts:BUTTON_Dismiss") }
+    ],
+    { cancelable: true }
+  )
 
 
 

@@ -29,6 +29,7 @@ const checkDelay = {
   (state => ({
     updateInProgress: state.update.updateInProgress,
 
+    currentLanguage: state.language.currentLanguage,
     downloadingLanguage: state.language.downloadingLanguage,
 
     showWiki: state.update.showWiki,
@@ -53,7 +54,6 @@ const checkDelay = {
 
     updateApp: (version) => dispatch(UpdateActions.updateApp(version)),
     updateWiki: (res, reason) => dispatch(UpdateActions.downloadWiki(reason, res)),
-    forceUpdateWiki: (res, reason) => dispatch(UpdateActions.downloadWiki(reason, res)),
   }))
 )
 export default class Updater extends React.PureComponent {
@@ -155,10 +155,10 @@ export default class Updater extends React.PureComponent {
 
   render() {
     const {
-      showWiki, downloadingWiki_reason, downloadingWiki_version, downloadingWiki_versionInfo,
-      showApp, downloadingApp_version,
+      downloadingWiki_reason, downloadingWiki_versionInfo,
+      downloadingApp_version,
 
-      downloadingLanguage,
+      currentLanguage, downloadingLanguage,
     } = this.props;
 
 
@@ -167,12 +167,12 @@ export default class Updater extends React.PureComponent {
       * the wiki data is corrupted (DOWNLOAD_REASONS.MISSING)
       */
     return (
-      <View style={[styles.modalsWrapper, !showWiki && !showApp && styles.modalsWrapper_hidden]}>
+      <View style={[styles.modalsWrapper, !downloadingWiki_reason && !downloadingApp_version && !downloadingLanguage && styles.modalsWrapper_hidden]}>
 
         { !downloadingWiki_reason ? null :
           <View style={styles.modal}>
             <WikiDownloading
-              version={downloadingWiki_version}
+              currentLanguage={currentLanguage}
               versionInfo={downloadingWiki_versionInfo}
               reason={downloadingWiki_reason}
               onFinish={this._handleFinishDownLoadingWiki}

@@ -13,7 +13,7 @@ const host = local
               : `https://raw.githubusercontent.com/kriskate/dota-data/${branch}`
 
 const images_base = `${host}/assets/images/`;
-const base_data = `${host}/$WIKI_FOLDER/`;
+const base_data = `${host}/data/`;
 
 export const assets = {
   attributes: {
@@ -94,15 +94,14 @@ export const url = {
     items: id => `${images_base}items/${id}.png`,
   },
 
-  currentWiki: `${host}/info.json`,
+  currentWiki: `${base_data}info.json`,
 
-  data:{
-    heroes: `${base_data}heroes.json`,
-    items: `${base_data}items.json`,
-    patch_notes: `${base_data}patch_notes.json`,
-    tips: `${base_data}tips.json`,
-    info: `${base_data}info.json`,
-  },
+  data: (language) => ({
+    heroes: `${base_data}${language}/heroes.json`,
+    items: `${base_data}${language}/items.json`,
+    patch_notes: `${base_data}${language}/patch_notes.json`,
+    tips: `${base_data}${language}/tips.json`,
+  }),
 }
 
 

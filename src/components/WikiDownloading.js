@@ -24,7 +24,7 @@ export default class WikiDownloading extends React.PureComponent {
   static defaultProps = {
     reason: '',
     version: '',
-    versionInfo: null,
+    currentLanguage: null,
     onFinish: () => {},
   }
 
@@ -35,12 +35,10 @@ export default class WikiDownloading extends React.PureComponent {
     this._downloadWiki();
   }
   _downloadWiki = async () => {
-    const { versionInfo } = this.props;
-    Platform.OS === 'ios' && StatusBar.setNetworkActivityIndicatorVisible(true);
+    const { currentLanguage } = this.props;
 
-    const wiki = await downloadWiki(versionInfo, p => this._progress('wiki', p));
+    const wiki = await downloadWiki(currentLanguage, p => this._progress('wiki', p));
     
-    Platform.OS === 'ios' && StatusBar.setNetworkActivityIndicatorVisible(false);
 
     this.setState({ wiki });
   }

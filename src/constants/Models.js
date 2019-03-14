@@ -69,14 +69,12 @@ export function model_user (user) {
 }
 export function model_settings (settings) {
   const {
-    language=null,
     showProfileOnHome=true,
     autoCheckApp=true,
     autoCheckDB=true,
     tipsState=model_tips({}),
   } = settings;
   return {
-    language,
     showProfileOnHome,
     autoCheckApp,
     autoCheckDB,
@@ -102,10 +100,10 @@ export const model_tips = ({
 
 export const model_language = ({
   name="english",
-  wikiData={}, // model_wiki
+  wikiInfo={}, // model_wiki
 }) => ({
   name,
-  wikiData,
+  wikiInfo,
 })
 
 

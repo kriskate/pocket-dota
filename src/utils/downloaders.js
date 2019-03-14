@@ -1,10 +1,12 @@
 import { FileSystem } from 'expo';
-import { Platform, Image } from 'react-native';
+import { Image, Platform, StatusBar } from 'react-native';
 import { url, folder_data } from '../constants/Data';
 import { loadCurrentWikiInfo, loadWiki, } from './loaders';
 import { model_wiki_info } from '../constants/Models';
 import PromisePool from 'es6-promise-pool';
 import { getWikiImages } from './Images';
+import { dota2com_languages } from '../localization';
+import Logger from './Logger';
 
 
 export const downloadImages = async (wiki, progress_callback) => {
@@ -31,39 +33,52 @@ export const downloadImages = async (wiki, progress_callback) => {
 }
 
 
-export const downloadWiki = async (wikiInfo, progress_callback) => {
-  await checkFolder(folder_data);
+export const downloadWiki = async (language, progress_callback) => {
+  Platform.OS === 'ios' && StatusBar.setNetworkActivityIndicatorVisible(true);
 
-  // Logger.debug('downloading new wiki');
+  const dota_language = dota2com_languages[language];
   
-  let info = wikiInfo || await loadCurrentWikiInfo();
-  if(!info) info = await downloadWikiInfo();
+  await checkFolder(folder_data);
+  await checkFolder(`${folder_data}${dota_language}`);
 
-  const { wikiVersionFolder } = model_wiki_info(info);
-
-  const keys = Object.keys(url.data);
+  const dataURL = url.data(dota_language);
+  const keys = Object.keys(dataURL);
 
   const progress = overallProgress(keys, progress_callback);
   let iosProgress = 0;
 
-  await Promise.all(
-    keys.map(async key => {
-      // Logger.debug(`downloading data for ${key}`);
-      await download(
-        url.data[key].replace('$WIKI_FOLDER', wikiVersionFolder),
-        folder_data,
-        progress(key)
-      );
-      if(Platform.OS === 'ios') {
-        iosProgress += 1/keys.length;
-        progress_callback(iosProgress);
-      }
-      // Logger.silly(`- downloaded ${key}`);
-    })
-  );
+  try {
+    await Promise.all(
+      keys.map(async key => {
+        Logger.debug(`downloading data for ${key}`);
+        await download(
+          dataURL[key],
+          `${folder_data}${dota_language}/`,
+          progress(key)
+        );
+        if(Platform.OS === 'ios') {
+          iosProgress += 1/keys.length;
+          progress_callback(iosProgress);
+        }
+        Logger.debug(`- downloaded ${key}`);
+      })
+    );
+
+  } catch(e) {
+    return null;
+  }
+  await downloadWikiInfo();
+
+  await FileSystem.copyAsync({
+    from: `${folder_data}info.json`,
+    to: `${folder_data}${dota_language}/info.json`,
+  })
+
+  Platform.OS === 'ios' && StatusBar.setNetworkActivityIndicatorVisible(false);
 
   // wikiInfo is passed in through the update reducer, to the WikiDownloading Component
-  return await loadWiki();
+  const loadedWiki = await loadWiki(language);
+  return loadedWiki;
 }
 
 
@@ -91,8 +106,8 @@ const overallProgress = (keys, progress_callback) => {
 
 const download = async (uri, folder, progress=()=>{}) => {
   const filename = uri.split('/').pop();
-  const output = `${folder}/${filename}`;
-
+  const output = `${folder}${filename}`;
+  
   const dld = FileSystem.createDownloadResumable(uri, output, {}, progress);
 
   return dld.downloadAsync();

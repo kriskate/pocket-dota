@@ -7,7 +7,7 @@ import Logo from './Logo';
 
 export default InitialLanguageSelector = () => ((
   <View style={styles.container}>
-    <Logo />
+    <Logo fillBackground={true} />
     <LanguageSelector isInitial />
   </View>
 ));

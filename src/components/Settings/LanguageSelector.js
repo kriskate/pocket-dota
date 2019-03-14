@@ -5,12 +5,15 @@ import { withNamespaces } from 'react-i18next';
 
 import { Button, Image, Text } from '../ui';
 import { Actions } from '../../reducers/language';
+import { Actions as WikiActions } from '../../reducers/wiki';
 
-import { languages, defaultLanguage } from '../../localization';
+import i18n, { languages, defaultLanguage, availableLanguages } from '../../localization';
 import { assets } from '../../constants/Data';
 import Colors from '../../constants/Colors';
 import { ICONS } from '../../constants/Constants';
 import { alertLanguageDownload, alertLanguageUpdate } from '../../utils/Alerts';
+import Layout from '../../constants/Layout';
+import { loadWiki } from '../../utils/loaders';
 
 
 
@@ -21,15 +24,36 @@ const LANG_STATES = {
 }
 
 
+const LanguageIcon = ({ languageState }) => (
+  <View style={styles.languageButton_icon}>
+    {
+      languageState == LANG_STATES.GOOD
+      ?
+      <ICONS.ICON_GOOD />
+      :
+      languageState == LANG_STATES.DOWNLOAD
+      ?
+      <ICONS.ICON_DOWNLOAD />
+      :
+      <ICONS.ICON_UPDATE />
+    }
+  </View>
+)
+
+
 @withNamespaces()
 @connect(
   (state => ({
+    isInitialLanguageSet: state.language.isInitialLanguageSet,
     currentLanguage: state.language.currentLanguage,
     availableLanguages: state.language.availableLanguages,
   })),
   ( dispatch => ({
+    setInitialLanguage: () => dispatch(Actions.setInitialLanguage()),
     setLanguage: (language) => dispatch(Actions.setLanguage(language)),
     downloadLanguage: language => (dispatch(Actions.downloadLanguage(language))),
+
+    newWiki: (wiki) => dispatch(WikiActions.newWiki(wiki)),
   }))
 )
 export default class LanguageSelector extends React.PureComponent {
@@ -40,14 +64,15 @@ export default class LanguageSelector extends React.PureComponent {
     const { currentLanguage, availableLanguages } = nextProps;
     const languageStates = {};
 
-    availableLanguages.forEach(lang => {
+    Object.keys(languages).forEach(lang => {
       const langData = availableLanguages.find(l => l.name == lang);
-    
+
       if(!langData) {
         languageStates[lang] = LANG_STATES.DOWNLOAD;
       } else {
         const cLangData = availableLanguages.find(l => l.name == currentLanguage);
-        if(langData.info.wikiVersion < cLangData.info.wikiVersion) 
+
+        if(langData.wikiInfo.wikiVersion < cLangData.wikiInfo.wikiVersion) 
           languageStates[lang] = LANG_STATES.UPDATE;
         else 
           languageStates[lang] = LANG_STATES.GOOD;
@@ -58,40 +83,46 @@ export default class LanguageSelector extends React.PureComponent {
     };
   }
 
-  _onLangPress = (lang) => {
-    const onNo = () => {};
-    const onYes = () => {
-      this.props.downloadLanguage(lang);
-      this.props.languageChange_callback();
-    }
+  _onNo = () => {}
+  _onYes = (lang) => {
+    this.props.downloadLanguage(lang);
+    this.props.languageChange_callback(lang);
+
+    if(!this.props.isInitialLanguageSet)
+      this.props.setInitialLanguage();
+  }
+  _changeLanguage = async (lang) => {
+    this.props.setLanguage(lang);
+    this.props.i18n.changeLanguage(lang);
+    this.props.newWiki(await loadWiki(lang));
+    
+    this.props.languageChange_callback();
+
+    if(!this.props.isInitialLanguageSet)
+      this.props.setInitialLanguage();
+  }
+
+  _onLangPress = async (lang) => {
+    if(lang == this.props.currentLanguage && this.props.isInitialLanguageSet)
+      return;
 
     const languageState = this.state.languageStates[lang];
+
     switch (languageState) {
       case LANG_STATES.DOWNLOAD:
-        alertLanguageDownload(lang, onYes, onNo);
-        break;
+        alertLanguageDownload(lang, () => this._onYes(lang), this._onNo);
+      break;
       case LANG_STATES.UPDATE:
-        alertLanguageUpdate(lang, onYes, onNo);
-        break;
+        alertLanguageUpdate(lang, () => this._onYes(lang), () => this._changeLanguage(lang));
+      break;
       case LANG_STATES.GOOD:
-        this.props.setLanguage(lang);
-        break;
-    }
-
-    alertLanguageDownload();
-  }
-  _renderSymbol = (lang) => {
-    const languageState = this.state.languageStates[lang];
-
-    switch(languageState) {
-      case LANG_STATES.GOOD:
-        return <ICONS.ICON_GOOD />
-      case LANG_STATES.DOWNLOAD:
-        return <ICONS.ICON_DOWNLOAD />
-      case LANG_STATES.UPDATE:
-        return <ICONS.ICON_UPDATE />
+        this._changeLanguage(lang);
+      break;
     }
   }
+  _renderSymbol = (lang) => (
+    <LanguageIcon languageState={this.state.languageStates[lang]} />
+  )
   render() {
     const { 
       isInitial,
@@ -104,12 +135,16 @@ export default class LanguageSelector extends React.PureComponent {
         Object.keys(languages).map(lang => (
           <Button prestyled key={lang} disabled={!isInitial && lang == currentLanguage}
               style={[styles.languageButton, 
+                isInitial && styles.languageButton_spread,
                 { backgroundColor: currentLanguage == lang ? Colors.dota_ui2 : Colors.dota_ui1, }
               ]}
               onPress={() => this._onLangPress(lang)} >
 
             { this._renderSymbol(lang) }
-            <Text>{languages[lang]}</Text>
+            
+            <Text>
+            { !availableLanguages.includes(lang) && <ICONS.ICON_TRANSLATE /> } {languages[lang]}
+            </Text>
             <Image style={styles.languageButton_image} source={assets.locales[lang]} />
           </Button>
         ))
@@ -122,13 +157,17 @@ export default class LanguageSelector extends React.PureComponent {
 const styles = StyleSheet.create({
   container: {
     flex: 3,
-    backgroundColor: Colors.dota_ui1_light,
+    backgroundColor: Colors.dota_ui2,
   },
 
   spread: {
     justifyContent: 'center',
+    backgroundColor: Colors.dota_ui1_light,
   },
 
+  languageButton_spread: {
+    marginVertical: Layout.padding_small/2,
+  },
   languageButton: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -137,7 +176,12 @@ const styles = StyleSheet.create({
   languageButton_image: {
     width: 40,
     height: 30,
-  }
+  },
+  languageButton_icon: {
+    width: 40,
+    height: 17,
+    alignItems: "center",
+  },
 })
 
 LanguageSelector.defaultProps = {

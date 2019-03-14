@@ -1,5 +1,5 @@
 import React from 'react';
-import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import { FontAwesome, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import Colors from './Colors';
 import { Constants } from 'expo';
 import { Platform } from 'react-native';
@@ -65,6 +65,8 @@ export const ICONS = {
   BUTTON_FORWARD: () => <Ionicons name="ios-arrow-forward" size={17} color={Colors.dota_white} />,
   BUTTON_USER: ({color}) => <FontAwesome name="user" size={17} color={color || Colors.dota_white} />,
   BUTTON_INFO: () => <FontAwesome name="info" size={17} color={Colors.dota_white} />,
+
+  ICON_TRANSLATE: () => <MaterialIcons size={17} color={Colors.dota_red_dark} name="translate" />,
 
   ICON_DOWNLOAD: () => <Ionicons size={17} color={Colors.dota_white}
     name={Platform.OS == "ios" ? "ios-cloud-download" : "md-cloud-download"} />,
