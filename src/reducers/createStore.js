@@ -10,8 +10,6 @@ import wiki, { Actions as WikiActions } from './wiki';
 
 import { getDeviceLanguage } from '../localization';
 import { loadWiki, loadDefaultWiki } from '../utils/loaders';
-import { AsyncStorage } from 'react-native';
-
 
 const persistConfig = {
   key: 'pocket-dota',
@@ -20,7 +18,6 @@ const persistConfig = {
 }
 
 export default async (done) => {
-  // await AsyncStorage.clear();
 
   const persistedReducer = persistReducer(persistConfig, combineReducers({
     language,

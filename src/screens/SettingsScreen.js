@@ -3,7 +3,7 @@ import { Container, Text, Button, Switch } from '../components/ui';
 
 import { headerStyle } from '../utils/screen';
 import { SCREEN_LABELS, SCREEN_LABELS_HIDDEN, APP_VERSION, GET_WIKI_VERSION, ICONS } from '../constants/Constants';
-import { StyleSheet, View, } from 'react-native';
+import { StyleSheet, View, AsyncStorage, } from 'react-native';
 import Colors from '../constants/Colors';
 import Layout from '../constants/Layout';
 import { test__downgradeWiki, test__removeWiki } from '../utils/loaders';
@@ -51,7 +51,6 @@ const TYPES = {
   })),
   (dispatch => ({
     updateSettings: val => dispatch(Actions.settings(val)),
-    setProfile: val => dispatch(Actions.setProfile(val)),
     setUser: val => dispatch(Actions.setUser(val)),
 
     updateWiki: (res, reason) => dispatch(UpdateActions.downloadWiki(reason, res)),
@@ -126,7 +125,8 @@ export default class SettingsScreen extends React.PureComponent {
   }
   _resetSettings = () => {
     const onYes = async () => {
-      this.props.setProfile(model_profile({}));
+      // this.props.setProfile(model_profile({}));
+      await AsyncStorage.clear();
     
       await FileSystem.deleteAsync(folder_data, { idempotent: true });
       Updates.reload();
