@@ -10,7 +10,7 @@ import { Actions as WikiActions } from '../../reducers/wiki';
 import i18n, { languages, defaultLanguage, availableLanguages } from '../../localization';
 import { assets } from '../../constants/Data';
 import Colors from '../../constants/Colors';
-import { ICONS } from '../../constants/Constants';
+import { ICONS, GET_WIKI_VERSION_latest } from '../../constants/Constants';
 import { alertLanguageDownload, alertLanguageUpdate } from '../../utils/Alerts';
 import Layout from '../../constants/Layout';
 import { loadWiki } from '../../utils/loaders';
@@ -70,9 +70,7 @@ export default class LanguageSelector extends React.PureComponent {
       if(!langData) {
         languageStates[lang] = LANG_STATES.DOWNLOAD;
       } else {
-        const cLangData = availableLanguages.find(l => l.name == currentLanguage);
-
-        if(langData.wikiInfo.wikiVersion < cLangData.wikiInfo.wikiVersion) 
+        if(langData.wikiInfo.wikiVersion < GET_WIKI_VERSION_latest().split('-')[1]) 
           languageStates[lang] = LANG_STATES.UPDATE;
         else 
           languageStates[lang] = LANG_STATES.GOOD;

@@ -1,6 +1,7 @@
 import { model_language, model_wiki_info } from "../constants/Models";
 import i18n, { defaultLanguage } from "../localization";
 import { alertLanguageDownload_Failed } from "../utils/Alerts";
+import { setWikiVersion_latest } from "../constants/Constants";
 
 export const ActionTypes = {
   SET_INITIAL_LANGUAGE: 'SET_INITIAL_LANGUAGE',
@@ -68,6 +69,8 @@ export default function reducer(state=initialState, action) {
       } else {
         new_a.push(new_lang);
       }
+      new_a.sort((a, b) => b.wikiInfo.wikiVersion - a.wikiInfo.wikiVersion);
+      setWikiVersion_latest(new_a[0].wikiInfo);
 
       return { ...state,
         availableLanguages: new_a,
