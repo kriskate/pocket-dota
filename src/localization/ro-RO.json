@@ -14,13 +14,13 @@
     "UpdateCheckAvailable_Title": "O versiune nouă {{What}} a fost găsită! ({{newVersion}})",
     "UpdateCheckAvailable": "O versiune nouă {{What}} a fost găsită! ({{newVersion}})\nDoriți să începem descărcare ei?\nEste recomandat să fiți conectat la o rețea WI-FI înainte de a descărca date noi.",
     "UpdateCheckError": "A apărut o eroare în încercarea de a actualiza versiunea {{What}}.\n{{error}}\nVă rugăm să încercați din nou.",
+    "download_size": "dimensiune download:",
     "RemoveProfileData_Title": "Sunteți sigur că doriți eliminarea datelor de profil?",
     "RemoveProfileData": "Se vor elimina toate datele de profil Dota 2 de pe dispozitiv.",
     "ResetSettingsTitle": "Sunteți sigur că doriți reinițializarea setărilor la valorile implicite?",
     "ResetSettings": "Se vor reseta toate setările la valorile implicite, inclusiv ștergerea datelor de profil Dota 2."
   },
   "Components": {
-    "LANGUAGE_DOWNLOAD": "Pentru a folosi limba selectată, trebuie descărcate fișiere adiționale. Doriți să continuați?",
     "AppDownloading": {
       "downloading": "Se descarcă",
       "downloading_done": "Atunci când se termină actualizarea, aplicația va reporni."
@@ -28,7 +28,9 @@
     "WikiDownloading": {
       "PROGRESS_DATA": "Se descarcă fișierele cu eroi",
       "PROGRESS_IMAGES": "Se descarcă imaginile",
-      "PROGRESS_UPDATE_VERSION": "Se actualizează la versiunea:"
+      "PROGRESS_UPDATE_VERSION": "Se actualizează la versiunea:",
+      "UPDATE_DONE": "S-a terminat actualizarea wiki la versiunea:",
+      "CONSENT_PRECACHE_IMAGES": "Doriţi să pre-cache-ul imaginilor pentru eroi şi obiecte?\nAcest lucru va asigura că veţi obţine cea mai bună experienţă în timp ce utilizaţi Pocket Dota, pentru că nu va trebui să așteptați încărcarea imaginilor mai târziu."
     },
     "DOWNLOAD_REASONS": {
       "FRESH": "Deoarece aceasta este prima dată când deschideți aplicația, vor trebui descărcate fișiere suplimentare (exemplu: descrieri eroi/ obiecte, imagini).",
@@ -163,7 +165,15 @@
   },
   "Screen_Patch": {
     "ReleaseDate": "Data lansării:",
-    "ViewGameChanges": "vezi schimbări"
+    "ViewGameChanges": "vezi schimbări",
+    "Nerfed": "Agravat",
+    "Buffed": "Îmbunătățit",
+    "Buffed most heroes": "S-au îmbunătățit majoritatea eroilor",
+    "Rebalanced most heroes": "S-au reechilibrat majoritatea eroilor",
+    "Rebalanced": "Reechilibrat",
+    "Reworked": "Refăcut",
+    "Added new items": "Obiecte adăugate",
+    "Removed items": "Elementele eliminate"
   },
   "Screen_Settings": {
     "Section_Profile": "Profil",
@@ -180,6 +190,7 @@
     "Database_ClearWiki": "Șterge wiki",
     "Database_DowngradeWiki": "Declasează wiki",
     "Section_App": "Setări aplicație:",
+    "App_Language": "Limbă",
     "App_Tips": "Sfaturi in-app",
     "App_CheckUpdate": "Verifică actualizări aplicație",
     "App_ResetToDefault": "Resetează la setările implicite",
@@ -204,6 +215,12 @@
     "profileAdded_short": "Profil adăugat",
     "profileAdded_description": "Acest profil de Dota 2 a fost adăugat. Profilul va fi disponibil pe ecranul de pornire, dacă această opțiune este activată în \"Setări\".",
     "DONT_SHOW_AGAIN": "NU MAI AFIȘA"
+  },
+  "Screen_SettingsLanguage": {
+    "UPDATE": "Fișierele de limbaj nu sunt de actualitate. Doriți să le actualizați?",
+    "DOWNLOAD_ASK": "Pentru a utiliza limba selectată, trebuie descărcate fișiere adiționale. Doriți să continuați?",
+    "DOWNLOAD_FAIL": "Descărcarea de fișiere de limbă nu a reușit. Vă rugăm să încercați din nou mai târziu.",
+    "DOWNLOADING": "Se descarcă fișierele limbii selectate"
   },
   "Screen_Stats": {
     "TypeProfileName": "Introdu numele de profil pentru căutare",
