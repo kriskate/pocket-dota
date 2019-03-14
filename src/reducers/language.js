@@ -1,7 +1,8 @@
+// to-do: move everything inside the wiki reducer
+
 import { model_language, model_wiki_info } from "../constants/Models";
 import { defaultLanguage } from "../localization";
 import { alertLanguageDownload_Failed } from "../utils/Alerts";
-import { setWikiVersion_latest } from "../constants/Constants";
 
 export const ActionTypes = {
   SET_INITIAL_LANGUAGE: 'SET_INITIAL_LANGUAGE',
@@ -10,6 +11,8 @@ export const ActionTypes = {
 
   DOWNLOAD_LANGUAGE: "DOWNLOAD_LANGUAGE",
   DOWNLOAD_LANGUAGE_DONE: "DOWNLOAD_LANGUAGE_DONE",
+
+  SET_LATEST_WIKI_VERSION: "SET_LATEST_WIKI_VERSION",
 }
 export const Actions = {
   setInitialLanguage: () => ({ type: ActionTypes.SET_INITIAL_LANGUAGE }),
@@ -18,6 +21,8 @@ export const Actions = {
 
   downloadLanguage: language => ({ type: ActionTypes.DOWNLOAD_LANGUAGE, language }),
   downloadLanguage_done: (language, data) => ({ type: ActionTypes.DOWNLOAD_LANGUAGE_DONE, language, data }),
+
+  setLatestWikiVersion: (version) => ({ type: ActionTypes.SET_LATEST_WIKI_VERSION, version }),
 }
 
 export const initialState = {
@@ -28,6 +33,8 @@ export const initialState = {
   availableLanguages: [], // model_language({})
 
   downloadingLanguage: false,
+
+  latestWikiVersion: 0,
 }
 
 export default function reducer(state=initialState, action) {
@@ -70,12 +77,17 @@ export default function reducer(state=initialState, action) {
         new_a.push(new_lang);
       }
       new_a.sort((a, b) => b.wikiInfo.wikiVersion - a.wikiInfo.wikiVersion);
-      setWikiVersion_latest(new_a[0].wikiInfo);
 
       return { ...state,
         availableLanguages: new_a,
         downloadingLanguage: false,
+        latestWikiVersion: new_a[0].wikiInfo.wikiVersion,
       };
+
+    case ActionTypes.SET_LATEST_WIKI_VERSION:
+      return { ...state,
+        latestWikiVersion: action.version,
+      }
 
     default:
       return state;

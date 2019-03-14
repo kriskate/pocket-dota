@@ -11,13 +11,6 @@ export const setWikiVersion = ({ appVersion, wikiVersion }) => {
 }
 export const GET_WIKI_VERSION = () => _wikiVersion;
 
-let _wikiVersion_latest;
-export const setWikiVersion_latest = ({ appVersion, wikiVersion }) => {
-  _wikiVersion_latest = !appVersion ? null :
-    `${appVersion}-${wikiVersion}`;
-}
-export const GET_WIKI_VERSION_latest = () => _wikiVersion_latest;
-
 export const APP_VERSION = Constants.manifest.version;
 
 export const ITEM_CONSTANTS = {

@@ -9,7 +9,7 @@ import { Actions as LanguageActions } from './reducers/language';
 import WikiDownloading from './components/WikiDownloading';
 import { alertWikiUpdateDone, alertAppUpdateDone, alertUpdateCheckAvailable, alertCannotUpdate } from './utils/Alerts';
 
-import { GET_WIKI_VERSION, setWikiVersion_latest } from './constants/Constants';
+import { GET_WIKI_VERSION } from './constants/Constants';
 import Layout from './constants/Layout';
 import Colors from './constants/Colors';
 import AppDownloading from './components/AppDownloading';
@@ -57,6 +57,7 @@ const checkDelay = {
     updateWiki: (res, reason) => dispatch(UpdateActions.downloadWiki(reason, res)),
 
     downloadLanguage_done: (language, wikiInfo) => dispatch(LanguageActions.downloadLanguage_done(language, wikiInfo)),
+    setLatestWikiVersion: (version) => dispatch(LanguageActions.setLatestWikiVersion(version)),
   }))
 )
 export default class Updater extends React.PureComponent {
@@ -146,7 +147,7 @@ export default class Updater extends React.PureComponent {
       // to-do - reenable this for app
       if(What == 'App') onYes();
       else {
-        setWikiVersion_latest(res.latestVersionInfo);
+        this.props.setLatestWikiVersion(res.latestVersionInfo.wikiVersion);
         alertUpdateCheckAvailable(What, res.newVersion, onNo, onYes);
       }
     } else {

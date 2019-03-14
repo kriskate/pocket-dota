@@ -10,7 +10,7 @@ import { Actions as WikiActions } from '../../reducers/wiki';
 import i18n, { languages, defaultLanguage, availableLanguages } from '../../localization';
 import { assets } from '../../constants/Data';
 import Colors from '../../constants/Colors';
-import { ICONS, GET_WIKI_VERSION_latest } from '../../constants/Constants';
+import { ICONS } from '../../constants/Constants';
 import { alertLanguageDownload, alertLanguageUpdate } from '../../utils/Alerts';
 import Layout from '../../constants/Layout';
 import { loadWiki } from '../../utils/loaders';
@@ -44,6 +44,8 @@ const LanguageIcon = ({ languageState }) => (
 @withNamespaces()
 @connect(
   (state => ({
+    latestWikiVersion: state.language.latestWikiVersion,
+
     isInitialLanguageSet: state.language.isInitialLanguageSet,
     currentLanguage: state.language.currentLanguage,
     availableLanguages: state.language.availableLanguages,
@@ -61,7 +63,7 @@ export default class LanguageSelector extends React.PureComponent {
     languageStates: {},
   }
   static getDerivedStateFromProps(nextProps) {
-    const { currentLanguage, availableLanguages } = nextProps;
+    const { availableLanguages } = nextProps;
     const languageStates = {};
 
     Object.keys(languages).forEach(lang => {
@@ -70,7 +72,7 @@ export default class LanguageSelector extends React.PureComponent {
       if(!langData) {
         languageStates[lang] = LANG_STATES.DOWNLOAD;
       } else {
-        if(langData.wikiInfo.wikiVersion < GET_WIKI_VERSION_latest().split('-')[1]) 
+        if(langData.wikiInfo.wikiVersion < nextProps.latestWikiVersion)
           languageStates[lang] = LANG_STATES.UPDATE;
         else 
           languageStates[lang] = LANG_STATES.GOOD;
