@@ -101,10 +101,13 @@ export default class LanguageSelector extends React.PureComponent {
   }
 
   _onLangPress = async (lang) => {
-    if(lang == this.props.currentLanguage && this.props.isInitialLanguageSet)
-      return;
-
     const languageState = this.state.languageStates[lang];
+
+    if(lang == this.props.currentLanguage 
+        && this.props.isInitialLanguageSet 
+        && languageState !== LANG_STATES.UPDATE) {
+      return;
+    }
 
     switch (languageState) {
       case LANG_STATES.DOWNLOAD:
@@ -131,10 +134,15 @@ export default class LanguageSelector extends React.PureComponent {
       <View scrollable style={[styles.container, isInitial && styles.spread] } >
       {
         Object.keys(languages).map(lang => (
-          <Button prestyled key={lang} disabled={!isInitial && lang == currentLanguage}
+          <Button prestyled key={lang}
               style={[styles.languageButton, 
                 isInitial && styles.languageButton_spread,
-                { backgroundColor: currentLanguage == lang ? Colors.dota_ui2 : Colors.dota_ui1, }
+                {
+                  backgroundColor: currentLanguage == lang ? Colors.dota_ui2 : Colors.dota_ui1,
+                  borderColor: currentLanguage == lang ? Colors.goldenrod : Colors.dota_ui1,
+                  borderBottomColor: currentLanguage == lang ? Colors.goldenrod : Colors.dota_ui2,
+                  borderTopColor: currentLanguage == lang ? Colors.goldenrod : Colors.dota_ui2,
+                }
               ]}
               onPress={() => this._onLangPress(lang)} >
 
