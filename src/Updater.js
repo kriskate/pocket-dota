@@ -4,7 +4,6 @@ import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions as UpdateActions, DOWNLOAD_STATE } from './reducers/update';
 import { Actions as WikiActions } from './reducers/wiki';
-import { Actions as LanguageActions } from './reducers/language';
 
 import WikiDownloading from './components/WikiDownloading';
 import { alertWikiUpdateDone, alertAppUpdateDone, alertUpdateCheckAvailable, alertCannotUpdate } from './utils/Alerts';
@@ -30,8 +29,8 @@ const checkDelay = {
   (state => ({
     updateInProgress: state.update.updateInProgress,
 
-    currentLanguage: state.language.currentLanguage,
-    downloadingLanguage: state.language.downloadingLanguage,
+    currentLanguage: state.wiki.currentLanguage,
+    downloadingLanguage: state.wiki.downloadingLanguage,
 
     showWiki: state.update.showWiki,
     downloadingWiki_reason: state.update.downloadingWiki_reason,
@@ -46,18 +45,18 @@ const checkDelay = {
   })),
   (dispatch => ({
     updateCheck: (updateInProgress) => dispatch(UpdateActions.updateCheck(updateInProgress)),
-
-    newWiki: (wiki) => dispatch(WikiActions.newWiki(wiki)),
-
+    
     hide: (what) => dispatch(UpdateActions.hide(what)),
     doneWiki: () => dispatch(UpdateActions.doneWiki()),
     doneApp: () => dispatch(UpdateActions.doneApp()),
-
+    
     updateApp: (version) => dispatch(UpdateActions.updateApp(version)),
     updateWiki: (res, reason) => dispatch(UpdateActions.downloadWiki(reason, res)),
+    
+    newWiki: (wiki) => dispatch(WikiActions.newWiki(wiki)),
 
-    downloadLanguage_done: (language, wikiInfo) => dispatch(LanguageActions.downloadLanguage_done(language, wikiInfo)),
-    setLatestWikiVersion: (version) => dispatch(LanguageActions.setLatestWikiVersion(version)),
+    downloadLanguage_done: (language, wikiInfo) => dispatch(WikiActions.downloadLanguage_done(language, wikiInfo)),
+    setLatestWikiVersion: (version) => dispatch(WikiActions.setLatestWikiVersion(version)),
   }))
 )
 export default class Updater extends React.PureComponent {

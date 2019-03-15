@@ -13,7 +13,7 @@ const { Line,} = Svg;
 
 @withNavigation
 @connect(state => ({
-  items: state.wiki.items,
+  items: state.wiki.wikiData.items,
 }))
 export default class ItemComponents extends React.PureComponent {
   state = {

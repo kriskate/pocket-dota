@@ -10,7 +10,7 @@ import InfiniteScollFlatList from '../components/InfiniteScrollFlatList';
 
 
 @connect(state => ({
-  patch_notes: state.wiki.patch_notes,
+  patch_notes: state.wiki.wikiData.patch_notes,
 }))
 export default class PatchNotesScreen extends React.Component {
   static navigationOptions = () => ({

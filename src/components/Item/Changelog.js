@@ -10,7 +10,7 @@ import { withNamespaces } from 'react-i18next';
 
 @withNamespaces("Screen_Item")
 @connect(state => ({
-  patch_notes: state.wiki.patch_notes
+  patch_notes: state.wiki.wikiData.patch_notes
 }))
 export default class Changelog extends React.Component {
   // delayed render so the changelog computation does not affect initial item render

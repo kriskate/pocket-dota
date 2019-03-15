@@ -48,7 +48,7 @@ const _getHeroSections = (heroes, t) => {
 
 @withNamespaces("Screen_Heroes")
 @connect(state => ({ 
-  heroes: state.wiki.heroes,
+  heroes: state.wiki.wikiData.heroes,
 }))
 export default class HeroesScreen extends React.PureComponent {
   static navigationOptions = () => ({

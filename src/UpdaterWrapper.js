@@ -4,7 +4,7 @@ import Updater from './Updater';
 import InitialLanguageSelector from './components/Settings/InitialLanguageSelector';
 
 export default connect(state => ({
-  isInitialLanguageSet: state.language.isInitialLanguageSet,
+  isInitialLanguageSet: state.wiki.isInitialLanguageSet,
 }))( 
   ({ isInitialLanguageSet }) => isInitialLanguageSet 
     ? <Updater /> 

@@ -52,7 +52,7 @@ const rename_items = {
 
 @withNamespaces("Screen_Hero")
 @connect(state => ({
-  game_items: state.wiki.items
+  game_items: state.wiki.wikiData.items
 }))
 export default class ItemBuild extends React.Component {
   render() {

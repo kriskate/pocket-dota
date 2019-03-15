@@ -71,8 +71,8 @@ class Section extends React.Component {
 
 @withNamespaces("Screen_Tips")
 @connect(state => ({
-  tips: state.wiki.tips,
-  wiki_heroes: state.wiki.heroes,
+  tips: state.wiki.wikiData.tips,
+  wiki_heroes: state.wiki.wikiData.heroes,
 }))
 export default class TipsScreen extends React.Component {
   static navigationOptions = () => ({

@@ -3,7 +3,6 @@ import { StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 
-import { Actions } from '../../reducers/language';
 import { Actions as UpdateActions } from '../../reducers/update';
 import { Actions as WikiActions } from '../../reducers/wiki';
 
@@ -18,13 +17,13 @@ import { languages } from '../../localization';
 @withNamespaces(["Screen_SettingsLanguage"])
 @connect(
   (state => ({
-    downloadingLanguage: state.language.downloadingLanguage,
+    downloadingLanguage: state.wiki.downloadingLanguage,
   })),
   ( dispatch => ({
     updateCheck: (updateInProgress) => dispatch(UpdateActions.updateCheck(updateInProgress)),
     
-    setLanguage: (language) => dispatch(Actions.setLanguage(language)),
-    downloadLanguage_done: (language, data) => dispatch(Actions.downloadLanguage_done(language, data)),
+    setLanguage: (language) => dispatch(WikiActions.setLanguage(language)),
+    downloadLanguage_done: (language, data) => dispatch(WikiActions.downloadLanguage_done(language, data)),
 
     newWiki: (wiki) => dispatch(WikiActions.newWiki(wiki)),
   }))

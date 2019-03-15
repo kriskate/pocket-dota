@@ -48,9 +48,9 @@ const Changes = ({ changes, images, namesArr, isItem }) => !changes || changes.l
 
 
 @connect(state => ({
-  patch_notes: state.wiki.patch_notes,
-  wiki_heroes: state.wiki.heroes,
-  wiki_items: state.wiki.items,
+  patch_notes: state.wiki.wikiData.patch_notes,
+  wiki_heroes: state.wiki.wikiData.heroes,
+  wiki_items: state.wiki.wikiData.items,
 }))
 export default class PatchScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({

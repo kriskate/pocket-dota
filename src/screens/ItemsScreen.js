@@ -18,7 +18,7 @@ import i18next from 'i18next';
 
 @withNamespaces("Screen_Items")
 @connect(state => ({
-  items: state.wiki.items,
+  items: state.wiki.wikiData.items,
 }))
 export default class Itemscreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({

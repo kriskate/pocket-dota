@@ -4,10 +4,9 @@ import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 
 import { Button, Image, Text } from '../ui';
-import { Actions } from '../../reducers/language';
 import { Actions as WikiActions } from '../../reducers/wiki';
 
-import i18n, { languages, defaultLanguage, availableLanguages } from '../../localization';
+import { languages, availableLanguages } from '../../localization';
 import { assets } from '../../constants/Data';
 import Colors from '../../constants/Colors';
 import { ICONS } from '../../constants/Constants';
@@ -44,16 +43,16 @@ const LanguageIcon = ({ languageState }) => (
 @withNamespaces()
 @connect(
   (state => ({
-    latestWikiVersion: state.language.latestWikiVersion,
+    latestWikiVersion: state.wiki.latestWikiVersion,
 
-    isInitialLanguageSet: state.language.isInitialLanguageSet,
-    currentLanguage: state.language.currentLanguage,
-    availableLanguages: state.language.availableLanguages,
+    isInitialLanguageSet: state.wiki.isInitialLanguageSet,
+    currentLanguage: state.wiki.currentLanguage,
+    availableLanguages: state.wiki.availableLanguages,
   })),
   ( dispatch => ({
-    setInitialLanguage: () => dispatch(Actions.setInitialLanguage()),
-    setLanguage: (language) => dispatch(Actions.setLanguage(language)),
-    downloadLanguage: language => (dispatch(Actions.downloadLanguage(language))),
+    setInitialLanguage: () => dispatch(WikiActions.setInitialLanguage()),
+    setLanguage: (language) => dispatch(WikiActions.setLanguage(language)),
+    downloadLanguage: language => (dispatch(WikiActions.downloadLanguage(language))),
 
     newWiki: (wiki) => dispatch(WikiActions.newWiki(wiki)),
   }))

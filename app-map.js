@@ -4,7 +4,6 @@ import createStore from "./src/reducers/createStore";
 import { alertUpdateCheckAvailable, alertAppUpdateDone, alertLanguageDownload } from "./src/utils/Alerts";
 
 // actions
-import { Actions as LanguageActions } from "./src/reducers/language";
 import { Actions as UpdateActions } from "./src/reducers/update";
 import { Actions as WikiActions } from "./src/reducers/wiki";
 
@@ -20,7 +19,7 @@ import { Updates } from "expo";
 import { defaultLanguage } from "./src/localization";
 
 const store = createStore();
-const { currentLanguage } = store.getState().language;
+const { currentLanguage } = store.getState().wiki;
 
 const Legend = {
   show = () => {/* mount selected component */},
@@ -47,7 +46,7 @@ if(!currentLanguage) {
   
         await Legend.show(<LanguageDownloading />)
         Legend.then(downloadFinished => {
-          LanguageActions.downloadLanguage_done(downloadFinished)
+          WikiActions.downloadLanguage_done(downloadFinished)
           Legend.hide(<InitialLanguageSelector />)
           Legend.show(<Updater />)
         }) 
