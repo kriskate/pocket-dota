@@ -40,6 +40,7 @@ export const initialState = {
 
   downloadingLanguage: false,
 
+  currentWikiVersion: 0,
   latestWikiVersion: 0,
 }
 
@@ -47,8 +48,10 @@ export default function reducer(state=initialState, action) {
   const { language } = action;
   switch(action.type) {
     case ActionTypes.NEW_WIKI:
+      const { wiki } = action;
       return { ...state,
-        wikiData: action.wiki,
+        wikiData: wiki,
+        currentWikiVersion: wiki.info.wikiVersion,
       };
 
     case ActionTypes.SET_INITIAL_LANGUAGE:

@@ -62,10 +62,11 @@ const persistorDone = async (store) => {
   // store.dispatch(WikiActions.downloadLanguage_done('fr-FR', wikiTest))
 
   // populate state.wiki.availableLanguages with the current store language
-  // this will also ensure that setWikiVersion_latest is set from the language reducer
+  // this will also ensure that latestWikiVersion is set from the language reducer
   store.dispatch(WikiActions.downloadLanguage_done(finalLanguage, wikiData.info));
 
   // populate state.wiki.wikiData
+  // this will also ensure currentWikiVersion is correct
   store.dispatch(WikiActions.newWiki(wikiData));
 }
 

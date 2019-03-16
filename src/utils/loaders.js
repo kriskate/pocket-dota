@@ -2,7 +2,6 @@ import { Asset, Font, Icon, FileSystem, Updates } from 'expo';
 import { model_profile, model_wiki } from '../constants/Models';
 import { getItem } from './storage';
 import { assets, folder_data, localData } from '../constants/Data';
-import { setWikiVersion } from '../constants/Constants';
 import { Alert } from 'react-native';
 import { dota2com_languages } from '../localization';
 
@@ -55,7 +54,6 @@ export const loadWiki = async (language) => {
       // Logger.silly(`- loaded local data: wiki : ${key} : ${!!data[key]}`);
     })
   );
-  if(!badData) setWikiVersion(data.info);
       
   return badData ? null : data;
 }
@@ -68,7 +66,6 @@ export const loadDefaultWiki = async () => {
       data[dataFile] = await localData[dataFile];
     })
   );
-  setWikiVersion(data.info);
 
   return data;
 }
@@ -115,7 +112,6 @@ export const test__downgradeWiki = async () => {
       wikiVersion: 30,
     };
     await FileSystem.writeAsStringAsync(`${folder_data}/info.json`, JSON.stringify(newInfo));
-    setWikiVersion(newInfo);
   
     console.log('replaced wiki with v30')
   }

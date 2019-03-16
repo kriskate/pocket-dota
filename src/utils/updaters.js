@@ -1,4 +1,3 @@
-import { GET_WIKI_VERSION } from "../constants/Constants";
 import { url } from "../constants/Data";
 import { Platform } from "react-native";
 import { Constants } from "expo";
@@ -22,19 +21,18 @@ const getJSONwikiInfo = async () => {
     return { error: e.message };
   }
 }
-export const wiki_needsUpdate = async () => {
+export const wiki_needsUpdate = async (currentWikiVersion) => {
   let latestVersionInfo = await getJSONwikiInfo();
 
   if(latestVersionInfo.error)
     return { error: ERRORS.NO_WIKI_VERSION + `\r\n${latestVersionInfo.error}`};
 
-  const { appVersion, wikiVersion, } = model_wiki_info(latestVersionInfo);
-  const newVersion = `${appVersion}-${wikiVersion}`;
+  const { wikiVersion, } = model_wiki_info(latestVersionInfo);
 
-  if(GET_WIKI_VERSION() === newVersion)
+  if(currentWikiVersion === wikiVersion)
     return false;
   else
-    return { newVersion, latestVersionInfo };
+    return { newVersion: wikiVersion, latestVersionInfo };
 }
 
 

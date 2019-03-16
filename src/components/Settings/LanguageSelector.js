@@ -12,7 +12,7 @@ import Colors from '../../constants/Colors';
 import { ICONS } from '../../constants/Constants';
 import { alertLanguageDownload, alertLanguageUpdate } from '../../utils/Alerts';
 import Layout from '../../constants/Layout';
-import { loadWiki } from '../../utils/loaders';
+import { loadWiki, loadDefaultWiki } from '../../utils/loaders';
 
 
 
@@ -91,9 +91,12 @@ export default class LanguageSelector extends React.PureComponent {
       this.props.setInitialLanguage();
   }
   _changeLanguage = async (lang) => {
+    let newWikiData = await loadWiki(lang);
+    if(!newWikiData) newWikiData = await loadDefaultWiki();
+
     this.props.setLanguage(lang);
     this.props.i18n.changeLanguage(lang);
-    this.props.newWiki(await loadWiki(lang));
+    this.props.newWiki(newWikiData);
     
     this.props.languageChange_callback();
 

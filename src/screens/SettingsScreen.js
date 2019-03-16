@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Text, Button, Switch } from '../components/ui';
 
 import { headerStyle } from '../utils/screen';
-import { SCREEN_LABELS, SCREEN_LABELS_HIDDEN, APP_VERSION, GET_WIKI_VERSION, ICONS } from '../constants/Constants';
+import { SCREEN_LABELS, SCREEN_LABELS_HIDDEN, APP_VERSION, ICONS } from '../constants/Constants';
 import { StyleSheet, View, AsyncStorage, } from 'react-native';
 import Colors from '../constants/Colors';
 import Layout from '../constants/Layout';
@@ -48,6 +48,8 @@ const TYPES = {
 
     updatingWiki: state.update.downloadingWiki_version,
     updatingApp: state.update.downloadingApp_version,
+
+    currentWikiVersion: state.wiki.currentWikiVersion,
   })),
   (dispatch => ({
     updateSettings: val => dispatch(Actions.settings(val)),
@@ -84,7 +86,7 @@ export default class SettingsScreen extends React.PureComponent {
   }
 
   _checkForUpdate = async (What) => {
-    const { updatingWiki, updatingApp, t } = this.props;
+    const { updatingWiki, updatingApp, currentWikiVersion, t } = this.props;
 
     const stater = What == TYPES.WIKI ? 'checkingWiki' : 'checkingApp';
 
@@ -98,7 +100,7 @@ export default class SettingsScreen extends React.PureComponent {
 
     const maybeTooFast = new Date();
 
-    const res = What == TYPES.WIKI ? await wiki_needsUpdate() : await app_needsUpdate();
+    const res = What == TYPES.WIKI ? await wiki_needsUpdate(currentWikiVersion) : await app_needsUpdate();
 
     if(new Date() - maybeTooFast < 1500) await sleep(1500);
 
@@ -143,7 +145,7 @@ export default class SettingsScreen extends React.PureComponent {
     const { navigate } = this.props.navigation;
 
     const { checkingApp, checkingWiki } = this.state;
-    const { updatingApp, updatingWiki, t } = this.props;
+    const { updatingApp, updatingWiki, currentWikiVersion, t } = this.props;
 
     const wikiUpdatingMessage = checkingWiki || (updatingWiki && t("updating"));
     const appUpdatingMessage = checkingApp || (updatingApp && t("updating"));
@@ -192,7 +194,7 @@ export default class SettingsScreen extends React.PureComponent {
             onPress={() => this._checkForUpdate(TYPES.WIKI)}
             message={wikiUpdatingMessage && wikiUpdatingMessage}
             disabled={wikiUpdatingMessage && wikiUpdatingMessage.includes("checkingForUpdate")}
-            current={GET_WIKI_VERSION()}
+            current={currentWikiVersion}
           />
           {!__DEV__ ? null : [
             <Button prestyled warning key={'clear'}

@@ -8,7 +8,6 @@ import { Actions as WikiActions } from './reducers/wiki';
 import WikiDownloading from './components/WikiDownloading';
 import { alertWikiUpdateDone, alertAppUpdateDone, alertUpdateCheckAvailable, alertCannotUpdate } from './utils/Alerts';
 
-import { GET_WIKI_VERSION } from './constants/Constants';
 import Layout from './constants/Layout';
 import Colors from './constants/Colors';
 import AppDownloading from './components/AppDownloading';
@@ -31,6 +30,7 @@ const checkDelay = {
 
     currentLanguage: state.wiki.currentLanguage,
     downloadingLanguage: state.wiki.downloadingLanguage,
+    currentWikiVersion: state.wiki.currentWikiVersion,
 
     showWiki: state.update.showWiki,
     downloadingWiki_reason: state.update.downloadingWiki_reason,
@@ -95,15 +95,14 @@ export default class Updater extends React.PureComponent {
     }, checkDelay.app);
 
     /* the wiki modal should be visible if minWikiVersion is not met */
-    const cWiki = GET_WIKI_VERSION();
-    if(cWiki) {
-      const currentWikiVersion = parseInt(cWiki.split('-')[1]);
+    const { currentWikiVersion } = this.props;
+    if(currentWikiVersion !== 0) {
       const minWikiVersion = parseInt(require('../app.json').minWikiVersion);
       const forceShowWiki = currentWikiVersion < minWikiVersion;
       
       if(forceShowWiki) {
-        const { t, updateWiki } = this.props;
-        const res = await wiki_needsUpdate();
+        const { t, updateWiki, currentWikiVersion } = this.props;
+        const res = await wiki_needsUpdate(currentWikiVersion);
 
         // the app has a version of /info.json in cache and will show that
         if(res == false) alertCannotUpdate(minWikiVersion, t("Updater_persistingProblem"));
@@ -129,7 +128,7 @@ export default class Updater extends React.PureComponent {
   _checkUpdate = async (What) => {
     this.props.updateCheck(true);
 
-    const res = What == 'App' ? await app_needsUpdate() : await wiki_needsUpdate();
+    const res = What == 'App' ? await app_needsUpdate() : await wiki_needsUpdate(this.props.currentWikiVersion);
 
     if(!res) {
       this.props.updateCheck(false);
