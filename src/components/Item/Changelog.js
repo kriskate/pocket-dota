@@ -5,10 +5,12 @@ import { FlatList, StyleSheet, View } from 'react-native';
 import Layout from '../../constants/Layout';
 import { Text } from '../ui';
 import Colors from '../../constants/Colors';
+import { withNamespaces } from 'react-i18next';
 
 
+@withNamespaces("Screen_Item")
 @connect(state => ({
-  patch_notes: state.wiki.patch_notes
+  patch_notes: state.wiki.wikiData.patch_notes
 }))
 export default class Changelog extends React.Component {
   // delayed render so the changelog computation does not affect initial item render
@@ -32,7 +34,7 @@ export default class Changelog extends React.Component {
   render() {
     if(!this.state.delayed) return null;
 
-    const { item_tag, patch_notes } = this.props;
+    const { item_tag, patch_notes, t } = this.props;
     const notes = [];
 
     Object.keys(patch_notes).reverse().forEach(patch => {
@@ -53,7 +55,7 @@ export default class Changelog extends React.Component {
         color: Colors.dota_radiant,
         fontWeight: 'bold',
         textAlign: 'center',
-      }}>Item changelog:</Text>,
+      }}>{t("Label_ItemChangelog")}</Text>,
       <FlatList key="patch-list"
         data={notes}
         renderItem={this._renderPatch}

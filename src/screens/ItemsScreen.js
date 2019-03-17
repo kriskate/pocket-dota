@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { StyleSheet } from 'react-native';
 
 import { headerStyle } from '../utils/screen';
-import { SCREEN_LABELS, SCREEN_LABELS_HIDDEN } from '../constants/Constants';
+import { SCREEN_LABELS_HIDDEN } from '../constants/Constants';
 
 import { Container } from '../components/ui';
 import ListScreen from '../components/ListScreen';
@@ -12,36 +12,57 @@ import { url } from '../constants/Data';
 import { model_section } from '../constants/Models';
 import Colors from '../constants/Colors';
 import { parseCategory } from '../utils/utils';
+import { withNamespaces } from 'react-i18next';
+import i18next from 'i18next';
 
 
-
+@withNamespaces("Screen_Items")
 @connect(state => ({
-  items: state.wiki.items,
+  items: state.wiki.wikiData.items,
 }))
 export default class Itemscreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: SCREEN_LABELS.ITEMS,
+    title: i18next.t("Constants:SCREEN_LABELS.ITEMS"),
     ...headerStyle,
   });
 
-  render() {
-    const { items } = this.props;
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      itemSections: [],
+    };
+  }
+
+  static getDerivedStateFromProps(newProps) {
+    const { items, t } = newProps;
     
     const itemSections = [];
 
     items.forEach(item => {
       const { category } = item;
-      let section = itemSections.find(({ title }) => title == category);
+      const parsed = parseCategory(category);
+      const translated_category = t("ItemType_" + parsed);
+      let section = itemSections.find(({ title }) => title == translated_category);
+
       if(!section) {
         section = model_section({ 
-          title: category,
-          color: Colors.items[parseCategory(category)],
+          title: translated_category,
+          color: Colors.items[parsed],
         });
         itemSections.push(section);
       }
 
       section.data.push(item);
     });
+
+    return {
+      itemSections,
+    }
+  }
+
+  render() {
+    const { itemSections } = this.state;
 
     return (
       <Container backToHome style={ styles.container }>

@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 import { StyleSheet } from 'react-native';
 
 import ListScreen from '../ListScreen';
-import { ITEM_CONSTANTS, SCREEN_LABELS_HIDDEN } from '../../constants/Constants';
+import { SCREEN_LABELS_HIDDEN } from '../../constants/Constants';
 import { model_itembuild, model_section } from '../../constants/Models';
 import { url } from '../../constants/Data';
 import Layout from '../../constants/Layout';
 import Logger from '../../utils/Logger';
+import { withNamespaces } from 'react-i18next';
 
 const rename_items = {
   "item_iron_talon": "deprecated",
@@ -48,19 +49,21 @@ const rename_items = {
   "item_diffusal_2": "item_diffusal_blade",
 }
 
+
+@withNamespaces("Screen_Hero")
 @connect(state => ({
-  game_items: state.wiki.items
+  game_items: state.wiki.wikiData.items
 }))
 export default class ItemBuild extends React.Component {
   render() {
     const item_builds = model_itembuild(this.props.item_builds);
     const itemSections = [];
-    const { game_items, hero_tag } = this.props;
+    const { game_items, hero_tag, t } = this.props;
 
     Object.keys(item_builds).forEach(moment => {
       if(!item_builds[moment] || item_builds[moment].length == 0) return;
 
-      const section = model_section({ title: ITEM_CONSTANTS.BUILDS[moment], });
+      const section = model_section({ title: t(moment), });
       itemSections.push(section);
       
       //!data-point - add try catch
@@ -70,7 +73,7 @@ export default class ItemBuild extends React.Component {
 
         const item = game_items.find(({ tag }) => tag == npc_tag.replace('item_', ''));
         if(!item) Logger.debug(`could not find item ${hero_tag}: ${npc_tag}`);
-        section.data.push(item);
+        else section.data.push(item);
       });
     });
     

@@ -4,9 +4,11 @@ import { connect } from 'react-redux';
 import { Button, Container, Image, Text } from '../components/ui';
 
 import { headerStyle, animation } from '../utils/screen';
-import { SCREEN_LABELS, ICONS } from '../constants/Constants';
+import { ICONS } from '../constants/Constants';
 import Layout from '../constants/Layout';
 import { url } from '../constants/Data';
+import { withNamespaces } from 'react-i18next';
+import i18next from 'i18next';
 
 
 class Section extends React.Component {
@@ -67,30 +69,31 @@ class Section extends React.Component {
   }
 }
 
+@withNamespaces("Screen_Tips")
 @connect(state => ({
-  tips: state.wiki.tips,
-  wiki_heroes: state.wiki.heroes,
+  tips: state.wiki.wikiData.tips,
+  wiki_heroes: state.wiki.wikiData.heroes,
 }))
 export default class TipsScreen extends React.Component {
   static navigationOptions = () => ({
-    title: SCREEN_LABELS.TIPS,
+    title: i18next.t("Constants:SCREEN_LABELS.TIPS"),
     ...headerStyle,
   });
 
   render() {
-    const { tips, wiki_heroes } = this.props;
+    const { tips, wiki_heroes, t } = this.props;
     const { introduction, universal, beginner, intermediate, advanced, hero } = tips;
 
     return (
       <Container scrollable backToHome>
 
-        <Section title="Introduction" data={introduction} />
-        <Section title="Universal" data={universal} />
-        <Section title="Beginner" data={beginner} />
-        <Section title="Intermediate" data={intermediate} />
-        <Section title="Advanced" data={advanced} />
+        <Section title={t("Label_Introduction")} data={introduction} />
+        <Section title={t("Label_Universal")} data={universal} />
+        <Section title={t("Label_Beginner")} data={beginner} />
+        <Section title={t("Label_Intermediate")} data={intermediate} />
+        <Section title={t("Label_Advanced")} data={advanced} />
 
-        <Section title="Heroes" data={hero} wiki_heroes={wiki_heroes} />
+        <Section title={t("Label_Heroes")} data={hero} wiki_heroes={wiki_heroes} />
 
       </Container>
     );

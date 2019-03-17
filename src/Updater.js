@@ -8,12 +8,13 @@ import { Actions as WikiActions } from './reducers/wiki';
 import WikiDownloading from './components/WikiDownloading';
 import { alertWikiUpdateDone, alertAppUpdateDone, alertUpdateCheckAvailable, alertCannotUpdate } from './utils/Alerts';
 
-import { DOWNLOAD_REASONS, GET_WIKI_VERSION } from './constants/Constants';
 import Layout from './constants/Layout';
 import Colors from './constants/Colors';
 import AppDownloading from './components/AppDownloading';
 import { Updates } from 'expo';
 import { app_needsUpdate, wiki_needsUpdate } from './utils/updaters';
+import { withNamespaces } from 'react-i18next';
+import LanguageDownloading from './components/Updaters/LanguageDownloading';
 
 
 const checkDelay = {
@@ -21,9 +22,15 @@ const checkDelay = {
   app: 500,
 }
 
+@withNamespaces("Components")
+
 @connect(
   (state => ({
     updateInProgress: state.update.updateInProgress,
+
+    currentLanguage: state.wiki.currentLanguage,
+    downloadingLanguage: state.wiki.downloadingLanguage,
+    currentWikiVersion: state.wiki.currentWikiVersion,
 
     showWiki: state.update.showWiki,
     downloadingWiki_reason: state.update.downloadingWiki_reason,
@@ -38,16 +45,18 @@ const checkDelay = {
   })),
   (dispatch => ({
     updateCheck: (updateInProgress) => dispatch(UpdateActions.updateCheck(updateInProgress)),
-
-    newWiki: (wiki) => dispatch(WikiActions.newWiki(wiki)),
-
+    
     hide: (what) => dispatch(UpdateActions.hide(what)),
     doneWiki: () => dispatch(UpdateActions.doneWiki()),
     doneApp: () => dispatch(UpdateActions.doneApp()),
-
+    
     updateApp: (version) => dispatch(UpdateActions.updateApp(version)),
-    updateWiki: (res) => dispatch(UpdateActions.downloadWiki(DOWNLOAD_REASONS.UPDATE, res)),
-    forceUpdateWiki: (res) => dispatch(UpdateActions.downloadWiki(DOWNLOAD_REASONS.UPDATE_FORCED, res)),
+    updateWiki: (res, reason) => dispatch(UpdateActions.downloadWiki(reason, res)),
+    
+    newWiki: (wiki) => dispatch(WikiActions.newWiki(wiki)),
+
+    downloadLanguage_done: (language, wikiInfo) => dispatch(WikiActions.downloadLanguage_done(language, wikiInfo)),
+    setLatestWikiVersion: (version) => dispatch(WikiActions.setLatestWikiVersion(version)),
   }))
 )
 export default class Updater extends React.PureComponent {
@@ -58,18 +67,17 @@ export default class Updater extends React.PureComponent {
     }
 
     this.props.newWiki(wiki);
-
-    if(this.props.downloadingWiki_reason === DOWNLOAD_REASONS.UPDATE) {
-      alertWikiUpdateDone(this.props.downloadingWiki_version);
-    }
-
+    this.props.downloadLanguage_done(this.props.currentLanguage, wiki.info);
     this.props.doneWiki();
+
+    alertWikiUpdateDone(this.props.downloadingWiki_version);
   }
   _handleFinishDownLoadingApp = () => {
     const onYes = () => Updates.reloadFromCache();
+    const onNo = () => this.props.updateCheck(false);
     this.props.doneApp();
 
-    alertAppUpdateDone(this.props.downloadingApp_version, onYes);
+    alertAppUpdateDone(this.props.downloadingApp_version, onYes, onNo);
   }
 
   _hideWikiModal = () => {
@@ -87,21 +95,21 @@ export default class Updater extends React.PureComponent {
     }, checkDelay.app);
 
     /* the wiki modal should be visible if minWikiVersion is not met */
-    const cWiki = GET_WIKI_VERSION();
-    if(cWiki) {
-      const currentWikiVersion = parseInt(cWiki.split('-')[1]);
+    const { currentWikiVersion } = this.props;
+    if(currentWikiVersion !== 0) {
       const minWikiVersion = parseInt(require('../app.json').minWikiVersion);
       const forceShowWiki = currentWikiVersion < minWikiVersion;
       
       if(forceShowWiki) {
-        const res = await wiki_needsUpdate();
+        const { t, updateWiki, currentWikiVersion } = this.props;
+        const res = await wiki_needsUpdate(currentWikiVersion);
 
         // the app has a version of /info.json in cache and will show that
-        if(res == false) alertCannotUpdate(minWikiVersion, 'If the problem persists, please clear the application files.');
+        if(res == false) alertCannotUpdate(minWikiVersion, t("Updater_persistingProblem"));
         // if the app does not have /info.json in cache or the file is missing form the server
         else if(res.error) alertCannotUpdate(minWikiVersion, res.error);
         // if everything goes well, update the wiki
-        else this.props.updateWiki(res);
+        else updateWiki(res, t("DOWNLOAD_REASONS.UPDATE"));
 
         return;
       }
@@ -120,7 +128,7 @@ export default class Updater extends React.PureComponent {
   _checkUpdate = async (What) => {
     this.props.updateCheck(true);
 
-    const res = What == 'App' ? await app_needsUpdate() : await wiki_needsUpdate();
+    const res = What == 'App' ? await app_needsUpdate() : await wiki_needsUpdate(this.props.currentWikiVersion);
 
     if(!res) {
       this.props.updateCheck(false);
@@ -128,13 +136,18 @@ export default class Updater extends React.PureComponent {
     }
 
     if(!res.error) {
+      const { t, updateApp, updateWiki } = this.props;
+
       const onNo = () => {
         this.props.updateCheck(false);
       };
-      const onYes = () => What == 'App' ? this.props.updateApp(res.newVersion) : this.props.updateWiki(res);
+      const onYes = () => What == 'App' ? updateApp(res.newVersion) : updateWiki(res, t("DOWNLOAD_REASONS.UPDATE"));
       // to-do - reenable this for app
-      if(What == 'App') onYes() 
-      else alertUpdateCheckAvailable(What, res.newVersion, onNo, onYes);
+      if(What == 'App') onYes();
+      else {
+        this.props.setLatestWikiVersion(res.latestVersionInfo.wikiVersion);
+        alertUpdateCheckAvailable(What, res.newVersion, onNo, onYes);
+      }
     } else {
       this.props.updateCheck(false);
     }
@@ -143,45 +156,41 @@ export default class Updater extends React.PureComponent {
 
   render() {
     const {
-      showWiki, downloadingWiki_reason, downloadingWiki_version, downloadingWiki_versionInfo,
-      showApp, downloadingApp_version,
+      downloadingWiki_reason, downloadingWiki_versionInfo,
+      downloadingApp_version,
+
+      currentLanguage, downloadingLanguage,
     } = this.props;
 
-
-    /* the wiki modal should not be able to be hidden if:
-      * there is no wiki data (DOWNLOAD_REASONS.FRESH)
-      * the wiki data is corrupted (DOWNLOAD_REASONS.MISSING)
-      */
     return (
-      <View style={[styles.modalsWrapper, !showWiki && !showApp && styles.modalsWrapper_hidden]}>
+      <View style={[styles.modalsWrapper, !downloadingWiki_reason && !downloadingApp_version && !downloadingLanguage && styles.modalsWrapper_hidden]}>
+
         { !downloadingWiki_reason ? null :
-        <View style={[styles.modal, !showWiki && styles.modal_hidden]}>
-          <WikiDownloading
-            version={downloadingWiki_version}
-            versionInfo={downloadingWiki_versionInfo}
-            reason={downloadingWiki_reason}
-            onFinish={this._handleFinishDownLoadingWiki}
-            onError={Logger.error}
-          />
-        {/* { downloadingWiki_reason !== DOWNLOAD_REASONS.UPDATE ? null :
-          <Button prestyled style={Styles.modal_downloading_close_button}
-            title="RUN IN THE BACKGROUND" titleStyle={{ textAlign: 'center' }}
-            onPress={this._hideWikiModal} />
-        } */}
-        </View>
+          <View style={styles.modal}>
+            <WikiDownloading
+              currentLanguage={currentLanguage}
+              versionInfo={downloadingWiki_versionInfo}
+              reason={downloadingWiki_reason}
+              onFinish={this._handleFinishDownLoadingWiki}
+              onError={Logger.error}
+            />
+          </View>
         }
 
         { !downloadingApp_version ? null :
-        <View style={[styles.modal, !showApp && styles.modal_hidden]}>
-          <AppDownloading 
-            downloadingApp_version={downloadingApp_version}
-            onFinish={this._handleFinishDownLoadingApp}
-            onError={Logger.error}
-          />
-          {/* <Button prestyled style={Styles.modal_downloading_close_button}
-            title="RUN IN THE BACKGROUND" titleStyle={{ textAlign: 'center' }}
-            onPress={this._hideAppModal} /> */}
-        </View>
+          <View style={styles.modal}>
+            <AppDownloading 
+              downloadingApp_version={downloadingApp_version}
+              onFinish={this._handleFinishDownLoadingApp}
+              onError={Logger.error}
+            />
+          </View>
+        }
+
+        { !downloadingLanguage ? null :
+          <View style={styles.modal}>
+            <LanguageDownloading />
+          </View> 
         }
         
         

@@ -4,8 +4,10 @@ import { Image, Text } from '../ui';
 import { ICONS } from '../../constants/Constants';
 import Layout from '../../constants/Layout';
 import { assets } from '../../constants/Data';
+import { withNamespaces } from 'react-i18next';
 
 
+@withNamespaces("Screen_Hero")
 export default class Roles extends React.Component {
   _renderRoleLevel = (level) => {
     const arr = [];
@@ -16,13 +18,13 @@ export default class Roles extends React.Component {
     return arr;
   }
   render() {
-    const { roles, roleLevels } = this.props;
+    const { roles, roleLevels, t } = this.props;
     const r_split = roles.split(',');
     const rl_split = roleLevels.split(',');
 
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Roles: </Text>
+        <Text style={styles.title}>{t("Label_Roles")} </Text>
         <View style={styles.roles}>
         { r_split.map((role, idx) => (
           <View style={styles.role} key={role}>

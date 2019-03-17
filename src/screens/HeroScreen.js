@@ -15,8 +15,10 @@ import { headerStyle } from '../utils/screen';
 import { HTML } from '../components/Hero/AbilityPreview';
 import Talents from '../components/Hero/Talents';
 import Changelog from '../components/Hero/Changelog';
+import { withNamespaces } from 'react-i18next';
 
 
+@withNamespaces("Screen_Hero")
 export default class HeroScreen extends React.PureComponent {
   static navigationOptions = ({ navigation }) => {
     const hero = model_hero(navigation.getParam('data'));
@@ -43,52 +45,54 @@ export default class HeroScreen extends React.PureComponent {
   };
 
   render() {
+    const { t } = this.props;
+
     const hero = model_hero(this.props.navigation.getParam('data'));
     const { name, bio, hype, tag, talents, attributes, abilities, abilities_special, abilities_aghs, abilities_hidden, item_builds } = hero;
     
     return (
       <Container scrollable style={styles.container} >
-        <Card title='Hype and Stats'>
+        <Card title={t("Section_HypeandStats")}>
           <Text style={styles.hype}>{hype}</Text>
 
           <Attributes attributes={attributes} tag={tag} />
         </Card>
 
-        <Card title='Talents' showTitleWhenOpened>
+        <Card title={t("Section_Talents")} showTitleWhenOpened>
           <Talents talents={talents} />
         </Card>
 
-        <Card title='Abilities' showTitleWhenOpened>
+        <Card title={t("Section_Abilities")} showTitleWhenOpened>
           <Abilities abilities={abilities} />
         </Card>
 
         { !abilities_special || abilities_special.length == 0 ? null :
-          <Card title='Special Abilities' showTitleWhenOpened>
+          <Card title={t("Section_SpecialAbilities")} showTitleWhenOpened>
             <Abilities abilities={abilities_special} />
           </Card>  
         }
 
         { !abilities_aghs || abilities_aghs.length == 0 ? null :
-          <Card title="Aghanim's enabled Abilities"  showTitleWhenOpened>
+          <Card title={t("Section_AghanimAbilities")}  showTitleWhenOpened>
             <Abilities abilities={abilities_aghs} />
           </Card>  
         }
 
         { !abilities_hidden || abilities_hidden.length == 0 ? null :
-          <Card title="Hidden Abilities"  showTitleWhenOpened>
+          <Card title={t("Section_HiddenAbilities")}  showTitleWhenOpened>
             <Abilities abilities={abilities_hidden} />
           </Card>  
         }
 
-        <Card title='Biography' showTitleWhenOpened>
+        <Card title={t("Section_Biography")} showTitleWhenOpened>
           <HTML htmlContent={bio} style={{ backgroundColor: Colors.dota_ui1 }} />
         </Card>
 
-        <Card title='Recommended item build' showTitleWhenOpened>
+        <Card title={t("Section_RecommendedItemBuild")} showTitleWhenOpened>
           <ItemBuild item_builds={item_builds} />
         </Card>
 
-        <Card title='Hero changelog' showTitleWhenOpened>
+        <Card title={t("Section_HeroChangelog")} showTitleWhenOpened>
           <Changelog hero_tag={tag} />
         </Card>
       </Container>

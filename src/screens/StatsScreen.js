@@ -3,19 +3,22 @@ import { View, ActivityIndicator, StyleSheet, TextInput, Keyboard, TouchableWith
 import { Button, Container, Image, Text } from '../components/ui';
 
 import { headerStyle } from '../utils/screen';
-import { SCREEN_LABELS, URL_ODOTA, SCREEN_LABELS_HIDDEN } from '../constants/Constants';
+import { URL_ODOTA, SCREEN_LABELS_HIDDEN } from '../constants/Constants';
 import Colors from '../constants/Colors';
 import Layout from '../constants/Layout';
 import { model_odota } from '../constants/Models';
 import { connect } from 'react-redux';
 import { Actions } from '../reducers/profile';
-import { showTip, APP_TIPS } from '../components/AppTips';
+import { showTip } from '../components/AppTips';
 import RequiresConnection from '../utils/RequiresConnection';
+import { withNamespaces } from 'react-i18next';
+import i18next from 'i18next';
 
 
+@withNamespaces("Screen_Stats")
 class ProfileThumb extends React.PureComponent {
   render() {
-    const { navigation, result } = this.props;
+    const { navigation, result, t } = this.props;
     const { account_id, avatarfull, last_match_time, personaname } = model_odota(result);
     const src = { uri: avatarfull.replace('_full','_medium'), cache: 'force-cache' };
 
@@ -25,23 +28,25 @@ class ProfileThumb extends React.PureComponent {
         <Image source={src} style={styles.thumb_img} />
         <View style={styles.thumb_texts}>
           <Text style={styles.thumb_name}>{personaname}</Text>
-          <Text style={styles.thumb_date}>{ !last_match_time ? '' : 'Last match: ' + new Date(last_match_time).toUTCString()}</Text>
+          <Text style={styles.thumb_date}>{ !last_match_time ? '' : t("LastMatch") + " " + new Date(last_match_time).toUTCString()}</Text>
         </View>
       </Button>
 
     )
   }
 }
+
+@withNamespaces("Screen_Stats")
 class Results extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    showTip(APP_TIPS.PROFILE_ADD_REQUIREMENTS, 15);
+    showTip("profileAddRequirements", 15);
   }
   _renderItem = ({item}) => <ProfileThumb result={item} navigation={this.props.navigation} />
 
   render() {
-    const { lastSearch, lastSearchResults } = this.props;
+    const { lastSearch, lastSearchResults, t } = this.props;
 
     return (
       lastSearchResults == null
@@ -50,7 +55,7 @@ class Results extends React.PureComponent {
         </Container>
       : <Container scrollable padInner style={styles.results}>
         { lastSearchResults.length < 1
-          ? <Text>Could not find any results for <Text style={{color: Colors.dota_white}}>{lastSearch}</Text>
+          ? <Text>{t("CouldNotFind")} <Text style={{color: Colors.dota_white, fontWeight: "bold" }}>{lastSearch}</Text>
             </Text>
           : <FlatList
               data={lastSearchResults}
@@ -63,6 +68,8 @@ class Results extends React.PureComponent {
   }
 }
 
+
+@withNamespaces("Screen_Stats")
 @connect(
   (state => ({ 
     lastSearch: state.profile.lastSearch,
@@ -82,7 +89,7 @@ export default class StatsScreen extends React.Component {
     }
   }
   static navigationOptions = ({ navigation }) => ({
-    title: SCREEN_LABELS.STATS,
+    title: i18next.t("Constants:SCREEN_LABELS.STATS"),
     ...headerStyle,
   });
 
@@ -99,7 +106,7 @@ export default class StatsScreen extends React.Component {
   _handleChange = (search_text) => this.setState({ search_text })
 
   render() {
-    const { lastSearch, lastSearchResults, navigation, } = this.props;
+    const { lastSearch, lastSearchResults, navigation, t, } = this.props;
     const { search_text } = this.state;
 
     return (
@@ -109,14 +116,14 @@ export default class StatsScreen extends React.Component {
           <View style={styles.search}>
             <TextInput style={styles.searchBox}
               selectTextOnFocus
-              placeholder='Type in profile name to look up'
+              placeholder={t("TypeProfileName")}
               onSubmitEditing={this._handleSubmit}
               returnKeyType='search'
               enablesReturnKeyAutomatically
               onChangeText={this._handleChange}
               value={search_text}
             />
-            <Button style={styles.searchButton} onPress={this._handleSubmit}><Text>Search</Text></Button>
+            <Button style={styles.searchButton} onPress={this._handleSubmit}><Text>{t("Label_Search")}</Text></Button>
           </View>
           { !lastSearch ? null : <Results navigation={navigation} lastSearch={lastSearch} lastSearchResults={lastSearchResults} /> }
         </Container>

@@ -18,6 +18,7 @@ import { SCREEN_LABELS, SCREEN_LABELS_HIDDEN } from '../constants/Constants';
 import Drawer from '../components/Drawer';
 import Colors from '../constants/Colors';
 import PatchScreen from '../screens/PatchScreen';
+import SettingsLanguageScreen from '../screens/SettingsLanguageScreen';
 
 const drawerNav = createDrawerNavigator({
   [SCREEN_LABELS.HEROES]: createStackNavigator({
@@ -39,6 +40,7 @@ const drawerNav = createDrawerNavigator({
   }),
   [SCREEN_LABELS.SETTINGS]: createStackNavigator({ 
     [SCREEN_LABELS.SETTINGS]: SettingsScreen,
+    [SCREEN_LABELS_HIDDEN.SETTINGS_LANGUAGE]: SettingsLanguageScreen,
     [SCREEN_LABELS_HIDDEN.SETTINGS_TIPS]: SettingsTipsScreen,
   }),
 

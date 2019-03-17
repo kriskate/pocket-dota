@@ -64,7 +64,6 @@ export default function reducer(state=initialState, action) {
       };
     case ActionTypes.DONE_UPDATE_APP:
       return { ...state,
-        updateInProgress: false,
         showApp: false,
         downloadingApp_version: '', 
       };

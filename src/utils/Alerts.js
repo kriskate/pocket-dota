@@ -1,32 +1,68 @@
 import { Alert } from "react-native";
+import i18n from 'i18next';
+import { languages } from "../localization";
+
+
+const wikiSize = () => `\r\n( ${i18n.t("Alerts:download_size")} ~1.4 MB )`
+
+
+export const alertLanguageUpdate = (lang, onYes, onNo) => 
+  Alert.alert(
+    languages[lang],
+    i18n.t("Screen_SettingsLanguage:UPDATE") + wikiSize(),
+    [
+      { text: i18n.t("Alerts:BUTTON_No"), style: 'cancel', onPress: onNo },
+      { text: i18n.t("Alerts:BUTTON_Yes"), onPress: onYes },
+    ],
+    { cancelable: true }
+  );
+export const alertLanguageDownload = (lang, onYes, onNo) => 
+  Alert.alert(
+    languages[lang],
+    i18n.t("Screen_SettingsLanguage:DOWNLOAD_ASK") + wikiSize(),
+    [
+      { text: i18n.t("Alerts:BUTTON_No"), style: 'cancel', onPress: onNo },
+      { text: i18n.t("Alerts:BUTTON_Yes"), onPress: onYes },
+    ],
+    { cancelable: true }
+  );
+export const alertLanguageDownload_Failed = (lang) =>
+  Alert.alert(
+    languages[lang],
+    i18n.t("Screen_SettingsLanguage:DOWNLOAD_FAIL"),
+    [
+      { text: i18n.t("Alerts:BUTTON_Dismiss") }
+    ],
+    { cancelable: true }
+  )
+
 
 
 export const alertGeneral = (title, content) => 
   Alert.alert(
     title, content,
     [
-      {text: 'Dismiss'}
+      {text: i18n.t("Alerts:BUTTON_Dismiss")}
     ],
     { cancelable: true }
   );
 
-export const alertAppUpdateDone = (version, onYes) =>
+export const alertAppUpdateDone = (version, onYes, onNo) =>
   Alert.alert(
-    'Success!',
-`Downloading new app version ${version} has finished successfully.
-The app will now restart, in order for the new version to be applied.`,
+    i18n.t("Alerts:MESSAGE_Success"),
+    i18n.t("Alerts:AppUpdateDone", { "version": version }),
     [
-      { text: `Don't restart`, style: 'cancel' },
-      { text: 'OK', onPress: onYes },
+      { text: i18n.t("Alerts:BUTTON_DontRestart"), onPress: onNo, style: 'cancel' },
+      { text: i18n.t("Alerts:BUTTON_Yes"), onPress: onYes },
     ]
   )
 
 export const alertWikiUpdateDone = (version) => 
   Alert.alert(
-    `Success!`,
-    `Downloading new wiki files for version ${version} has finished succesfully.`,
+    i18n.t("Alerts:MESSAGE_Success"),
+    i18n.t("Alerts:WikiUpdateDone", { version }),
     [
-      { text: 'OK' },
+      { text: i18n.t("Alerts:BUTTON_Ok"), },
     ],
     { cancelable: true }
   );
@@ -34,41 +70,31 @@ export const alertWikiUpdateDone = (version) =>
 
 export const alertUpdateCheckError = (What, error, onDismiss) =>
   Alert.alert(
-    `Error`,
-`There was an error while trying to retrieve new ${What} version
-${error}
-Please try again later.`,
+    i18n.t("Alerts:MESSAGE_Error"),
+    i18n.t("Alerts:UpdateCheckError", { What, error }),
     [
-      { text: 'OK', onPress: onDismiss },
+      { text: i18n.t("Alerts:BUTTON_Ok"), onPress: onDismiss },
     ],
     { cancelable: true }
   );
 
-export const alertUpdateCheckAvailable = (What, newV, onNo, onYes) =>
+export const alertUpdateCheckAvailable = (What, newVersion, onNo, onYes) =>
   Alert.alert(
-    `New ${What} version found! (${newV})`,
-`A new ${What} version has been found.
-Would you like to download it?
-It is recomended to be connected to a WI-FI network before downloading new data.
-( download size: ~1.4 MB )`,
+    i18n.t("Alerts:UpdateCheckAvailable_Title", { What, newVersion }),
+    i18n.t("Alerts:UpdateCheckAvailable", { What }) + wikiSize(),
     [
-      { text: 'No', style: 'cancel', onPress: onNo },
-      { text: 'Yes', onPress: onYes },
+      { text: i18n.t("Alerts:BUTTON_No"), style: 'cancel', onPress: onNo },
+      { text: i18n.t("Alerts:BUTTON_Yes"), onPress: onYes },
     ],
     { cancelable: true }
   );
 
-export const alertCannotUpdate = (v, e) =>
+export const alertCannotUpdate = (version, e) =>
   Alert.alert(
-    `The update cannot start`,
-`Pocket Dota is trying to update it's Wiki to a version higher than ${v}, but has encountered an error.
-There might be a problem with your connection; please restart the app and make sure you're connected to the internet.
-
-THIS UPDATE IS HIGHLY RECOMMENDED - if the update is not made, the application will not show the data correctly; it might even crash due to lack of correct data.
-
-${e}`,
+    i18n.t("Alerts:CannotUpdate_Title"),
+    i18n.t("Alerts:CannotUpdate", { version }),
     [
-      { text: 'OK' },
+      { text: i18n.t("Alerts:BUTTON_Ok") },
     ],
     { cancelable: false }
   );
@@ -76,11 +102,12 @@ ${e}`,
 
 export const alertRemoveProfileData = (onYes) =>
   Alert.alert(
-    'Are you sure you want to remove your profile?',
-    'This will remove the Dota profile data.',
+    i18n.t("Alerts:RemoveProfileData_Title"),
+    i18n.t("Alerts:RemoveProfileData"),
+
     [
-      { text: 'No', style: 'cancel' },
-      { text: 'Yes', onPress: onYes },
+      { text: i18n.t("Alerts:BUTTON_No"), style: 'cancel' },
+      { text: i18n.t("Alerts:BUTTON_Yes"), onPress: onYes },
     ],
     { cancelable: true }
   );
@@ -88,11 +115,11 @@ export const alertRemoveProfileData = (onYes) =>
 
 export const alertResetSettings = (onYes) =>
   Alert.alert(
-    'Are you sure you want to reset settings to default?',
-    'This will reset the settings to default, including the removal of the Dota profile data.',
+    i18n.t("Alerts:ResetSettingsTitle"),
+    i18n.t("Alerts:ResetSettings"),
     [
-      { text: 'No', style: 'cancel' },
-      { text: 'Yes', onPress: onYes },
+      { text: i18n.t("Alerts:BUTTON_No"), style: 'cancel' },
+      { text: i18n.t("Alerts:BUTTON_Yes"), onPress: onYes },
     ],
     { cancelable: true }
   );

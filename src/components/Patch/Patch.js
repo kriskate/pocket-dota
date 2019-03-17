@@ -8,8 +8,10 @@ import Layout from '../../constants/Layout';
 
 import PatchShort from './PatchShort';
 import { SCREEN_LABELS_HIDDEN, ICONS } from '../../constants/Constants';
+import { withNamespaces } from 'react-i18next';
 
 
+@withNamespaces("Screen_Patch")
 export default class Patch extends React.Component {
   state = {
     open: false,
@@ -19,22 +21,22 @@ export default class Patch extends React.Component {
     this.props.navigate(SCREEN_LABELS_HIDDEN.PATCH, { data: this.props.patch });
   }
   render () {
-    const { patch, patch_content, } = this.props;
+    const { patch, patch_content, t } = this.props;
     const { version_date, changes_short, } = model_patch_notes(patch_content);
 
     return (
       <View key={patch} style={styles.patch}>
         <View style={styles.title}>
           <Text>{patch}</Text> 
-          <Text>Release date: {new Date(version_date).toLocaleDateString() || version_date}</Text>
+          <Text>{t("ReleaseDate")} {new Date(version_date).toLocaleDateString() || version_date}</Text>
         </View>
 
         <PatchShort changes_short={changes_short} />
 
         <Button prestyled style={styles.button_more_title}
             onPress={this.openPatch} >
-          <Text>view game changes</Text>
-          <ICONS.FORWARD />
+          <Text>{t("ViewGameChanges")}</Text>
+          <ICONS.BUTTON_FORWARD />
         </Button>
       </View>
     )

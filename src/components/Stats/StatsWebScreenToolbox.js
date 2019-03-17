@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Platform } from 'react-native';
 
-import { showTip, APP_TIPS } from '../AppTips';
+import { showTip } from '../AppTips';
 import { ICONS } from "../../constants/Constants";
 import Styles from '../../constants/Styles';
 import { Button } from '../ui';
@@ -16,7 +16,7 @@ export default class StatsWebScreenToolbox extends React.PureComponent {
 
     if(c_account_id !== account_id) {
       setProfile({ name: personaname, image: avatarfull, account_id, last_match_time });
-      showTip(APP_TIPS.PROFILE_ADDED);
+      showTip("profileAdded");
     }
   }
   render() {
@@ -28,19 +28,19 @@ export default class StatsWebScreenToolbox extends React.PureComponent {
       <View style={styles.navigation_controls}>
         <Button prestyled style={[ Styles.toolbox_button, {width} ]}
             onPress={goBack}>
-          <ICONS.BACK />
+          <ICONS.BUTTON_BACK />
         </Button>
         <Button prestyled style={[ Styles.toolbox_button, {width} ]}
             onPress={goForward} >
-          <ICONS.FORWARD />
+          <ICONS.BUTTON_FORWARD />
         </Button>
         <Button prestyled style={[ Styles.toolbox_button, {width} ]}
             onPress={this._setProfile}>
-          <ICONS.USER color={c_account_id == account_id ? Colors.goldenrod : Colors.dota_white}/>
+          <ICONS.BUTTON_USER color={c_account_id == account_id ? Colors.goldenrod : Colors.dota_white}/>
         </Button>
         <Button prestyled style={[ Styles.toolbox_button, {width} ]}
           onPress={showHelp}>
-          <ICONS.INFO />
+          <ICONS.BUTTON_INFO />
         </Button>
       </View>
     )

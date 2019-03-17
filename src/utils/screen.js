@@ -28,4 +28,6 @@ export const headerStyle = {
     color: Colors.dota_white,
   },
   headerTintColor: Colors.dota_white,
+
+  headerBackTitle: null,
 }

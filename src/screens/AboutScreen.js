@@ -3,10 +3,12 @@ import { StyleSheet, View, Platform } from 'react-native';
 import { Container, Image, Text } from '../components/ui';
 
 import { headerStyle } from '../utils/screen';
-import { SCREEN_LABELS, URLS, APP_VERSION } from '../constants/Constants';
+import { URLS, APP_VERSION } from '../constants/Constants';
 import Layout from '../constants/Layout';
 import Colors from '../constants/Colors';
 import { assets } from '../constants/Data';
+import { withNamespaces } from 'react-i18next';
+import i18next from 'i18next';
 
 
 const Section = ({ title, children }) => (
@@ -17,13 +19,17 @@ const Section = ({ title, children }) => (
     </View>
   </View>
 )
+
+@withNamespaces("Screen_About")
 export default class AboutScreen extends React.Component {
   static navigationOptions = () => ({
-    title: SCREEN_LABELS.ABOUT,
+    title: i18next.t("Constants:SCREEN_LABELS.ABOUT"),
     ...headerStyle,
   });
   
   render() {
+    const { t } = this.props;
+
     return (
       <Container backToHome scrollable style={styles.container}>
 
@@ -33,37 +39,37 @@ export default class AboutScreen extends React.Component {
         </View>
 
         <View style={{ padding: Layout.padding_small }}>
-          <Text>Notes:</Text>
-          <Text><Text style={styles.highlight}>Wiki data</Text> - refers to all of the information displayed about the Dota 2 heroes, items and patch notes throughout the app.</Text>
-          <Text><Text style={styles.highlight}>Player statistics</Text> - refers to all of the information displayed within the Player statistics screens.</Text>
+          <Text>{t("Notes_Title")}</Text>
+          <Text><Text style={styles.highlight}>{t("WikiData")}</Text> - {t("WikiData_description")}</Text>
+          <Text><Text style={styles.highlight}>{t("PlayerStatistics")}</Text> - {t("PlayerStatistics_description")}</Text>
         </View>
 
-        <Section title="App">
-          <Text><Text style={styles.highlight}>Pocket Dota</Text> is a free app that aims to give players an insight from within the game, when they're unable to access the actual game. It can also be used while playing the game, in order to keep track of the heroes and items of the opposing teams.</Text>
-          <Text><Text style={styles.highlight}>Pocket Dota</Text> is hereby not created, sponsored or endorsed by any of the companies mentioned on this page. It only uses open source data.</Text>
+        <Section title={t("App_Title")}>
+          <Text><Text style={styles.highlight}>Pocket Dota</Text> {t("FreeApp")}</Text>
+          <Text><Text style={styles.highlight}>Pocket Dota</Text> {t("NotEndorsed")}</Text>
         </Section>
 
-        <Section title="Copyright information">
-          <Text style={styles.header2}>Wiki data</Text>
-          <Text hasUrl URLS={URLS}>The Dota 2 game, logo, the contents of game files (heroes, abilities, items, patch notes, tips), as well as their artwork/ names/ descriptions are © {URLS["Valve corporation"]}.</Text>
-          <Text hasUrl URLS={URLS}>Dota2 game files and images provided by {URLS["Elo"]}, through {URLS["Dota buff"]} and parsed by Pocket Dota's own data generator service.</Text>
+        <Section title={t("Copyright_Information_Title")}>
+          <Text style={styles.header2}>{t("Copyright_WikiData")}</Text>
+          <Text hasUrl URLS={URLS}>{ t("Copyright_TheGame", { valve_corporation: URLS["Valve corporation"] }) }</Text>
+          <Text hasUrl URLS={URLS}>{ t("Copyright_GameFiles", { elo: URLS["Elo"], dota_buff: URLS["Dota buff"] }) }</Text>
 
-          <Text style={styles.header2}>Player statistics</Text>
-          <Text hasUrl URLS={URLS}>The data presented through the Player statistics screen are information collected, parsed, displayed and owned by {URLS["Open Dota"]}.</Text>
-          <Text>For an even more in-depth analysis of your player profile, it is recommended to open their website on a desktop/ laptop computer and create an Open Dota account.</Text>
+          <Text style={styles.header2}>{t("Copyright_PlayerStatistic")}</Text>
+          <Text hasUrl URLS={URLS}>{t("Copyright_OpenDotaData", { open_dota: URLS["Open Dota"] }) }</Text>
+          <Text>{t("Copyright_OpenDotaShoutout")}</Text>
         </Section>
 
-        <Section title="Tech">
-          <Text hasUrl URLS={URLS}>The Wiki data is automatically generated from the <Text style={styles.highlight}>Dota2 game files</Text>, and updated when the information in these changes, through a {URLS["NodeJS"]} backend service.</Text>
-          <Text hasUrl URLS={URLS} style={styles.text_spaced}>The application is developed in {URLS["React Native"]}, having {URLS["Expo"]} as a React Native management utility.</Text>
-          <Text style={styles.highlight}>Recommended OS version: {Platform.OS === 'ios' ? "IOS 9+" : "Android 4.4+"}</Text>
+        <Section title={t("Tech_Title")}>
+          <Text hasUrl URLS={URLS}>{t("Tech_TheWiki", { nodejs: URLS["NodeJS"] })}</Text>
+          <Text hasUrl URLS={URLS} style={styles.text_spaced}>{t("Tech_Frameworks", { react_native: URLS["React Native"], expo: URLS["Expo"] })}</Text>
+          <Text style={styles.highlight}>{t("Tech_OS")} {Platform.OS === 'ios' ? "IOS 9+" : "Android 4.4+"}</Text>
         </Section>
 
 
-        <Section title="Contact (Discord)">
-          <Text hasUrl URLS={URLS} style={styles.text_spaced}>If you experience any issues with the usage of this app, please use the {URLS["Issues"]} channel.</Text>
-          <Text hasUrl URLS={URLS} style={styles.text_spaced}>If you would like to see more functionality brought into the app, use the {URLS["Feature Requests"]} channel.</Text>
-          <Text hasUrl URLS={URLS} style={styles.text_spaced}>If you just wanna have a chat with the app's developer, use the {URLS["General"]} channel.</Text>
+        <Section title={t("Contact_Title")}>
+          <Text hasUrl URLS={URLS} style={styles.text_spaced}>{t("Contact_Issues", { issues: URLS["Issues"] })}</Text>
+          <Text hasUrl URLS={URLS} style={styles.text_spaced}>{t("Contact_Features", { feature_requests: URLS["Feature Requests"] })}</Text>
+          <Text hasUrl URLS={URLS} style={styles.text_spaced}>{t("Contact_General", { general: URLS["General"] })}</Text>
         </Section>
 
       </Container>

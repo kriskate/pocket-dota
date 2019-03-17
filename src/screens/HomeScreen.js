@@ -4,9 +4,10 @@ import { Container, Image, Thumbnail } from '../components/ui/';
 import { connect } from 'react-redux';
 
 import Colors from '../constants/Colors';
-import { HOME_LABELS, SCREEN_LABELS, SCREEN_LABELS_HIDDEN } from '../constants/Constants';
+import { SCREEN_LABELS, SCREEN_LABELS_HIDDEN } from '../constants/Constants';
 import { assets } from '../constants/Data';
 import Layout from '../constants/Layout';
+import { withNamespaces } from 'react-i18next';
 import Analytics from '../utils/Analytics';
 
 
@@ -28,6 +29,7 @@ const MenuItem = ({height, onPress, label, cardImage, profileImage}) => (
   </View>
 );
 
+@withNamespaces("Constants")
 @connect(state => ({
   user: state.profile.user,
   showProfileOnHome: state.profile.settings.showProfileOnHome,
@@ -41,6 +43,7 @@ export default class HomeScreen extends React.PureComponent {
     const { showProfileOnHome } = this.props;
     const { name, image, account_id } = this.props.user;
     const { navigate } = this.props.navigation;
+    const { t } = this.props;
 
     let rowHeight = 140;
     const numRows = 6 + (!image || !showProfileOnHome ? 0 : 1);
@@ -55,18 +58,18 @@ export default class HomeScreen extends React.PureComponent {
     return (
       <Container scrollable bounces={false} snapToInterval={rowHeight}>
 
-        <MenuItem onPress={() => navigate(SCREEN_LABELS.HEROES)} label={HOME_LABELS.HEROES} height={rowHeight}
+        <MenuItem onPress={() => navigate(SCREEN_LABELS.HEROES)} label={t("HOME_LABELS.LABEL_HEROES")} height={rowHeight}
           cardImage={assets.app.menuHeroes} />
-        <MenuItem onPress={() => navigate(SCREEN_LABELS.ITEMS)} label={HOME_LABELS.ITEMS} height={rowHeight}
+        <MenuItem onPress={() => navigate(SCREEN_LABELS.ITEMS)} label={t("HOME_LABELS.LABEL_ITEMS")} height={rowHeight}
           cardImage={assets.app.menuItems} />
 
-        <MenuItem onPress={() => navigate(SCREEN_LABELS.PATCH_NOTES)} label={HOME_LABELS.PATCH_NOTES} height={rowHeight}
+        <MenuItem onPress={() => navigate(SCREEN_LABELS.PATCH_NOTES)} label={t("HOME_LABELS.LABEL_PATCH_NOTES")} height={rowHeight}
           cardImage={assets.app.menuPatch} />
 
-        <MenuItem onPress={() => navigate(SCREEN_LABELS.TIPS)} label={HOME_LABELS.TIPS} height={rowHeight}
+        <MenuItem onPress={() => navigate(SCREEN_LABELS.TIPS)} label={t("HOME_LABELS.LABEL_TIPS")} height={rowHeight}
           cardImage={assets.app.menuTips} />
 
-        <MenuItem onPress={() => navigate(SCREEN_LABELS.STATS)} label={HOME_LABELS.STATS} height={rowHeight}
+        <MenuItem onPress={() => navigate(SCREEN_LABELS.STATS)} label={t("HOME_LABELS.LABEL_STATS")} height={rowHeight}
           cardImage={assets.app.menuStats} />
         { !image || !showProfileOnHome ? null :
           <MenuItem onPress={() => navigate(SCREEN_LABELS_HIDDEN.STATS_WEB, { data: { account_id, personaname: name } })} label={name} height={rowHeight}
@@ -74,7 +77,7 @@ export default class HomeScreen extends React.PureComponent {
             profileImage={image} /> 
         }
 
-        <MenuItem onPress={() => navigate(SCREEN_LABELS.SETTINGS)} label={HOME_LABELS.SETTINGS} height={rowHeight}
+        <MenuItem onPress={() => navigate(SCREEN_LABELS.SETTINGS)} label={t("HOME_LABELS.LABEL_SETTINGS")} height={rowHeight}
           cardImage={assets.app.menuSettings} />
 
       </Container>

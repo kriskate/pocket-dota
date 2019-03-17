@@ -7,12 +7,14 @@ import { Actions } from '../reducers/profile';
 import { headerStyle } from '../utils/screen';
 import { URL_ODOTA } from '../constants/Constants';
 import Colors from '../constants/Colors';
-import { showTip, APP_TIPS } from '../components/AppTips';
+import { showTip } from '../components/AppTips';
 import { model_odota } from '../constants/Models';
 
 import StatsWebScreenModal from '../components/modals/StatsWebScreenModal';
 import StatsWebScreenToolbox from '../components/Stats/StatsWebScreenToolbox';
 import RequiresConnection from '../utils/RequiresConnection';
+
+import i18next from 'i18next';
 
 
 const bkC = `background-color:${Colors.dota_ui1}!important;`;
@@ -66,13 +68,13 @@ export default class StatsWebScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     ...headerStyle,
     title: navigation.getParam('data').personaname,
-    headerTruncatedBackTitle: 'Stats',
+    headerTruncatedBackTitle: i18next.t("Constants:SCREEN_LABELS.STATS_SHORT"),
   });
 
   constructor(props) {
     super(props);
 
-    showTip(APP_TIPS.PROFILE_ADD, 15);
+    showTip("profileAdd", 15);
 
     this.view = React.createRef();
     this.state = {

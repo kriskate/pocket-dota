@@ -12,18 +12,20 @@ import { Image, Text } from '../ui';
 import Attribute from './Attribute';
 import { calculateAttributes, parseAsNumbers } from '../../utils/CalculateAttributes';
 import Layout from '../../constants/Layout';
-import { showTip, APP_TIPS } from '../AppTips';
+import { showTip } from '../AppTips';
 import Roles from './Roles';
 import Complexity from './Complexity';
+import { withNamespaces } from 'react-i18next';
 
 import Analytics from '../../utils/Analytics';
 
 
+@withNamespaces("Screen_Hero")
 export default class extends React.Component {
   constructor(props) {
     super(props);
 
-    showTip(APP_TIPS.ATTRIBUTES_SLIDER);
+    showTip("attributesSlider");
 
     this.state = {
       level: 1,
@@ -32,9 +34,10 @@ export default class extends React.Component {
   }
 
   render() {
+    const { t } = this.props;
     const { level } = this.state;
 
-    const { Role, Rolelevels, Complexity: _complexity } = this.props.attributes;
+    const { Role, Rolelevels, Complexity: _complexity, AttackCapabilities } = this.props.attributes;
 
     const { 
       agility, intelligence, strength, agiGain, intGain, strGain,
@@ -74,10 +77,10 @@ export default class extends React.Component {
         </View>
 
         <View style={styles.secondaryAttributes}>
-          <Attribute val={attackSpeed} title='Attack Speed' />
-          <Attribute val={spellDamage} title='Spell Amplification' />
-          <Attribute val={magicResistance} title='Magic Resistance' />
-          <Attribute val={ATTRIBUTES[this.state.attributes.AttackCapabilities]} title='Attack Type' />
+          <Attribute val={attackSpeed} title={t("AttackSpeed")} />
+          <Attribute val={spellDamage} title={t("SpellAmplification")} />
+          <Attribute val={magicResistance} title={t("MagicResistance")} />
+          <Attribute val={t(AttackCapabilities)} title={t("AttackType")} />
         </View>
 
         <View style={styles.slider}>
@@ -93,20 +96,20 @@ export default class extends React.Component {
             thumbStyle={{ backgroundColor: Colors.goldenrod }}
           />
           <Text style={styles.levelText}>
-            { level === 0 ? 'Base stats' : `Level: ${level}` }
+            { level === 0 ? t("Label_BaseStats") : t("Label_Level") + " " + level }
           </Text>
         </View>
 
         <View style={styles.misc}>
-          <Text style={styles.fixed}>Fixed values:</Text>
-          <Attribute val={parseFloat(MovementTurnRate)} title='Movement Turn Rate' />
-          <Attribute val={parseFloat(AttackRate)} title='Base Attack Rate' />
-          <Attribute val={parseFloat(AttackAnimationPoint)} title='Attack Animation Point' />
-          <Attribute val={parseFloat(AttackAcquisitionRange)} title='Attack Acquisition Range' />
-          <Attribute val={parseFloat(AttackRange)} title='Attack Range' />
-          <Attribute val={this.state.attributes.AttackCapabilities == "DOTA_UNIT_CAP_MELEE_ATTACK" || ProjectileSpeed == "0" ? "Instant" : parseFloat(ProjectileSpeed)} title='Projectile Speed' />
-          <Attribute val={parseFloat(VisionDaytimeRange)} title="Vision Range (Day)" />
-          <Attribute val={parseFloat(VisionNighttimeRange)} title="Vision Range (Night)" />
+          <Text style={styles.fixed}>{t("Label_FixedValues")}</Text>
+          <Attribute val={parseFloat(MovementTurnRate)} title={t("MovementTurnRate")} />
+          <Attribute val={parseFloat(AttackRate)} title={t("BaseAttackRate")} />
+          <Attribute val={parseFloat(AttackAnimationPoint)} title={t("AttackAnimationPoint")} />
+          <Attribute val={parseFloat(AttackAcquisitionRange)} title={t("AttackAquisitionRange")} />
+          <Attribute val={parseFloat(AttackRange)} title={t("AttackRange")} />
+          <Attribute val={this.state.attributes.AttackCapabilities == "DOTA_UNIT_CAP_MELEE_ATTACK" || ProjectileSpeed == "0" ? t("Instant") : parseFloat(ProjectileSpeed)} title={t("ProjectileSpeed")} />
+          <Attribute val={parseFloat(VisionDaytimeRange)} title={t("VisionRangeDay")} />
+          <Attribute val={parseFloat(VisionNighttimeRange)} title={t("VisionRangeNight")} />
         </View>
       </View>
     )

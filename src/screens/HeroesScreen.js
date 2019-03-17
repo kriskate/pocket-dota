@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, } from 'react-native';
 import { connect } from 'react-redux';
 
-import { SCREEN_LABELS, SCREEN_LABELS_HIDDEN, ATTRIBUTES } from '../constants/Constants';
+import { SCREEN_LABELS_HIDDEN, ATTRIBUTES } from '../constants/Constants';
 import { Container } from '../components/ui';
 import { url } from '../constants/Data';
 import Colors from '../constants/Colors';
@@ -10,37 +10,33 @@ import Layout from '../constants/Layout';
 import { headerStyle } from '../utils/screen';
 import ListScreen from '../components/ListScreen';
 import { model_section } from '../constants/Models';
+import { withNamespaces } from 'react-i18next';
+import i18next from 'i18next';
 
 
-const _getHeroSections = (heroes) => {    
-  const heroSections = [];
+const _getHeroSections = (heroes, t) => {    
+  const heroSections = [
+    new model_section({ title: t("MainAttribute_Agility"), color: Colors.dota_agi }),
+    new model_section({ title: t("MainAttribute_Intelligence"), color: Colors.dota_int }),
+    new model_section({ title: t("MainAttribute_Strength"), color: Colors.dota_str }),
+  ];
 
   heroes.forEach(hero => {
-    let att, color;
+    let att;
 
     switch(hero.attributes.AttributePrimary) {
       case ATTRIBUTES.agility:
-        color = Colors.dota_agi;
-        att = 'Agility';
+        att = t("MainAttribute_Agility");
         break;
       case ATTRIBUTES.intelligence:
-        color = Colors.dota_int;
-        att = 'Intelligence';
+        att = t("MainAttribute_Intelligence");
         break;
       case ATTRIBUTES.strength:
-        color = Colors.dota_str;
-        att = 'Strength';
+        att = t("MainAttribute_Strength");
         break;
     }
-    let section = heroSections.find(({ title }) => title == att);
-    if(!section) {
-      section = model_section({ 
-        title: att,
-        color,
-      });
-      heroSections.push(section);
-    }
 
+    let section = heroSections.find(({ title }) => title == att);
     section.data.push(hero);
   });
   heroSections.forEach(section => section.data.sort((a, b) => 
@@ -50,12 +46,13 @@ const _getHeroSections = (heroes) => {
   return heroSections;
 }
 
+@withNamespaces("Screen_Heroes")
 @connect(state => ({ 
-  heroes: state.wiki.heroes,
+  heroes: state.wiki.wikiData.heroes,
 }))
 export default class HeroesScreen extends React.PureComponent {
   static navigationOptions = () => ({
-    title: SCREEN_LABELS.HEROES,
+    title: i18next.t("Constants:SCREEN_LABELS.HEROES"),
     ...headerStyle,
   });
   constructor(props) {
@@ -66,7 +63,7 @@ export default class HeroesScreen extends React.PureComponent {
 
 
   static getDerivedStateFromProps(newProps) {
-    return { heroSections: _getHeroSections(newProps.heroes) };
+    return { heroSections: _getHeroSections(newProps.heroes, newProps.t) };
   }
 
 

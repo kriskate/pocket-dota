@@ -23,20 +23,30 @@ export const Actions = {
 export const initialState = model_profile({});
 
 export default function reducer(state=initialState, action) {
-  const { user, settings, lastSearch, lastSearchResults, profile, tip } = action;
-
   switch(action.type) {
+
     case ActionTypes.SEARCH_PROFILE:
+      const { lastSearch } = action;
       return { ...state, lastSearch };
+
     case ActionTypes.SEARCH_PROFILE_RESULTS:
+      const { lastSearchResults } = action;
       return { ...state, lastSearchResults };
+
     case ActionTypes.SET_USER:
+      const { user } = action;
       return { ...state, user };
+
     case ActionTypes.SET_PROFILE: 
+      const { profile } = action;
       return { ...profile };
+
     case ActionTypes.SETTINGS:
+      const { settings } = action;
       return { ...state, settings: {...state.settings, ...settings} };
+
     case ActionTypes.SET_TIPS:
+      const { tip } = action;
       return { ...state, settings: {
           ...state.settings, 
           tipsState: { 
@@ -45,7 +55,9 @@ export default function reducer(state=initialState, action) {
           },
         },
       };
+      
     default:
       return state;
   }
+
 }

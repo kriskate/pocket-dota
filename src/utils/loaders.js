@@ -2,8 +2,8 @@ import { Asset, Font, Icon, FileSystem, Updates } from 'expo';
 import { model_profile, model_wiki } from '../constants/Models';
 import { getItem } from './storage';
 import { assets, folder_data, localData } from '../constants/Data';
-import { setWikiVersion } from '../constants/Constants';
 import { Alert } from 'react-native';
+import { dota2com_languages } from '../localization';
 
 
 export const loadInitialAssets = async () => {
@@ -38,37 +38,37 @@ export const loadProfileStateFromStorage = async () => {
 }
 
 
-export const loadWiki = async () => {
-  // Logger.debug('loading wiki data');
+export const loadWiki = async (language) => {
+  const dota_language = dota2com_languages[language];
   const data = model_wiki({});
-  const dataFileNames = Object.keys(data);
   let badData = false;
   
   await Promise.all(
-    dataFileNames.map(async key => {
+    Object.keys(data).map(async key => {
       try {
-        data[key] = JSON.parse(await FileSystem.readAsStringAsync(folder_data + `${key}.json`));
+        data[key] = JSON.parse(await FileSystem.readAsStringAsync(folder_data + `${dota_language}/${key}.json`));
       } catch(e) {
         // if the file for one of the assets does not exist, re-download all of them
         badData = true;
       }
       // Logger.silly(`- loaded local data: wiki : ${key} : ${!!data[key]}`);
     })
-  )
-  
-  if(badData) {
-    await Promise.all(
-      dataFileNames.map(async dataFile => {
-        data[dataFile] = await localData[dataFile];
-      })
-    )
-  }
-  setWikiVersion(data.info);
+  );
       
-  return data;
-  // return badData ? null : data;
+  return badData ? null : data;
 }
 
+export const loadDefaultWiki = async () => {
+  const data = model_wiki({});
+
+  await Promise.all(
+    Object.keys(data).map(async dataFile => {
+      data[dataFile] = await localData[dataFile];
+    })
+  );
+
+  return data;
+}
 
 export const loadCurrentWikiInfo = async () => {
   let info;
@@ -112,7 +112,6 @@ export const test__downgradeWiki = async () => {
       wikiVersion: 30,
     };
     await FileSystem.writeAsStringAsync(`${folder_data}/info.json`, JSON.stringify(newInfo));
-    setWikiVersion(newInfo);
   
     console.log('replaced wiki with v30')
   }
