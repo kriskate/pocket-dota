@@ -21,7 +21,7 @@ const events = {
 let isInitialized = false;
 
 const initialize = () => {
-  // if (__DEV__ || !AMPLITUDE_API_KEY) return;
+  if (__DEV__ || !AMPLITUDE_API_KEY) return;
 
   Amplitude.initialize(AMPLITUDE_API_KEY);
   isInitialized = true;
