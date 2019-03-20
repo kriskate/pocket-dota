@@ -52,6 +52,7 @@ i18n
       "de-DE": require('./de-DE.json'),
       "en-US": require('./en-US.json'),
       "es-ES": require('./es-ES.json'),
+      "fr-FR": require('./fr-FR.json'),
       "ja-JP": require('./ja-JP.json'),
       "ro-RO": require('./ro-RO.json'),
       "ru-RU": require('./ru-RU.json'),

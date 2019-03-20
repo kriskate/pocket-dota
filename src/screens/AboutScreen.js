@@ -45,8 +45,8 @@ export default class AboutScreen extends React.Component {
         </View>
 
         <Section title={t("App_Title")}>
-          <Text><Text style={styles.highlight}>Pocket Dota</Text> {t("FreeApp")}</Text>
-          <Text><Text style={styles.highlight}>Pocket Dota</Text> {t("NotEndorsed")}</Text>
+          <Text><Text style={styles.highlight}>Pocket Info for Dota2</Text> {t("FreeApp")}</Text>
+          <Text><Text style={styles.highlight}>Pocket Info for Dota2</Text> {t("NotEndorsed")}</Text>
         </Section>
 
         <Section title={t("Copyright_Information_Title")}>

@@ -44,7 +44,7 @@ export const assets = {
   },
 
   app: {
-    icon: require('../assets/images/app-icon.png'),
+    icon: require('../assets/images/icon.png'),
     menuHeroes: require('../assets/images/menu-heroes.png'),
     menuItems: require('../assets/images/menu-items.png'),
     menuStats: require('../assets/images/menu-stats.png'),
@@ -52,7 +52,7 @@ export const assets = {
     menuTips: require('../assets/images/menu-tips.png'),
     menuProfile: require("../assets/images/menu-profile.png"),
     menuSettings: require("../assets/images/menu-settings.png"),
-    logoRed: require('../assets/images/logo-red.png'),
+    logoRed: require('../assets/images/logo.png'),
   },
 
   locales: {

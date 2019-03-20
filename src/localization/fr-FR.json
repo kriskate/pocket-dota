@@ -10,7 +10,7 @@
     "AppUpdateDone": "La nouvelle version de l'application {{version}} a été téléchargée avec succès.\nL'application sera maintenant relancée pour que la nouvelle version soit appliquée.",
     "WikiUpdateDone": "Les nouveaux fichiers wiki pour la version {{version}} ont été téléchargés avec succès.",
     "CannotUpdate_Title": "La mise à jour ne peut pas être démarrée",
-    "CannotUpdate": "Pocket Dota essaie de mettre à jour son Wiki à une version plus récente que {{version}} mais a rencontré une erreur. Le problème pourrait être causé par votre connexion; veuillez redémarrer l'application et vous assurer que vous avez une connexion internet.\n\nCETTE MISE A JOUR EST FORTEMENT RECOMMANDEE - si la mise à jour n'est pas effectuée, l'application pourra afficher les données de manière erronée; cela pourrait entraîner un plantage de l'application à cause du manque de données correctes.",
+    "CannotUpdate": "Pocket Info for Dota2 essaie de mettre à jour son Wiki à une version plus récente que {{version}} mais a rencontré une erreur. Le problème pourrait être causé par votre connexion; veuillez redémarrer l'application et vous assurer que vous avez une connexion internet.\n\nCETTE MISE A JOUR EST FORTEMENT RECOMMANDEE - si la mise à jour n'est pas effectuée, l'application pourra afficher les données de manière erronée; cela pourrait entraîner un plantage de l'application à cause du manque de données correctes.",
     "UpdateCheckAvailable_Title": "Nouvelle version {{What}} trouvée ! ({{newVersion}})",
     "UpdateCheckAvailable": "Une nouvelle version de {{What}} a été trouvée. ({{newVersion}}) \nSouhaitez-vous la télécharger?\nIl est recommandé d’être connecté à un réseau WI-FI avant de télécharger les nouvelles données.",
     "UpdateCheckError": "Une erreur est survenue lorsqu'on a essayé d'extraire la nouvelle version {{What}}\n{{error}}\nVeuillez essayer plus tard.",
@@ -30,7 +30,7 @@
       "PROGRESS_IMAGES": "Mise en antémémoire des images",
       "PROGRESS_UPDATE_VERSION": "Mise à jour à la version:",
       "UPDATE_DONE": "Le wiki a été mis à jour vers la version:",
-      "CONSENT_PRECACHE_IMAGES": "Est-ce que vous souhaitez mettre en cache les images pour les héros et les objets?\nCela garantira que vous ayez la meilleure expérience lors de l’utilisation de Pocket Dota et que vous ne deviez pas attendre que les images chargent plus tard."
+      "CONSENT_PRECACHE_IMAGES": "Est-ce que vous souhaitez mettre en cache les images pour les héros et les objets?\nCela garantira que vous ayez la meilleure expérience lors de l’utilisation de Pocket Info for Dota2 et que vous ne deviez pas attendre que les images chargent plus tard."
     },
     "DOWNLOAD_REASONS": {
       "FRESH": "Parce que c’est la première fois que vous démarrez l’application, des fichiers supplémentaires doivent être téléchargés (par exemple: description des héros/ articles, images).",
@@ -80,7 +80,7 @@
     "Copyright_Information_Title": "Informations sur les droits d'auteur",
     "Copyright_WikiData": "Données wiki",
     "Copyright_TheGame": "Le jeu Dota 2, le logo, le contenu des fichiers du jeu (héros, capacités, objets, notes de version, astuces), ainsi que leurs illustrations/ noms/ descriptions sont © {{valve_corporation}}.",
-    "Copyright_GameFiles": "Les fichiers de jeu Dota2 et les images sont fournies par {{elo}}, par l’intermédiaire de {{dota_buff}} et analysés par le service de génération de données propre à Pocket Dota.",
+    "Copyright_GameFiles": "Les fichiers de jeu Dota2 et les images sont fournies par {{elo}}, par l’intermédiaire de {{dota_buff}} et analysés par le service de génération de données propre à Pocket Info for Dota2.",
     "Copyright_PlayerStatistics": "Statistiques des joueurs",
     "Copyright_OpenDotaData": "Les données présentées sur l’écran des statistiques du joueur sont informations collectées, analysées, affichées et possédées par {{open_dota}}.",
     "Copyright_OpenDotaShoutout": "Pour une analyse plus approfondie de votre profil de joueur, il est recommandé d’ouvrir leur site Web sur un ordinateur de bureau / ordinateur portable et de créer un compte Open Dota.",

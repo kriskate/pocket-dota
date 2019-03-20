@@ -10,7 +10,7 @@
     "AppUpdateDone": "Descărcarea noii versiuni {{version}} a aplicației s-a terminat cu succes.\nAplicația va reporni, pentru ca noua versiune să fie activată.",
     "WikiUpdateDone": "Descărcarea de fișiere noi wiki pentru versiunea {{version}} s-a terminat cu succes.",
     "CannotUpdate_Title": "Actualizarea nu poate porni",
-    "CannotUpdate": "Pocket Dota a încercat să actualizeze datele Wiki la o versiune mai mare de {{version}}, dar a întâlnit o eroare.\nAr putea fi o problemă de conexiune; vă rugăm reporniți aplicația și asigurați-vă ca sunteți conectat la internet.\n\nACEASTĂ ACTUALIZARE ESTE RECOMANDATĂ - dacă actualizare nu este efectuată, aplicația ar putea afișa datele eronat; acest lucru ar putea duce la închiderea aplicației din cauza lipsei de date corecte.",
+    "CannotUpdate": "Pocket Info for Dota2 a încercat să actualizeze datele Wiki la o versiune mai mare de {{version}}, dar a întâlnit o eroare.\nAr putea fi o problemă de conexiune; vă rugăm reporniți aplicația și asigurați-vă ca sunteți conectat la internet.\n\nACEASTĂ ACTUALIZARE ESTE RECOMANDATĂ - dacă actualizare nu este efectuată, aplicația ar putea afișa datele eronat; acest lucru ar putea duce la închiderea aplicației din cauza lipsei de date corecte.",
     "UpdateCheckAvailable_Title": "O versiune nouă {{What}} a fost găsită! ({{newVersion}})",
     "UpdateCheckAvailable": "O versiune nouă {{What}} a fost găsită! ({{newVersion}})\nDoriți să începem descărcare ei?\nEste recomandat să fiți conectat la o rețea WI-FI înainte de a descărca date noi.",
     "UpdateCheckError": "A apărut o eroare în încercarea de a actualiza versiunea {{What}}.\n{{error}}\nVă rugăm să încercați din nou.",
@@ -30,7 +30,7 @@
       "PROGRESS_IMAGES": "Se descarcă imaginile",
       "PROGRESS_UPDATE_VERSION": "Se actualizează la versiunea:",
       "UPDATE_DONE": "S-a terminat actualizarea wiki la versiunea:",
-      "CONSENT_PRECACHE_IMAGES": "Doriţi să pre-cache-ul imaginilor pentru eroi şi obiecte?\nAcest lucru va asigura că veţi obţine cea mai bună experienţă în timp ce utilizaţi Pocket Dota, pentru că nu va trebui să așteptați încărcarea imaginilor mai târziu."
+      "CONSENT_PRECACHE_IMAGES": "Doriţi să pre-cache-ul imaginilor pentru eroi şi obiecte?\nAcest lucru va asigura că veţi obţine cea mai bună experienţă în timp ce utilizaţi Pocket Info for Dota2, pentru că nu va trebui să așteptați încărcarea imaginilor mai târziu."
     },
     "DOWNLOAD_REASONS": {
       "FRESH": "Deoarece aceasta este prima dată când deschideți aplicația, vor trebui descărcate fișiere suplimentare (exemplu: descrieri eroi/ obiecte, imagini).",
@@ -80,7 +80,7 @@
     "Copyright_Information_Title": "Drepturi de autor",
     "Copyright_WikiData": "Date Wiki",
     "Copyright_TheGame": "Jocul Dota 2, logo-ul, conținutul fișierelor de joc (eroi, abilități, obiecte, note de patch-uri, sfaturi), precum și alte opere de artă / nume / descrieri sunt © {{valve_corporation}}.",
-    "Copyright_GameFiles": "Fișierele și imaginile din jocul Dota 2 sunt furnizate de {{elo}}, prin {{dota_buff}} și analizate de propriul serviciu de generare de date al Pocket Dota.",
+    "Copyright_GameFiles": "Fișierele și imaginile din jocul Dota 2 sunt furnizate de {{elo}}, prin {{dota_buff}} și analizate de propriul serviciu de generare de date al Pocket Info for Dota2.",
     "Copyright_PlayerStatistics": "Statistici jucători",
     "Copyright_OpenDotaData": "Datele prezentate în ecranul de Statistici jucători sunt informații colectate, analizate, afișate și deținute de {{open_dota}}.",
     "Copyright_OpenDotaShoutout": "Pentru o analiză mai în profunzime a profilului de jucător, se recomandă deschiderea site-ul lor pe un calculator și crearea un cont Open Dota.",

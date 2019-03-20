@@ -3,18 +3,19 @@
   "changelog": {
     "1.1.0": "Hero talent tree; Scrollable Homescreen with new items (Tip, Patch Notes, Settings); Dota 2 game tips; Patch notes; No images recache at wiki update",
     "1.2.2": "Hero roles; Hero complexity; Hero advanced attributes; Hero changelog (from Patch notes); Item changelog (from Patch notes); Recalculated attribute bonuses; Added default wiki data; No longer have to download additional data on first run; User consent for pre-caching images; UI tweaks (eg: disable menu bounce on IOS); Expo SDK upgrade; Various performance enhancements;",
-    "2.0.0": "Added translations engine;"
+    "1.3.0": "Added translations engine; Available additional languages: French, Romanian;",
+    "2.0.0": "Rebranded to Pocket Info for Dota2; Minor layout adjustments;"
   },
   "expo": {
-    "version": "1.2.2",
-    "name": "Pocket Dota",
+    "version": "2.0.0",
+    "name": "Pocket Info for Dota2",
     "description": "Dota 2 reference in you pocket",
     "slug": "pocket-dota",
     "privacy": "public",
     "sdkVersion": "32.0.0",
     "platforms": ["ios", "android"],
     "orientation": "portrait",
-    "icon": "./src/assets/images/app-icon.png",
+    "icon": "./src/assets/images/icon.png",
     "primaryColor": "#1B1E21",
     "splash": {
       "image": "./src/assets/images/splash.png",
@@ -32,7 +33,7 @@
     "ios": {
       "bundleIdentifier": "kriskate.pocketdota",
       "buildNumber": "2",
-      "icon": "./src/assets/images/app-icon.png",
+      "icon": "./src/assets/images/icon.png",
   
       "merchantId": "kriskate",
   
@@ -50,10 +51,10 @@
       }
     },
     "android": {
-      "package": "kriskate.pocketdota",
+      "package": "kriskate.pocketdotainfo",
       "versionCode": 2,
       "adaptiveIcon": {
-        "foregroundImage": "./src/assets/images/app-icon-adaptive.png",
+        "foregroundImage": "./src/assets/images/icon-adaptive.png",
         "backgroundColor": "#1B1E21"
       },
       "permissions": [
