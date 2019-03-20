@@ -22,17 +22,20 @@ You will also be featured in a dedicated **Contributors** page within the app, a
 If you'd like to contribute to the app's translations, check out [Pocket Dota's crowdin page](https://crowdin.com/project/pocket-dota).
 The sign-up process and hands-on translation process are really straightforward.
 
-Currently, the supported languages are: ( :white_check_mark: means it's already done)
+Currently, the supported languages are:
 
 | Language                 | Done                         |
 | -----------------------: | :-----------------------: |
-| "de-DE": "Deutsch"       |  |
+| "de-DE": "Deutsch"       | |
 | "en-US": "English"       | :white_check_mark: |
 | "es-ES": "Español"       |  |
 | 'fr-FR": "Français"      |  |
 | "ja-JP": "日本語"         |  |
 | "ro-RO": "Română"        | :white_check_mark: |
 | "ru-RU": "Русский"        |  |
+
+The languages which are partially supported (heroes and items only), will be represented by a ![no](https://i.imgur.com/tEvr2Ma.png) sign in-app.
+
 
 ### ... not managed by Pocket Dota
 Please take note that the ***Dota 2***'s **heroes/ items/ patch notes** descriptions and **other in-game texts** are translated by [Valve](https://www.valvesoftware.com/en/), and that the **Stats** screen is [Open Dota](https://www.opendota.com/)'s. As such, Pocket Dota cannot be responsible for any missing/ wrong translations in the above mentioned places.
