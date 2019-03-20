@@ -54,7 +54,7 @@ export default class AboutScreen extends React.Component {
           <Text hasUrl URLS={URLS}>{ t("Copyright_TheGame", { valve_corporation: URLS["Valve corporation"] }) }</Text>
           <Text hasUrl URLS={URLS}>{ t("Copyright_GameFiles", { elo: URLS["Elo"], dota_buff: URLS["Dota buff"] }) }</Text>
 
-          <Text style={styles.header2}>{t("Copyright_PlayerStatistic")}</Text>
+          <Text style={styles.header2}>{t("Copyright_PlayerStatistics")}</Text>
           <Text hasUrl URLS={URLS}>{t("Copyright_OpenDotaData", { open_dota: URLS["Open Dota"] }) }</Text>
           <Text>{t("Copyright_OpenDotaShoutout")}</Text>
         </Section>
