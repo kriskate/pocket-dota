@@ -15,7 +15,7 @@ export default {
   dota_radiant: '#598307',
   dota_dire: '#A83806',
   dota_ui1: '#1B1E21',
-  dota_ui1_light: '#1b1e21b5',
+  dota_ui1_light: '#1b1e21A6',
   dota_ui2: '#2F363D',
   dota_ui3: '#0C141D',
   dota_white: '#d6d6d6',

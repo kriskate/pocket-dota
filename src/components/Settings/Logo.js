@@ -25,8 +25,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 30,
     alignSelf: 'stretch',
-    // backgroundColor: 'blue',
     width: undefined,
-    height: undefined
+    height: undefined,
   },
 })

@@ -95,4 +95,6 @@ export const URLS = {
   'Feature Requests': 'https://discord.gg/mwP3FRM',
   'Issues': 'https://discord.gg/BMCrMbw',
   'General': 'https://discord.gg/WXjby2w',
+
+  'our crowdin page': 'https://crowdin.com/project/pocket-dota',
 }

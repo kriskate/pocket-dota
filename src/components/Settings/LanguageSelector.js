@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Linking } from 'react-native';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 
@@ -9,7 +9,7 @@ import { Actions as WikiActions } from '../../reducers/wiki';
 import { languages, availableLanguages } from '../../localization';
 import { assets } from '../../constants/Data';
 import Colors from '../../constants/Colors';
-import { ICONS } from '../../constants/Constants';
+import { ICONS, URLS } from '../../constants/Constants';
 import { alertLanguageDownload, alertLanguageUpdate } from '../../utils/Alerts';
 import Layout from '../../constants/Layout';
 import { loadWiki, loadDefaultWiki } from '../../utils/loaders';
@@ -60,6 +60,7 @@ const LanguageIcon = ({ languageState }) => (
 export default class LanguageSelector extends React.PureComponent {
   state = {
     languageStates: {},
+    languageIncomplete: null,
   }
   static getDerivedStateFromProps(nextProps) {
     const { availableLanguages } = nextProps;
@@ -105,6 +106,16 @@ export default class LanguageSelector extends React.PureComponent {
   }
 
   _onLangPress = async (lang) => {
+    if(!availableLanguages.includes(lang)) {
+      this.setState({ languageIncomplete: lang });
+    } else {
+      this._considerLanguageChange(lang);
+    }
+
+  }
+  _considerLanguageChange = async (lang) => {
+    this.setState({ languageIncomplete: null, });
+
     const languageState = this.state.languageStates[lang];
 
     if(lang == this.props.currentLanguage 
@@ -125,6 +136,36 @@ export default class LanguageSelector extends React.PureComponent {
       break;
     }
   }
+
+  _helpTranslate = async (lang) => {
+    Linking.canOpenURL(URLS["our crowdin page"]).then(Linking.openURL(URLS["our crowdin page"]));
+  }
+
+
+  _renderLanguageIncomplete = (lang) => (
+    <View style={styles.languageIncomplete_wrapper}>
+
+      <View style={styles.languageIncomplete} >  
+        <View style={styles.languageIncomplete_flag}>
+          <Text>{languages[lang]}</Text>
+          <Image style={[styles.languageButton_image, { marginLeft: Layout.padding_big, }]} source={assets.locales[lang]} />
+        </View>
+        <Text>This language is not fully translated.</Text>
+        <Text>Would you like to help translating this language?</Text>
+      </View>
+
+      <View style={styles.languageIncomplete_buttons} >
+        <Button prestyled style={styles.languageIncomplete_button} onPress={this._helpTranslate} >
+          <Text>Help Translate</Text>
+        </Button>
+        <Button prestyled style={styles.languageIncomplete_button} onPress={() => this._considerLanguageChange(lang)}>
+          <Text>Continue to the incomplete version</Text>
+        </Button>
+      </View>
+
+    </View>
+  )
+
   _renderSymbol = (lang) => (
     <LanguageIcon languageState={this.state.languageStates[lang]} />
   )
@@ -137,6 +178,14 @@ export default class LanguageSelector extends React.PureComponent {
     return (
       <View scrollable style={[styles.container, isInitial && styles.spread] } >
       {
+        this.state.languageIncomplete
+
+        ?
+
+        this._renderLanguageIncomplete(this.state.languageIncomplete)
+
+        :
+
         Object.keys(languages).map(lang => (
           <Button prestyled key={lang}
               style={[styles.languageButton, 
@@ -173,6 +222,7 @@ const styles = StyleSheet.create({
   spread: {
     justifyContent: 'center',
     backgroundColor: Colors.dota_ui1_light,
+    // backgroundColor: Colors.dota_agi,
   },
 
   languageButton_spread: {
@@ -191,6 +241,35 @@ const styles = StyleSheet.create({
     width: 40,
     height: 17,
     alignItems: "center",
+  },
+
+  languageIncomplete: {
+    padding: Layout.padding_big * 3,
+    backgroundColor: Colors.dota_ui1,
+    borderWidth: 1,
+    borderTopColor: Colors.dota_ui2,
+    borderBottomColor: Colors.dota_ui2,
+  },
+  languageIncomplete_flag: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: "center",
+    margin: Layout.padding_big,
+  },
+
+  languageIncomplete_wrapper: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  languageIncomplete_buttons: {
+    // position: 'absolute',
+    // flexDirection: 'row',
+    // bottom: Layout.padding_big,
+    // left: 0,
+    // right: 0,
+  },
+  languageIncomplete_button: {
+    // flex: 2,
   },
 })
 
