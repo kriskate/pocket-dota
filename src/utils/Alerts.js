@@ -81,7 +81,7 @@ export const alertUpdateCheckError = (What, error, onDismiss) =>
 export const alertUpdateCheckAvailable = (What, newVersion, onNo, onYes) =>
   Alert.alert(
     i18n.t("Alerts:UpdateCheckAvailable_Title", { What, newVersion }),
-    i18n.t("Alerts:UpdateCheckAvailable", { What }) + wikiSize(),
+    i18n.t("Alerts:UpdateCheckAvailable", { What, newVersion }) + wikiSize(),
     [
       { text: i18n.t("Alerts:BUTTON_No"), style: 'cancel', onPress: onNo },
       { text: i18n.t("Alerts:BUTTON_Yes"), onPress: onYes },
