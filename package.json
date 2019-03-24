@@ -5,10 +5,10 @@
     "test": "node ./node_modules/jest/bin/jest.js --watchAll",
     "test-coverage": "node ./node_modules/jest/bin/jest.js --watchAll --coverage",
     "releasev1": "expo build:android --release-channel prod-v1",
-    "release-android": "expo publish --release-channel android-build-2",
+    "release-android": "expo publish --release-channel android-build-1",
     "release-ios": "expo publish --release-channel ios-build-1",
-    "build-android": "expo build:android --release-channel android-build-2",
-    "build-ios": "expo build:android --release-channel ios-build-1"
+    "build-android": "expo build:android --release-channel android-build-1",
+    "build-ios": "expo build:ios --release-channel ios-build-1"
   },
   "jest": {
     "preset": "jest-expo",

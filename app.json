@@ -31,8 +31,8 @@
       "./src/assets/images/*"
     ],
     "ios": {
-      "bundleIdentifier": "kriskate.pocketdota",
-      "buildNumber": "2",
+      "bundleIdentifier": "kriskate.pocketinfodota",
+      "buildNumber": "1",
       "icon": "./src/assets/images/icon.png",
   
       "merchantId": "kriskate",
@@ -51,8 +51,8 @@
       }
     },
     "android": {
-      "package": "kriskate.pocketdotainfo",
-      "versionCode": 2,
+      "package": "kriskate.pocketinfodota",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/images/icon-adaptive.png",
         "backgroundColor": "#1B1E21"
