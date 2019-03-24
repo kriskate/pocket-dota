@@ -24,15 +24,15 @@ The sign-up process and hands-on translation process are really straightforward.
 
 Currently, the supported languages are:
 
-| Language                 | Done                         |
-| -----------------------: | :-----------------------: |
-| "de-DE": "Deutsch"       | |
-| "en-US": "English"       | :white_check_mark: |
-| "es-ES": "Español"       |  |
-| 'fr-FR": "Français"      |  |
-| "ja-JP": "日本語"         |  |
-| "ro-RO": "Română"        | :white_check_mark: |
-| "ru-RU": "Русский"        |  |
+| Language                 | Wiki               | App                |
+| -----------------------: | :----------------: | :----------------: |
+| "de-DE": "Deutsch"       | :white_check_mark: |                    |
+| "en-US": "English"       | :white_check_mark: | :white_check_mark: |
+| "es-ES": "Español"       | :white_check_mark: |                    |
+| 'fr-FR": "Français"      | :white_check_mark: | :white_check_mark: |
+| "ja-JP": "日本語"         | :white_check_mark: |                    |
+| "ro-RO": "Română"        | :white_check_mark: | :white_check_mark: |
+| "ru-RU": "Русский"       | :white_check_mark: |                    |
 
 The languages which are partially supported (heroes and items only), will be represented by a ![no](https://i.imgur.com/tEvr2Ma.png) sign in-app.
 
