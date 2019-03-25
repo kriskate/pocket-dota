@@ -29,10 +29,10 @@ export const wiki_needsUpdate = async (currentWikiVersion) => {
 
   const { wikiVersion, } = model_wiki_info(latestVersionInfo);
 
-  if(currentWikiVersion === wikiVersion)
-    return false;
-  else
+  if(currentWikiVersion < wikiVersion)
     return { newVersion: wikiVersion, latestVersionInfo };
+  else
+    return false;
 }
 
 
