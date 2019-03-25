@@ -3,13 +3,14 @@ import { NavigationActions } from 'react-navigation';
 import { StyleSheet, View, } from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 
-import { SCREEN_LABELS, APP_VERSION } from '../constants/Constants';
+import { SCREEN_LABELS, APP_VERSION, URLS } from '../constants/Constants';
 import { Button, Container, Image, Text } from './ui';
 import Colors from '../constants/Colors';
 import { assets } from '../constants/Data';
 import Layout from '../constants/Layout';
 import { showTip } from './AppTips';
 import { withNamespaces } from 'react-i18next';
+import { openURL } from './ui/Text';
 
 const ListItem = ({ label, navigation, selected, t }) => (
   <Button viewStyle={[styles.item, selected && styles.selectedItem]} 
@@ -49,6 +50,7 @@ export default class Drawer extends React.Component {
         <View style={styles.imgIconWrapper}>
           <Image style={styles.imgIcon} source={assets.app.logoRed} />
           <Text style={styles.appVersion}>v. {APP_VERSION}</Text>
+          <Button prestyled style={styles.contribute} onPress={() => openURL(URLS.Contribute)}><Text>Contribute</Text></Button>
         </View>
 
 
@@ -88,11 +90,19 @@ const styles = StyleSheet.create({
   },
   appVersion: {
     color: Colors.goldenrod,
-    marginRight: Layout.padding_small,
     position: 'absolute',
+    bottom: Layout.padding_small,
+    left: Layout.padding_small,
+    padding: Layout.padding_small,
+  },
+  contribute: {
+    backgroundColor: Colors.dota_ui1,
+    position: 'absolute',
+    // width: '50%',
     bottom: 0,
     right: 0,
-    padding: Layout.padding_small,
+    padding: Layout.padding_regular,
+    paddingHorizontal: 2*Layout.padding_regular,
   },
   
   item: {

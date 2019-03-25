@@ -97,4 +97,6 @@ export const URLS = {
   'General': 'https://discord.gg/WXjby2w',
 
   'our crowdin page': 'https://crowdin.com/project/pocket-dota',
+
+  'Contribute': 'https://pocket-dota.info/contribute',
 }
