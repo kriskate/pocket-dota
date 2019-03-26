@@ -32,7 +32,7 @@
     ],
     "ios": {
       "bundleIdentifier": "kriskate.pocketinfodota",
-      "buildNumber": "1",
+      "buildNumber": "3",
       "icon": "./src/assets/images/icon.png",
   
       "merchantId": "kriskate",
