@@ -80,6 +80,9 @@ export default class HomeScreen extends React.PureComponent {
         <MenuItem onPress={() => navigate(SCREEN_LABELS.SETTINGS)} label={t("HOME_LABELS.LABEL_SETTINGS")} height={rowHeight}
           cardImage={assets.app.menuSettings} />
 
+        <MenuItem onPress={() => navigate(SCREEN_LABELS.ABOUT)} label={t("HOME_LABELS.LABEL_ABOUT")} height={rowHeight}
+          cardImage={assets.app.menuAbout} />
+
       </Container>
     );
   }

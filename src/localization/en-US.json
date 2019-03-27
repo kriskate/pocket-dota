@@ -65,7 +65,9 @@
       "LABEL_TIPS": "TIPS",
     
       "LABEL_STATS": "PLAYER STATISTICS",
-      "LABEL_SETTINGS": "SETTINGS"
+      "LABEL_SETTINGS": "SETTINGS",
+
+      "LABEL_ABOUT": "ABOUT"
     },
 
     "SCREEN_LABELS": {

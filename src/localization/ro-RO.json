@@ -48,7 +48,8 @@
       "LABEL_PATCH_NOTES": "NOTE PATCH",
       "LABEL_TIPS": "SFATURI",
       "LABEL_STATS": "STATISTICI JUCĂTORI",
-      "LABEL_SETTINGS": "SETĂRI"
+      "LABEL_SETTINGS": "SETĂRI",
+      "LABEL_ABOUT": "DESPRE"
     },
     "SCREEN_LABELS": {
       "HOME": "Acasă",

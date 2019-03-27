@@ -54,6 +54,7 @@ export const assets = {
     menuTips:       require('../assets/images/menu/menu-tips.png'),
     menuProfile:    require("../assets/images/menu/menu-profile.png"),
     menuSettings:   require("../assets/images/menu/menu-settings.png"),
+    menuAbout:      require("../assets/images/menu/menu-about.png"),
   },
 
   locales: {
