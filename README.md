@@ -15,8 +15,6 @@ You will also be featured in a dedicated **Contributors** page within the app, a
 
 ## Translations
 
-> *Note: the app has no translations integrated at the moment, but the logic for the translations is written. They will be available soon.*
-
 > *As a general rule, please don't make the text lengths much longer than the original English ones, as this might affect Pocket Info's appearance.*
 
 If you'd like to contribute to the app's translations, check out [Pocket Info's crowdin page](https://crowdin.com/project/pocket-dota).
@@ -24,21 +22,26 @@ The sign-up process and hands-on translation process are really straightforward.
 
 Currently, the supported languages are:
 
-| Language                 | Wiki               | App                |
-| -----------------------: | :----------------: | :----------------: |
-| "de-DE": "Deutsch"       | :white_check_mark: |                    |
-| "en-US": "English"       | :white_check_mark: | :white_check_mark: |
-| "es-ES": "Español"       | :white_check_mark: |                    |
-| 'fr-FR": "Français"      | :white_check_mark: | :white_check_mark: |
-| "ja-JP": "日本語"         | :white_check_mark: |                    |
-| "ro-RO": "Română"        | :white_check_mark: | :white_check_mark: |
-| "ru-RU": "Русский"       | :white_check_mark: |                    |
+| Language                 | Wiki               | App                | Stats              |
+| -----------------------: | :----------------: | :----------------: | :----------------: |
+| "de-DE": "Deutsch"       | :white_check_mark: |                    | :white_check_mark: |
+| "en-US": "English"       | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| "es-ES": "Español"       | :white_check_mark: |                    | :white_check_mark: |
+| 'fr-FR": "Français"      | :white_check_mark: | :white_check_mark: |                    |
+| "ja-JP": "日本語"         | :white_check_mark: |                    | :white_check_mark: |
+| "ro-RO": "Română"        | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| "ru-RU": "Русский"       | :white_check_mark: |                    | :white_check_mark: |
 
 The languages which are partially supported (heroes and items only), will be represented by a ![no](https://i.imgur.com/tEvr2Ma.png) sign in-app.
 
 
 ### ... not managed by Pocket Info
 Please take note that the ***Dota 2***'s **heroes/ items/ patch notes** descriptions and **other in-game texts** are translated by [Valve](https://www.valvesoftware.com/en/), and that the **Stats** screen is [Open Dota](https://www.opendota.com/)'s. As such, Pocket Info cannot be responsible for any missing/ wrong translations in the above mentioned places.
+
+**The wiki data** - comes from the game files, so the wiki translations are already made (but sometimes incomplete - i.e. patch notes).
+If you'd like to help translating the Dota2 game itself, you can try enrolling with [Steam Translation](https://translation.steampowered.com/).
+
+**The stats section** - comes from OpenDota. If you encounter any translation problems with this section, you can help them out [here](https://translate.opendota.com/).
 
 #### Patch notes
 
