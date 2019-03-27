@@ -39,9 +39,12 @@ const _getHeroSections = (heroes, t) => {
     let section = heroSections.find(({ title }) => title == att);
     section.data.push(hero);
   });
+
+  // to-do: delegate sections to backend
+  // sort hero names
   heroSections.forEach(section => section.data.sort((a, b) => 
-    (a.name.toUpperCase() <= b.name.toUpperCase()) ? -1 : 1
-  ))
+    (a.name <= b.name) ? -1 : 1
+  ));
 
   return heroSections;
 }
