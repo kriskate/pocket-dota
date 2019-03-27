@@ -8,7 +8,7 @@
     "2.0.1": "Bugfix: Desired language is now loaded by default; Various small fixes;"
   },
   "expo": {
-    "version": "2.0.1",
+    "version": "2.0.2",
     "name": "Pocket Info for Dota2",
     "description": "Dota 2 reference in you pocket",
     "slug": "pocket-dota",
@@ -33,7 +33,7 @@
     ],
     "ios": {
       "bundleIdentifier": "kriskate.pocketinfodota",
-      "buildNumber": "4",
+      "buildNumber": "5",
       "icon": "./src/assets/images/app-icons/icon-ios.png",
   
       "merchantId": "kriskate",
@@ -53,7 +53,7 @@
     },
     "android": {
       "package": "kriskate.pocketinfodota",
-      "versionCode": 2,
+      "versionCode": 3,
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/images/app-icons/icon-adaptive-foreground.png",
         "backgroundImage": "./src/assets/images/app-icons/icon-adaptive-background.png"
