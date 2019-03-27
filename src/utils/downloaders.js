@@ -67,6 +67,8 @@ export const downloadWiki = async (language, progress_callback) => {
   } catch(e) {
     return null;
   }
+  
+  Platform.OS === 'ios' && StatusBar.setNetworkActivityIndicatorVisible(false);
   await downloadWikiInfo();
 
   await FileSystem.copyAsync({
@@ -74,7 +76,6 @@ export const downloadWiki = async (language, progress_callback) => {
     to: `${folder_data}${dota_language}/info.json`,
   })
 
-  Platform.OS === 'ios' && StatusBar.setNetworkActivityIndicatorVisible(false);
 
   // wikiInfo is passed in through the update reducer, to the WikiDownloading Component
   const loadedWiki = await loadWiki(language);
