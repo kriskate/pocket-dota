@@ -145,7 +145,7 @@ export default class Updater extends React.PureComponent {
       // to-do - reenable this for app
       if(What == 'App') onYes();
       else {
-        this.props.setLatestWikiVersion(res.latestVersionInfo.wikiVersion);
+        this.props.setLatestWikiVersion(res.newVersion);
         alertUpdateCheckAvailable(What, res.newVersion, onNo, onYes);
       }
     } else {
@@ -169,7 +169,7 @@ export default class Updater extends React.PureComponent {
           <View style={styles.modal}>
             <WikiDownloading
               currentLanguage={currentLanguage}
-              versionInfo={downloadingWiki_versionInfo}
+              version={downloadingWiki_versionInfo.wikiVersion}
               reason={downloadingWiki_reason}
               onFinish={this._handleFinishDownLoadingWiki}
               onError={Logger.error}
