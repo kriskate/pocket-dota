@@ -5,7 +5,8 @@
     "1.2.2": "Hero roles; Hero complexity; Hero advanced attributes; Hero changelog (from Patch notes); Item changelog (from Patch notes); Recalculated attribute bonuses; Added default wiki data; No longer have to download additional data on first run; User consent for pre-caching images; UI tweaks (eg: disable menu bounce on IOS); Expo SDK upgrade; Various performance enhancements;",
     "1.3.0": "Added translations engine; Available additional languages: French, Romanian;",
     "2.0.0": "Rebranded to Pocket Info for Dota2; Minor layout adjustments;",
-    "2.0.1": "Bugfix: Desired language is now loaded by default; Various small fixes;"
+    "2.0.1": "Bugfix: Desired language is now loaded by default; Various small fixes;",
+    "2.0.2": "Icon change (enlarged background); Optimized all images (reduced app size by 1MB); Added About button on Home screen;"
   },
   "expo": {
     "version": "2.0.2",
