@@ -8,7 +8,7 @@ import profile from './profile';
 import update from './update';
 import wiki, { Actions as WikiActions } from './wiki';
 
-import { getDeviceLanguage } from '../localization';
+import i18n, { getDeviceLanguage } from '../localization';
 import { loadWiki, loadDefaultWiki } from '../utils/loaders';
 
 
@@ -68,5 +68,7 @@ const persistorDone = async (store) => {
   // populate state.wiki.wikiData
   // this will also ensure currentWikiVersion is correct
   store.dispatch(WikiActions.newWiki(wikiData));
+
+  i18n.changeLanguage(finalLanguage);
 }
 
