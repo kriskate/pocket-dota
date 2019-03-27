@@ -105,7 +105,7 @@ export default class extends React.Component {
           <Attribute val={parseFloat(MovementTurnRate)} title={t("MovementTurnRate")} />
           <Attribute val={parseFloat(AttackRate)} title={t("BaseAttackRate")} />
           <Attribute val={parseFloat(AttackAnimationPoint)} title={t("AttackAnimationPoint")} />
-          <Attribute val={parseFloat(AttackAcquisitionRange)} title={t("AttackAquisitionRange")} />
+          <Attribute val={parseFloat(AttackAcquisitionRange)} title={t("AttackAcquisitionRange")} />
           <Attribute val={parseFloat(AttackRange)} title={t("AttackRange")} />
           <Attribute val={this.state.attributes.AttackCapabilities == "DOTA_UNIT_CAP_MELEE_ATTACK" || ProjectileSpeed == "0" ? t("Instant") : parseFloat(ProjectileSpeed)} title={t("ProjectileSpeed")} />
           <Attribute val={parseFloat(VisionDaytimeRange)} title={t("VisionRangeDay")} />
