@@ -1,7 +1,7 @@
 import { Asset, Font, Icon, FileSystem, Updates } from 'expo';
 import { model_profile, model_wiki } from '../constants/Models';
 import { getItem } from './storage';
-import { assets, folder_data, localData } from '../constants/Data';
+import { assets, folder_data, defaultData } from '../constants/Data';
 import { Alert } from 'react-native';
 import { dota2com_languages } from '../localization';
 
@@ -63,7 +63,7 @@ export const loadDefaultWiki = async () => {
 
   await Promise.all(
     Object.keys(data).map(async dataFile => {
-      data[dataFile] = await localData[dataFile];
+      data[dataFile] = await defaultData[dataFile];
     })
   );
 

@@ -16,10 +16,10 @@
     "sdkVersion": "32.0.0",
     "platforms": ["ios", "android"],
     "orientation": "portrait",
-    "icon": "./src/assets/images/icon.png",
+    "icon": "./src/assets/images/app-icons/icon-ios.png",
     "primaryColor": "#1B1E21",
     "splash": {
-      "image": "./src/assets/images/splash.png",
+      "image": "./src/assets/images/app-icons/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#1B1E21"
     },
@@ -34,7 +34,7 @@
     "ios": {
       "bundleIdentifier": "kriskate.pocketinfodota",
       "buildNumber": "4",
-      "icon": "./src/assets/images/icon.png",
+      "icon": "./src/assets/images/app-icons/icon-ios.png",
   
       "merchantId": "kriskate",
   
@@ -47,16 +47,16 @@
         "backgroundColor": "#1B1E21",
         "resizeMode": "contain",
   
-        "image": "./src/assets/images/splash.png",
-        "tabletImage": "./src/assets/images/splash.png"
+        "image": "./src/assets/images/app-icons/splash.png",
+        "tabletImage": "./src/assets/images/app-icons/splash.png"
       }
     },
     "android": {
       "package": "kriskate.pocketinfodota",
       "versionCode": 2,
       "adaptiveIcon": {
-        "foregroundImage": "./src/assets/images/icon-adaptive.png",
-        "backgroundColor": "#1B1E21"
+        "foregroundImage": "./src/assets/images/app-icons/icon-adaptive-foreground.png",
+        "backgroundImage": "./src/assets/images/app-icons/icon-adaptive-background.png"
       },
       "permissions": [
         "com.anddoes.launcher.permission.UPDATE_COUNT",

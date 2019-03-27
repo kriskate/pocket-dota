@@ -27,7 +27,7 @@ export default class AppDownloading extends React.PureComponent {
 
         <View style={styles.wrapper}>
           <Image resizeMode='contain' style={styles.logo}
-            source={ assets.app.logoRed } 
+            source={ assets.app.logo } 
           />
         </View>
 

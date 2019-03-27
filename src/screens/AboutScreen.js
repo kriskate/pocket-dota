@@ -34,7 +34,7 @@ export default class AboutScreen extends React.Component {
       <Container backToHome scrollable style={styles.container}>
 
         <View style={styles.logo}>
-          <Image style={[styles.logo, styles.logoImg]} source={assets.app.logoRed} />
+          <Image style={[styles.logo, styles.logoImg]} source={assets.app.logo} />
           <Text style={styles.appVersion}>v. {APP_VERSION}</Text>
         </View>
 

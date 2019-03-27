@@ -48,7 +48,7 @@ export default class Drawer extends React.Component {
       <Container scrollable bounces={false}>
         <Image style={styles.imgBackground} source={assets.app.menuProfile} />
         <View style={styles.imgIconWrapper}>
-          <Image style={styles.imgIcon} source={assets.app.logoRed} />
+          <Image style={styles.imgIcon} source={assets.app.logo} />
           <Text style={styles.appVersion}>v. {APP_VERSION}</Text>
           <View style={styles.contribute}>
             <Button prestyled onPress={() => openURL(URLS.Contribute)}><Text>Contribute</Text></Button>

@@ -7,7 +7,7 @@ import Colors from '../../constants/Colors';
 export default ({ fillBackground }) => (
   <View style={[ styles.wrapper, fillBackground && styles.wrapperFilled ]}>
     <Image resizeMode='contain' style={styles.logo}
-      source={ assets.app.logoRed } 
+      source={ assets.app.logo } 
     />
   </View>
 )
