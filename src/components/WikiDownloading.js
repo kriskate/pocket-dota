@@ -9,6 +9,7 @@ import { assets } from '../constants/Data';
 
 import Styles from '../constants/Styles';
 import Layout from '../constants/Layout';
+import { alertUpdateCheckError } from '../utils/Alerts';
 
 @withNamespaces(["Components", "Alerts"])
 export default class WikiDownloading extends React.PureComponent {
@@ -38,9 +39,14 @@ export default class WikiDownloading extends React.PureComponent {
     const { currentLanguage } = this.props;
 
     const wiki = await downloadWiki(currentLanguage, p => this._progress('wiki', p));
-    
 
-    this.setState({ wiki });
+    if(!wiki) {
+      alertUpdateCheckError('Wiki', "Data seems to be corrupted", () => {});
+      this.props.onFinish();
+    }
+    else {
+      this.setState({ wiki });
+    }
   }
   _consentImages = () => {
     this.setState({ images_consent: true });
