@@ -91,3 +91,7 @@ For an even more in-depth analysis of your player profile, it is recommended to 
 
 
 > #### **Pocket Info** is hereby not created, sponsored or endorsed by any of the companies mentioned on this page. It only uses open source data.
+
+
+# License
+You can read the app's license [here](https://pocket-dota.info/license).
