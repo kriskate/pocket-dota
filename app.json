@@ -10,7 +10,7 @@
     "2.0.3": "Localization - added menu items to all languages; Heroes and Items screens - added search functionality"
   },
   "expo": {
-    "version": "2.0.2",
+    "version": "2.0.3",
     "name": "Pocket Info for Dota2",
     "description": "Dota 2 reference in you pocket",
     "slug": "pocket-dota",
