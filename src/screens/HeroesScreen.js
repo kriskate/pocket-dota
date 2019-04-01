@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, } from 'react-native';
+import { StyleSheet, TextInput, View, } from 'react-native';
 import { connect } from 'react-redux';
 
 import { SCREEN_LABELS_HIDDEN, ATTRIBUTES } from '../constants/Constants';
@@ -14,7 +14,9 @@ import { withNamespaces } from 'react-i18next';
 import i18next from 'i18next';
 
 
-const _getHeroSections = (heroes, t) => {    
+const _getHeroSections = (heroes, search, t) => {
+  const r = new RegExp(search, 'i');
+
   const heroSections = [
     new model_section({ title: t("MainAttribute_Agility"), color: Colors.dota_agi }),
     new model_section({ title: t("MainAttribute_Intelligence"), color: Colors.dota_int }),
@@ -22,6 +24,8 @@ const _getHeroSections = (heroes, t) => {
   ];
 
   heroes.forEach(hero => {
+    if(search && !r.test(hero.name)) return;
+
     let att;
 
     switch(hero.attributes.AttributePrimary) {
@@ -61,21 +65,40 @@ export default class HeroesScreen extends React.PureComponent {
   constructor(props) {
     super(props);
     
-    this.state = { heroSections: [] }
+    this.state = { 
+      heroSections: [],
+      heroSearch: '',
+    }
   }
 
 
-  static getDerivedStateFromProps(newProps) {
-    return { heroSections: _getHeroSections(newProps.heroes, newProps.t) };
+  static getDerivedStateFromProps(newProps, state) {
+    return { heroSections: _getHeroSections(newProps.heroes, state.search, newProps.t) };
   }
+
+  _handleChange = (search) => this.setState({ search })
 
 
   render() {
-    const { heroSections } = this.state;
+    const { heroSections, search } = this.state;
 
     return (
-      <Container backToHome style={ styles.container }>
+      <Container backToHome style={ styles.container } scrollable>
+
+        <View style={styles.search}>
+          <TextInput style={styles.searchBox}
+            selectTextOnFocus
+            placeholder={"Search"}
+            returnKeyType='search'
+            enablesReturnKeyAutomatically
+            onChangeText={this._handleChange}
+            value={search}
+          />
+        </View>
+
         <ListScreen
+          scrollEnabled={false}
+
           hasSections
           itemList={heroSections}
           imageAspectRatio={127/71}
@@ -84,6 +107,7 @@ export default class HeroesScreen extends React.PureComponent {
           imageExtractor={item => url.images.small(item.tag)}
           labelExtractor={item => item.name}
         />
+
       </Container>
     );
   }
@@ -93,5 +117,20 @@ export default class HeroesScreen extends React.PureComponent {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: Layout.padding_small,
-  }
+  },
+
+
+  search: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: Layout.padding_regular,
+    marginVertical: Layout.padding_regular,
+  },
+  searchBox: {
+    marginRight: Layout.padding_regular,
+    backgroundColor: Colors.dota_white,
+    padding: Layout.padding_small,
+    borderRadius: 5,
+    flex: 1,
+  },
 })

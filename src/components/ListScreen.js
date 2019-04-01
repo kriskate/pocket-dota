@@ -85,11 +85,13 @@ export default class ListScreen extends React.PureComponent {
   }
 
   render() {
-    const { itemList, hasSections, initialNumToRender } = this.props;
+    const { itemList, hasSections, initialNumToRender, scrollEnabled } = this.props;
 
     if(hasSections)
       return (
         <FlatList
+          scrollEnabled={scrollEnabled !== false}
+
           initialNumToRender={initialNumToRender || 1}
           maxToRenderPerBatch={1}
           updateCellsBatchingPeriod={100}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TextInput, View, } from 'react-native';
 
 import { headerStyle } from '../utils/screen';
 import { SCREEN_LABELS_HIDDEN } from '../constants/Constants';
@@ -31,15 +31,19 @@ export default class Itemscreen extends React.Component {
 
     this.state = {
       itemSections: [],
+      search: "",
     };
   }
 
-  static getDerivedStateFromProps(newProps) {
+  static getDerivedStateFromProps(newProps, state) {
     const { items, t } = newProps;
+    const r = new RegExp(state.search, 'i');
     
     const itemSections = [];
 
     items.forEach(item => {
+      if(state.search && !r.test(item.name)) return;
+
       const { category } = item;
       const parsed = parseCategory(category);
       const translated_category = t("ItemType_" + parsed);
@@ -60,13 +64,29 @@ export default class Itemscreen extends React.Component {
       itemSections,
     }
   }
+  
+  _handleChange = (search) => this.setState({ search })
 
   render() {
-    const { itemSections } = this.state;
+    const { itemSections, search } = this.state;
 
     return (
-      <Container backToHome style={ styles.container }>
+      <Container backToHome style={ styles.container } scrollable>
+
+        <View style={styles.search}>
+          <TextInput style={styles.searchBox}
+            selectTextOnFocus
+            placeholder={"Search"}
+            returnKeyType='search'
+            enablesReturnKeyAutomatically
+            onChangeText={this._handleChange}
+            value={search}
+          />
+        </View>
+        
         <ListScreen
+          scrollEnabled={false}
+          
           overlayed
           hasSections
           initialNumToRender={3}
@@ -77,6 +97,7 @@ export default class Itemscreen extends React.Component {
           imageExtractor={item => url.images.items(item.tag)}
           labelExtractor={item => item.name}
         />
+
       </Container>
     );
   }
@@ -86,5 +107,19 @@ export default class Itemscreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: Layout.padding_small,
-  }
+  },
+
+  search: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: Layout.padding_regular,
+    marginVertical: Layout.padding_regular,
+  },
+  searchBox: {
+    marginRight: Layout.padding_regular,
+    backgroundColor: Colors.dota_white,
+    padding: Layout.padding_small,
+    borderRadius: 5,
+    flex: 1,
+  },
 })

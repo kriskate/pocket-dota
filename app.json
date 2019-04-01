@@ -7,7 +7,7 @@
     "2.0.0": "Rebranded to Pocket Info for Dota2; Minor layout adjustments",
     "2.0.1": "Bugfix: Desired language is now loaded by default; Various small fixes",
     "2.0.2": "Icon change (enlarged background); Optimized all images (reduced app size by 1MB); Added About button on Home screen",
-    "2.0.3": "Localization - added menu items to all languages"
+    "2.0.3": "Localization - added menu items to all languages; Heroes and Items screens - added search functionality"
   },
   "expo": {
     "version": "2.0.2",
