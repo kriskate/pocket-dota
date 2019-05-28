@@ -17,6 +17,7 @@ import Logger from './utils/Logger';
 import { DOWNLOAD_REASONS } from './constants/Constants';
 import AppTips from './components/AppTips';
 import { initialState } from './reducers/update';
+import { alertGetNew } from './utils/Alerts';
 
 
 /* SETUP */
@@ -40,6 +41,8 @@ export default class App extends React.Component {
   _handleFinishLoading = async () => {
     await this._loadLocalStore();
 
+    alertGetNew();
+    
     this.setState({ loaded: true });
   };
 

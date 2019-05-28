@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { Actions } from '../reducers/profile';
 import { showTip, APP_TIPS } from '../components/AppTips';
 import RequiresConnection from '../utils/RequiresConnection';
+import { alertGetNew } from '../utils/Alerts';
 
 
 class ProfileThumb extends React.PureComponent {
@@ -97,6 +98,10 @@ export default class StatsScreen extends React.Component {
     this.props.searchForResults(lastSearchResults);
   }
   _handleChange = (search_text) => this.setState({ search_text })
+
+  componentDidMount() {
+    alertGetNew();
+  }
 
   render() {
     const { lastSearch, lastSearchResults, navigation, } = this.props;

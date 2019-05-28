@@ -1,4 +1,4 @@
-import { Alert } from "react-native";
+import { Alert, Linking } from "react-native";
 
 
 export const alertGeneral = (title, content) => 
@@ -92,6 +92,26 @@ export const alertResetSettings = (onYes) =>
     [
       { text: 'No', style: 'cancel' },
       { text: 'Yes', onPress: onYes },
+    ],
+    { cancelable: true }
+  );
+
+
+const openPlayStore = () => {
+  Linking.openURL('https://play.google.com/store/apps/details?id=kriskate.pocketinfodota');
+}
+const openLanding = () => {
+  Linking.openURL('https://pocket-dota.info/');
+}
+export const alertGetNew = (onYes) =>
+  Alert.alert(
+    'New version!',
+    `The app has been rebranded to "Pocket Dota Info"\r\n
+The new version can be found on the Play Store, and contains all the latest features and Dota Wiki updates.`,
+    [
+      { text: 'Get new version', style: 'cancel', onPress: openPlayStore },
+      { text: 'App website', onPress: openLanding },
+      { text: 'Continue to old version' },
     ],
     { cancelable: true }
   );

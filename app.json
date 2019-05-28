@@ -1,7 +1,7 @@
 {
   "minWikiVersion": "36",
   "expo": {
-    "version": "1.1.0",
+    "version": "1.1.0-and",
     "name": "Pocket Dota",
     "description": "Dota 2 refference in you pocket",
     "slug": "pocket-dota",
